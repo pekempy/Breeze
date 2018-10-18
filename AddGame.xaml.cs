@@ -48,7 +48,6 @@ namespace GameLauncher
             }
             this.Hide();
             clearFields();
-            listViewModel.LoadGames();
         }
 
         #endregion ADD GAME button

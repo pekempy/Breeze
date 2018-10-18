@@ -8,7 +8,7 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        WindowStartupLocation ="CenterScreen"
+        WindowStartupLocation ="CenterOwner"
         Background="Transparent"
         AllowsTransparency="True"
         FontFamily="{StaticResource MaterialDesignFont}"

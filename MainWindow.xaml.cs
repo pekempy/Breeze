@@ -90,8 +90,10 @@ namespace GameLauncher
 
         public void RefreshGames()
         {
-            DataContext = null;
-            listViewModel.LoadGames();
+            listViewModel = new ListViewModel();
+            listViewModel.LoadGames();            
+            DataContext = listViewModel;
+
             //bannerViewModel.LoadGames();
             //posterViewModel.LoadGames();
             //gridViewModel.LoadGames();
@@ -110,6 +112,7 @@ namespace GameLauncher
         {
             this.Opacity = 0.5;
             ag.ShowDialog();
+            RefreshGames();
             this.Opacity = 100;
         }
 
