@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GameLauncher.Views;
+using GameLauncher.Models;
 using System.IO;
 using GameLauncher.ViewModels;
 
@@ -22,14 +23,11 @@ namespace GameLauncher
     {
         #region ViewModels are at class level to be reused
 
+        private LoadAllGames lag;
         private GridViewModel gridViewModel;
         private PosterViewModel posterViewModel;
         private ListViewModel listViewModel;
         private BannerViewModel bannerViewModel;
-        private ListView lv;
-        private GridView gv;
-        private PosterView pv;
-        private BannerView bv;
         private AddGame ag;
 
         #endregion ViewModels are at class level to be reused
@@ -40,20 +38,14 @@ namespace GameLauncher
 
             #region Instantiate new displays only ONCE
 
-            gridViewModel = new GridViewModel();
-            posterViewModel = new PosterViewModel();
-            bannerViewModel = new BannerViewModel();
-            listViewModel = new ListViewModel();
-            gv = new GridView();
-            pv = new PosterView();
-            bv = new BannerView();
-            lv = new ListView();
+            lag = new LoadAllGames();
             ag = new AddGame();
 
             #endregion Instantiate new displays only ONCE
 
             #region default view
 
+            listViewModel = new ListViewModel();
             listViewModel.LoadGames();
             DataContext = listViewModel;
 
@@ -86,25 +78,43 @@ namespace GameLauncher
 
         #endregion Until we add StayOpen glag to drawer, this helps w/ scrollbar
 
-        #region Refresh Games method
+        //#region Refresh Games method
 
         public void RefreshGames()
         {
-            listViewModel = new ListViewModel();
-            listViewModel.LoadGames();            
-            DataContext = listViewModel;
-
-            //bannerViewModel.LoadGames();
-            //posterViewModel.LoadGames();
-            //gridViewModel.LoadGames();
+            if (DataContext == gridViewModel)
+            {
+                Console.WriteLine("Grid");
+                GridViewActive();
+                
+            }
+            else if (DataContext == listViewModel)
+            {
+                Console.WriteLine("List");
+                ListViewActive();
+            }
+            else if (DataContext == posterViewModel)
+            {
+                Console.WriteLine("Poster");
+                PosterViewActive();
+            }
+            else if (DataContext == bannerViewModel)
+            {
+                Console.WriteLine("Banner");
+                BannerViewActive();
+            }
+            else
+            {
+                Console.WriteLine("Nothing");
+            }
         }
 
-        public void RefreshGames_OnClick(object sender, RoutedEventArgs e)
-        {
-            RefreshGames();
-        }
+        ////public void RefreshGames_OnClick(object sender, RoutedEventArgs e)
+        ////{
+        ////    RefreshGames();
+        ////}
 
-        #endregion Refresh Games method
+        //#endregion Refresh Games method
 
         #region Open AddGameWindow with FAB
 
@@ -122,25 +132,53 @@ namespace GameLauncher
 
         private void GridButton_OnClick(object sender, RoutedEventArgs e)
         {
-            DataContext = gridViewModel;
+            GridViewActive();
         }
 
         private void PosterButton_OnClick(object sender, RoutedEventArgs e)
         {
-            DataContext = posterViewModel;
+            PosterViewActive();
         }
 
         private void BannerButton_OnClick(object sender, RoutedEventArgs e)
         {
-            DataContext = bannerViewModel;
+            BannerViewActive();
         }
 
         private void ListButton_OnClick(object sender, RoutedEventArgs e)
         {
-            DataContext = listViewModel;
+            ListViewActive();
         }
 
         #endregion Change DataContext with buttons in overflow
+
+        private void ListViewActive()
+        {
+            listViewModel = new ListViewModel();
+            listViewModel.LoadGames();
+            DataContext = listViewModel;
+        }
+
+        private void GridViewActive()
+        {
+            gridViewModel = new GridViewModel();
+            gridViewModel.LoadGames();
+            DataContext = gridViewModel;
+        }
+
+        private void PosterViewActive()
+        {
+            posterViewModel = new PosterViewModel();
+            posterViewModel.LoadGames();
+            DataContext = posterViewModel;
+        }
+
+        private void BannerViewActive()
+        {
+            bannerViewModel = new BannerViewModel();
+            bannerViewModel.LoadGames();
+            DataContext = bannerViewModel;
+        }
 
         #region Refresh & Settings button
 

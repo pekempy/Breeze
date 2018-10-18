@@ -13,7 +13,7 @@ namespace GameLauncher
             InitializeComponent();
         }
 
-        private ListViewModel listViewModel = new ListViewModel();
+        //private ListViewModel listViewModel = new ListViewModel();
 
         #region ADD GAME button
 

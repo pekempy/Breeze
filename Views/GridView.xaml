@@ -1,12 +1,103 @@
-﻿<UserControl x:Class="GameLauncher.Views.GridView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:GameLauncher.Views"
+             xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
+             xmlns:Models="clr-namespace:GameLauncher.Models"
+             x:Class="GameLauncher.Views.GridView"
+             d:DataContext="{d:DesignInstance Type=ViewModels:GridViewModel}"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Background="Blue">
-        <TextBlock>Grid View</TextBlock>
+             d:DesignHeight="300"
+             d:DesignWidth="300">
+    <Grid>
+        <!-- Define columns and rows -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!-- This section displays one card per game in GamesList-->
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      Grid.ColumnSpan="3"
+                      Grid.RowSpan="7">
+            <!-- ItemsControl is bound to OC to know how many cards to make-->
+            <ItemsControl x:Name="gameListView"
+                          Grid.ColumnSpan="3"
+                          Grid.RowSpan="7"
+                          Margin="10 10 0 10"
+                          ItemsSource="{Binding GridView}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <!-- The card -->
+                            <materialDesign:Card Margin="10 5 10 0"
+                                                 Grid.ColumnSpan="3"
+                                                 Grid.RowSpan="5"
+                                                 Height="80">
+                                <Grid>
+                                    <!-- Game Image -->
+                                    <Image x:Name="GameIcon"
+                                           Width="60"
+                                           Grid.RowSpan="2"
+                                           HorizontalAlignment="Left"
+                                           Source="{Binding Icon, Mode=OneWay}" />
+                                    <!-- Game Title-->
+                                    <Label x:Name="GameTitle"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Margin="80 1 0 45"
+                                           Height="auto"
+                                           Width="175"
+                                           FontSize="20"
+                                           Content="{Binding Title, Mode=OneWay}" />
+                                    <!-- Game Genres -->
+                                    <Label x:Name="GameGenre"
+                                           VerticalAlignment="Top"
+                                           HorizontalAlignment="Left"
+                                           Margin="10 35 0 0"
+                                           Content="{Binding Genre, Mode=OneWay}" />
+                                    <!-- Game Link -->
+                                    <TextBlock x:Name="GameLinkBlock"
+                                               VerticalAlignment="Top"
+                                               HorizontalAlignment="Left"
+                                               Margin="72 53 10 10"
+                                               FontSize="16">
+                                        <Hyperlink NavigateUri="{Binding Link, Mode=OneWay}"
+                                                   RequestNavigate="Hyperlink_Link">
+                                            <TextBlock x:Name="GameLink"
+                                                       Text="{Binding Link, Mode=OneWay}" />
+                                        </Hyperlink>
+                                    </TextBlock>
+                                    <!-- Game Launcher -->
+                                    <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                            x:Name="GameLauncher"
+                                            Click="LaunchButton_OnClick"
+                                            Tag="{Binding Path, Mode=OneWay}"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Right"
+                                            Margin="0 16 6 19"
+                                            Height="40"
+                                            Width="40">
+                                        <materialDesign:PackIcon Kind="Gamepad" />
+                                    </Button>
+                                </Grid>
+                            </materialDesign:Card>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>

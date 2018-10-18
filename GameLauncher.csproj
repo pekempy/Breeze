@@ -107,6 +107,7 @@
       <DependentUpon>AddGame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\GameModel.cs" />
+    <Compile Include="Models\LoadAllGames.cs" />
     <Compile Include="ViewModels\PosterViewModel.cs" />
     <Compile Include="ViewModels\BannerViewModel.cs" />
     <Compile Include="ViewModels\GridViewModel.cs" />

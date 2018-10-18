@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:views="clr-namespace:GameLauncher.Views"
         xmlns:viewmodels="clr-namespace:GameLauncher.ViewModels"
+        xmlns:models="clr-namespace:GameLauncher.Models"
         Title="Game Launcher" Height="800" Width="1100"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -122,14 +123,14 @@
                                     </StackPanel>
                                 </Button>
                                 <!-- Refresh Button -->
-                                <Button Click="RefreshGames_OnClick">
+                                <!--<Button Click="RefreshGames_OnClick">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Refresh"
                                                                  VerticalAlignment="Center"
                                                                  Margin="0 0 10 0" />
                                         <TextBlock Text="Refresh Games" />
                                     </StackPanel>
-                                </Button>
+                                </Button>-->
                                 <!-- Grid Button -->
                                 <Button Click="SettingsButton_OnClick">
                                     <StackPanel Orientation="Horizontal">

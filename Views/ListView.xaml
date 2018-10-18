@@ -5,11 +5,13 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:GameLauncher.Views"
              xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
+             xmlns:Models="clr-namespace:GameLauncher.Models"
              x:Class="GameLauncher.Views.ListView"
              d:DataContext="{d:DesignInstance Type=ViewModels:ListViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300">
+    <!--d:DataContext="{d:DesignInstance Type=ViewModels:ListViewModel}"-->
     <Grid>
         <!-- Define columns and rows -->
         <Grid.ColumnDefinitions>
@@ -36,9 +38,9 @@
                           Grid.ColumnSpan="3"
                           Grid.RowSpan="7"
                           Margin="10 10 0 10"
-                          ItemsSource="{Binding Games}">
+                          ItemsSource="{Binding ListView}">
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate >
                         <StackPanel Orientation="Vertical">
                             <!-- The card -->
                             <materialDesign:Card Margin="10 5 10 0"

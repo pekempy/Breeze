@@ -11,8 +11,7 @@ namespace GameLauncher.ViewModels
 {
     public class ListViewModel
     {
-        public ObservableCollection<GameList> Games { get; set; }
-
+        public ObservableCollection<GameList> ListView { get; set; }
         public void LoadGames()
         {
             ObservableCollection<GameList> games = new ObservableCollection<GameList>();
@@ -41,7 +40,7 @@ namespace GameLauncher.ViewModels
                     numberOfGames++;
                 }
             }
-            Games = games;
+            ListView = games;
         }
     }
 }
