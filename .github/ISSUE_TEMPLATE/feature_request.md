@@ -4,8 +4,5 @@ about: Something we've missed?
 
 ---
 
-**Describe what you'd like implemented**
-_What feature have we forgotten or overlooked?_
-
-**Additional context**
-_Any more information about the feature, concept art etc_
+**DESCRIBE THE FEATURE YOU WOULD LIKE**
+What feature have we forgotten or overlooked?
