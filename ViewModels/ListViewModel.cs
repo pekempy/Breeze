@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using GameLauncher.Models;
+using GameLauncher.Views;
 
 namespace GameLauncher.ViewModels
 {
@@ -19,7 +20,6 @@ namespace GameLauncher.ViewModels
             {
                 //Read file to gameFile
                 string gameFile = "./Resources/GamesList.txt";
-                StreamReader sr = new StreamReader(gameFile, true);
                 //gamesArr is array containing all game info per item
                 string[] gamesArr = File.ReadAllLines(gameFile);
                 //columns is array containing each element of particular game
@@ -40,7 +40,6 @@ namespace GameLauncher.ViewModels
                     });
                     numberOfGames++;
                 }
-                sr.Close();
             }
             Games = games;
         }

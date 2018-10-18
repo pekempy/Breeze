@@ -22,13 +22,13 @@ namespace GameLauncher.Models
         private string _poster;
         private string _banner;
 
-        public string Title { get { return _title; } set { _title = value; OnPropertyChanged(Title); } }
-        public string Genre { get { return _genre; } set { _genre = value; OnPropertyChanged(Genre); } }
-        public string Path { get { return _path; } set { _path = value; OnPropertyChanged(Path); } }
-        public string Link { get { return _link; } set { _link = value; OnPropertyChanged(Link); } }
-        public string Icon { get { return _icon; } set { _icon = value; OnPropertyChanged(Icon); } }
-        public string Poster { get { return _poster; } set { _poster = value; OnPropertyChanged(Poster); } }
-        public string Banner { get { return _banner; } set { _banner = value; OnPropertyChanged(Banner); } }
+        public string Title { get { return _title; } set { _title = value; OnPropertyChanged("Title"); } }
+        public string Genre { get { return _genre; } set { _genre = value; OnPropertyChanged("Genre"); } }
+        public string Path { get { return _path; } set { _path = value; OnPropertyChanged("Path"); } }
+        public string Link { get { return _link; } set { _link = value; OnPropertyChanged("Link"); } }
+        public string Icon { get { return _icon; } set { _icon = value; OnPropertyChanged("Icon"); } }
+        public string Poster { get { return _poster; } set { _poster = value; OnPropertyChanged("Poster"); } }
+        public string Banner { get { return _banner; } set { _banner = value; OnPropertyChanged("Banner"); } }
 
         #region INotifyPropertyChanged
 
