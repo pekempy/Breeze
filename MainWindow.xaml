@@ -30,100 +30,82 @@
             <views:GridView DataContext="{Binding}" />
         </DataTemplate>
     </Window.Resources>
-
-    <materialDesign:DialogHost Identifier="RootDialog"
-                               SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
-        <Grid>
-            <!-- Set up grid definitions -->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <!-- This manages changing display between list/banner/poster/grid -->
-            <ContentControl Grid.Row="0"
+    <Grid>
+        <!-- This manages changing display between list/banner/poster/grid -->
+        <ContentControl Grid.Row="0"
                             Grid.Column="0"
                             Grid.RowSpan="5"
                             Grid.ColumnSpan="5"
                             Content="{Binding}"
                             Margin="0 70 0 0" />
-            <!-- DrawerHost is the main "host" to have the hamburger -->
-            <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}"
+        <!-- DrawerHost is the main "host" to have the hamburger -->
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}"
                                    Grid.RowSpan="5"
                                    Grid.ColumnSpan="5">
-                <!-- Top Action Bar -->
-                <materialDesign:ColorZone Padding="6"
+            <!-- Top Action Bar -->
+            <materialDesign:ColorZone Padding="6"
                                       Mode="PrimaryMid"
                                       DockPanel.Dock="Top"
                                       MaxHeight="100"
                                       materialDesign:ShadowAssist.ShadowDepth="Depth2">
-                    <!-- Everything contained in top bar -->
-                    <DockPanel>
-                        <!-- Hamburger button -->
-                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                <!-- Everything contained in top bar -->
+                <DockPanel>
+                    <!-- Hamburger button -->
+                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}"
                                       IsChecked="False"
                                       Margin="20 0 0 0"
                                       x:Name="MenuToggleButton" />
-                        <!-- Title -->
-                        <TextBlock VerticalAlignment="Center"
+                    <!-- Title -->
+                    <TextBlock VerticalAlignment="Center"
                                    FontSize="20"
                                    FontWeight="SemiBold"
                                    Margin="20 0 0 0"
                                    Text="Game Launcher" />
-                        <!-- Top Right Overflow -->
-                        <materialDesign:PopupBox DockPanel.Dock="Right"
+                    <!-- Top Right Overflow -->
+                    <materialDesign:PopupBox DockPanel.Dock="Right"
                                                  PlacementMode="BottomAndAlignRightEdges"
                                                  StaysOpen="False"
                                                  HorizontalAlignment="Right">
-                            <!-- Items inside overflow -->
-                            <StackPanel>
-                                <!-- Grid Button -->
-                                <Button Click="GridButton_OnClick">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="ViewModule"
+                        <!-- Items inside overflow -->
+                        <StackPanel>
+                            <!-- Grid Button -->
+                            <Button Click="GridButton_OnClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ViewModule"
                                                                  VerticalAlignment="Center"
                                                                  Margin="0 0 10 0" />
-                                        <TextBlock Text="Grid View" />
-                                    </StackPanel>
-                                </Button>
-                                <!-- Poster Button -->
-                                <Button Click="PosterButton_OnClick">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="ViewList"
+                                    <TextBlock Text="Grid View" />
+                                </StackPanel>
+                            </Button>
+                            <!-- Poster Button -->
+                            <Button Click="PosterButton_OnClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ViewList"
                                                                  VerticalAlignment="Center"
                                                                  Margin="0 0 10 0" />
-                                        <TextBlock Text="Poster View" />
-                                    </StackPanel>
-                                </Button>
-                                <!-- Banner Button -->
-                                <Button Click="BannerButton_OnClick">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="ViewStream"
+                                    <TextBlock Text="Poster View" />
+                                </StackPanel>
+                            </Button>
+                            <!-- Banner Button -->
+                            <Button Click="BannerButton_OnClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ViewStream"
                                                                  VerticalAlignment="Center"
                                                                  Margin="0 0 10 0" />
-                                        <TextBlock Text="Banner View" />
-                                    </StackPanel>
-                                </Button>
-                                <!-- Grid Button -->
-                                <Button Click="ListButton_OnClick">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="ViewHeadline"
+                                    <TextBlock Text="Banner View" />
+                                </StackPanel>
+                            </Button>
+                            <!-- Grid Button -->
+                            <Button Click="ListButton_OnClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ViewHeadline"
                                                                  VerticalAlignment="Center"
                                                                  Margin="0 0 10 0" />
-                                        <TextBlock Text="List View" />
-                                    </StackPanel>
-                                </Button>
-                                <!-- Refresh Button -->
-                                <!--<Button Click="RefreshGames_OnClick">
+                                    <TextBlock Text="List View" />
+                                </StackPanel>
+                            </Button>
+                            <!-- Refresh Button -->
+                            <!--<Button Click="RefreshGames_OnClick">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Refresh"
                                                                  VerticalAlignment="Center"
@@ -131,79 +113,79 @@
                                         <TextBlock Text="Refresh Games" />
                                     </StackPanel>
                                 </Button>-->
-                                <!-- Grid Button -->
-                                <Button Click="SettingsButton_OnClick">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Settings"
+                            <!-- Grid Button -->
+                            <Button Click="SettingsButton_OnClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Settings"
                                                                  VerticalAlignment="Center"
                                                                  Margin="0 0 10 0" />
-                                        <TextBlock Text="Settings" />
-                                    </StackPanel>
-                                </Button>
-                            </StackPanel>
-                        </materialDesign:PopupBox>
-                        <!-- Search Bar -->
-                        <materialDesign:ColorZone Mode="Light"
+                                    <TextBlock Text="Settings" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+                    <!-- Search Bar -->
+                    <materialDesign:ColorZone Mode="Light"
                                                   CornerRadius="2"
                                                   materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                                   HorizontalAlignment="Right"
                                                   VerticalAlignment="Center"
                                                   MaxHeight="60"
                                                   Margin="0 0 20 0">
-                            <StackPanel Orientation="Horizontal"
+                        <StackPanel Orientation="Horizontal"
                                         Margin="16"
                                         MaxHeight="20">
-                                <!-- Search bar Icon -->
-                                <materialDesign:PackIcon Kind="Magnify"
+                            <!-- Search bar Icon -->
+                            <materialDesign:PackIcon Kind="Magnify"
                                                          Opacity=".56"
                                                          VerticalAlignment="Center" />
-                                <!-- Search text -->
-                                <TextBox Margin="8 0 0 0"
+                            <!-- Search text -->
+                            <TextBox Margin="8 0 0 0"
                                          MinWidth="150"
                                          FontSize="11"
                                          materialDesign:HintAssist.Hint="Please search..."
                                          materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
                                          BorderThickness="0"
                                          VerticalAlignment="Center" />
-                                <!-- "send" button -->
-                                <Button Style="{DynamicResource MaterialDesignToolButton}">
-                                    <materialDesign:PackIcon Kind="Send"
+                            <!-- "send" button -->
+                            <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                <materialDesign:PackIcon Kind="Send"
                                                              Opacity=".56"
                                                              VerticalAlignment="Center"
                                                              Margin="0 0 0 10" />
-                                </Button>
-                            </StackPanel>
-                        </materialDesign:ColorZone>
-                    </DockPanel>
-                </materialDesign:ColorZone>
-                <!-- Content for hamburger -->
-                <materialDesign:DrawerHost.LeftDrawerContent>
-                    <DockPanel MinWidth="212">
-                        <!-- Button to open hamburger -->
-                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}"
+                            </Button>
+                        </StackPanel>
+                    </materialDesign:ColorZone>
+                </DockPanel>
+            </materialDesign:ColorZone>
+            <!-- Content for hamburger -->
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="212">
+                    <!-- Button to open hamburger -->
+                    <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}"
                                   DockPanel.Dock="Top"
                                   HorizontalAlignment="Right"
                                   Margin="16"
                                   IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" />
-                        <!-- Listbox for...? Genres? #unsure -->
-                        <ListBox x:Name="ListBox"
+                    <!-- Listbox for...? Genres? #unsure -->
+                    <ListBox x:Name="ListBox"
                              Margin="0 16 0 16"
                              SelectedIndex="0"
                              ItemsSource="{Binding DemoItems}"
                              PreviewMouseLeftButtonUp="UIElement_OnPreviewLeftMouseButtonUp">
-                            <!-- binding to duplicate genres goes here -->
-                            <ListBox.ItemTemplate>
-                                <DataTemplate DataType="?">
-                                    <TextBlock Text="{Binding Genre}"
+                        <!-- binding to duplicate genres goes here -->
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="?">
+                                <TextBlock Text="{Binding Genre}"
                                                Margin="32 0 32 0" />
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </DockPanel>
-                </materialDesign:DrawerHost.LeftDrawerContent>
-            </materialDesign:DrawerHost>
-            <!-- FAB for adding new games -->
-            <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+        </materialDesign:DrawerHost>
+        <!-- FAB for adding new games -->
+        <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
                     Width="60"
                     Height="60"
                     HorizontalAlignment="Right"
@@ -214,11 +196,10 @@
                     Click="openAddGameWindow_OnClick"
                     Grid.Row="5"
                     Grid.Column="5">
-                <materialDesign:PackIcon Kind="Plus"
+            <materialDesign:PackIcon Kind="Plus"
                                          VerticalAlignment="Center"
                                          Height="30"
                                          Width="30" />
-            </Button>
-        </Grid>
-    </materialDesign:DialogHost>
+        </Button>
+    </Grid>
 </Window>

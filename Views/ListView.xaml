@@ -12,26 +12,11 @@
              d:DesignHeight="300"
              d:DesignWidth="300">
     <!--d:DataContext="{d:DesignInstance Type=ViewModels:ListViewModel}"-->
-    <Grid>
-        <!-- Define columns and rows -->
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+
 
         <!-- This section displays one card per game in GamesList-->
         <ScrollViewer VerticalScrollBarVisibility="Auto"
-                      Grid.ColumnSpan="3"
+                      Grid.ColumnSpan="1"
                       Grid.RowSpan="7">
             <!-- ItemsControl is bound to OC to know how many cards to make-->
             <ItemsControl x:Name="gameListView"
@@ -41,7 +26,7 @@
                           ItemsSource="{Binding ListView}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate >
-                        <StackPanel Orientation="Vertical">
+                     
                             <!-- The card -->
                             <materialDesign:Card Margin="10 5 10 0"
                                                  Grid.ColumnSpan="3"
@@ -95,10 +80,10 @@
                                     </Button>
                                 </Grid>
                             </materialDesign:Card>
-                        </StackPanel>
+       
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-    </Grid>
+
 </UserControl>

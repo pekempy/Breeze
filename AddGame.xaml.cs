@@ -77,24 +77,6 @@ namespace GameLauncher
 
         #endregion clearFields
 
-        #region PickGenre button - unknown
-
-        private void PickGenre_OnClick(object sender, RoutedEventArgs e)
-        {
-            return; //??
-        }
-
-        #endregion PickGenre button - unknown
-
-        #region GenreDialog close - unknown
-
-        public void GenreDialog_OnDialogClosing(object sender, RoutedEventArgs e)
-        {
-            return; //??
-        }
-
-        #endregion GenreDialog close - unknown
-
         #region AddGenre OnClick
 
         private void AddGenre_OnClick(object sender, RoutedEventArgs e)

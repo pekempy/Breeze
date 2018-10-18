@@ -109,13 +109,6 @@ namespace GameLauncher
             }
         }
 
-        ////public void RefreshGames_OnClick(object sender, RoutedEventArgs e)
-        ////{
-        ////    RefreshGames();
-        ////}
-
-        //#endregion Refresh Games method
-
         #region Open AddGameWindow with FAB
 
         private void openAddGameWindow_OnClick(object sender, RoutedEventArgs e)
@@ -180,12 +173,7 @@ namespace GameLauncher
             DataContext = bannerViewModel;
         }
 
-        #region Refresh & Settings button
-
-        private void RefreshButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            return;
-        }
+        #region Settings button
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
         {
