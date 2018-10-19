@@ -13,52 +13,52 @@
              d:DesignWidth="300">
     <!--d:DataContext="{d:DesignInstance Type=ViewModels:ListViewModel}"-->
 
-
-        <!-- This section displays one card per game in GamesList-->
-        <ScrollViewer VerticalScrollBarVisibility="Auto"
+    <!-- This section displays one card per game in GamesList-->
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
                       Grid.ColumnSpan="1"
                       Grid.RowSpan="7">
-            <!-- ItemsControl is bound to OC to know how many cards to make-->
-            <ItemsControl x:Name="gameListView"
+        <!-- ItemsControl is bound to OC to know how many cards to make-->
+        <ItemsControl x:Name="gameListView"
                           Grid.ColumnSpan="3"
                           Grid.RowSpan="7"
                           Margin="10 10 0 10"
                           ItemsSource="{Binding ListView}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate >
-                     
-                            <!-- The card -->
-                            <materialDesign:Card Margin="10 5 10 0"
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+
+                    <!-- The card -->
+                    <materialDesign:Card Margin="10 5 10 0"
                                                  Grid.ColumnSpan="3"
                                                  Grid.RowSpan="5"
                                                  Height="80">
-                                <Grid>
-                                    <!-- Game Image -->
-                                    <Image x:Name="GameIcon"
-                                           Width="60"
+                        <Grid>
+                            <!-- Game Image -->
+                            <Image x:Name="GameIcon"
+                                           Width="80"
                                            Grid.RowSpan="2"
                                            HorizontalAlignment="Left"
+                                           Stretch="Fill"
                                            Source="{Binding Icon, Mode=OneWay}" />
-                                    <!-- Game Title-->
-                                    <Label x:Name="GameTitle"
+                            <!-- Game Title-->
+                            <Label x:Name="GameTitle"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Left"
-                                           Margin="65 1 0 45"
+                                           Margin="85,1,0,45"
                                            Height="auto"
                                            Width="175"
                                            FontSize="20"
                                            Content="{Binding Title, Mode=OneWay}" />
-                                    <!-- Game Genres -->
-                                    <Label x:Name="GameGenre"
+                            <!-- Game Genres -->
+                            <Label x:Name="GameGenre"
                                            VerticalAlignment="Top"
                                            HorizontalAlignment="Left"
-                                           Margin="65 35 0 0"
+                                           Margin="88,32,0,0"
                                            Content="{Binding Genre, Mode=OneWay}" />
-                                    <!-- Game Link -->
-                                    <TextBlock x:Name="GameLinkBlock"
+                            <!-- Game Link -->
+                            <TextBlock x:Name="GameLinkBlock"
                                                VerticalAlignment="Top"
                                                HorizontalAlignment="Left"
-                                               Margin="72 53 10 10"
+                                               Margin="93,58,0,0"
                                                FontSize="9">
                                         <Hyperlink NavigateUri="{Binding Link, Mode=OneWay}"
                                                    RequestNavigate="Hyperlink_Link">
@@ -66,8 +66,8 @@
                                                        Text="{Binding Link, Mode=OneWay}" />
                                         </Hyperlink>
                                     </TextBlock>
-                                    <!-- Game Launcher -->
-                                    <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                            <!-- Game Launcher -->
+                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
                                             x:Name="GameLauncher"
                                             Click="LaunchButton_OnClick"
                                             Tag="{Binding Path, Mode=OneWay}"
@@ -76,14 +76,12 @@
                                             Margin="0 16 6 19"
                                             Height="40"
                                             Width="40">
-                                        <materialDesign:PackIcon Kind="Gamepad" />
-                                    </Button>
-                                </Grid>
-                            </materialDesign:Card>
-       
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
-
+                                <materialDesign:PackIcon Kind="Gamepad" />
+                            </Button>
+                        </Grid>
+                    </materialDesign:Card>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
 </UserControl>

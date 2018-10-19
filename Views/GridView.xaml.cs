@@ -14,7 +14,9 @@ namespace GameLauncher.Views
         {
             InitializeComponent();
         }
+
         #region Run the hyperlink
+
         private void Hyperlink_Link(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
