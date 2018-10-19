@@ -30,7 +30,7 @@ namespace GameLauncher.ViewModels
                     columns = gamesArr[numberOfGames].Split('|');
                     games.Add(new GameList
                     {
-                        Title = columns[0].ToUpper(),
+                        Title = columns[0],
                         Genre = columns[1],
                         Path = columns[2],
                         Link = columns[3],
