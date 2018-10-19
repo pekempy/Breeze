@@ -23,8 +23,9 @@ namespace GameLauncher
     {
         #region ViewModels are at class level to be reused
 
-        private LoadAllGames lag;
+        //private LoadAllGames lag;
         private GridViewModel gridViewModel;
+
         private PosterViewModel posterViewModel;
         private ListViewModel listViewModel;
         private BannerViewModel bannerViewModel;
@@ -38,7 +39,7 @@ namespace GameLauncher
 
             #region Instantiate new displays only ONCE
 
-            lag = new LoadAllGames();
+            //lag = new LoadAllGames();
             ag = new AddGame();
 
             #endregion Instantiate new displays only ONCE
@@ -78,7 +79,7 @@ namespace GameLauncher
 
         #endregion Until we add StayOpen glag to drawer, this helps w/ scrollbar
 
-        //#region Refresh Games method
+        #region Refresh Games method
 
         public void RefreshGames()
         {
@@ -86,7 +87,6 @@ namespace GameLauncher
             {
                 Console.WriteLine("Grid");
                 GridViewActive();
-                
             }
             else if (DataContext == listViewModel)
             {
@@ -108,6 +108,8 @@ namespace GameLauncher
                 Console.WriteLine("Nothing");
             }
         }
+
+        #endregion Refresh Games method
 
         #region Open AddGameWindow with FAB
 
@@ -181,7 +183,7 @@ namespace GameLauncher
             return; //to prevent errors
         }
 
-        #endregion Refresh & Settings button
+        #endregion Settings button
 
         #region When program closed
 

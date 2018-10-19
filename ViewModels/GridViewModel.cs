@@ -9,7 +9,7 @@ using GameLauncher.Views;
 
 namespace GameLauncher.ViewModels
 {
-    class GridViewModel
+    internal class GridViewModel
     {
         public ObservableCollection<GameList> GridView { get; set; }
 

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows.Navigation;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Diagnostics;
+using GameLauncher.ViewModels;
 
 namespace GameLauncher.Views
 {
@@ -20,5 +14,25 @@ namespace GameLauncher.Views
         {
             InitializeComponent();
         }
+
+        #region Run the hyperlink
+
+        private void Hyperlink_Link(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+        }
+
+        #endregion Run the hyperlink
+
+        #region Run the game
+
+        private void LaunchButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            object link = ((Button)sender).Tag;
+            string linkString = link.ToString().Trim();
+            Process.Start(new ProcessStartInfo(linkString));
+        }
+
+        #endregion Run the game
     }
 }

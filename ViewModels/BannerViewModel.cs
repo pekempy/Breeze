@@ -9,7 +9,7 @@ using GameLauncher.Views;
 
 namespace GameLauncher.ViewModels
 {
-    class BannerViewModel
+    internal class BannerViewModel
     {
         public ObservableCollection<GameList> BannerView { get; set; }
 
