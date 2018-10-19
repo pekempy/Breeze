@@ -9,7 +9,7 @@
 
 #### Not working: 
 > Search bar
-> Deleting games
+  Deleting games
 
 #### Planned updates:
 - Genre filtering from hamburger menu
