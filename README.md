@@ -8,7 +8,7 @@
 > Users can add games manually, and they will be displayed on all views
 
 #### Not working: 
-> Search bar
+> Search bar /
   Deleting games
 
 #### Planned updates:
