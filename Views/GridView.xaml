@@ -1,4 +1,5 @@
 ﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,6 +12,13 @@
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="GameListCVS" Source="{Binding GridView}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Title"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
 
     <!-- This section displays one card per game in GamesList-->
     <ScrollViewer VerticalScrollBarVisibility="Auto"
@@ -21,7 +29,7 @@
                           Grid.ColumnSpan="3"
                           Grid.RowSpan="7"
                           Margin="10 10 0 10"
-                          ItemsSource="{Binding GridView}">
+                          ItemsSource="{Binding Source={StaticResource GameListCVS}}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />
@@ -35,7 +43,8 @@
                                                  Grid.ColumnSpan="3"
                                                  Grid.RowSpan="5"
                                                  Height="140"
-                                         MaxWidth="300">
+                                         MaxWidth="250"
+                                         MinWidth="250">
                         <Grid>
                             <!-- Game Image -->
                             <Image x:Name="GamePoster"
@@ -46,45 +55,29 @@
                                            HorizontalAlignment="Left"
                                            Source="{Binding Poster, Mode=OneWay}" />
                             <!-- Game Title-->
-                            <Label x:Name="GameTitle"
+                            <TextBlock x:Name="GameTitle"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Left"
-                                           Margin="114,10,-36,94"
-                                           Height="auto"
-                                           Width="175"
+                                           Margin="114,14,0,65"
+                                           Height="61"
+                                           Width="126"
+                                           TextWrapping="Wrap"
                                            FontSize="20"
-                                           Content="{Binding Title, Mode=OneWay}" RenderTransformOrigin="0.503,0.514" />
+                                           Text="{Binding Title, Mode=OneWay}" RenderTransformOrigin="0.503,0.514" />
                             <!-- Game Genres -->
                             <TextBlock x:Name="GameGenre"
                                            VerticalAlignment="Top"
                                            HorizontalAlignment="Left"
-                                           Margin="114,51,0,0"
+                                           Margin="114,80,0,0"
                                            TextWrapping="Wrap"
-                                           Text="{Binding Genre, Mode=OneWay}" />
-                            <!-- Game Link -->
-                            <TextBlock x:Name="GameLinkBlock"
-                                               VerticalAlignment="Top"
-                                               HorizontalAlignment="Left"
-                                               Margin="114,90,0,0"
-                                               FontSize="9">
-                                        <Hyperlink NavigateUri="{Binding Link, Mode=OneWay}"
-                                                   RequestNavigate="Hyperlink_Link">
-                                            <TextBlock x:Name="GameLink"
-                                                       Text="{Binding Link, Mode=OneWay}" />
-                                        </Hyperlink>
-                                    </TextBlock>
-                            <!-- Game Launcher -->
-                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                            x:Name="GameLauncher"
-                                            Click="LaunchButton_OnClick"
-                                            Tag="{Binding Path, Mode=OneWay}"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Right"
-                                            Margin="0 16 6 19"
-                                            Height="40"
-                                            Width="40">
-                                <materialDesign:PackIcon Kind="Gamepad" />
-                            </Button>
+                                           Text="{Binding Genre, Mode=OneWay}" Height="50" Width="126" />
+                            <!-- Launcher -->
+                            <Button Width="250"
+                                    Height="140"
+                                    Opacity="0"
+                                    Tag="{Binding Path}"
+                                    Click="LaunchButton_OnClick"
+                                />
                         </Grid>
                     </materialDesign:Card>
                 </DataTemplate>

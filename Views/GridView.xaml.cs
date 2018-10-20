@@ -34,5 +34,6 @@ namespace GameLauncher.Views
         }
 
         #endregion Run the game
+        
     }
 }

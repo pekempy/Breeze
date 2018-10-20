@@ -19,6 +19,7 @@ namespace GameLauncher.ViewModels
         public void LoadGames()
         {
             ObservableCollection<GameList> games = new ObservableCollection<GameList>();
+
             if (File.Exists("./Resources/GamesList.txt"))
             {
                 //Read file to gameFile
@@ -44,7 +45,11 @@ namespace GameLauncher.ViewModels
                     numberOfGames++;
                 }
             }
+            
             ListView = games;
+        
         }
+
     }
+
 }

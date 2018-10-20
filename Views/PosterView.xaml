@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<UserControl xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
     x:Class="GameLauncher.Views.PosterView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -13,6 +13,13 @@
     d:DesignHeight="300"
     d:DesignWidth="300">
 
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="GameListCVS" Source="{Binding PosterView}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Title"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
     <Grid>
         <!-- Define columns and rows -->
         <Grid.ColumnDefinitions>
@@ -38,7 +45,7 @@
             <ItemsControl
                 x:Name="gameListView"
                 Margin="10 10 0 10"
-                ItemsSource="{Binding PosterView}"
+                ItemsSource="{Binding Source={StaticResource GameListCVS}}"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

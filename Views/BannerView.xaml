@@ -1,6 +1,7 @@
 ﻿<UserControl
     x:Class="GameLauncher.Views.BannerView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:GameLauncher.Views"
@@ -13,6 +14,13 @@
     d:DesignHeight="300"
     d:DesignWidth="300">
 
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="GameListCVS" Source="{Binding BannerView}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Title"/>
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
     <Grid>
         <!-- Define columns and rows -->
         <Grid.ColumnDefinitions>
@@ -38,7 +46,7 @@
             <ItemsControl
                 x:Name="gameListView"
                 Margin="10 10 0 10"
-                ItemsSource="{Binding BannerView}"
+                ItemsSource="{Binding Source={StaticResource GameListCVS}}"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
