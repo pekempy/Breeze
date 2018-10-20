@@ -13,7 +13,8 @@
         TextOptions.TextRenderingMode="Auto"
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{StaticResource MaterialDesignFont}">
+        FontFamily="{StaticResource MaterialDesignFont}"
+        Icon="Game Icon.ico">
 
     <!-- Required to make different views work -->
     <Window.Resources>

@@ -65,6 +65,11 @@
                                                Height="220"
                                                Width="180"
                                                Stretch="Fill" />
+                                    <Button Width="180"
+                                                    Height="220"
+                                                    Opacity="0"
+                                                    Tag="{Binding Path}"
+                                                    Click="LaunchButton_OnClick" />
                                     <!-- stackpanel for the button -->
                                     <StackPanel Grid.Row="1"
                                                     Margin="0 0 0 0"
@@ -76,7 +81,6 @@
                                                     Content="{Binding Title}"
                                                     VerticalAlignment="Bottom"
                                                     HorizontalAlignment="Left"
-                                                    Click="LaunchButton_OnClick"
                                                     HorizontalContentAlignment="Left" />
                                         </WrapPanel>
                                     </StackPanel>

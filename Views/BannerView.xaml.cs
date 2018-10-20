@@ -1,10 +1,7 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Diagnostics;
-using GameLauncher.ViewModels;
 
 namespace GameLauncher.Views
 {

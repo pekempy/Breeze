@@ -55,14 +55,15 @@
                                     MaxWidth="300"
                                     Margin="10 5 10 0">
                                 <Grid>
-                                    <TextBlock>
-                                        <Hyperlink NavigateUri="{Binding Link}">
-                                            <Image Source="{Binding Banner}"
+                                    <Image Source="{Binding Banner}"
                                                    Height="100"
                                                    Width="300"
                                                    Stretch="Fill" />
-                                        </Hyperlink>
-                                    </TextBlock>
+                                    <Button Width="300"
+                                            Height="100"
+                                            Tag="{Binding Path}"
+                                            Click="LaunchButton_OnClick"
+                                            Opacity="0" />
                                 </Grid>
                             </materialDesign:Card>
                         </StackPanel>
