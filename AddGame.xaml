@@ -272,7 +272,7 @@
                         IsDefault="False"
                         Style="{DynamicResource MaterialDesignToolButton}"
                         ToolTip="Attach a poster of the game"
-                        Click="AttachIcon_OnClick">
+                        Click="AttachPoster_OnClick">
                     <materialDesign:PackIcon Kind="Attachment"
                                              VerticalAlignment="Center"
                                              Height="20"
@@ -294,7 +294,7 @@
                         IsDefault="False"
                         Style="{DynamicResource MaterialDesignToolButton}"
                         ToolTip="Attach a banner of the game"
-                        Click="AttachIcon_OnClick">
+                        Click="AttachBanner_OnClick">
                     <materialDesign:PackIcon Kind="Attachment"
                                              VerticalAlignment="Center"
                                              Height="20"
