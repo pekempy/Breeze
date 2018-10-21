@@ -25,7 +25,6 @@ namespace GameLauncher
 
         //private LoadAllGames lag;
         private GridViewModel gridViewModel;
-
         private PosterViewModel posterViewModel;
         private ListViewModel listViewModel;
         private BannerViewModel bannerViewModel;
@@ -116,6 +115,8 @@ namespace GameLauncher
         private void openAddGameWindow_OnClick(object sender, RoutedEventArgs e)
         {
             this.Opacity = 0.5;
+            ag = new AddGame();
+            ag.Owner = this;
             ag.ShowDialog();
             RefreshGames();
             this.Opacity = 100;

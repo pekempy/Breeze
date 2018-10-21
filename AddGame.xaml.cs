@@ -2,7 +2,6 @@
 using System.IO;
 using System.Windows;
 using Microsoft.Win32;
-using GameLauncher.ViewModels;
 
 namespace GameLauncher
 {

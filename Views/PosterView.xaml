@@ -71,24 +71,25 @@
                                     <Image Source="{Binding Poster}"
                                                Height="220"
                                                Width="180"
-                                               Stretch="Fill" />
+                                               Stretch="Fill"/>
                                     <Button Width="180"
-                                                    Height="220"
-                                                    Opacity="0"
-                                                    Tag="{Binding Path}"
-                                                    Click="LaunchButton_OnClick" />
+                                               Height="220"
+                                               Style="{StaticResource MaterialDesignFlatButton}"
+                                               Tag="{Binding Path}"
+                                               Click="LaunchButton_OnClick"
+                                               Opacity="0.1"/>
                                     <!-- stackpanel for the button -->
                                     <StackPanel Grid.Row="1"
-                                                    Margin="0 0 0 0"
-                                                    HorizontalAlignment="Left"
-                                                    VerticalAlignment="Bottom" Grid.RowSpan="2">
+                                                Margin="0 0 0 0"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Bottom" Grid.RowSpan="2">
                                         <WrapPanel Width="180">
                                             <Button Width="180"
                                                     Style="{StaticResource MaterialDesignFlatButton}"
                                                     Content="{Binding Title}"
                                                     VerticalAlignment="Bottom"
                                                     HorizontalAlignment="Left"
-                                                    HorizontalContentAlignment="Left" />
+                                                    HorizontalContentAlignment="Left"/>
                                         </WrapPanel>
                                     </StackPanel>
                                 </Grid>

@@ -74,10 +74,10 @@
                             <!-- Launcher -->
                             <Button Width="250"
                                     Height="140"
-                                    Opacity="0"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
                                     Tag="{Binding Path}"
                                     Click="LaunchButton_OnClick"
-                                />
+                                    Opacity="0.1"/>
                         </Grid>
                     </materialDesign:Card>
                 </DataTemplate>

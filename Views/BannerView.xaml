@@ -69,9 +69,10 @@
                                                    Stretch="Fill" />
                                     <Button Width="300"
                                             Height="100"
+                                            Style="{StaticResource MaterialDesignFlatButton}"
                                             Tag="{Binding Path}"
                                             Click="LaunchButton_OnClick"
-                                            Opacity="0" />
+                                            Opacity="0.1"/>
                                 </Grid>
                             </materialDesign:Card>
                         </StackPanel>
