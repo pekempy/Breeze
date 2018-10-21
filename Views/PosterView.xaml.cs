@@ -33,6 +33,16 @@ namespace GameLauncher.Views
             Process.Start(new ProcessStartInfo(linkString));
         }
 
-        #endregion Run the game
+        #endregion Run the game   
+        
+        private void EditGame_OnClick(object sender, RoutedEventArgs e)
+        {
+            return;
+        }
+
+    private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
+    {
+        return;
     }
+}
 }

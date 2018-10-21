@@ -19,5 +19,7 @@ namespace GameLauncher.ViewModels
             lag.LoadGames();
             PosterView = lag.Games;
         }
+
+
     }
 }

@@ -26,7 +26,7 @@
                       Grid.RowSpan="7">
         <!-- ItemsControl is bound to OC to know how many cards to make-->
         <ItemsControl x:Name="gameListView"
-                          Grid.ColumnSpan="3"
+                          Grid.ColumnSpan="1"
                           Grid.RowSpan="7"
                           Margin="10 10 0 10"
                           ItemsSource="{Binding Source={StaticResource GameListCVS}}">
@@ -37,49 +37,35 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-
-                    <!-- The card -->
-                    <materialDesign:Card Margin="10 5 10 0"
-                                                 Grid.ColumnSpan="3"
-                                                 Grid.RowSpan="5"
-                                                 Height="140"
-                                         MaxWidth="250"
-                                         MinWidth="250">
-                        <Grid>
-                            <!-- Game Image -->
-                            <Image x:Name="GamePoster"
-                                           Width="80"
-                                           MinWidth="100"
+                    <Grid>
+                        <!-- Game Image -->
+                        <Image x:Name="GameIcon"
+                                           Height="100"
+                                           Width="100"
                                            Stretch="Fill"
-                                           Grid.RowSpan="2"
+                                           Grid.RowSpan="1"
                                            HorizontalAlignment="Left"
-                                           Source="{Binding Poster, Mode=OneWay}" />
-                            <!-- Game Title-->
-                            <TextBlock x:Name="GameTitle"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Left"
-                                           Margin="114,14,0,65"
-                                           Height="61"
-                                           Width="126"
+                               VerticalAlignment="Top"
+                                           Source="{Binding Icon, Mode=OneWay}" Margin="-1,0,0,0" />
+                        <!-- Game Title-->
+                        <TextBlock x:Name="GameTitle"
+                                           VerticalAlignment="Bottom"
+                                           HorizontalAlignment="Center"
+                                           Margin="0,0,151,0"
+                                           Height="39"
+                                           Width="100"
                                            TextWrapping="Wrap"
                                            FontSize="20"
-                                           Text="{Binding Title, Mode=OneWay}" RenderTransformOrigin="0.503,0.514" />
-                            <!-- Game Genres -->
-                            <TextBlock x:Name="GameGenre"
-                                           VerticalAlignment="Top"
-                                           HorizontalAlignment="Left"
-                                           Margin="114,80,0,0"
-                                           TextWrapping="Wrap"
-                                           Text="{Binding Genre, Mode=OneWay}" Height="50" Width="126" />
-                            <!-- Launcher -->
-                            <Button Width="250"
+                                   TextAlignment="Center"
+                                           Text="{Binding Title, Mode=OneWay}" />
+                        <!-- Launcher -->
+                        <Button Width="100"
                                     Height="140"
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     Tag="{Binding Path}"
                                     Click="LaunchButton_OnClick"
-                                    Opacity="0.1"/>
-                        </Grid>
-                    </materialDesign:Card>
+                                    Opacity="0.1" Margin="0,0,150,0"/>
+                    </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
