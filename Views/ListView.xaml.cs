@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Diagnostics;
 using GameLauncher.ViewModels;
+using System;
 
 namespace GameLauncher.Views
 {
@@ -34,5 +35,19 @@ namespace GameLauncher.Views
         }
 
         #endregion Run the game
+
+        private void EditGame_OnClick(object sender, RoutedEventArgs e)
+        {
+            object title = ((Button)sender).Tag;
+            Console.WriteLine(title);
+            return;
+        }
+
+        private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
+        {
+            object title = ((Button)sender).Tag;
+            Console.WriteLine(title);
+            return;
+        }
     }
 }

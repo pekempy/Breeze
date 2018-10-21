@@ -51,7 +51,7 @@
                                            HorizontalAlignment="Left"
                                            Margin="85,1,0,45"
                                            Height="auto"
-                                           Width="175"
+                                           Width="151"
                                            FontSize="20"
                                            Content="{Binding Title, Mode=OneWay}" />
                             <!-- Game Genres -->
@@ -72,16 +72,43 @@
                                                        Text="{Binding Link, Mode=OneWay}" />
                                         </Hyperlink>
                                     </TextBlock>
+                            <!-- Overflow -->
+                            <materialDesign:PopupBox 
+                                                 PlacementMode="LeftAndAlignTopEdges"
+                                                 StaysOpen="False"
+                                                 HorizontalAlignment="Right" Margin="0,0,0,50" Grid.Row="0" Grid.RowSpan="1" Width="34">
+                                <!-- Items inside overflow -->
+                                <StackPanel>
+                                    <!-- Edit Button -->
+                                    <Button Click="EditGame_OnClick"
+                                                    Tag="{Binding Title}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Pencil"
+                                                                 VerticalAlignment="Center" />
+                                            <TextBlock Text="Edit" />
+                                        </StackPanel>
+                                    </Button>
+                                    <!-- Delete Button -->
+                                    <Button Click="DeleteGame_OnClick"
+                                                    Tag="{Binding Title}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Delete"
+                                                                 VerticalAlignment="Center" />
+                                            <TextBlock Text="Delete" />
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </materialDesign:PopupBox>
                             <!-- Game Launcher -->
-                            <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
                                             x:Name="GameLauncher"
                                             Click="LaunchButton_OnClick"
                                             Tag="{Binding Path, Mode=OneWay}"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Right"
-                                            Margin="0 16 6 19"
-                                            Height="40"
-                                            Width="40">
+                                            Height="30"
+                                            Width="34" Margin="0,50,0,0"
+                                    Padding="0,0,0,0" >
                                 <materialDesign:PackIcon Kind="Gamepad" />
                             </Button>
                         </Grid>

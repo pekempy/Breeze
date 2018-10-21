@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -31,5 +32,18 @@ namespace GameLauncher.Views
         }
 
         #endregion Run the game
+        private void EditGame_OnClick(object sender, RoutedEventArgs e)
+        {
+            object title = ((Button)sender).Tag;
+            Console.WriteLine(title);
+            return;
+        }
+
+        private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
+        {
+            object title = ((Button)sender).Tag;
+            Console.WriteLine(title);
+            return;
+        }
     }
 }

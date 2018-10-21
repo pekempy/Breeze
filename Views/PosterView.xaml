@@ -92,7 +92,7 @@
                                                     HorizontalContentAlignment="Left"/>
                                         </WrapPanel>
                                     </StackPanel>
-                                    <!-- Top Right Overflow -->
+                                    <!-- Overflow -->
                                     <materialDesign:PopupBox 
                                                  PlacementMode="TopAndAlignRightEdges"
                                                  StaysOpen="False"
@@ -100,7 +100,8 @@
                                         <!-- Items inside overflow -->
                                         <StackPanel>
                                             <!-- Edit Button -->
-                                            <Button Click="EditGame_OnClick">
+                                            <Button Click="EditGame_OnClick"
+                                                    Tag="{Binding Title}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Pencil"
                                                                  VerticalAlignment="Center" />
@@ -108,7 +109,8 @@
                                                 </StackPanel>
                                             </Button>
                                             <!-- Delete Button -->
-                                            <Button Click="DeleteGame_OnClick">
+                                            <Button Click="DeleteGame_OnClick"
+                                                    Tag="{Binding Title}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Delete"
                                                                  VerticalAlignment="Center" />

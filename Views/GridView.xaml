@@ -11,7 +11,7 @@
              d:DataContext="{d:DesignInstance Type=ViewModels:GridViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="300"
-             d:DesignWidth="300">
+             d:DesignWidth="1200">
     <UserControl.Resources>
         <CollectionViewSource x:Key="GameListCVS" Source="{Binding GridView}">
             <CollectionViewSource.SortDescriptions>
@@ -28,7 +28,7 @@
         <ItemsControl x:Name="gameListView"
                           Grid.ColumnSpan="1"
                           Grid.RowSpan="7"
-                          Margin="10 10 0 10"
+                      HorizontalAlignment="Left"
                           ItemsSource="{Binding Source={StaticResource GameListCVS}}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
