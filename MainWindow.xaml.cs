@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using MaterialDesignThemes.Wpf;
 
 namespace GameLauncher
 {
@@ -19,6 +20,7 @@ namespace GameLauncher
         private ListViewModel listViewModel;
         private BannerViewModel bannerViewModel;
         private AddGame ag;
+        public string theme;
 
         #endregion ViewModels are at class level to be reused
 
@@ -35,9 +37,10 @@ namespace GameLauncher
 
             #region default view
 
-            listViewModel = new ListViewModel();
-            listViewModel.LoadGames();
-            DataContext = listViewModel;
+            posterViewModel = new PosterViewModel();
+            posterViewModel.LoadGames();
+            DataContext = posterViewModel;
+            theme = "dark";
 
             #endregion default view
 
@@ -51,6 +54,30 @@ namespace GameLauncher
             }
 
             #endregion if game file doesn't exist, create dir + open ag dialog
+        }
+
+        private void ThemeSwitch_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (theme == "dark")
+            {
+                SwitchThemeLight();
+            }
+            else if (theme == "light")
+            {
+                SwitchThemeDark();
+            }
+        }
+
+        public void SwitchThemeLight()
+        {
+            ThemeAssist.SetTheme(this, BaseTheme.Light);
+            theme = "light";
+        }
+
+        public void SwitchThemeDark()
+        {
+            ThemeAssist.SetTheme(this, BaseTheme.Dark);
+            theme = "dark";
         }
 
         #region Until we add StayOpen glag to drawer, this helps w/ scrollbar

@@ -115,7 +115,16 @@
                                         <TextBlock Text="Refresh Games" />
                                     </StackPanel>
                                 </Button>-->
-                            <!-- Grid Button -->
+                            <!-- Theme button -->
+                            <Button Click="ThemeSwitch_OnClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ThemeLightDark"
+                                                             VerticalAlignment="Center"
+                                                             Margin="0 0 10 0" />
+                                    <TextBlock Text="Theme Switch" />
+                                </StackPanel>
+                            </Button>
+                            <!-- Settings Button -->
                             <Button Click="SettingsButton_OnClick">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Settings"
