@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.IO;
 using System.Windows;
-using Microsoft.Win32;
 
 namespace GameLauncher
 {

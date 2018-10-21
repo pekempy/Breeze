@@ -66,18 +66,19 @@
                     <materialDesign:PopupBox DockPanel.Dock="Right"
                                                  PlacementMode="BottomAndAlignRightEdges"
                                                  StaysOpen="False"
-                                                 HorizontalAlignment="Right">
+                                                 HorizontalAlignment="Right"
+                                             Padding="0 0 0 0">
                         <!-- Items inside overflow -->
                         <StackPanel>
                             <!-- Grid Button -->
-                            <Button Click="GridButton_OnClick">
+                            <!--<Button Click="GridButton_OnClick">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="ViewModule"
                                                                  VerticalAlignment="Center"
                                                                  Margin="0 0 10 0" />
                                     <TextBlock Text="Grid View" />
                                 </StackPanel>
-                            </Button>
+                            </Button>-->
                             <!-- Poster Button -->
                             <Button Click="PosterButton_OnClick">
                                 <StackPanel Orientation="Horizontal">

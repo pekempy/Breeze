@@ -114,7 +114,7 @@
                                              Height="20"
                                              Width="20" />
                     <Button.CommandParameter>
-                        
+
                         <Grid Width="Auto"
                           Height="Auto"
                           MinHeight="200"

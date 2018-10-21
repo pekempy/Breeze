@@ -13,104 +13,110 @@
              d:DesignHeight="300"
              d:DesignWidth="300">
     <UserControl.Resources>
-        <CollectionViewSource x:Key="GameListCVS" Source="{Binding ListView}">
+        <CollectionViewSource x:Key="GameListCVS"
+                              Source="{Binding ListView}">
             <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Title"/>
+                <scm:SortDescription PropertyName="Title" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
     </UserControl.Resources>
     <!-- This section displays one card per game in GamesList-->
     <ScrollViewer VerticalScrollBarVisibility="Auto"
-                      Grid.ColumnSpan="1"
-                      Grid.RowSpan="7">
+                  Grid.ColumnSpan="1"
+                  Grid.RowSpan="7">
         <!-- ItemsControl is bound to OC to know how many cards to make-->
         <ItemsControl x:Name="gameListView"
-                          Grid.ColumnSpan="3"
-                          Grid.RowSpan="7"
-                          Margin="10 10 0 10"
-                          ItemsSource="{Binding Source={StaticResource GameListCVS}}">
+                      Grid.ColumnSpan="3"
+                      Grid.RowSpan="7"
+                      Margin="10 10 0 10"
+                      ItemsSource="{Binding Source={StaticResource GameListCVS}}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
 
                     <!-- The card -->
                     <materialDesign:Card Margin="10 5 10 0"
-                                                 Grid.ColumnSpan="3"
-                                                 Grid.RowSpan="5"
-                                                 Height="80">
+                                         Grid.ColumnSpan="3"
+                                         Grid.RowSpan="5"
+                                         Height="80">
                         <Grid>
                             <!-- Game Image -->
                             <Image x:Name="GameIcon"
-                                           Width="80"
-                                           Grid.RowSpan="2"
-                                           HorizontalAlignment="Left"
-                                           Stretch="Fill"
-                                           Source="{Binding Icon, Mode=OneWay}" />
+                                   Width="80"
+                                   Grid.RowSpan="2"
+                                   HorizontalAlignment="Left"
+                                   Stretch="Fill"
+                                   Source="{Binding Icon, Mode=OneWay}" />
                             <!-- Game Title-->
                             <Label x:Name="GameTitle"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Left"
-                                           Margin="85,1,0,45"
-                                           Height="auto"
-                                           Width="151"
-                                           FontSize="20"
-                                           Content="{Binding Title, Mode=OneWay}" />
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="85,1,0,45"
+                                   FontSize="20"
+                                   Content="{Binding Title, Mode=OneWay}" />
                             <!-- Game Genres -->
                             <Label x:Name="GameGenre"
-                                           VerticalAlignment="Top"
-                                           HorizontalAlignment="Left"
-                                           Margin="88,32,0,0"
-                                           Content="{Binding Genre, Mode=OneWay}" />
-                            <!-- Game Link -->
-                            <TextBlock x:Name="GameLinkBlock"
-                                               VerticalAlignment="Top"
-                                               HorizontalAlignment="Left"
-                                               Margin="93,58,0,0"
-                                               FontSize="9">
-                                        <Hyperlink NavigateUri="{Binding Link, Mode=OneWay}"
-                                                   RequestNavigate="Hyperlink_Link">
-                                            <TextBlock x:Name="GameLink"
-                                                       Text="{Binding Link, Mode=OneWay}" />
-                                        </Hyperlink>
-                                    </TextBlock>
+                                   VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="86,32,0,0"
+                                   FontSize="10"
+                                   Content="{Binding Genre, Mode=OneWay}"
+                                   materialDesign:ColorZoneAssist.Mode="Accent" />
+
+                            <!-- Game Launcher -->
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    x:Name="GameLauncher"
+                                    Click="LaunchButton_OnClick"
+                                    Tag="{Binding Path, Mode=OneWay}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Height="80"
+                                    Width="10000"
+                                    Margin="0"
+                                    Padding="0,0,0,0"
+                                    Opacity="0.1" />
                             <!-- Overflow -->
-                            <materialDesign:PopupBox 
-                                                 PlacementMode="LeftAndAlignTopEdges"
-                                                 StaysOpen="False"
-                                                 HorizontalAlignment="Right" Margin="0,0,0,50" Grid.Row="0" Grid.RowSpan="1" Width="34">
+                            <materialDesign:PopupBox PlacementMode="LeftAndAlignTopEdges"
+                                                     StaysOpen="False"
+                                                     HorizontalAlignment="Right"
+                                                     Margin="0,0,0,50"
+                                                     Grid.Row="0"
+                                                     Grid.RowSpan="1"
+                                                     Width="34"
+                                                     Padding="0 0 0 0">
                                 <!-- Items inside overflow -->
                                 <StackPanel>
+                                    <!-- Link Button -->
+                                    <Button Click="GameLink_OnClick"
+                                            Tag="{Binding Link}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Earth"
+                                                                     VerticalAlignment="Center" />
+                                            <TextBlock Text="Website"
+                                                       Margin="5 0 0 0" />
+                                        </StackPanel>
+                                    </Button>
                                     <!-- Edit Button -->
                                     <Button Click="EditGame_OnClick"
-                                                    Tag="{Binding Title}">
+                                            Tag="{Binding Title}">
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="Pencil"
-                                                                 VerticalAlignment="Center" />
-                                            <TextBlock Text="Edit" />
+                                                                     VerticalAlignment="Center" />
+                                            <TextBlock Text="Edit"
+                                                       Margin="5 0 0 0" />
                                         </StackPanel>
                                     </Button>
                                     <!-- Delete Button -->
                                     <Button Click="DeleteGame_OnClick"
-                                                    Tag="{Binding Title}">
+                                            Tag="{Binding Title}">
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="Delete"
-                                                                 VerticalAlignment="Center" />
-                                            <TextBlock Text="Delete" />
+                                                                     VerticalAlignment="Center" />
+                                            <TextBlock Text="Delete"
+                                                       Margin="5 0 0 0" />
                                         </StackPanel>
                                     </Button>
                                 </StackPanel>
                             </materialDesign:PopupBox>
-                            <!-- Game Launcher -->
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                            x:Name="GameLauncher"
-                                            Click="LaunchButton_OnClick"
-                                            Tag="{Binding Path, Mode=OneWay}"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Right"
-                                            Height="30"
-                                            Width="34" Margin="0,50,0,0"
-                                    Padding="0,0,0,0" >
-                                <materialDesign:PackIcon Kind="Gamepad" />
-                            </Button>
                         </Grid>
                     </materialDesign:Card>
                 </DataTemplate>

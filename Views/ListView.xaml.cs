@@ -1,11 +1,7 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using System.Collections.ObjectModel;
-using System.IO;
+﻿using System;
 using System.Diagnostics;
-using GameLauncher.ViewModels;
-using System;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace GameLauncher.Views
 {
@@ -16,25 +12,26 @@ namespace GameLauncher.Views
             InitializeComponent();
         }
 
-        #region Run the hyperlink
-
-        private void Hyperlink_Link(object sender, RequestNavigateEventArgs e)
+        private void GameLink_OnClick(object sender, RoutedEventArgs e)
         {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            object link = ((Button)sender).Tag;
+            string linkstring = link.ToString().Trim();
+
+            if (linkstring != "")
+            {
+                Process.Start(new ProcessStartInfo(linkstring));
+            }
         }
-
-        #endregion Run the hyperlink
-
-        #region Run the game
 
         private void LaunchButton_OnClick(object sender, RoutedEventArgs e)
         {
             object link = ((Button)sender).Tag;
             string linkString = link.ToString().Trim();
-            Process.Start(new ProcessStartInfo(linkString));
+            if (linkString != "")
+            {
+                Process.Start(new ProcessStartInfo(linkString));
+            }
         }
-
-        #endregion Run the game
 
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
         {

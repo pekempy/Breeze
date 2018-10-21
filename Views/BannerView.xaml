@@ -15,9 +15,10 @@
     d:DesignWidth="300">
 
     <UserControl.Resources>
-        <CollectionViewSource x:Key="GameListCVS" Source="{Binding BannerView}">
+        <CollectionViewSource x:Key="GameListCVS"
+                              Source="{Binding BannerView}">
             <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Title"/>
+                <scm:SortDescription PropertyName="Title" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
     </UserControl.Resources>
@@ -38,16 +39,15 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <!-- This section displays one card per game in GamesList-->
-        <ScrollViewer
-            Grid.RowSpan="7"
-            Grid.ColumnSpan="3"
-            VerticalScrollBarVisibility="Auto" Margin="0,0,-48,-0.429">
+        <ScrollViewer Grid.RowSpan="7"
+                      Grid.ColumnSpan="3"
+                      VerticalScrollBarVisibility="Auto"
+                      Margin="0,0,-48,-0.429">
             <!-- ItemsControl is bound to OC to know how many cards to make-->
-            <ItemsControl
-                x:Name="gameListView"
-                Margin="10 10 0 10"
-                ItemsSource="{Binding Source={StaticResource GameListCVS}}"
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl x:Name="gameListView"
+                          Margin="10 10 0 10"
+                          ItemsSource="{Binding Source={StaticResource GameListCVS}}"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
@@ -61,47 +61,59 @@
                             <materialDesign:Card
                                 Width="300"
                                 Height="100"
-                                    Margin="10 5 10 0">
+                                Margin="10 5 10 0">
                                 <Grid>
                                     <Image Source="{Binding Banner}"
-                                                   Height="100"
-                                                   Width="300"
-                                                   Stretch="Fill" />
+                                           Height="100"
+                                           Width="300"
+                                           Stretch="Fill" />
                                     <TextBlock Background="Black"
-                                               Opacity="0.4" Margin="0,80,0,0"
+                                               Opacity="0.6" Margin="0,80,0,0"
                                                FontSize="12" />
-                                    <TextBlock Text="{Binding Title}" 
-                                               Height="Auto" 
-                                               Width="Auto" 
+                                    <TextBlock Text="{Binding Title}"
+                                               Height="Auto"
+                                               Width="Auto"
                                                Margin="10,80,32,0"
                                                VerticalAlignment="Center"
-                                               Foreground="White"/>
+                                               Foreground="White" />
                                     <Button Width="300"
                                             Height="100"
                                             Style="{StaticResource MaterialDesignFlatButton}"
                                             Tag="{Binding Path}"
                                             Click="LaunchButton_OnClick"
-                                            Opacity="0.1"/>
+                                            Opacity="0.1" />
 
                                     <!-- Overflow -->
-                                    <materialDesign:PopupBox Foreground="White"
-                                                             materialDesign:ShadowAssist.ShadowEdges="Bottom"
-                                                             materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                                                             materialDesign:ShadowAssist.Darken="True"
-                                                 PlacementMode="TopAndAlignRightEdges"
+                                    <materialDesign:PopupBox
+                                                 PlacementMode="LeftAndAlignTopEdges"
                                                  StaysOpen="False"
-                                                 HorizontalAlignment="Center" Margin="273,77,0,0" Grid.Row="0" Grid.RowSpan="1"
-                                                             Padding="0 0 0 0" Width="27">
+                                                 HorizontalAlignment="Right"
+                                                 Grid.Row="0"
+                                                 Grid.RowSpan="1"
+                                                 Width="26"
+                                                 Padding="0 0 0 0"
+                                                 Margin="0,77,0,0"
+                                                 Foreground="White">
                                         <!-- Items inside overflow -->
                                         <StackPanel>
+                                            <!-- Link Button -->
+                                            <Button Click="GameLink_OnClick"
+                                                    Tag="{Binding Link}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="Earth"
+                                                                             VerticalAlignment="Center" />
+                                                    <TextBlock Text="Website"
+                                                               Margin="5 0 0 0" />
+                                                </StackPanel>
+                                            </Button>
                                             <!-- Edit Button -->
                                             <Button Click="EditGame_OnClick"
                                                     Tag="{Binding Title}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Pencil"
-                                                                 VerticalAlignment="Center" />
-                                                    <TextBlock Text="Edit"/>
-                                                    
+                                                                             VerticalAlignment="Center" />
+                                                    <TextBlock Text="Edit"
+                                                               Margin="5 0 0 0" />
                                                 </StackPanel>
                                             </Button>
                                             <!-- Delete Button -->
@@ -109,8 +121,9 @@
                                                     Tag="{Binding Title}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Delete"
-                                                                 VerticalAlignment="Center" />
-                                                    <TextBlock Text="Delete" />
+                                                                             VerticalAlignment="Center" />
+                                                    <TextBlock Text="Delete"
+                                                               Margin="5 0 0 0" />
                                                 </StackPanel>
                                             </Button>
                                         </StackPanel>

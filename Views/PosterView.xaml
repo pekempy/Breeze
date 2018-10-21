@@ -14,9 +14,10 @@
     d:DesignWidth="300">
 
     <UserControl.Resources>
-        <CollectionViewSource x:Key="GameListCVS" Source="{Binding PosterView}">
+        <CollectionViewSource x:Key="GameListCVS"
+                              Source="{Binding PosterView}">
             <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Title"/>
+                <scm:SortDescription PropertyName="Title" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
     </UserControl.Resources>
@@ -37,16 +38,14 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <!-- This section displays one card per game in GamesList-->
-        <ScrollViewer
-            Grid.RowSpan="7"
-            Grid.ColumnSpan="3"
-            VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.RowSpan="7"
+                      Grid.ColumnSpan="3"
+                      VerticalScrollBarVisibility="Auto">
             <!-- ItemsControl is bound to OC to know how many cards to make-->
-            <ItemsControl
-                x:Name="gameListView"
-                Margin="10 10 0 10"
-                ItemsSource="{Binding Source={StaticResource GameListCVS}}"
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl x:Name="gameListView"
+                          Margin="10 10 0 10"
+                          ItemsSource="{Binding Source={StaticResource GameListCVS}}"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
@@ -57,10 +56,9 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <!-- The card -->
-                            <materialDesign:Card
-                                    MinWidth="180"
-                                    MaxWidth="180"
-                                    Margin="10 5 10 0">
+                            <materialDesign:Card MinWidth="180"
+                                                 MaxWidth="180"
+                                                 Margin="10 10 10 10">
                                 <Grid>
                                     <!-- This grid positions content on the card -->
                                     <Grid.RowDefinitions>
@@ -69,15 +67,15 @@
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
                                     <Image Source="{Binding Poster}"
-                                               Height="220"
-                                               Width="180"
-                                               Stretch="Fill"/>
+                                           Height="220"
+                                           Width="180"
+                                           Stretch="Fill" />
                                     <Button Width="180"
-                                               Height="220"
-                                               Style="{StaticResource MaterialDesignFlatButton}"
-                                               Tag="{Binding Path}"
-                                               Click="LaunchButton_OnClick"
-                                               Opacity="0.1"/>
+                                            Height="220"
+                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                            Tag="{Binding Path}"
+                                            Click="LaunchButton_OnClick"
+                                            Opacity="0.1" />
                                     <!-- stackpanel for the button -->
                                     <StackPanel Grid.Row="1"
                                                 Margin="0 0 0 0"
@@ -89,23 +87,38 @@
                                                     Content="{Binding Title}"
                                                     VerticalAlignment="Bottom"
                                                     HorizontalAlignment="Left"
-                                                    HorizontalContentAlignment="Left"/>
+                                                    HorizontalContentAlignment="Left" />
                                         </WrapPanel>
                                     </StackPanel>
                                     <!-- Overflow -->
-                                    <materialDesign:PopupBox 
-                                                 PlacementMode="TopAndAlignRightEdges"
-                                                 StaysOpen="False"
-                                                 HorizontalAlignment="Right" Margin="0" Grid.Row="1" Grid.RowSpan="2">
+                                    <materialDesign:PopupBox PlacementMode="LeftAndAlignTopEdges"
+                                                             StaysOpen="False"
+                                                             HorizontalAlignment="Center"
+                                                             Margin="154,1,0,0"
+                                                             Grid.Row="1"
+                                                             Grid.RowSpan="2"
+                                                             Width="26"
+                                                             Padding="0 0 0 0">
                                         <!-- Items inside overflow -->
                                         <StackPanel>
+                                            <!-- Link Button -->
+                                            <Button Click="GameLink_OnClick"
+                                                    Tag="{Binding Link}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="Earth"
+                                                                             VerticalAlignment="Center" />
+                                                    <TextBlock Text="Website"
+                                                               Margin="5 0 0 0" />
+                                                </StackPanel>
+                                            </Button>
                                             <!-- Edit Button -->
                                             <Button Click="EditGame_OnClick"
                                                     Tag="{Binding Title}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Pencil"
-                                                                 VerticalAlignment="Center" />
-                                                    <TextBlock Text="Edit" />
+                                                                             VerticalAlignment="Center" />
+                                                    <TextBlock Text="Edit"
+                                                               Margin="5 0 0 0" />
                                                 </StackPanel>
                                             </Button>
                                             <!-- Delete Button -->
@@ -113,8 +126,9 @@
                                                     Tag="{Binding Title}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Delete"
-                                                                 VerticalAlignment="Center" />
-                                                    <TextBlock Text="Delete" />
+                                                                             VerticalAlignment="Center" />
+                                                    <TextBlock Text="Delete"
+                                                               Margin="5 0 0 0" />
                                                 </StackPanel>
                                             </Button>
                                         </StackPanel>

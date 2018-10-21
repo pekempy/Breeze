@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameLauncher.ViewModels;
+using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using GameLauncher.Views;
-using GameLauncher.Models;
-using System.IO;
-using GameLauncher.ViewModels;
 
 namespace GameLauncher
 {
@@ -25,6 +14,7 @@ namespace GameLauncher
 
         //private LoadAllGames lag;
         private GridViewModel gridViewModel;
+
         private PosterViewModel posterViewModel;
         private ListViewModel listViewModel;
         private BannerViewModel bannerViewModel;

@@ -11,11 +11,11 @@
              d:DataContext="{d:DesignInstance Type=ViewModels:GridViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="300"
-             d:DesignWidth="1200">
+             d:DesignWidth="300">
     <UserControl.Resources>
         <CollectionViewSource x:Key="GameListCVS" Source="{Binding GridView}">
             <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Title"/>
+                <scm:SortDescription PropertyName="Title" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
     </UserControl.Resources>
@@ -26,9 +26,8 @@
                       Grid.RowSpan="7">
         <!-- ItemsControl is bound to OC to know how many cards to make-->
         <ItemsControl x:Name="gameListView"
-                          Grid.ColumnSpan="1"
-                          Grid.RowSpan="7"
                       HorizontalAlignment="Left"
+                      Margin="10 10 10 10"
                           ItemsSource="{Binding Source={StaticResource GameListCVS}}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -37,35 +36,34 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <!-- Game Image -->
-                        <Image x:Name="GameIcon"
-                                           Height="100"
-                                           Width="100"
-                                           Stretch="Fill"
-                                           Grid.RowSpan="1"
+                    <materialDesign:Card Margin="5 5 5 5"
+                                         Height="180">
+                        <Grid>
+                            <!-- Game Image -->
+                            <Image x:Name="GameIcon"
+                                           Stretch="Uniform"
                                            HorizontalAlignment="Left"
                                VerticalAlignment="Top"
-                                           Source="{Binding Icon, Mode=OneWay}" Margin="-1,0,0,0" />
-                        <!-- Game Title-->
-                        <TextBlock x:Name="GameTitle"
+                                           Source="{Binding Icon, Mode=OneWay}" />
+                            <!-- Game Title-->
+                            <TextBlock x:Name="GameTitle"
                                            VerticalAlignment="Bottom"
                                            HorizontalAlignment="Center"
-                                           Margin="0,0,151,0"
                                            Height="39"
                                            Width="100"
                                            TextWrapping="Wrap"
                                            FontSize="20"
                                    TextAlignment="Center"
                                            Text="{Binding Title, Mode=OneWay}" />
-                        <!-- Launcher -->
-                        <Button Width="100"
+                            <!-- Launcher -->
+                            <Button Width="100"
                                     Height="140"
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     Tag="{Binding Path}"
                                     Click="LaunchButton_OnClick"
-                                    Opacity="0.1" Margin="0,0,150,0"/>
-                    </Grid>
+                                    Opacity="0.1" />
+                        </Grid>
+                    </materialDesign:Card>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

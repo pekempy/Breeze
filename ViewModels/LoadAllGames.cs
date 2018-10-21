@@ -1,17 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Diagnostics;
+﻿using GameLauncher.Models;
+using System.Collections.ObjectModel;
 using System.IO;
-using System.Threading.Tasks;
-using GameLauncher.Models;
-using GameLauncher.Views;
 
 namespace GameLauncher.ViewModels
 {
     public class LoadAllGames
     {
-
         public ObservableCollection<GameList> Games { get; set; }
 
         public void LoadGames()

@@ -1,11 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
-using GameLauncher.Models;
-using GameLauncher.Views;
+﻿using GameLauncher.Models;
+using System.Collections.ObjectModel;
 
 namespace GameLauncher.ViewModels
 {
