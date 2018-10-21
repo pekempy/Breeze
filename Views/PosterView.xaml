@@ -82,8 +82,9 @@
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Bottom" Grid.RowSpan="2">
                                         <WrapPanel Width="180">
-                                            <Button Width="180"
-                                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                            <Button Name="PosterGameTitle"
+                                                    Width="180"
+                                                    Style="{StaticResource MaterialDesignFlatAccentButton}"
                                                     Content="{Binding Title}"
                                                     VerticalAlignment="Bottom"
                                                     HorizontalAlignment="Left"
