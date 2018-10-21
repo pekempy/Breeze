@@ -92,6 +92,60 @@
                                                     HorizontalContentAlignment="Left"/>
                                         </WrapPanel>
                                     </StackPanel>
+                                    <!-- Top Right Overflow -->
+                                    <materialDesign:PopupBox 
+                                                 PlacementMode="BottomAndAlignRightEdges"
+                                                 StaysOpen="False"
+                                                 HorizontalAlignment="Right" Margin="0,0,0,5" Grid.Row="1" Grid.RowSpan="2">
+                                        <!-- Items inside overflow -->
+                                        <StackPanel>
+                                            <!-- Grid Button -->
+                                            <Button>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="ViewModule"
+                                                                 VerticalAlignment="Center"
+                                                                 Margin="0 0 10 0" />
+                                                    <TextBlock Text="Grid View" />
+                                                </StackPanel>
+                                            </Button>
+                                            <!-- Poster Button -->
+                                            <Button>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="ViewList"
+                                                                 VerticalAlignment="Center"
+                                                                 Margin="0 0 10 0" />
+                                                    <TextBlock Text="Poster View" />
+                                                </StackPanel>
+                                            </Button>
+                                            <!-- Banner Button -->
+                                            <Button>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="ViewStream"
+                                                                 VerticalAlignment="Center"
+                                                                 Margin="0 0 10 0" />
+                                                    <TextBlock Text="Banner View" />
+                                                </StackPanel>
+                                            </Button>
+                                            <!-- Grid Button -->
+                                            <Button>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="ViewHeadline"
+                                                                 VerticalAlignment="Center"
+                                                                 Margin="0 0 10 0" />
+                                                    <TextBlock Text="List View" />
+                                                </StackPanel>
+                                            </Button>
+                                            <!-- Settings Button -->
+                                            <Button>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="Settings"
+                                                                 VerticalAlignment="Center"
+                                                                 Margin="0 0 10 0" />
+                                                    <TextBlock Text="Settings" />
+                                                </StackPanel>
+                                            </Button>
+                                        </StackPanel>
+                                    </materialDesign:PopupBox>
                                 </Grid>
                             </materialDesign:Card>
                         </StackPanel>
