@@ -14,9 +14,7 @@ namespace GameLauncher
     {
         #region ViewModels are at class level to be reused
 
-        //private LoadAllGames lag;
         private SettingsViewModel settingsViewModel;
-
         private PosterViewModel posterViewModel;
         private ListViewModel listViewModel;
         private BannerViewModel bannerViewModel;
@@ -41,7 +39,7 @@ namespace GameLauncher
             posterViewModel = new PosterViewModel();
             posterViewModel.LoadGames();
             DataContext = posterViewModel;
-
+            ThemeAssist.SetTheme(this, BaseTheme.Light);
             theme = "dark";
 
             #endregion default view
@@ -53,6 +51,7 @@ namespace GameLauncher
             {
                 Directory.CreateDirectory("./Resources/");
                 ag.Show();
+                RefreshGames();
             }
 
             #endregion if game file doesn't exist, create dir + open ag dialog

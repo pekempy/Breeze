@@ -1,37 +1,90 @@
-﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:GameLauncher.Views"
-             xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
-             xmlns:Models="clr-namespace:GameLauncher.Models"
-             xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
-             x:Class="GameLauncher.Views.SettingsView"
-             d:DataContext="{d:DesignInstance Type=ViewModels:SettingsViewModel}"
-             mc:Ignorable="d"
-             d:DesignHeight="300"
-             d:DesignWidth="300">
-
-    <materialDesign:ColorZone Mode="PrimaryMid" Margin="0 -6 0 0">
-        <!-- Negative margin to remove whitespace :D -->
-        <StackPanel Orientation="Horizontal"
+﻿<UserControl
+    x:Class="GameLauncher.Views.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Models="clr-namespace:GameLauncher.Models"
+    xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
+    xmlns:local="clr-namespace:GameLauncher.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    d:DataContext="{d:DesignInstance Type=ViewModels:SettingsViewModel}"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="b2v" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <materialDesign:ColorZone
+            Grid.ColumnSpan="40"
+        Margin="0,0,0,0"
+        materialDesign:ShadowAssist.ShadowDepth="Depth2"
+        materialDesign:ShadowAssist.ShadowEdges="Bottom"
+        Mode="PrimaryMid">
+            <!--  Negative margin to remove whitespace :D  -->
+            <StackPanel
+            Margin="4"
+            VerticalAlignment="Top"
+            Orientation="Horizontal">
+                <RadioButton
+                Name="GeneralBtn"
                 Margin="4"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left">
-            <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
-                     Margin="4"
-                     IsChecked="True"
-                     Content="GENERAL" />
-            <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
-                     Margin="4"
-                     IsChecked="False"
-                     Content="THEMES" />
-            <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
-                     Margin="4"
-                     IsChecked="False"
-                     Content="GENRES" />
-        </StackPanel>
-    </materialDesign:ColorZone>
+                Content="GENERAL"
+                IsChecked="False"
+                Style="{StaticResource MaterialDesignTabRadioButton}" />
+                <RadioButton
+                Name="ThemeBtn"
+                Margin="4"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="THEMES"
+                IsChecked="True"
+                Style="{StaticResource MaterialDesignTabRadioButton}" />
+                <RadioButton
+                Name="GenreBtn"
+                Margin="4"
+                Content="GENRES"
+                IsChecked="False"
+                Style="{StaticResource MaterialDesignTabRadioButton}" />
+            </StackPanel>
+        </materialDesign:ColorZone>
+
+        <WrapPanel
+                  Grid.ColumnSpan="4">
+            <Grid Name="GeneralBlock"
+                  Margin="10 60 0 0"
+                  Visibility="{Binding ElementName=GeneralBtn, Path=IsChecked, Converter={StaticResource b2v}}">
+                <!-- CONTENT OF THE GENERAL TAB GOES IN HERE -->
+                <TextBlock>General</TextBlock>
+            </Grid>
+            <!-- ############################################################################################################### -->
+            <Grid Name="ThemeBlock"
+                  Margin="10 60 0 0"
+                  Visibility="{Binding Path=IsChecked, ElementName=ThemeBtn, Converter={StaticResource b2v}}">
+                <!-- CONTENT OF THE THEMES TAB GOES IN HERE -->
+                <TextBlock>Enable Dark Mode *Not working atm*</TextBlock>
+                <ToggleButton Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                              IsChecked="False"
+                              Checked="DarkModeToggle_Checked"
+                              Unchecked="DarkModeToggle_Unchecked"
+                              HorizontalAlignment="Right" Margin="0,0,-60,0" />
+            </Grid>
+            <!-- ############################################################################################################### -->
+            <Grid Name="GenreBlock"
+                  Margin="10 60 0 0"
+                  Visibility="{Binding Path=IsChecked, ElementName=GenreBtn, Converter={StaticResource b2v}}">
+                <!-- CONTENT OF THE GENRES TAB GOES IN HERE-->
+                <TextBlock>Genres</TextBlock>
+            </Grid>
+        </WrapPanel>
+    </Grid>
 </UserControl>

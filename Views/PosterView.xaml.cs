@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using GameLauncher.ViewModels;
 
 namespace GameLauncher.Views
 {
@@ -42,9 +43,8 @@ namespace GameLauncher.Views
 
         private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
         {
-            object title = ((Button)sender).Tag;
-            Console.WriteLine(title);
-            return;
+            RemoveGame rg = new RemoveGame();
+            rg.RemoveGameFromFile(((Button)sender).Tag);
         }
     }
 }
