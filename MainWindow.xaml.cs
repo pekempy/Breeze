@@ -15,7 +15,7 @@ namespace GameLauncher
         #region ViewModels are at class level to be reused
 
         //private LoadAllGames lag;
-        private GridViewModel gridViewModel;
+        private SettingsViewModel settingsViewModel;
 
         private PosterViewModel posterViewModel;
         private ListViewModel listViewModel;
@@ -41,6 +41,7 @@ namespace GameLauncher
             posterViewModel = new PosterViewModel();
             posterViewModel.LoadGames();
             DataContext = posterViewModel;
+
             theme = "dark";
 
             #endregion default view
@@ -100,7 +101,7 @@ namespace GameLauncher
 
         public void RefreshGames()
         {
-            if (DataContext == gridViewModel)
+            if (DataContext == settingsViewModel)
             {
                 Console.WriteLine("Grid");
                 GridViewActive();
@@ -175,9 +176,8 @@ namespace GameLauncher
 
         private void GridViewActive()
         {
-            gridViewModel = new GridViewModel();
-            gridViewModel.LoadGames();
-            DataContext = gridViewModel;
+            settingsViewModel = new SettingsViewModel();
+            DataContext = settingsViewModel;
         }
 
         private void PosterViewActive()
@@ -198,8 +198,8 @@ namespace GameLauncher
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
         {
-            //code to be put in for settings form
-            return; //to prevent errors
+            settingsViewModel = new SettingsViewModel();
+            DataContext = settingsViewModel;
         }
 
         #endregion Settings button

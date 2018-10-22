@@ -27,8 +27,8 @@
         <DataTemplate x:Name="posterViewTemplate" DataType="{x:Type viewmodels:PosterViewModel}">
             <views:PosterView DataContext="{Binding}" />
         </DataTemplate>
-        <DataTemplate x:Name="gridViewTemplate" DataType="{x:Type viewmodels:GridViewModel}">
-            <views:GridView DataContext="{Binding}" />
+        <DataTemplate x:Name="settingsViewTemplate" DataType="{x:Type viewmodels:SettingsViewModel}">
+            <views:SettingsView DataContext="{Binding}" />
         </DataTemplate>
     </Window.Resources>
     <Grid>

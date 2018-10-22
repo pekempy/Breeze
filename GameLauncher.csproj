@@ -113,8 +113,8 @@
     <Compile Include="Views\PosterView.xaml.cs">
       <DependentUpon>PosterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\GridView.xaml.cs">
-      <DependentUpon>GridView.xaml</DependentUpon>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BannerView.xaml.cs">
       <DependentUpon>BannerView.xaml</DependentUpon>
@@ -142,7 +142,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\GridView.xaml">
+    <Page Include="Views\SettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
