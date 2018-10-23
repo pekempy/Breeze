@@ -8,13 +8,9 @@ namespace GameLauncher
 {
     public partial class AddGames : Page
     {
-        private static readonly MainWindow MainWindow = (MainWindow)Application.Current.MainWindow;
-
         public AddGames()
         {
             InitializeComponent();
-
-            AddGameDialog.DialogClosing += (o, args) => MainWindow.RefreshGames();
         }
 
         private void AddGame_OnClick(object sender, RoutedEventArgs e)
@@ -33,12 +29,12 @@ namespace GameLauncher
             try
             {
                 TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
-                tsw.WriteLine(NewGameTitle.Text + " | " +
-                              NewGameGenre.Text + " | " +
-                              NewGamePath.Text + " | " +
-                              NewGameLink.Text + " | " +
-                              NewGameIcon.Text + " | " +
-                              NewGamePoster.Text + " | " +
+                tsw.WriteLine(NewGameTitle.Text + "|" +
+                              NewGameGenre.Text + "|" +
+                              NewGamePath.Text + "|" +
+                              NewGameLink.Text + "|" +
+                              NewGameIcon.Text + "|" +
+                              NewGamePoster.Text + "|" +
                               NewGameBanner.Text);
                 tsw.Close();
             }
@@ -48,6 +44,7 @@ namespace GameLauncher
             }
 
             clearFields();
+            ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
             AddGameDialog.IsOpen = false;
         }
 

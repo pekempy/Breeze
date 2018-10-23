@@ -1,6 +1,7 @@
 ﻿using GameLauncher.Models;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows;
 
 namespace GameLauncher.ViewModels
 {
