@@ -78,12 +78,15 @@ namespace GameLauncher
 
         private void OpenAddGameWindow_OnClick(object sender, RoutedEventArgs e)
         {
-            this.Opacity = 0.5;
-            ag = new AddGame();
-            ag.Owner = this;
-            ag.ShowDialog();
-            RefreshGames();
-            this.Opacity = 100;
+            AddGame ag = new AddGame();
+            ag.AddGameDialog.Visibility = Visibility.Visible;
+            ag.AddGameDialog.Content = ag;
+            //this.Opacity = 0.5;
+            //ag = new AddGame();
+            //ag.Owner = this;
+            //ag.ShowDialog();
+            //RefreshGames();
+            //this.Opacity = 100;
         }
 
         private void UIElement_OnPreviewLeftMouseButtonUp(object sender, MouseButtonEventArgs e)

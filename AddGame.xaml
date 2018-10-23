@@ -26,31 +26,36 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <!-- Dialog for adding games -->
-    <Border Background ="{DynamicResource MaterialDesignPaper}"
+    <materialDesign:DialogHost x:Name="AddGameDialog"
+                               CloseOnClickAway="True"
+                               IsOpen="False"
+                               Visibility="Visible">
+        <materialDesign:DialogHost.DialogContent>
+            <!-- Dialog for adding games -->
+            <Border Background ="{DynamicResource MaterialDesignPaper}"
             CornerRadius="5 5 5 5">
-        <materialDesign:DialogHost Identifier="RootDialog">
-            <Grid Width="500"
+                <materialDesign:DialogHost Identifier="RootDialog">
+                    <Grid Width="500"
                   Margin="0 0 -3 4">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="60" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="60" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="2*" />
-                </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="60" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
 
-                <!-- AddGame Dialog Title -->
-                <TextBlock Text="Add a new game"
+                        <!-- AddGame Dialog Title -->
+                        <TextBlock Text="Add a new game"
                            Grid.Row="0"
                            Grid.ColumnSpan="3"
                            FontSize="20"
@@ -58,24 +63,24 @@
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
                            Margin="25 20 0 0">
-                </TextBlock>
+                        </TextBlock>
 
-                <!-- NewGameTitle -->
-                <TextBox Name="NewGameTitle"
+                        <!-- NewGameTitle -->
+                        <TextBox Name="NewGameTitle"
                          Grid.Row="1"
                          Grid.ColumnSpan="3"
                          Margin="40 0 40 0"
                          materialDesign:HintAssist.Hint="Title"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
 
-                <!-- NewGamePath -->
-                <TextBox Name="NewGamePath"
+                        <!-- NewGamePath -->
+                        <TextBox Name="NewGamePath"
                          Grid.Row="2"
                          Grid.ColumnSpan="3"
                          Margin="40 0 40 0"
                          materialDesign:HintAssist.Hint="Path to file"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                <Button HorizontalAlignment="Right"
+                        <Button HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Grid.Row="2"
                         Grid.Column="2"
@@ -84,14 +89,14 @@
                         Style="{DynamicResource MaterialDesignToolButton}"
                         ToolTip="Attach the game launcher"
                         Click="AttachLauncher_OnClick">
-                    <materialDesign:PackIcon Kind="Attachment"
+                            <materialDesign:PackIcon Kind="Attachment"
                                              VerticalAlignment="Center"
                                              Height="20"
                                              Width="20" />
-                </Button>
+                        </Button>
 
-                <!-- NewGameGenres -->
-                <TextBox Name="NewGameGenre"
+                        <!-- NewGameGenres -->
+                        <TextBox Name="NewGameGenre"
                          Grid.Row="3"
                          Grid.ColumnSpan="3"
                          Margin="40 0 40 0"
@@ -99,8 +104,8 @@
                          IsReadOnly="True"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
 
-                <!-- Genre picker button -->
-                <Button HorizontalAlignment="Right"
+                        <!-- Genre picker button -->
+                        <Button HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Grid.Row="3"
                         Grid.Column="2"
@@ -109,101 +114,101 @@
                         Style="{DynamicResource MaterialDesignToolButton}"
                         ToolTip="Pick the genre(s)"
                         Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
-                    <materialDesign:PackIcon Kind="DotsHorizontal"
+                            <materialDesign:PackIcon Kind="DotsHorizontal"
                                              VerticalAlignment="Center"
                                              Height="20"
                                              Width="20" />
-                    <Button.CommandParameter>
+                            <Button.CommandParameter>
 
-                        <Grid Width="Auto"
+                                <Grid Width="Auto"
                           Height="Auto"
                           MinHeight="200"
                           MinWidth="200">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3*" />
-                                <ColumnDefinition Width="3*" />
-                                <ColumnDefinition Width="3*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Pick your genre(s)"
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*" />
+                                        <ColumnDefinition Width="3*" />
+                                        <ColumnDefinition Width="3*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Pick your genre(s)"
                                    Grid.Row="0"
                                    Grid.ColumnSpan="3"
                                    FontSize="20"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Top"
                                    Margin="10 10 0 0" />
-                            <!-- Genres are hardcoded in -->
-                            <CheckBox Name="Action"
+                                    <!-- Genres are hardcoded in -->
+                                    <CheckBox Name="Action"
                                   Content="Action"
                                   Grid.Row="1"
                                   Grid.ColumnSpan="3"
                                   Margin="20 5 0 5" />
-                            <CheckBox Name="Adventure"
+                                    <CheckBox Name="Adventure"
                                   Content="Adventure"
                                   Grid.Row="2"
                                   Grid.ColumnSpan="3"
                                   Margin="20 0 0 5" />
-                            <CheckBox Name="Fantasy"
+                                    <CheckBox Name="Fantasy"
                                   Content="Fantasy"
                                   Grid.Row="3"
                                   Grid.ColumnSpan="3"
                                   Margin="20 0 0 5" />
-                            <CheckBox Name="FPS"
+                                    <CheckBox Name="FPS"
                                   Content="FPS"
                                   Grid.Row="4"
                                   Grid.ColumnSpan="3"
                                   Margin="20 0 0 5" />
-                            <CheckBox Name="Horror"
+                                    <CheckBox Name="Horror"
                                   Content="Horror"
                                   Grid.Row="5"
                                   Grid.ColumnSpan="3"
                                   Margin="20 0 0 5" />
-                            <CheckBox Name="OpenWorld"
+                                    <CheckBox Name="OpenWorld"
                                   Content="Open World"
                                   Grid.Row="6"
                                   Grid.ColumnSpan="3"
                                   Margin="20 0 0 5" />
-                            <CheckBox Name="Platform"
+                                    <CheckBox Name="Platform"
                                   Content="Platform"
                                   Grid.Row="7"
                                   Grid.ColumnSpan="3"
                                   Margin="20 0 0 5" />
-                            <CheckBox Name="RolePlaying"
+                                    <CheckBox Name="RolePlaying"
                                   Content="Role-Playing"
                                   Grid.Row="8"
                                   Grid.ColumnSpan="3"
                                   Margin="20 0 0 5" />
-                            <CheckBox Name="Shooter"
+                                    <CheckBox Name="Shooter"
                                   Content="Shooter"
                                   Grid.Row="9"
                                   Grid.ColumnSpan="3"
                                   Margin="20 0 0 5" />
-                            <CheckBox Name="Simulation"
+                                    <CheckBox Name="Simulation"
                                   Content="Simulation"
                                   Grid.Row="10"
                                   Grid.ColumnSpan="3"
                                   Margin="20 0 0 5" />
-                            <CheckBox Name="Thriller"
+                                    <CheckBox Name="Thriller"
                                   Content="Thriller"
                                   Grid.Row="11"
                                   Grid.ColumnSpan="3"
                                   Margin="20 0 0 5" />
-                            <!-- CANCEL or ACCEPT buttons -->
-                            <Button Content="CANCEL"
+                                    <!-- CANCEL or ACCEPT buttons -->
+                                    <Button Content="CANCEL"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Bottom"
                                 Grid.Column="0"
@@ -213,7 +218,7 @@
                                 Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
                                 Style="{DynamicResource MaterialDesignFlatButton}"
                                 Click="ClearGenreSelection_OnClick" />
-                            <Button Content="ACCEPT"
+                                    <Button Content="ACCEPT"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Bottom"
                                 Grid.Column="2"
@@ -223,26 +228,26 @@
                                 Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
                                 Style="{DynamicResource MaterialDesignFlatButton}"
                                 Click="AddGenre_OnClick" />
-                        </Grid>
-                    </Button.CommandParameter>
-                </Button>
+                                </Grid>
+                            </Button.CommandParameter>
+                        </Button>
 
-                <!-- NewGameLink -->
-                <TextBox Name="NewGameLink"
+                        <!-- NewGameLink -->
+                        <TextBox Name="NewGameLink"
                          Grid.Row="4"
                          Grid.ColumnSpan="3"
                          Margin="40 0 40 0"
                          materialDesign:HintAssist.Hint="Web link"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
 
-                <!-- NewGameIcon-->
-                <TextBox Name="NewGameIcon"
+                        <!-- NewGameIcon-->
+                        <TextBox Name="NewGameIcon"
                            Grid.Row="5"
                            Grid.ColumnSpan="3"
                            Margin="40 0 40 0"
                            materialDesign:HintAssist.Hint="Icon"
                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                <Button HorizontalAlignment="Right"
+                        <Button HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Grid.Row="5"
                         Grid.Column="2"
@@ -251,20 +256,20 @@
                         Style="{DynamicResource MaterialDesignToolButton}"
                         ToolTip="Attach a small icon file"
                         Click="AttachIcon_OnClick">
-                    <materialDesign:PackIcon Kind="Attachment"
+                            <materialDesign:PackIcon Kind="Attachment"
                                              VerticalAlignment="Center"
                                              Height="20"
                                              Width="20" />
-                </Button>
+                        </Button>
 
-                <!-- NewGamePoster -->
-                <TextBox Name="NewGamePoster"
+                        <!-- NewGamePoster -->
+                        <TextBox Name="NewGamePoster"
                            Grid.Row="6"
                            Grid.ColumnSpan="3"
                            Margin="40 0 40 0"
                            materialDesign:HintAssist.Hint="Poster"
                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                <Button HorizontalAlignment="Right"
+                        <Button HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Grid.Row="6"
                         Grid.Column="2"
@@ -273,20 +278,20 @@
                         Style="{DynamicResource MaterialDesignToolButton}"
                         ToolTip="Attach a poster of the game"
                         Click="AttachPoster_OnClick">
-                    <materialDesign:PackIcon Kind="Attachment"
+                            <materialDesign:PackIcon Kind="Attachment"
                                              VerticalAlignment="Center"
                                              Height="20"
                                              Width="20" />
-                </Button>
+                        </Button>
 
-                <!-- NewGameBanner -->
-                <TextBox Name="NewGameBanner"
+                        <!-- NewGameBanner -->
+                        <TextBox Name="NewGameBanner"
                            Grid.Row="7"
                            Grid.ColumnSpan="3"
                            Margin="40 0 40 0"
                            materialDesign:HintAssist.Hint="Banner"
                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                <Button HorizontalAlignment="Right"
+                        <Button HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Grid.Row="7"
                         Grid.Column="2"
@@ -295,14 +300,14 @@
                         Style="{DynamicResource MaterialDesignToolButton}"
                         ToolTip="Attach a banner of the game"
                         Click="AttachBanner_OnClick">
-                    <materialDesign:PackIcon Kind="Attachment"
+                            <materialDesign:PackIcon Kind="Attachment"
                                              VerticalAlignment="Center"
                                              Height="20"
                                              Width="20" />
-                </Button>
+                        </Button>
 
-                <!-- CANCEL or ACCEPT button -->
-                <Button Content="CANCEL"
+                        <!-- CANCEL or ACCEPT button -->
+                        <Button Content="CANCEL"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Bottom"
                         Grid.Column="0"
@@ -311,7 +316,7 @@
                         IsCancel="True"
                         Style="{DynamicResource MaterialDesignFlatButton}"
                         Click="CancelAddGame_OnClick" />
-                <Button Content="ADD GAME"
+                        <Button Content="ADD GAME"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
                         Grid.Row="12"
@@ -320,7 +325,9 @@
                         IsDefault="True"
                         Style="{DynamicResource MaterialDesignFlatButton}"
                         Click="AddGame_OnClick" />
-            </Grid>
-        </materialDesign:DialogHost>
-    </Border>
+                    </Grid>
+                </materialDesign:DialogHost>
+            </Border>
+        </materialDesign:DialogHost.DialogContent>
+    </materialDesign:DialogHost>
 </Window>
