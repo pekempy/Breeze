@@ -11,7 +11,7 @@
     Height="800"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{StaticResource MaterialDesignFont}"
-    Icon="Game Icon.ico"
+    Icon="breeze.ico"
     TextElement.FontSize="13"
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"

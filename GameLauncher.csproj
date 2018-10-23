@@ -39,7 +39,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Game Icon.ico</ApplicationIcon>
+    <ApplicationIcon>breeze.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>GameLauncher.App</StartupObject>
@@ -63,6 +63,7 @@
       <HintPath>packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\ControlzEx.4.0.0-alpha0189\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -198,6 +199,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="breeze.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Fody.3.2.13\build\Fody.targets" Condition="Exists('packages\Fody.3.2.13\build\Fody.targets')" />
