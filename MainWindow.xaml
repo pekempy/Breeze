@@ -6,7 +6,7 @@
     xmlns:models="clr-namespace:GameLauncher.Models"
     xmlns:viewmodels="clr-namespace:GameLauncher.ViewModels"
     xmlns:views="clr-namespace:GameLauncher.Views"
-    Title="Game Launcher"
+    Title="Breeze"
     Width="1100"
     Height="800"
     Background="{DynamicResource MaterialDesignPaper}"

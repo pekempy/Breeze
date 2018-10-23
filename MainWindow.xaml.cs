@@ -10,7 +10,7 @@ namespace GameLauncher
 {
     public partial class MainWindow : Window
     {
-        private AddGame ag;
+        public static AddGames DialogAddGames = new AddGames();
         private BannerViewModel bannerViewModel;
         private ListViewModel listViewModel;
         private PosterViewModel posterViewModel;
@@ -20,7 +20,6 @@ namespace GameLauncher
         {
             InitializeComponent();
             //lag = new LoadAllGames();
-            ag = new AddGame();
             posterViewModel = new PosterViewModel();
             posterViewModel.LoadGames();
             DataContext = posterViewModel;
@@ -29,9 +28,18 @@ namespace GameLauncher
             if (!File.Exists("./Resources/GamesList.txt"))
             {
                 Directory.CreateDirectory("./Resources/");
-                ag.Show();
+
+                OpenAddGameDialog();
+
                 RefreshGames();
             }
+        }
+
+        public void OpenAddGameDialog()
+        {
+            DialogFrame.Visibility = Visibility.Visible;
+            DialogFrame.Content = DialogAddGames;
+            DialogAddGames.AddGameDialog.IsOpen = true;
         }
 
         private void BannerButton_OnClick(object sender, RoutedEventArgs e)
@@ -78,19 +86,8 @@ namespace GameLauncher
 
         private void OpenAddGameWindow_OnClick(object sender, RoutedEventArgs e)
         {
-            AddGames addGames = new AddGames();
-            
-            DialogFrame.Visibility = Visibility.Visible;
-            DialogFrame.Content = addGames;
-            
-            addGames.AddGameDialog.IsOpen = true;
-
-            //this.Opacity = 0.5;
-            //ag = new AddGame();
-            //ag.Owner = this;
-            //ag.ShowDialog();
-            //RefreshGames();
-            //this.Opacity = 100;
+            OpenAddGameDialog();
+            RefreshGames();
         }
 
         private void UIElement_OnPreviewLeftMouseButtonUp(object sender, MouseButtonEventArgs e)
@@ -102,12 +99,6 @@ namespace GameLauncher
                 dependencyObject = VisualTreeHelper.GetParent(dependencyObject);
             }
             MenuToggleButton.IsChecked = false;
-        }
-
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-            Application.Current.Shutdown();
         }
 
         private void RefreshGames_OnClick(object sender, RoutedEventArgs e)

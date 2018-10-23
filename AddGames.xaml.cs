@@ -6,15 +6,14 @@ using System.Windows.Controls;
 
 namespace GameLauncher
 {
-    /// <summary>
-    /// Логика взаимодействия для AddGames.xaml
-    /// </summary>
     public partial class AddGames : Page
     {
         public AddGames()
         {
             InitializeComponent();
         }
+
+        private static readonly MainWindow MainWindow = (MainWindow)Application.Current.MainWindow;
 
         private void AddGame_OnClick(object sender, RoutedEventArgs e)
         {
@@ -46,8 +45,8 @@ namespace GameLauncher
                 Console.WriteLine("Exception: " + ex.Message);
             }
 
-            AddGameDialog.IsOpen = false;
             clearFields();
+            AddGameDialog.IsOpen = false;
         }
 
         private void CancelAddGame_OnClick(object sender, RoutedEventArgs e)

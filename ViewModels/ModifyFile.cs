@@ -4,11 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GameLauncher.ViewModels
 {
     public class ModifyFile
     {
+        private static readonly MainWindow MainWindow = (MainWindow)Application.Current.MainWindow;
+
         public static void RemoveGameFromFile(object gameName)
         {
             gameName = gameName.ToString();
@@ -34,7 +37,6 @@ namespace GameLauncher.ViewModels
 
         public static void EditGameInfile(object gameName)
         {
-            AddGames eg = new AddGames();
             gameName = gameName.ToString();
             var text = File.ReadAllLines("./Resources/GamesList.txt", Encoding.UTF8);
             for (int i = 0; i < text.Length; i++)
@@ -43,18 +45,17 @@ namespace GameLauncher.ViewModels
                 {
                     try
                     {
-                        string[] column = new string[0];
                         Console.WriteLine(text[i]); //Write entire game line to output window
-                        column = text[i].Split('|');
-                        eg.NewGameTitle.Text = column[0];
-                        eg.NewGameGenre.Text = column[1];
-                        eg.NewGamePath.Text = column[2];
-                        eg.NewGameLink.Text = column[3];
-                        eg.NewGameIcon.Text = column[4];
-                        eg.NewGamePoster.Text = column[5];
-                        eg.NewGameBanner.Text = column[6];
+                        string[] column = text[i].Split('|');
+                        MainWindow.DialogAddGames.NewGameTitle.Text = column[0];
+                        MainWindow.DialogAddGames.NewGameGenre.Text = column[1];
+                        MainWindow.DialogAddGames.NewGamePath.Text = column[2];
+                        MainWindow.DialogAddGames.NewGameLink.Text = column[3];
+                        MainWindow.DialogAddGames.NewGameIcon.Text = column[4];
+                        MainWindow.DialogAddGames.NewGamePoster.Text = column[5];
+                        MainWindow.DialogAddGames.NewGameBanner.Text = column[6];
+                        MainWindow.OpenAddGameDialog();
                         RemoveGameFromFile(gameName); //Prevent duplicates
-                        eg.AddGameDialog.IsOpen = true;
                     }
                     catch (Exception e)
                     {
