@@ -2,11 +2,14 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using GameLauncher.ViewModels;
 
 namespace GameLauncher.Views
 {
     public partial class BannerView : UserControl
     {
+        private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
+
         public BannerView()
         {
             InitializeComponent();
@@ -35,16 +38,14 @@ namespace GameLauncher.Views
 
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
         {
-            object title = ((Button)sender).Tag;
-            Console.WriteLine(title);
-            return;
+            ModifyFile.EditGameInfile(((Button)sender).Tag);
+            MainWindow.RefreshGames();
         }
 
         private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
         {
-            object title = ((Button)sender).Tag;
-            Console.WriteLine(title);
-            return;
+            ModifyFile.RemoveGameFromFile(((Button)sender).Tag);
+            MainWindow.RefreshGames();
         }
     }
 }
