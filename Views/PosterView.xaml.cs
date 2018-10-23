@@ -8,6 +8,8 @@ namespace GameLauncher.Views
 {
     public partial class PosterView : UserControl
     {
+        private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
+
         public PosterView()
         {
             InitializeComponent();
@@ -36,15 +38,13 @@ namespace GameLauncher.Views
 
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
         {
-            object title = ((Button)sender).Tag;
-            Console.WriteLine(title);
-            return;
+            ModifyFile.EditGameInfile(((Button)sender).Tag);
         }
 
         private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
         {
-            RemoveGame rg = new RemoveGame();
-            rg.RemoveGameFromFile(((Button)sender).Tag);
+            ModifyFile.RemoveGameFromFile(((Button)sender).Tag);
+            MainWindow.RefreshGames();
         }
     }
 }

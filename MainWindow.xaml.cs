@@ -5,46 +5,25 @@ using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
-using MaterialDesignThemes.Wpf;
-using GameLauncher.Views;
 
 namespace GameLauncher
 {
     public partial class MainWindow : Window
     {
-        #region ViewModels are at class level to be reused
-
-        private SettingsViewModel settingsViewModel;
-        private PosterViewModel posterViewModel;
-        private ListViewModel listViewModel;
-        private BannerViewModel bannerViewModel;
         private AddGame ag;
-        public string theme;
-
-        #endregion ViewModels are at class level to be reused
+        private BannerViewModel bannerViewModel;
+        private ListViewModel listViewModel;
+        private PosterViewModel posterViewModel;
+        private SettingsViewModel settingsViewModel;
 
         public MainWindow()
         {
             InitializeComponent();
-
-            #region Instantiate new displays only ONCE
-
             //lag = new LoadAllGames();
             ag = new AddGame();
-
-            #endregion Instantiate new displays only ONCE
-
-            #region default view
-
             posterViewModel = new PosterViewModel();
             posterViewModel.LoadGames();
             DataContext = posterViewModel;
-            ThemeAssist.SetTheme(this, BaseTheme.Light);
-            theme = "dark";
-
-            #endregion default view
-
-            #region if game file doesn't exist, create dir + open ag dialog
 
             //If games list doesn't exist, create directory and open ag dialog
             if (!File.Exists("./Resources/GamesList.txt"))
@@ -53,35 +32,59 @@ namespace GameLauncher
                 ag.Show();
                 RefreshGames();
             }
-
-            #endregion if game file doesn't exist, create dir + open ag dialog
         }
 
-        private void ThemeSwitch_OnClick(object sender, RoutedEventArgs e)
+        private void BannerButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (theme == "dark")
-            {
-                SwitchThemeLight();
-            }
-            else if (theme == "light")
-            {
-                SwitchThemeDark();
-            }
+            BannerViewActive();
         }
 
-        public void SwitchThemeLight()
+        private void BannerViewActive()
         {
-            ThemeAssist.SetTheme(this, BaseTheme.Light);
-            theme = "light";
+            bannerViewModel = new BannerViewModel();
+            bannerViewModel.LoadGames();
+            DataContext = bannerViewModel;
         }
 
-        public void SwitchThemeDark()
+        private void ListButton_OnClick(object sender, RoutedEventArgs e)
         {
-            ThemeAssist.SetTheme(this, BaseTheme.Dark);
-            theme = "dark";
+            ListViewActive();
         }
 
-        #region Until we add StayOpen glag to drawer, this helps w/ scrollbar
+        private void ListViewActive()
+        {
+            listViewModel = new ListViewModel();
+            listViewModel.LoadGames();
+            DataContext = listViewModel;
+        }
+
+        private void PosterButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            PosterViewActive();
+        }
+
+        private void PosterViewActive()
+        {
+            posterViewModel = new PosterViewModel();
+            posterViewModel.LoadGames();
+            DataContext = posterViewModel;
+        }
+
+        private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            settingsViewModel = new SettingsViewModel();
+            DataContext = settingsViewModel;
+        }
+
+        private void openAddGameWindow_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Opacity = 0.5;
+            ag = new AddGame();
+            ag.Owner = this;
+            ag.ShowDialog();
+            RefreshGames();
+            this.Opacity = 100;
+        }
 
         private void UIElement_OnPreviewLeftMouseButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -94,18 +97,20 @@ namespace GameLauncher
             MenuToggleButton.IsChecked = false;
         }
 
-        #endregion Until we add StayOpen glag to drawer, this helps w/ scrollbar
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            Application.Current.Shutdown();
+        }
 
-        #region Refresh Games method
+        private void RefreshGames_OnClick(object sender, RoutedEventArgs e)
+        {
+            RefreshGames();
+        }
 
         public void RefreshGames()
         {
-            if (DataContext == settingsViewModel)
-            {
-                Console.WriteLine("Grid");
-                GridViewActive();
-            }
-            else if (DataContext == listViewModel)
+            if (DataContext == listViewModel)
             {
                 Console.WriteLine("List");
                 ListViewActive();
@@ -125,92 +130,5 @@ namespace GameLauncher
                 Console.WriteLine("Nothing");
             }
         }
-
-        #endregion Refresh Games method
-
-        #region Open AddGameWindow with FAB
-
-        private void openAddGameWindow_OnClick(object sender, RoutedEventArgs e)
-        {
-            this.Opacity = 0.5;
-            ag = new AddGame();
-            ag.Owner = this;
-            ag.ShowDialog();
-            RefreshGames();
-            this.Opacity = 100;
-        }
-
-        #endregion Open AddGameWindow with FAB
-
-        #region Change DataContext with buttons in overflow
-
-        private void GridButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            GridViewActive();
-        }
-
-        private void PosterButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            PosterViewActive();
-        }
-
-        private void BannerButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            BannerViewActive();
-        }
-
-        private void ListButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            ListViewActive();
-        }
-
-        #endregion Change DataContext with buttons in overflow
-
-        private void ListViewActive()
-        {
-            listViewModel = new ListViewModel();
-            listViewModel.LoadGames();
-            DataContext = listViewModel;
-        }
-
-        private void GridViewActive()
-        {
-            settingsViewModel = new SettingsViewModel();
-            DataContext = settingsViewModel;
-        }
-
-        private void PosterViewActive()
-        {
-            posterViewModel = new PosterViewModel();
-            posterViewModel.LoadGames();
-            DataContext = posterViewModel;
-        }
-
-        private void BannerViewActive()
-        {
-            bannerViewModel = new BannerViewModel();
-            bannerViewModel.LoadGames();
-            DataContext = bannerViewModel;
-        }
-
-        #region Settings button
-
-        private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            settingsViewModel = new SettingsViewModel();
-            DataContext = settingsViewModel;
-        }
-
-        #endregion Settings button
-
-        #region When program closed
-
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-            Application.Current.Shutdown();
-        }
-
-        #endregion When program closed
     }
 }

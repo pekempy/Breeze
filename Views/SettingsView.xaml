@@ -57,34 +57,40 @@
                 Style="{StaticResource MaterialDesignTabRadioButton}" />
             </StackPanel>
         </materialDesign:ColorZone>
-
-        <WrapPanel
-                  Grid.ColumnSpan="4">
-            <Grid Name="GeneralBlock"
+        <Grid Name="GeneralBlock"
                   Margin="10 60 0 0"
                   Visibility="{Binding ElementName=GeneralBtn, Path=IsChecked, Converter={StaticResource b2v}}">
-                <!-- CONTENT OF THE GENERAL TAB GOES IN HERE -->
-                <TextBlock>General</TextBlock>
-            </Grid>
-            <!-- ############################################################################################################### -->
-            <Grid Name="ThemeBlock"
+            <!-- CONTENT OF THE GENERAL TAB GOES IN HERE -->
+            <TextBlock>General</TextBlock>
+        </Grid>
+        <!-- ############################################################################################################### -->
+        <Grid Name="ThemeBlock"
                   Margin="10 60 0 0"
+                  Grid.ColumnSpan="4"
                   Visibility="{Binding Path=IsChecked, ElementName=ThemeBtn, Converter={StaticResource b2v}}">
-                <!-- CONTENT OF THE THEMES TAB GOES IN HERE -->
-                <TextBlock>Enable Dark Mode</TextBlock>
+            <!-- CONTENT OF THE THEMES TAB GOES IN HERE -->
+            <StackPanel HorizontalAlignment="Left">
+                <TextBlock Height="30">Enable Dark Mode</TextBlock>
+                <TextBlock Height="30">Primary Color for Light (coming soon)</TextBlock>
+                <TextBlock Height="30">Accent Color for Light (coming soon)</TextBlock>
+                <TextBlock Height="30">Primary Color for Dark (coming soon)</TextBlock>
+                <TextBlock Height="30">Accent Color for Dark (coming soon)</TextBlock>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right">
                 <ToggleButton Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
                               IsChecked="False"
                               Checked="DarkModeToggle_Checked"
                               Unchecked="DarkModeToggle_Unchecked"
-                              HorizontalAlignment="Right" Margin="0,0,-150,0" />
-            </Grid>
-            <!-- ############################################################################################################### -->
-            <Grid Name="GenreBlock"
+                              VerticalAlignment="Top"
+                              Margin="0 0 10 0" />
+            </StackPanel>
+        </Grid>
+        <!-- ############################################################################################################### -->
+        <Grid Name="GenreBlock"
                   Margin="10 60 0 0"
                   Visibility="{Binding Path=IsChecked, ElementName=GenreBtn, Converter={StaticResource b2v}}">
-                <!-- CONTENT OF THE GENRES TAB GOES IN HERE-->
-                <TextBlock>Genres</TextBlock>
-            </Grid>
-        </WrapPanel>
+            <!-- CONTENT OF THE GENRES TAB GOES IN HERE-->
+            <TextBlock>Genres</TextBlock>
+        </Grid>
     </Grid>
 </UserControl>

@@ -93,7 +93,7 @@
                                         <TextBlock Text="Banner View" />
                                     </StackPanel>
                                 </Button>
-                                <!--  Grid Button  -->
+                                <!--  List Button  -->
                                 <Button Click="ListButton_OnClick">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon
@@ -103,14 +103,14 @@
                                         <TextBlock Text="List View" />
                                     </StackPanel>
                                 </Button>
-                                <!--  Theme button  -->
-                                <Button Click="ThemeSwitch_OnClick">
+                                <!--  Refresh Button  -->
+                                <Button Click="RefreshGames_OnClick">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon
                                             Margin="0,0,10,0"
                                             VerticalAlignment="Center"
-                                            Kind="ThemeLightDark" />
-                                        <TextBlock Text="Theme Switch" />
+                                            Kind="Refresh" />
+                                        <TextBlock Text="Refresh" />
                                     </StackPanel>
                                 </Button>
                                 <!--  Settings Button  -->
