@@ -8,12 +8,14 @@ namespace GameLauncher
 {
     public partial class AddGames : Page
     {
+        private static readonly MainWindow MainWindow = (MainWindow)Application.Current.MainWindow;
+
         public AddGames()
         {
             InitializeComponent();
-        }
 
-        private static readonly MainWindow MainWindow = (MainWindow)Application.Current.MainWindow;
+            AddGameDialog.DialogClosing += (o, args) => MainWindow.RefreshGames();
+        }
 
         private void AddGame_OnClick(object sender, RoutedEventArgs e)
         {
