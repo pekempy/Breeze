@@ -1,4 +1,4 @@
-![Icon](https://i.imgur.com/CrN0M0S.png)
+![Icon](https://i.imgur.com/DWaP66t.png)
 # Breeze
 
 #### The Goal: 
