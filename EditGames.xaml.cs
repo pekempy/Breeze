@@ -9,7 +9,8 @@ namespace GameLauncher
 {
     public partial class EditGames : Page
     {
-        String guid;
+        private string guid;
+
         public EditGames()
         {
             InitializeComponent();
