@@ -1,5 +1,5 @@
 ![Icon](https://i.imgur.com/dOirjeE.png)
-# GameLauncher
+# Breeze
 
 #### The Goal: 
 > To create a material design themed Game Launcher with multiple view types to display the games. The user can add all of their games and launch them from one central location. Supports .exe and .lnk (shortcuts)
