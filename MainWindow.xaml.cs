@@ -78,9 +78,13 @@ namespace GameLauncher
 
         private void OpenAddGameWindow_OnClick(object sender, RoutedEventArgs e)
         {
-            AddGame ag = new AddGame();
-            ag.AddGameDialog.Visibility = Visibility.Visible;
-            ag.AddGameDialog.Content = ag;
+            AddGames addGames = new AddGames();
+            
+            DialogFrame.Visibility = Visibility.Visible;
+            DialogFrame.Content = addGames;
+            
+            addGames.AddGameDialog.IsOpen = true;
+
             //this.Opacity = 0.5;
             //ag = new AddGame();
             //ag.Owner = this;

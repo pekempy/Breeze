@@ -2,22 +2,24 @@
 using System;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace GameLauncher
 {
-    public partial class AddGame : Window
+    /// <summary>
+    /// Логика взаимодействия для AddGames.xaml
+    /// </summary>
+    public partial class AddGames : Page
     {
-        public AddGame()
+        public AddGames()
         {
             InitializeComponent();
         }
 
-        //private ListViewModel listViewModel = new ListViewModel();
-
         private void AddGame_OnClick(object sender, RoutedEventArgs e)
         {
             //This part repairs the link so it launches properly
-            string ngl = NewGameLink.Text.ToString();
+            string ngl = NewGameLink.Text;
             if (!ngl.Contains("http") && (ngl != ""))
             {
                 UriBuilder uriBuilder = new UriBuilder();
@@ -43,13 +45,14 @@ namespace GameLauncher
             {
                 Console.WriteLine("Exception: " + ex.Message);
             }
-            this.Hide();
+
+            AddGameDialog.IsOpen = false;
             clearFields();
         }
 
         private void CancelAddGame_OnClick(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            AddGameDialog.IsOpen = false;
             clearFields();
         }
 

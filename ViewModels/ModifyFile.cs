@@ -34,7 +34,7 @@ namespace GameLauncher.ViewModels
 
         public static void EditGameInfile(object gameName)
         {
-            AddGame eg = new AddGame();
+            AddGames eg = new AddGames();
             gameName = gameName.ToString();
             var text = File.ReadAllLines("./Resources/GamesList.txt", Encoding.UTF8);
             for (int i = 0; i < text.Length; i++)
@@ -54,7 +54,7 @@ namespace GameLauncher.ViewModels
                         eg.NewGamePoster.Text = column[5];
                         eg.NewGameBanner.Text = column[6];
                         RemoveGameFromFile(gameName); //Prevent duplicates
-                        eg.Show();
+                        eg.AddGameDialog.IsOpen = true;
                     }
                     catch (Exception e)
                     {

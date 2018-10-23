@@ -153,8 +153,7 @@
                                     BorderThickness="0"
                                     FontSize="11" />
                                 <!--  "send" button  -->
-                                <Button Style="{DynamicResource MaterialDesignToolButton}"
-                                        VerticalAlignment="Center">
+                                <Button VerticalAlignment="Center" Style="{DynamicResource MaterialDesignToolButton}">
                                     <materialDesign:PackIcon
                                         Margin="0,0,0,0"
                                         VerticalAlignment="Center"
@@ -221,5 +220,12 @@
                 VerticalAlignment="Center"
                 Kind="Plus" />
         </Button>
+
+        <Border>
+            <Frame
+                x:Name="DialogFrame"
+                NavigationUIVisibility="Hidden"
+                Visibility="Hidden" />
+        </Border>
     </Grid>
 </Window>
