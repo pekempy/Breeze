@@ -71,12 +71,12 @@
                   Margin="10 60 0 0"
                   Visibility="{Binding Path=IsChecked, ElementName=ThemeBtn, Converter={StaticResource b2v}}">
                 <!-- CONTENT OF THE THEMES TAB GOES IN HERE -->
-                <TextBlock>Enable Dark Mode *Not working atm*</TextBlock>
+                <TextBlock>Enable Dark Mode</TextBlock>
                 <ToggleButton Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
                               IsChecked="False"
                               Checked="DarkModeToggle_Checked"
                               Unchecked="DarkModeToggle_Unchecked"
-                              HorizontalAlignment="Right" Margin="0,0,-60,0" />
+                              HorizontalAlignment="Right" Margin="0,0,-150,0" />
             </Grid>
             <!-- ############################################################################################################### -->
             <Grid Name="GenreBlock"
