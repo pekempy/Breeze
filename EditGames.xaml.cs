@@ -7,36 +7,37 @@ using System.Windows.Controls;
 
 namespace GameLauncher
 {
-    public partial class AddGames : Page
+    public partial class EditGames : Page
     {
-        public AddGames()
+        String guid;
+        public EditGames()
         {
             InitializeComponent();
         }
 
-        private void AddGame_OnClick(object sender, RoutedEventArgs e)
+        private void EditGame_OnClick(object sender, RoutedEventArgs e)
         {
             //This part repairs the link so it launches properly
-            string ngl = NewGameLink.Text;
+            string ngl = EditLink.Text;
             if (!ngl.Contains("http") && (ngl != ""))
             {
                 UriBuilder uriBuilder = new UriBuilder();
                 uriBuilder.Scheme = "http";
-                uriBuilder.Host = NewGameLink.Text;
+                uriBuilder.Host = EditLink.Text;
                 Uri uri = uriBuilder.Uri;
-                NewGameLink.Text = uri.ToString();
+                EditLink.Text = uri.ToString();
             }
             //Write all the fields to the text file
             try
             {
                 TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
-                tsw.WriteLine(NewGameTitle.Text + "|" +
-                              NewGameGenre.Text + "|" +
-                              NewGamePath.Text + "|" +
-                              NewGameLink.Text + "|" +
-                              NewGameIcon.Text + "|" +
-                              NewGamePoster.Text + "|" +
-                              NewGameBanner.Text + "|" +
+                tsw.WriteLine(EditTitle.Text + "|" +
+                              EditGenre.Text + "|" +
+                              EditPath.Text + "|" +
+                              EditLink.Text + "|" +
+                              EditIcon.Text + "|" +
+                              EditPoster.Text + "|" +
+                              EditBanner.Text + "|" +
                               Guid.NewGuid());
                 tsw.Close();
             }
@@ -46,28 +47,29 @@ namespace GameLauncher
             }
 
             clearFields();
+            ModifyFile.RemoveGameFromFile(guid);
             ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
-            AddGameDialog.IsOpen = false;
+            EditGameDialog.IsOpen = false;
         }
 
-        private void CancelAddGame_OnClick(object sender, RoutedEventArgs e)
+        private void CancelEditGame_OnClick(object sender, RoutedEventArgs e)
         {
-            AddGameDialog.IsOpen = false;
+            EditGameDialog.IsOpen = false;
             clearFields();
         }
 
         private void clearFields()
         {
-            NewGameTitle.Text = "";
-            NewGamePath.Text = "";
-            NewGameGenre.Text = "";
-            NewGameLink.Text = "";
-            NewGameIcon.Text = "";
-            NewGamePoster.Text = "";
-            NewGameBanner.Text = "";
+            EditTitle.Text = "";
+            EditPath.Text = "";
+            EditGenre.Text = "";
+            EditLink.Text = "";
+            EditIcon.Text = "";
+            EditPoster.Text = "";
+            EditBanner.Text = "";
         }
 
-        private void AddGenre_OnClick(object sender, RoutedEventArgs e)
+        private void EditGenre_OnClick(object sender, RoutedEventArgs e)
         {
             string genrePlaceHolder = null;
             if (Action.IsChecked == true) { genrePlaceHolder += "Action "; }
@@ -87,7 +89,7 @@ namespace GameLauncher
                 genrePlaceHolder = genrePlaceHolder.TrimEnd(' ');
                 genrePlaceHolder = genrePlaceHolder.TrimEnd(';');
             }
-            NewGameGenre.Text = genrePlaceHolder;
+            EditGenre.Text = genrePlaceHolder;
             ClearGenreBoxes();
             return;
         }
@@ -122,7 +124,7 @@ namespace GameLauncher
             if (dialogResult == true)
             {
                 string ngLauncherFile = fileDialog.FileName;
-                NewGamePath.Text = ngLauncherFile;
+                EditPath.Text = ngLauncherFile;
             }
         }
 
@@ -136,7 +138,7 @@ namespace GameLauncher
             if (dialogResult == true)
             {
                 string ngIconFile = fileDialog.FileName;
-                NewGameIcon.Text = ngIconFile;
+                EditIcon.Text = ngIconFile;
             }
         }
 
@@ -150,7 +152,7 @@ namespace GameLauncher
             if (dialogResult == true)
             {
                 string ngPosterFile = fileDialog.FileName;
-                NewGamePoster.Text = ngPosterFile;
+                EditPoster.Text = ngPosterFile;
             }
         }
 
@@ -164,8 +166,13 @@ namespace GameLauncher
             if (dialogResult == true)
             {
                 string ngBannerFile = fileDialog.FileName;
-                NewGameBanner.Text = ngBannerFile;
+                EditBanner.Text = ngBannerFile;
             }
+        }
+
+        public void currentGuid(String currentGuid)
+        {
+            guid = currentGuid;
         }
     }
 }

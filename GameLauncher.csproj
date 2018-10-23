@@ -107,6 +107,9 @@
     <Compile Include="AddGames.xaml.cs">
       <DependentUpon>AddGames.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditGames.xaml.cs">
+      <DependentUpon>EditGames.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="ViewModels\LoadAllGames.cs" />
     <Compile Include="ViewModels\PosterViewModel.cs" />
@@ -127,6 +130,10 @@
       <DependentUpon>ListView.xaml</DependentUpon>
     </Compile>
     <Page Include="AddGames.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditGames.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

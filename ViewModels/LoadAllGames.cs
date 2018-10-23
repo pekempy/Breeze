@@ -33,6 +33,7 @@ namespace GameLauncher.ViewModels
                         Icon = columns[4],
                         Poster = columns[5],
                         Banner = columns[6],
+                        Guid = columns[7]
                     });
                     numberOfGames++;
                 }

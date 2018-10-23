@@ -114,7 +114,7 @@
                                             </Button>
                                             <!-- Edit Button -->
                                             <Button Click="EditGame_OnClick"
-                                                    Tag="{Binding Title}">
+                                                    Tag="{Binding Guid}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Pencil"
                                                                              VerticalAlignment="Center" />
@@ -124,7 +124,7 @@
                                             </Button>
                                             <!-- Delete Button -->
                                             <Button Click="DeleteGame_OnClick"
-                                                    Tag="{Binding Title}">
+                                                    Tag="{Binding Guid}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Delete"
                                                                              VerticalAlignment="Center" />

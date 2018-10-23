@@ -11,6 +11,7 @@ namespace GameLauncher
     public partial class MainWindow : Window
     {
         public static AddGames DialogAddGames = new AddGames();
+        public static EditGames DialogEditGames = new EditGames();
         private BannerViewModel bannerViewModel;
         private ListViewModel listViewModel;
         private PosterViewModel posterViewModel;
@@ -30,7 +31,6 @@ namespace GameLauncher
                 Directory.CreateDirectory("./Resources/");
 
                 OpenAddGameDialog();
-
                 RefreshGames();
             }
         }
@@ -40,6 +40,14 @@ namespace GameLauncher
             DialogFrame.Visibility = Visibility.Visible;
             DialogFrame.Content = DialogAddGames;
             DialogAddGames.AddGameDialog.IsOpen = true;
+        }
+
+        public void OpenEditGameDialog(String guid)
+        {
+            DialogFrame.Visibility = Visibility.Visible;
+            DialogFrame.Content = DialogEditGames;
+            DialogEditGames.currentGuid(guid);
+            DialogEditGames.EditGameDialog.IsOpen = true;
         }
 
         private void BannerButton_OnClick(object sender, RoutedEventArgs e)

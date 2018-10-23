@@ -18,7 +18,7 @@ namespace GameLauncher.ViewModels
             var text = File.ReadAllLines("./Resources/GamesList.txt", Encoding.UTF8);
             for (int i = 0; i < text.Length; i++)
             {
-                if (text[i].Contains($"{gameName}|"))
+                if (text[i].Contains($"{gameName}"))
                 {
                     try
                     {
@@ -35,27 +35,26 @@ namespace GameLauncher.ViewModels
             }
         }
 
-        public static void EditGameInfile(object gameName)
+        public static void EditGameInfile(object gameGuid)
         {
-            gameName = gameName.ToString();
+            gameGuid = gameGuid.ToString();
             var text = File.ReadAllLines("./Resources/GamesList.txt", Encoding.UTF8);
             for (int i = 0; i < text.Length; i++)
             {
-                if (text[i].Contains($"{gameName}|"))
+                if (text[i].Contains($"{gameGuid}"))
                 {
                     try
                     {
                         Console.WriteLine(text[i]); //Write entire game line to output window
                         string[] column = text[i].Split('|');
-                        MainWindow.DialogAddGames.NewGameTitle.Text = column[0];
-                        MainWindow.DialogAddGames.NewGameGenre.Text = column[1];
-                        MainWindow.DialogAddGames.NewGamePath.Text = column[2];
-                        MainWindow.DialogAddGames.NewGameLink.Text = column[3];
-                        MainWindow.DialogAddGames.NewGameIcon.Text = column[4];
-                        MainWindow.DialogAddGames.NewGamePoster.Text = column[5];
-                        MainWindow.DialogAddGames.NewGameBanner.Text = column[6];
-                        MainWindow.OpenAddGameDialog();
-                        RemoveGameFromFile(gameName); //Prevent duplicates
+                        MainWindow.DialogEditGames.EditTitle.Text = column[0];
+                        MainWindow.DialogEditGames.EditGenre.Text = column[1];
+                        MainWindow.DialogEditGames.EditPath.Text = column[2];
+                        MainWindow.DialogEditGames.EditLink.Text = column[3];
+                        MainWindow.DialogEditGames.EditIcon.Text = column[4];
+                        MainWindow.DialogEditGames.EditPoster.Text = column[5];
+                        MainWindow.DialogEditGames.EditBanner.Text = column[6];
+                        MainWindow.OpenEditGameDialog(gameGuid.ToString());
                     }
                     catch (Exception e)
                     {
