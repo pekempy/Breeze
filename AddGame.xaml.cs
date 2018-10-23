@@ -14,8 +14,6 @@ namespace GameLauncher
 
         //private ListViewModel listViewModel = new ListViewModel();
 
-        #region ADD GAME button
-
         private void AddGame_OnClick(object sender, RoutedEventArgs e)
         {
             //This part repairs the link so it launches properly
@@ -49,19 +47,11 @@ namespace GameLauncher
             clearFields();
         }
 
-        #endregion ADD GAME button
-
-        #region CANCEL button
-
         private void CancelAddGame_OnClick(object sender, RoutedEventArgs e)
         {
             this.Hide();
             clearFields();
         }
-
-        #endregion CANCEL button
-
-        #region clearFields
 
         private void clearFields()
         {
@@ -73,10 +63,6 @@ namespace GameLauncher
             NewGamePoster.Text = "";
             NewGameBanner.Text = "";
         }
-
-        #endregion clearFields
-
-        #region AddGenre OnClick
 
         private void AddGenre_OnClick(object sender, RoutedEventArgs e)
         {
@@ -103,18 +89,10 @@ namespace GameLauncher
             return;
         }
 
-        #endregion AddGenre OnClick
-
-        #region ClearGenreSelection
-
         private void ClearGenreSelection_OnClick(object sender, RoutedEventArgs e)
         {
             ClearGenreBoxes();
         }
-
-        #endregion ClearGenreSelection
-
-        #region Clear Genre Boxes
 
         private void ClearGenreBoxes()
         {
@@ -131,10 +109,6 @@ namespace GameLauncher
             Thriller.IsChecked = false;
         }
 
-        #endregion Clear Genre Boxes
-
-        #region Attach Launcher popup
-
         private void AttachLauncher_OnClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -149,15 +123,11 @@ namespace GameLauncher
             }
         }
 
-        #endregion Attach Launcher popup
-
-        #region Attach Icon popup
-
         private void AttachIcon_OnClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Multiselect = false;
-            fileDialog.InitialDirectory = "C:\\";
+            fileDialog.RestoreDirectory = true;
             fileDialog.Filter = "Images (*.jpg;*.png;*.bmp | *.jpg;*.png;*.bmp";
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true)
@@ -167,15 +137,11 @@ namespace GameLauncher
             }
         }
 
-        #endregion Attach Icon popup
-
-        #region Attach Poster popup
-
         private void AttachPoster_OnClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Multiselect = false;
-            fileDialog.InitialDirectory = "C:\\";
+            fileDialog.RestoreDirectory = true;
             fileDialog.Filter = "Images (*.jpg;*.png;*.bmp | *.jpg;*.png;*.bmp";
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true)
@@ -185,15 +151,11 @@ namespace GameLauncher
             }
         }
 
-        #endregion Attach Poster popup
-
-        #region Attach Banner popup
-
         private void AttachBanner_OnClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.RestoreDirectory = true;
             fileDialog.Multiselect = false;
-            fileDialog.InitialDirectory = "C:\\";
             fileDialog.Filter = "Images (*.jpg;*.png;*.bmp | *.jpg;*.png;*.bmp";
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true)
@@ -202,7 +164,5 @@ namespace GameLauncher
                 NewGameBanner.Text = ngBannerFile;
             }
         }
-
-        #endregion Attach Banner popup
     }
 }

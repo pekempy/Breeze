@@ -76,7 +76,7 @@ namespace GameLauncher
             DataContext = settingsViewModel;
         }
 
-        private void openAddGameWindow_OnClick(object sender, RoutedEventArgs e)
+        private void OpenAddGameWindow_OnClick(object sender, RoutedEventArgs e)
         {
             this.Opacity = 0.5;
             ag = new AddGame();

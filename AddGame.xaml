@@ -55,9 +55,9 @@
                            Grid.ColumnSpan="3"
                            FontSize="20"
                            Width="Auto"
-                           HorizontalAlignment="Center"
+                           HorizontalAlignment="Left"
                            VerticalAlignment="Top"
-                           Margin="0 20 0 0">
+                           Margin="25 20 0 0">
                 </TextBlock>
 
                 <!-- NewGameTitle -->
