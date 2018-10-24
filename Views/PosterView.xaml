@@ -14,7 +14,8 @@
     d:DesignWidth="300">
     <UserControl.Resources>
         <CollectionViewSource x:Key="GameListCVS"
-                              Source="{Binding PosterView}">
+                              Source="{Binding PosterView}"
+                              Filter="TitleFilter">
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Title" />
             </CollectionViewSource.SortDescriptions>

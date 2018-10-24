@@ -42,7 +42,5 @@ namespace GameLauncher.ViewModels
             }
             Games = games;
         }
-
-        public ICollectionView GamesView { get { return CollectionViewSource.GetDefaultView(Games); } }
     }
 }

@@ -1,8 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using GameLauncher.Models;
 using GameLauncher.ViewModels;
 
 namespace GameLauncher.Views
@@ -39,7 +42,8 @@ namespace GameLauncher.Views
 
         public static void SearchGames(string searchString)
         {
-            //Code here to filter games
+            Console.WriteLine(searchString);
+            //This writes whatever is in the search box... but... cannot get games to filter by Title on this
         }
 
         private void EditGame_OnClick(object sender, RoutedEventArgs e)

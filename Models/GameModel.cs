@@ -31,8 +31,6 @@ namespace GameLauncher.Models
 
         public string Guid { get { return _guid; } set { _guid = value; OnPropertyChanged("Guid"); } }
 
-        #region INotifyPropertyChanged
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
@@ -42,7 +40,5 @@ namespace GameLauncher.Models
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
-        #endregion INotifyPropertyChanged
     }
 }
