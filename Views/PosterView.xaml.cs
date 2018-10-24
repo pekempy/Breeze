@@ -55,6 +55,7 @@ namespace GameLauncher.Views
         {
             string searchString = GameSearchBar.Text;
             PublicSearchString = searchString;
+            //need to somehow get into SearchView from this
         }
 
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
