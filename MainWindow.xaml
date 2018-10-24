@@ -145,6 +145,8 @@
                                     Opacity=".56" />
                                 <!--  Search text  -->
                                 <TextBox
+                                    x:Name="GameSearchBar"
+                                    TextChanged="SearchChangedEventHandler"
                                     MinWidth="150"
                                     Margin="8,0,0,0"
                                     VerticalAlignment="Center"
@@ -153,7 +155,8 @@
                                     BorderThickness="0"
                                     FontSize="11" />
                                 <!--  "send" button  -->
-                                <Button VerticalAlignment="Center" Style="{DynamicResource MaterialDesignToolButton}">
+                                <Button VerticalAlignment="Center" Style="{DynamicResource MaterialDesignToolButton}"
+                                        x:Name="GameSearchSend">
                                     <materialDesign:PackIcon
                                         Margin="0,0,0,0"
                                         VerticalAlignment="Center"

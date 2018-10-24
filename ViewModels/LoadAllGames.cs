@@ -1,7 +1,9 @@
 ﻿using GameLauncher.Models;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Data;
 
 namespace GameLauncher.ViewModels
 {
@@ -40,5 +42,7 @@ namespace GameLauncher.ViewModels
             }
             Games = games;
         }
+
+        public ICollectionView GamesView { get { return CollectionViewSource.GetDefaultView(Games); } }
     }
 }

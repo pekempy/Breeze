@@ -12,7 +12,6 @@
     d:DataContext="{d:DesignInstance Type=ViewModels:PosterViewModel}"
     d:DesignHeight="300"
     d:DesignWidth="300">
-
     <UserControl.Resources>
         <CollectionViewSource x:Key="GameListCVS"
                               Source="{Binding PosterView}">
