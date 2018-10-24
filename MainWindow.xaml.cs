@@ -1,4 +1,5 @@
 ﻿using GameLauncher.ViewModels;
+using GameLauncher.Views;
 using System;
 using System.IO;
 using System.Linq;
@@ -103,6 +104,7 @@ namespace GameLauncher
         private void SearchChangedEventHandler(object sender, TextChangedEventArgs e)
         {
             string searchString = GameSearchBar.Text;
+            PosterView.SearchGames(searchString);
         }
 
         private void UIElement_OnPreviewLeftMouseButtonUp(object sender, MouseButtonEventArgs e)

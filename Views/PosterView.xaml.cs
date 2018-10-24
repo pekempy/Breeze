@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using GameLauncher.ViewModels;
 
 namespace GameLauncher.Views
@@ -34,6 +35,11 @@ namespace GameLauncher.Views
             {
                 Process.Start(new ProcessStartInfo(linkString));
             }
+        }
+
+        public static void SearchGames(string searchString)
+        {
+            //Code here to filter games
         }
 
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
