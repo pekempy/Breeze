@@ -103,8 +103,10 @@ namespace GameLauncher
 
         private void SearchChangedEventHandler(object sender, TextChangedEventArgs e)
         {
-            string searchString = GameSearchBar.Text;
-            PosterView.SearchGames(searchString);
+            if (sender is TextBox searchTxBox)
+            {
+                PosterView.SearchGames(searchTxBox.Text);
+            }
         }
 
         private void UIElement_OnPreviewLeftMouseButtonUp(object sender, MouseButtonEventArgs e)

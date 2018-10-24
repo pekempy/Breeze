@@ -46,6 +46,12 @@ namespace GameLauncher.Views
             //This writes whatever is in the search box... but... cannot get games to filter by Title on this
         }
 
+        private void GameSearchFilter(object sender, FilterEventArgs e)
+        {
+            GameList game = e.Item as GameList;
+            //e.Accepted = game != null && game.Title?.Contains(StringFromSearch); //StringFromSearch needs to be able to access "searchString" in above method
+        }
+
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.EditGameInfile(((Button)sender).Tag);
