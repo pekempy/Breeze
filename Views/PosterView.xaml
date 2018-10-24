@@ -14,7 +14,8 @@
     d:DesignWidth="300">
     <UserControl.Resources>
         <CollectionViewSource x:Key="GameListCVS"
-                              Source="{Binding PosterView}">
+                              Source="{Binding PosterView}"
+                              Filter="SearchView">
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Title" />
             </CollectionViewSource.SortDescriptions>
@@ -36,6 +37,48 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
+
+        <!--  Search Bar  -->
+        <materialDesign:ColorZone
+                            MaxHeight="60"
+                            Margin="0,-60,70,58"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                            CornerRadius="2"
+            Grid.Column="2"
+                            Mode="Light">
+            <StackPanel
+                                MaxHeight="20"
+                                Margin="16"
+                                Orientation="Horizontal">
+                <!--  Search bar Icon  -->
+                <materialDesign:PackIcon
+                                    VerticalAlignment="Center"
+                                    Kind="Magnify"
+                                    Opacity=".56" />
+                <!--  Search text  -->
+                <TextBox
+                                    x:Name="GameSearchBar"
+                                    TextChanged="SearchString_Handler"
+                                    MinWidth="150"
+                                    Margin="8,0,0,0"
+                                    VerticalAlignment="Center"
+                                    materialDesign:HintAssist.Hint="Please search..."
+                                    materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                                    BorderThickness="0"
+                                    FontSize="11" />
+                <!--  "send" button  -->
+                <Button VerticalAlignment="Center" Style="{DynamicResource MaterialDesignToolButton}"
+                                        x:Name="GameSearchSend">
+                    <materialDesign:PackIcon
+                                        Margin="0,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Kind="Send"
+                                        Opacity=".56" />
+                </Button>
+            </StackPanel>
+        </materialDesign:ColorZone>
         <!-- This section displays one card per game in GamesList-->
         <ScrollViewer Grid.RowSpan="7"
                       Grid.ColumnSpan="3"

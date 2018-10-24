@@ -7,8 +7,10 @@
     xmlns:viewmodels="clr-namespace:GameLauncher.ViewModels"
     xmlns:views="clr-namespace:GameLauncher.Views"
     Title="Breeze"
-    Width="1100"
-    Height="800"
+    Width="1800"
+    Height="900"
+    MinHeight="600"
+    MinWidth="400"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{StaticResource MaterialDesignFont}"
     Icon="breeze.ico"
@@ -45,6 +47,7 @@
             <Grid>
                 <materialDesign:ColorZone
                     MaxHeight="100"
+                    Height="65"
                     Padding="6"
                     materialDesign:ShadowAssist.ShadowDepth="Depth2"
                     DockPanel.Dock="Top"
@@ -63,7 +66,7 @@
                             VerticalAlignment="Center"
                             FontSize="20"
                             FontWeight="SemiBold"
-                            Text="Game Launcher" />
+                            Text="Breeze" />
                         <!--  Top Right Overflow  -->
                         <materialDesign:PopupBox
                             Padding="0,0,0,0"
@@ -125,46 +128,6 @@
                                 </Button>
                             </StackPanel>
                         </materialDesign:PopupBox>
-                        <!--  Search Bar  -->
-                        <materialDesign:ColorZone
-                            MaxHeight="60"
-                            Margin="0,0,20,0"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                            CornerRadius="2"
-                            Mode="Light">
-                            <StackPanel
-                                MaxHeight="20"
-                                Margin="16"
-                                Orientation="Horizontal">
-                                <!--  Search bar Icon  -->
-                                <materialDesign:PackIcon
-                                    VerticalAlignment="Center"
-                                    Kind="Magnify"
-                                    Opacity=".56" />
-                                <!--  Search text  -->
-                                <TextBox
-                                    x:Name="GameSearchBar"
-                                    TextChanged="SearchChangedEventHandler"
-                                    MinWidth="150"
-                                    Margin="8,0,0,0"
-                                    VerticalAlignment="Center"
-                                    materialDesign:HintAssist.Hint="Please search..."
-                                    materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                                    BorderThickness="0"
-                                    FontSize="11" />
-                                <!--  "send" button  -->
-                                <Button VerticalAlignment="Center" Style="{DynamicResource MaterialDesignToolButton}"
-                                        x:Name="GameSearchSend">
-                                    <materialDesign:PackIcon
-                                        Margin="0,0,0,0"
-                                        VerticalAlignment="Center"
-                                        Kind="Send"
-                                        Opacity=".56" />
-                                </Button>
-                            </StackPanel>
-                        </materialDesign:ColorZone>
                     </DockPanel>
                 </materialDesign:ColorZone>
 

@@ -13,6 +13,8 @@ using GameLauncher.ViewModels;
 using GameLauncher.Views;
 
 using System.Windows.Media;
+using System.Windows.Data;
+using GameLauncher.Models;
 
 namespace GameLauncher
 {
@@ -103,11 +105,6 @@ namespace GameLauncher
         {
             OpenAddGameDialog();
             RefreshGames();
-        }
-
-        private void SearchChangedEventHandler(object sender, TextChangedEventArgs e)
-        {
-            string searchString = GameSearchBar.Text;
         }
 
         private void UIElement_OnPreviewLeftMouseButtonUp(object sender, MouseButtonEventArgs e)

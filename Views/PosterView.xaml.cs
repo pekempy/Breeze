@@ -40,6 +40,23 @@ namespace GameLauncher.Views
             }
         }
 
+        public string PublicSearchString;
+
+        private void SearchView(object sender, FilterEventArgs e)
+        {
+            GameList game = e.Item as GameList;
+            if (PublicSearchString != null)
+            {
+                e.Accepted = (game != null) && game.Title.Contains(PublicSearchString);
+            }
+        }
+
+        private void SearchString_Handler(object sender, TextChangedEventArgs e)
+        {
+            string searchString = GameSearchBar.Text;
+            PublicSearchString = searchString;
+        }
+
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.EditGameInfile(((Button)sender).Tag);
