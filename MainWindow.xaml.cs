@@ -8,6 +8,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+
+using GameLauncher.ViewModels;
+using GameLauncher.Views;
+
 using System.Windows.Media;
 
 namespace GameLauncher
@@ -103,10 +107,7 @@ namespace GameLauncher
 
         private void SearchChangedEventHandler(object sender, TextChangedEventArgs e)
         {
-            if (sender is TextBox searchTxBox)
-            {
-                PosterView.SearchGames(searchTxBox.Text);
-            }
+            string searchString = GameSearchBar.Text;
         }
 
         private void UIElement_OnPreviewLeftMouseButtonUp(object sender, MouseButtonEventArgs e)
