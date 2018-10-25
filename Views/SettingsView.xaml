@@ -77,8 +77,8 @@
                 <TextBlock Height="30">Accent Color for Dark (coming soon)</TextBlock>
             </StackPanel>
             <StackPanel HorizontalAlignment="Right">
-                <ToggleButton Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
-                              IsChecked="False"
+                <ToggleButton x:Name="themeToggle"
+                    Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
                               Checked="DarkModeToggle_Checked"
                               Unchecked="DarkModeToggle_Unchecked"
                               VerticalAlignment="Top"

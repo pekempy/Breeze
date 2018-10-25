@@ -40,24 +40,6 @@ namespace GameLauncher.Views
             }
         }
 
-        public string PublicSearchString;
-
-        private void SearchView(object sender, FilterEventArgs e)
-        {
-            GameList game = e.Item as GameList;
-            if (PublicSearchString != null)
-            {
-                e.Accepted = (game != null) && game.Title.Contains(PublicSearchString);
-            }
-        }
-
-        private void SearchString_Handler(object sender, TextChangedEventArgs e)
-        {
-            string searchString = GameSearchBar.Text;
-            PublicSearchString = searchString;
-            //need to somehow get into SearchView from this
-        }
-
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.EditGameInfile(((Button)sender).Tag);
@@ -68,6 +50,11 @@ namespace GameLauncher.Views
         {
             ModifyFile.RemoveGameFromFile(((Button)sender).Tag);
             MainWindow.RefreshGames();
+        }
+
+        private void searchString(object sender, TextChangedEventArgs e)
+        {
+            Console.WriteLine(GameSearchBar.Text);
         }
     }
 }

@@ -7,13 +7,13 @@ namespace GameLauncher.ViewModels
 {
     internal class PosterViewModel
     {
-        public ObservableCollection<GameList> PosterView { get; set; }
+        public static ObservableCollection<GameList> PosterViewOC { get; set; }
 
         public void LoadGames()
         {
             LoadAllGames lag = new LoadAllGames();
             lag.LoadGames();
-            PosterView = lag.Games;
+            PosterViewOC = lag.Games;
         }
     }
 }

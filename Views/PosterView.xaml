@@ -14,8 +14,8 @@
     d:DesignWidth="300">
     <UserControl.Resources>
         <CollectionViewSource x:Key="GameListCVS"
-                              Source="{Binding PosterView}"
-                              Filter="SearchView">
+                              Source="{Binding PosterViewOC}"
+                              CollectionViewType="ListCollectionView">
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Title" />
             </CollectionViewSource.SortDescriptions>
@@ -60,14 +60,14 @@
                 <!--  Search text  -->
                 <TextBox
                                     x:Name="GameSearchBar"
-                                    TextChanged="SearchString_Handler"
                                     MinWidth="150"
                                     Margin="8,0,0,0"
                                     VerticalAlignment="Center"
                                     materialDesign:HintAssist.Hint="Please search..."
                                     materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
                                     BorderThickness="0"
-                                    FontSize="11" />
+                                    FontSize="11"
+                                    TextChanged="searchString" />
                 <!--  "send" button  -->
                 <Button VerticalAlignment="Center" Style="{DynamicResource MaterialDesignToolButton}"
                                         x:Name="GameSearchSend">

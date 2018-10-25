@@ -112,6 +112,7 @@
       <DependentUpon>EditGames.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\GameModel.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="ViewModels\LoadAllGames.cs" />
     <Compile Include="ViewModels\PosterViewModel.cs" />
     <Compile Include="ViewModels\BannerViewModel.cs" />

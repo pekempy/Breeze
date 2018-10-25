@@ -8,13 +8,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-
-using GameLauncher.ViewModels;
-using GameLauncher.Views;
-
 using System.Windows.Media;
 using System.Windows.Data;
 using GameLauncher.Models;
+using GameLauncher.Properties;
+using MaterialDesignThemes.Wpf;
 
 namespace GameLauncher
 {
@@ -29,6 +27,7 @@ namespace GameLauncher
 
         public MainWindow()
         {
+            LoadSettings();
             InitializeComponent();
             posterViewModel = new PosterViewModel();
             posterViewModel.LoadGames();
@@ -143,6 +142,19 @@ namespace GameLauncher
             else
             {
                 Console.WriteLine("Nothing");
+            }
+        }
+
+        public void LoadSettings()
+        {
+            //Theme Light or Dark
+            if (Settings.Default.theme.ToString() == "dark")
+            {
+                ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark);
+            }
+            else if (Settings.Default.theme.ToString() == "light")
+            {
+                ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Light);
             }
         }
     }
