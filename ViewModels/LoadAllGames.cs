@@ -42,5 +42,13 @@ namespace GameLauncher.ViewModels
             }
             Games = games;
         }
+
+        //Commented out some experimentation from searching (from https://wpftutorial.net/DataViews.html)
+        //public ICollectionView Search { get; }
+        //public LoadAllGames()
+        //{
+        //    ObservableCollection<GameList> searchResult = Games;
+        //    Search = CollectionViewSource.GetDefaultView(Games);
+        //}
     }
 }
