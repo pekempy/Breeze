@@ -151,6 +151,7 @@
                     <!--Code needs to go here for genres -->
                     <StackPanel Orientation="Vertical">
                         <TextBlock FontWeight="Bold" HorizontalAlignment="Center">HARD CODED PLACEHOLDER</TextBlock>
+                        <TextBlock>In future can filter by the genre selected</TextBlock>
                         <Button Style="{StaticResource MaterialDesignFlatButton}">
                             <TextBlock>Action</TextBlock>
                         </Button>
