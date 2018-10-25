@@ -16,14 +16,14 @@ namespace GameLauncher.Views
         private void DarkModeToggle_Checked(object sender, RoutedEventArgs e)
         {
             ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark);
-            Properties.Settings.Default.theme = "dark";
+            Properties.Settings.Default.theme = "Dark";
             SaveSettings();
         }
 
         private void DarkModeToggle_Unchecked(object sender, RoutedEventArgs e)
         {
             ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Light);
-            Properties.Settings.Default.theme = "light";
+            Properties.Settings.Default.theme = "Light";
             SaveSettings();
         }
 

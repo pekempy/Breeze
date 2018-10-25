@@ -148,20 +148,43 @@
                         DockPanel.Dock="Top"
                         IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
-                    <!--  Listbox for...? Genres? #unsure  -->
-                    <ListBox
-                        x:Name="ListBox"
-                        Margin="0,16,0,16"
-                        ItemsSource="{Binding DemoItems}"
-                        PreviewMouseLeftButtonUp="UIElement_OnPreviewLeftMouseButtonUp"
-                        SelectedIndex="0">
-                        <!--  binding to duplicate genres goes here  -->
-                        <ListBox.ItemTemplate>
-                            <DataTemplate DataType="?">
-                                <TextBlock Margin="32,0,32,0" Text="{Binding Genre}" />
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                    <!--Code needs to go here for genres -->
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock FontWeight="Bold" HorizontalAlignment="Center">HARD CODED PLACEHOLDER</TextBlock>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}">
+                            <TextBlock>Action</TextBlock>
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}">
+                            <TextBlock>Adventure</TextBlock>
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}">
+                            <TextBlock>Fantasy</TextBlock>
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}">
+                            <TextBlock>FPS</TextBlock>
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}">
+                            <TextBlock>Horror</TextBlock>
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}">
+                            <TextBlock>Open World</TextBlock>
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}">
+                            <TextBlock>Platform</TextBlock>
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}">
+                            <TextBlock>Role-Playing</TextBlock>
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}">
+                            <TextBlock>Shooter</TextBlock>
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}">
+                            <TextBlock>Simulation</TextBlock>
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}">
+                            <TextBlock>Thriller</TextBlock>
+                        </Button>
+                    </StackPanel>
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
         </materialDesign:DrawerHost>
