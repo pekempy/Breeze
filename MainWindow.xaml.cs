@@ -106,17 +106,6 @@ namespace GameLauncher
             RefreshGames();
         }
 
-        private void UIElement_OnPreviewLeftMouseButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            var dependencyObject = Mouse.Captured as DependencyObject;
-            while (dependencyObject != null)
-            {
-                if (dependencyObject is ScrollBar) return;
-                dependencyObject = VisualTreeHelper.GetParent(dependencyObject);
-            }
-            MenuToggleButton.IsChecked = false;
-        }
-
         private void RefreshGames_OnClick(object sender, RoutedEventArgs e)
         {
             RefreshGames();
