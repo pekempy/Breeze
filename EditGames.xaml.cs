@@ -119,8 +119,8 @@ namespace GameLauncher
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Multiselect = false;
-            fileDialog.InitialDirectory = "C:\\";
-            fileDialog.Filter = "Executable Files (*.exe) | *.exe;*.lnk";
+            fileDialog.RestoreDirectory = true;
+            fileDialog.Filter = "Executable Files (*.exe) | *.exe;*.lnk;*.url";
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true)
             {

@@ -98,13 +98,13 @@
                         <StackPanel Orientation="Horizontal">
                             <!-- The card -->
                             <materialDesign:Card
-                                Width="300"
+                                Width="290"
                                 Height="100"
                                 Margin="10 5 10 0">
                                 <Grid>
                                     <Image Source="{Binding Banner}"
                                            Height="100"
-                                           Width="300"
+                                           Width="290"
                                            Stretch="Fill" />
                                     <TextBlock Background="Black"
                                                Opacity="0.6" Margin="0,80,0,0"

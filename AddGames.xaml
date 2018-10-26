@@ -28,7 +28,7 @@
 
     <materialDesign:DialogHost
         x:Name="AddGameDialog"
-        CloseOnClickAway="True"
+        CloseOnClickAway="False"
         IsOpen="False"
         Visibility="Visible">
         <materialDesign:DialogHost.DialogContent>
