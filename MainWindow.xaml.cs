@@ -148,11 +148,11 @@ namespace GameLauncher
         public void LoadSettings()
         {
             //Theme Light or Dark
-            if (Settings.Default.theme.ToString() == "dark")
+            if (Settings.Default.theme.ToString() == "Dark")
             {
                 ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark);
             }
-            else if (Settings.Default.theme.ToString() == "light")
+            else if (Settings.Default.theme.ToString() == "Light")
             {
                 ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Light);
             }

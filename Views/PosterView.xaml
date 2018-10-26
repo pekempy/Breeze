@@ -9,13 +9,14 @@
     xmlns:Models="clr-namespace:GameLauncher.Models"
     xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
     mc:Ignorable="d"
+    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
     d:DataContext="{d:DesignInstance Type=ViewModels:PosterViewModel}"
     d:DesignHeight="300"
     d:DesignWidth="300">
     <UserControl.Resources>
         <CollectionViewSource x:Key="GameListCVS"
                               Source="{Binding PosterViewOC}"
-                              CollectionViewType="ListCollectionView">
+                              CollectionViewType="{x:Type dat:ListCollectionView}">
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Title" />
             </CollectionViewSource.SortDescriptions>
