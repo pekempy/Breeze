@@ -12,13 +12,13 @@ namespace GameLauncher.ViewModels
     {
         private static readonly MainWindow MainWindow = (MainWindow)Application.Current.MainWindow;
 
-        public static void RemoveGameFromFile(object gameName)
+        public static void RemoveGameFromFile(object gameGuid)
         {
-            gameName = gameName.ToString();
+            gameGuid = gameGuid.ToString();
             var text = File.ReadAllLines("./Resources/GamesList.txt", Encoding.UTF8);
             for (int i = 0; i < text.Length; i++)
             {
-                if (text[i].Contains($"{gameName}"))
+                if (text[i].Contains($"{gameGuid}"))
                 {
                     try
                     {
