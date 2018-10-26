@@ -11,10 +11,7 @@ namespace GameLauncher.Views
         public SettingsView()
         {
             InitializeComponent();
-            if (Settings.Default.theme == "Dark")
-            {
-                themeToggle.IsChecked = true;
-            }
+            if (Settings.Default.theme == "Dark") { themeToggle.IsChecked = true; }
         }
 
         private void DarkModeToggle_Checked(object sender, RoutedEventArgs e)

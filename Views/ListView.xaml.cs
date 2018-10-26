@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using GameLauncher.Models;
 using GameLauncher.ViewModels;
 
 namespace GameLauncher.Views
@@ -46,6 +48,26 @@ namespace GameLauncher.Views
         {
             ModifyFile.RemoveGameFromFile(((Button)sender).Tag);
             MainWindow.RefreshGames();
+        }
+
+        private void SearchString_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            RefreshList();
+        }
+
+        private void RefreshList()
+        {
+            CollectionViewSource GameListCVS = (CollectionViewSource)FindResource("GameListCVS");
+            if (GameListCVS != null)
+                GameListCVS.View.Refresh();
+        }
+
+        private void GameSearch(object sender, FilterEventArgs e)
+        {
+            if (e.Item is GameList)
+                e.Accepted = (e.Item as GameList).Title.ToUpper().Contains(GameSearchBar.Text.ToUpper());
+            else
+                e.Accepted = true;
         }
     }
 }

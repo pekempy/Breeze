@@ -52,9 +52,24 @@ namespace GameLauncher.Views
             MainWindow.RefreshGames();
         }
 
-        private void searchString(object sender, TextChangedEventArgs e)
+        private void SearchString_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Console.WriteLine(GameSearchBar.Text);
+            RefreshList();
+        }
+
+        private void RefreshList()
+        {
+            CollectionViewSource GameListCVS = (CollectionViewSource)FindResource("GameListCVS");
+            if (GameListCVS != null)
+                GameListCVS.View.Refresh();
+        }
+
+        private void GameSearch(object sender, FilterEventArgs e)
+        {
+            if (e.Item is GameList)
+                e.Accepted = (e.Item as GameList).Title.ToUpper().Contains(GameSearchBar.Text.ToUpper());
+            else
+                e.Accepted = true;
         }
     }
 }

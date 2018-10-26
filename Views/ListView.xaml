@@ -8,13 +8,16 @@
              xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
              xmlns:Models="clr-namespace:GameLauncher.Models"
              x:Class="GameLauncher.Views.ListView"
+             xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
              d:DataContext="{d:DesignInstance Type=ViewModels:ListViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300">
     <UserControl.Resources>
         <CollectionViewSource x:Key="GameListCVS"
-                              Source="{Binding ListView}">
+                              Source="{Binding ListView}"
+                              CollectionViewType="{x:Type dat:ListCollectionView}"
+                              Filter="GameSearch">
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Title" />
             </CollectionViewSource.SortDescriptions>
@@ -49,6 +52,7 @@
                 <!--  Search text  -->
                 <TextBox
                                     x:Name="GameSearchBar"
+                                    TextChanged="SearchString_TextChanged"
                                     MinWidth="150"
                                     Margin="8,0,0,0"
                                     VerticalAlignment="Center"
@@ -91,28 +95,28 @@
                                    Grid.RowSpan="2"
                                    HorizontalAlignment="Left"
                                    Stretch="Fill"
-                                   Source="{Binding Icon, Mode=OneWay}" />
+                                   Source="{Binding Icon, Mode=OneWay, FallbackValue='Missing element'}" />
                                     <!-- Game Title-->
                                     <Label x:Name="GameTitle"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Margin="85,1,0,45"
                                    FontSize="20"
-                                   Content="{Binding Title, Mode=OneWay}" />
+                                   Content="{Binding Title, Mode=OneWay, FallbackValue='Missing element'}" />
                                     <!-- Game Genres -->
                                     <Label x:Name="GameGenre"
                                    VerticalAlignment="Top"
                                    HorizontalAlignment="Left"
                                    Margin="86,32,0,0"
                                    FontSize="10"
-                                   Content="{Binding Genre, Mode=OneWay}"
+                                   Content="{Binding Genre, Mode=OneWay, FallbackValue='Missing element'}"
                                    materialDesign:ColorZoneAssist.Mode="Accent" />
 
                                     <!-- Game Launcher -->
                                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     x:Name="GameLauncher"
                                     Click="LaunchButton_OnClick"
-                                    Tag="{Binding Path, Mode=OneWay}"
+                                    Tag="{Binding Path, Mode=OneWay, FallbackValue='Missing element'}"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     Height="80"
@@ -133,7 +137,7 @@
                                         <StackPanel>
                                             <!-- Link Button -->
                                             <Button Click="GameLink_OnClick"
-                                            Tag="{Binding Link}">
+                                            Tag="{Binding Link, FallbackValue='Missing element'}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Earth"
                                                                      VerticalAlignment="Center" />
@@ -143,7 +147,7 @@
                                             </Button>
                                             <!-- Edit Button -->
                                             <Button Click="EditGame_OnClick"
-                                            Tag="{Binding Guid}">
+                                            Tag="{Binding Guid, FallbackValue='Missing element'}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Pencil"
                                                                      VerticalAlignment="Center" />
@@ -153,7 +157,7 @@
                                             </Button>
                                             <!-- Delete Button -->
                                             <Button Click="DeleteGame_OnClick"
-                                            Tag="{Binding Guid}">
+                                            Tag="{Binding Guid, FallbackValue='Missing element'}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Delete"
                                                                      VerticalAlignment="Center" />

@@ -16,7 +16,8 @@
     <UserControl.Resources>
         <CollectionViewSource x:Key="GameListCVS"
                               Source="{Binding PosterViewOC}"
-                              CollectionViewType="{x:Type dat:ListCollectionView}">
+                              CollectionViewType="{x:Type dat:ListCollectionView}"
+                              Filter="GameSearch">
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Title" />
             </CollectionViewSource.SortDescriptions>
@@ -61,14 +62,14 @@
                 <!--  Search text  -->
                 <TextBox
                                     x:Name="GameSearchBar"
+                                    TextChanged="SearchString_TextChanged"
                                     MinWidth="150"
                                     Margin="8,0,0,0"
                                     VerticalAlignment="Center"
                                     materialDesign:HintAssist.Hint="Please search..."
                                     materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
                                     BorderThickness="0"
-                                    FontSize="11"
-                                    TextChanged="searchString" />
+                                    FontSize="11" />
                 <!--  "send" button  -->
                 <Button VerticalAlignment="Center" Style="{DynamicResource MaterialDesignToolButton}"
                                         x:Name="GameSearchSend">
@@ -109,14 +110,14 @@
                                         <RowDefinition Height="5*" />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    <Image Source="{Binding Poster}"
+                                    <Image Source="{Binding Poster, FallbackValue=null}"
                                            Height="220"
                                            Width="180"
                                            Stretch="Fill" />
                                     <Button Width="180"
                                             Height="220"
                                             Style="{StaticResource MaterialDesignFlatButton}"
-                                            Tag="{Binding Path}"
+                                            Tag="{Binding Path, FallbackValue='Missing element'}"
                                             Click="LaunchButton_OnClick"
                                             Opacity="0.1" />
                                     <!-- stackpanel for the button -->
@@ -125,10 +126,10 @@
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Bottom" Grid.RowSpan="2">
                                         <WrapPanel Width="180">
-                                            <Button Name="PosterGameTitle"
+                                            <Button x:Name="PosterGameTitle"
                                                     Width="180"
                                                     Style="{StaticResource MaterialDesignFlatAccentButton}"
-                                                    Content="{Binding Title}"
+                                                    Content="{Binding Title, FallbackValue='Missing element'}"
                                                     VerticalAlignment="Bottom"
                                                     HorizontalAlignment="Left"
                                                     HorizontalContentAlignment="Left" />
@@ -147,7 +148,7 @@
                                         <StackPanel>
                                             <!-- Link Button -->
                                             <Button Click="GameLink_OnClick"
-                                                    Tag="{Binding Link}">
+                                                    Tag="{Binding Link, FallbackValue='Missing element'}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Earth"
                                                                              VerticalAlignment="Center" />
@@ -157,7 +158,7 @@
                                             </Button>
                                             <!-- Edit Button -->
                                             <Button Click="EditGame_OnClick"
-                                                    Tag="{Binding Guid}">
+                                                    Tag="{Binding Guid, FallbackValue='Missing element'}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Pencil"
                                                                              VerticalAlignment="Center" />
@@ -167,7 +168,7 @@
                                             </Button>
                                             <!-- Delete Button -->
                                             <Button Click="DeleteGame_OnClick"
-                                                    Tag="{Binding Guid}">
+                                                    Tag="{Binding Guid, FallbackValue='Missing element'}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Delete"
                                                                              VerticalAlignment="Center" />
