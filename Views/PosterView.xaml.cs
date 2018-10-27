@@ -65,6 +65,7 @@ namespace GameLauncher.Views
         }
 
         private void GameSearch(object sender, FilterEventArgs e)
+
         {
             if (e.Item is GameList)
                 e.Accepted = (e.Item as GameList).Title.ToUpper().Contains(GameSearchBar.Text.ToUpper());

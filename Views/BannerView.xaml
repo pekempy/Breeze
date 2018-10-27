@@ -71,15 +71,6 @@
                                     materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
                                     BorderThickness="0"
                                     FontSize="11" />
-                <!--  "send" button  -->
-                <Button VerticalAlignment="Center" Style="{DynamicResource MaterialDesignToolButton}"
-                                        x:Name="GameSearchSend">
-                    <materialDesign:PackIcon
-                                        Margin="0,0,0,0"
-                                        VerticalAlignment="Center"
-                                        Kind="Send"
-                                        Opacity=".56" />
-                </Button>
             </StackPanel>
         </materialDesign:ColorZone>
         <!-- This section displays one card per game in GamesList-->
