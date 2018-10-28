@@ -17,7 +17,7 @@
 
     <UserControl.Resources>
         <CollectionViewSource x:Key="GameListCVS"
-                              Source="{Binding BannerView}"
+                              Source="{Binding BannerViewOC}"
                               CollectionViewType="{x:Type dat:ListCollectionView}"
                               Filter="GameSearch">
             <CollectionViewSource.SortDescriptions>

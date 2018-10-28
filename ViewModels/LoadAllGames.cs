@@ -11,6 +11,8 @@ namespace GameLauncher.ViewModels
     {
         public ObservableCollection<GameList> Games { get; set; }
 
+        public ObservableCollection<GenreList> Genres { get; set; }
+
         public void LoadGames()
         {
             ObservableCollection<GameList> games = new ObservableCollection<GameList>();
@@ -41,14 +43,31 @@ namespace GameLauncher.ViewModels
                 }
             }
             Games = games;
+            LoadGenres();
         }
 
-        //Commented out some experimentation from searching (from https://wpftutorial.net/DataViews.html)
-        //public ICollectionView Search { get; }
-        //public LoadAllGames()
-        //{
-        //    ObservableCollection<GameList> searchResult = Games;
-        //    Search = CollectionViewSource.GetDefaultView(Games);
-        //}
+        public void LoadGenres()
+        {
+            ObservableCollection<GenreList> genres = new ObservableCollection<GenreList>();
+            if (File.Exists("./Resources/GenreList.txt"))
+            {
+                string genreFile = "./Resources/GenreList.txt";
+                string[] genreArray = File.ReadAllLines(genreFile);
+                string[] columns = new string[0];
+                int numberOfGenres = 0;
+                foreach (var item in genreArray)
+                {
+                    columns = genreArray[numberOfGenres].Split('|');
+                    genres.Add(new GenreList
+                    {
+                        Name = columns[0],
+                        Checked = columns[1],
+                        Guid = columns[2]
+                    });
+                    numberOfGenres++;
+                }
+            }
+            Genres = genres;
+        }
     }
 }

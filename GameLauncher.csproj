@@ -109,12 +109,13 @@
     <Compile Include="EditGames.xaml.cs">
       <DependentUpon>EditGames.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\GenreModel.cs" />
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\LoadAllGames.cs" />
     <Compile Include="ViewModels\PosterViewModel.cs" />
     <Compile Include="ViewModels\BannerViewModel.cs" />
-    <Compile Include="ViewModels\GridViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\ModifyFile.cs" />
     <Compile Include="Views\PosterView.xaml.cs">
