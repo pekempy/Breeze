@@ -5,15 +5,13 @@ namespace GameLauncher.ViewModels
 {
     internal class BannerViewModel
     {
-        public ObservableCollection<GameList> BannerViewOC { get; set; }
-
-        public ObservableCollection<GenreList> BannerGenre { get; set; }
+        public ObservableCollection<GameList> BannerView { get; set; }
 
         public void LoadGames()
         {
             LoadAllGames lag = new LoadAllGames();
             lag.LoadGames();
-            BannerViewOC = lag.Games;
+            BannerView = lag.Games;
         }
     }
 }
