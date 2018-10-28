@@ -28,6 +28,11 @@ namespace GameLauncher.Views
             SaveSettings();
         }
 
+        private void AddNewGenre_OnClick(object sender, RoutedEventArgs e)
+        {
+            return;
+        }
+
         public void SaveSettings()
         {
             Properties.Settings.Default.Save();

@@ -114,7 +114,7 @@
     <Compile Include="ViewModels\LoadAllGames.cs" />
     <Compile Include="ViewModels\PosterViewModel.cs" />
     <Compile Include="ViewModels\BannerViewModel.cs" />
-    <Compile Include="ViewModels\GridViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\ModifyFile.cs" />
     <Compile Include="Views\PosterView.xaml.cs">

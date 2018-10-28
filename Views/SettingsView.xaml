@@ -19,11 +19,19 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
         <materialDesign:ColorZone
             Grid.ColumnSpan="40"
         Margin="0,0,0,0"
@@ -47,13 +55,13 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Content="THEMES"
-                IsChecked="True"
+                IsChecked="False"
                 Style="{StaticResource MaterialDesignTabRadioButton}" />
                 <RadioButton
                 Name="GenreBtn"
                 Margin="4"
                 Content="GENRES"
-                IsChecked="False"
+                IsChecked="True"
                 Style="{StaticResource MaterialDesignTabRadioButton}" />
             </StackPanel>
         </materialDesign:ColorZone>
@@ -87,10 +95,42 @@
         </Grid>
         <!-- ############################################################################################################### -->
         <Grid Name="GenreBlock"
-                  Margin="10 60 0 0"
+                  Margin="10 60 10 10"
+                  Grid.RowSpan="6"
+                  Grid.ColumnSpan="4"
                   Visibility="{Binding Path=IsChecked, ElementName=GenreBtn, Converter={StaticResource b2v}}">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
             <!-- CONTENT OF THE GENRES TAB GOES IN HERE-->
-            <TextBlock>Genres</TextBlock>
+            <!-- First, show the current list of genres here -->
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.RowSpan="1"
+                        Height="25"
+                        VerticalAlignment="Top">
+                    <TextBlock Text="New Genre: "
+                           Margin="0 5 0 0"
+                           Height="20"
+                           VerticalAlignment="Top" />
+                    <TextBox Style="{StaticResource MaterialDesignTextBox}"
+                         Width="150"
+                         Height="20"
+                         VerticalAlignment="Top" />
+                    <Button Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Top" Height="20">
+                        <materialDesign:PackIcon Kind="Send"
+                             Opacity=".56"
+                             VerticalAlignment="Center" />
+                    </Button>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.RowSpan="4">
+                    <TextBlock Text="Current Genres:" VerticalAlignment="Top" />
+                    <!--Need to get the list of current genres to fill the rest of this-->
+                </StackPanel>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>
