@@ -158,6 +158,8 @@
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
                     <!--Code needs to go here for genres -->
                     <StackPanel Orientation="Vertical">
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                Content="All Genres" />
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
                             <ItemsControl x:Name="GenreSidebar" ItemsSource="{Binding Source={StaticResource GenreListCVS}}">
                                 <ItemsControl.ItemTemplate>
