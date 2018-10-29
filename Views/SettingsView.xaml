@@ -109,7 +109,7 @@
                   ScrollViewer.CanContentScroll="True"
                   Visibility="{Binding Path=IsChecked, ElementName=GenreBtn, Converter={StaticResource b2v}}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
+                <RowDefinition Height="60" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -135,20 +135,26 @@
                              VerticalAlignment="Center" />
                 </Button>
             </StackPanel>
-            <TextBlock Text="Current Genres:" Margin="0 25 0 0" FontWeight="Bold" />
+            <TextBlock Text="Current Genres:" Margin="0 45 0 0" FontWeight="Bold" />
             <ScrollViewer Grid.Row="1" Grid.RowSpan="4" VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="Disabled">
                 <StackPanel>
                     <!--Need to get the list of current genres to fill this-->
                     <ItemsControl x:Name="genreListView"
-                          Margin="10 10 0 10"
+                          Margin="0 0 0 10"
                           ItemsSource="{Binding Source={StaticResource GenreListCVS}}"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>
-                                    <TextBlock Text="{Binding Name}" Width="180" />
-                                    <Button Tag="{Binding Guid}"
-                                            HorizontalAlignment="Right"></Button>
+                                    <TextBlock Text="{Binding Name}" Width="180" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                            Click="DeleteGenre_OnClick"
+                                            Tag="{Binding Guid}"
+                                            Padding="0 0 0 0"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="Delete" HorizontalAlignment="Right" />
+                                    </Button>
                                 </WrapPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

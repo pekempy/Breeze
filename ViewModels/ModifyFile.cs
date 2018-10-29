@@ -63,5 +63,28 @@ namespace GameLauncher.ViewModels
                 }
             }
         }
+
+        public static void RemoveGenreFromFile(object genreGuid)
+        {
+            genreGuid = genreGuid.ToString();
+            var text = File.ReadAllLines("./Resources/GenreList.txt", Encoding.UTF8);
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (text[i].Contains($"{genreGuid}"))
+                {
+                    try
+                    {
+                        text[i] = "";
+
+                        text = text.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+                        File.WriteAllLines("./Resources/GenreList.txt", text);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                    }
+                }
+            }
+        }
     }
 }

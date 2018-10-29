@@ -96,6 +96,11 @@ namespace GameLauncher
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
         {
+            SettingsViewActive();
+        }
+
+        private void SettingsViewActive()
+        {
             settingsViewModel = new SettingsViewModel();
             settingsViewModel.LoadGenres();
             DataContext = settingsViewModel;
@@ -128,6 +133,11 @@ namespace GameLauncher
             {
                 Console.WriteLine("Banner");
                 BannerViewActive();
+            }
+            else if (DataContext == settingsViewModel)
+            {
+                Console.WriteLine("Settings");
+                SettingsViewActive();
             }
             else
             {
