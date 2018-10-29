@@ -5,13 +5,20 @@ namespace GameLauncher.ViewModels
 {
     public class ListViewModel
     {
-        public ObservableCollection<GameList> ListView { get; set; }
+        public ObservableCollection<GameList> ListViewOC { get; set; }
+        public static ObservableCollection<GenreList> GenreListOC { get; set; }
+        private LoadAllGames lag = new LoadAllGames();
 
         public void LoadGames()
         {
-            LoadAllGames lag = new LoadAllGames();
             lag.LoadGames();
-            ListView = lag.Games;
+            ListViewOC = lag.Games;
+        }
+
+        public void LoadGenres()
+        {
+            lag.LoadGenres();
+            GenreListOC = lag.Genres;
         }
     }
 }

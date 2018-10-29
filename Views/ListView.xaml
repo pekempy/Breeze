@@ -15,11 +15,18 @@
              d:DesignWidth="600">
     <UserControl.Resources>
         <CollectionViewSource x:Key="GameListCVS"
-                              Source="{Binding ListView}"
+                              Source="{Binding ListViewOC}"
                               CollectionViewType="{x:Type dat:ListCollectionView}"
                               Filter="GameSearch">
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Title" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+        <CollectionViewSource x:Key="GenreListCVS"
+                              Source="{Binding GenreListOC}"
+                              CollectionViewType="{x:Type dat:ListCollectionView}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Name" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
     </UserControl.Resources>

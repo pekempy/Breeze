@@ -58,14 +58,7 @@ namespace GameLauncher.Views
         }
 
         private void DeleteGenre_OnClick(object sender, RoutedEventArgs e)
-        {
-            //Code needs to go in here to check each item in Game text file and remove the deleted genre from the record
-            //1. Look in GenreList.txt to match guid to a "Name"
-            //2. Search GamesList.txt for match to above name
-            //3. Replace "$name" with "" + replace "  " with " " in case double whitespace
-            //4. Load Games again
-
-            //Check Genre file for the name of the genre to remove
+        {  //Check Genre file for the name of the genre to remove
             string genreGuid = ((Button)sender).Tag.ToString();
             var genretext = File.ReadAllLines("./Resources/GenreList.txt", Encoding.UTF8);
             for (int i = 0; i < genretext.Length; i++)
@@ -91,7 +84,7 @@ namespace GameLauncher.Views
                 if (gametext[i2].Contains(DeletedGenre))
                 {
                     try
-                    { //This entire section is to remove that genre from any games which contain it.
+                    {
                         Console.WriteLine(gametext[i2]);
                         string[] column = gametext[i2].Split('|');
                         string genretoedit = column[1];

@@ -1,11 +1,11 @@
-﻿<Window
+﻿<Window xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
     x:Class="GameLauncher.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:models="clr-namespace:GameLauncher.Models"
     xmlns:viewmodels="clr-namespace:GameLauncher.ViewModels"
     xmlns:views="clr-namespace:GameLauncher.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     Title="Breeze"
     Width="800"
     Height="600"
@@ -16,6 +16,7 @@
     Icon="breeze.ico"
     TextElement.FontSize="13"
     TextElement.FontWeight="Regular"
+    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
@@ -35,6 +36,13 @@
         <DataTemplate x:Name="settingsViewTemplate" DataType="{x:Type viewmodels:SettingsViewModel}">
             <views:SettingsView DataContext="{Binding}" />
         </DataTemplate>
+        <CollectionViewSource x:Key="GenreListCVS"
+                              Source="{Binding GenreListOC}"
+                              CollectionViewType="{x:Type dat:ListCollectionView}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Name" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
     </Window.Resources>
     <Grid>
 
@@ -150,41 +158,19 @@
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
                     <!--Code needs to go here for genres -->
                     <StackPanel Orientation="Vertical">
-                        <TextBlock FontWeight="Bold" HorizontalAlignment="Center">HARD CODED PLACEHOLDER</TextBlock>
-                        <TextBlock Padding="10 0 10 0">In future can filter by the genre selected</TextBlock>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}">
-                            <TextBlock>Action</TextBlock>
-                        </Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}">
-                            <TextBlock>Adventure</TextBlock>
-                        </Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}">
-                            <TextBlock>Fantasy</TextBlock>
-                        </Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}">
-                            <TextBlock>FPS</TextBlock>
-                        </Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}">
-                            <TextBlock>Horror</TextBlock>
-                        </Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}">
-                            <TextBlock>Open World</TextBlock>
-                        </Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}">
-                            <TextBlock>Platform</TextBlock>
-                        </Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}">
-                            <TextBlock>Role-Playing</TextBlock>
-                        </Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}">
-                            <TextBlock>Shooter</TextBlock>
-                        </Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}">
-                            <TextBlock>Simulation</TextBlock>
-                        </Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}">
-                            <TextBlock>Thriller</TextBlock>
-                        </Button>
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ItemsControl x:Name="GenreSidebar" ItemsSource="{Binding Source={StaticResource GenreListCVS}}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                Content="{Binding Name}"
+                                                Tag="{Binding Guid}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
                     </StackPanel>
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>

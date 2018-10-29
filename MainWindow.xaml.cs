@@ -31,13 +31,13 @@ namespace GameLauncher
             InitializeComponent();
             posterViewModel = new PosterViewModel();
             posterViewModel.LoadGames();
+            posterViewModel.LoadGenres();
             DataContext = posterViewModel;
 
             //If games list doesn't exist, create directory and open ag dialog
             if (!File.Exists("./Resources/GamesList.txt"))
             {
                 Directory.CreateDirectory("./Resources/");
-
                 OpenAddGameDialog();
                 RefreshGames();
             }
@@ -67,6 +67,7 @@ namespace GameLauncher
         {
             bannerViewModel = new BannerViewModel();
             bannerViewModel.LoadGames();
+            bannerViewModel.LoadGenres();
             DataContext = bannerViewModel;
         }
 
@@ -79,6 +80,7 @@ namespace GameLauncher
         {
             listViewModel = new ListViewModel();
             listViewModel.LoadGames();
+            listViewModel.LoadGenres();
             DataContext = listViewModel;
         }
 
@@ -91,6 +93,7 @@ namespace GameLauncher
         {
             posterViewModel = new PosterViewModel();
             posterViewModel.LoadGames();
+            posterViewModel.LoadGenres();
             DataContext = posterViewModel;
         }
 
