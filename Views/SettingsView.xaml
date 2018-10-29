@@ -11,11 +11,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
     d:DataContext="{d:DesignInstance Type=ViewModels:SettingsViewModel}"
+    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="b2v" />
+        <CollectionViewSource x:Key="GenreListCVS"
+                              Source="{Binding GenreListOC}"
+                              CollectionViewType="{x:Type dat:ListCollectionView}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Name" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -98,39 +106,55 @@
                   Margin="10 60 10 10"
                   Grid.RowSpan="6"
                   Grid.ColumnSpan="4"
+                  ScrollViewer.CanContentScroll="True"
                   Visibility="{Binding Path=IsChecked, ElementName=GenreBtn, Converter={StaticResource b2v}}">
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <!-- CONTENT OF THE GENRES TAB GOES IN HERE-->
-            <!-- First, show the current list of genres here -->
-            <StackPanel>
-                <StackPanel Orientation="Horizontal" Grid.RowSpan="1"
+            <StackPanel Orientation="Horizontal" Grid.RowSpan="1"
                         Height="25"
                         VerticalAlignment="Top">
-                    <TextBlock Text="New Genre: "
+                <TextBlock Text="New Genre: "
+                               FontWeight="Bold"
                            Margin="0 5 0 0"
                            Height="20"
                            VerticalAlignment="Top" />
-                    <TextBox Style="{StaticResource MaterialDesignTextBox}"
+                <TextBox x:Name="NewGenreName"
+                    Style="{StaticResource MaterialDesignTextBox}"
                          Width="150"
                          Height="20"
                          VerticalAlignment="Top" />
-                    <Button Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Top" Height="20">
-                        <materialDesign:PackIcon Kind="Send"
+                <Button Click="AddNewGenre_OnClick" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Top" Height="20">
+                    <materialDesign:PackIcon Kind="Send"
                              Opacity=".56"
                              VerticalAlignment="Center" />
-                    </Button>
-                </StackPanel>
-                <StackPanel Grid.Row="1" Grid.RowSpan="4">
-                    <TextBlock Text="Current Genres:" VerticalAlignment="Top" />
-                    <!--Need to get the list of current genres to fill the rest of this-->
-                </StackPanel>
+                </Button>
             </StackPanel>
+            <TextBlock Text="Current Genres:" Margin="0 25 0 0" FontWeight="Bold" />
+            <ScrollViewer Grid.Row="1" Grid.RowSpan="4" VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+                    <!--Need to get the list of current genres to fill this-->
+                    <ItemsControl x:Name="genreListView"
+                          Margin="10 10 0 10"
+                          ItemsSource="{Binding Source={StaticResource GenreListCVS}}"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <TextBlock Text="{Binding Name}" Width="180" />
+                                    <Button Tag="{Binding Guid}"
+                                            HorizontalAlignment="Right"></Button>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </UserControl>

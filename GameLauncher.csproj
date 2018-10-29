@@ -109,6 +109,7 @@
     <Compile Include="EditGames.xaml.cs">
       <DependentUpon>EditGames.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\GenreModel.cs" />
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ViewModels\LoadAllGames.cs" />

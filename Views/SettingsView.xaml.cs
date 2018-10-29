@@ -1,6 +1,9 @@
 ﻿using GameLauncher.Properties;
+using GameLauncher.ViewModels;
 using MaterialDesignThemes.Wpf;
+using System;
 using System.Configuration;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -8,8 +11,11 @@ namespace GameLauncher.Views
 {
     public partial class SettingsView : UserControl
     {
+        private LoadAllGames lag = new LoadAllGames();
+
         public SettingsView()
         {
+            lag.LoadGenres();
             InitializeComponent();
             if (Settings.Default.theme == "Dark") { themeToggle.IsChecked = true; }
         }
@@ -30,7 +36,18 @@ namespace GameLauncher.Views
 
         private void AddNewGenre_OnClick(object sender, RoutedEventArgs e)
         {
-            return;
+            try
+            {
+                TextWriter tsw = new StreamWriter(@"./Resources/GenreList.txt", true);
+                tsw.WriteLine(NewGenreName.Text + "|False|" + Guid.NewGuid());
+                tsw.Close();
+                NewGenreName.Text = "";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.Message);
+            }
+            lag.LoadGenres();
         }
 
         public void SaveSettings()

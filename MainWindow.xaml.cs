@@ -97,6 +97,7 @@ namespace GameLauncher
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
         {
             settingsViewModel = new SettingsViewModel();
+            settingsViewModel.LoadGenres();
             DataContext = settingsViewModel;
         }
 
