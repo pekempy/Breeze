@@ -57,20 +57,40 @@ namespace GameLauncher.Views
             RefreshList();
         }
 
-        private void RefreshList()
+        public void RefreshList()
         {
             CollectionViewSource GameListCVS = (CollectionViewSource)FindResource("GameListCVS");
+            GameListCVS.Filter += new FilterEventHandler(GameSearch);
+            GameListCVS.Filter += new FilterEventHandler(GenreFilter);
             if (GameListCVS != null)
-                GameListCVS.View.Refresh();
+                GameListCVS.View.Refresh(); //This is getting a null "GameListCVS.View"
         }
 
         private void GameSearch(object sender, FilterEventArgs e)
 
         {
-            if (e.Item is GameList)
-                e.Accepted = (e.Item as GameList).Title.ToUpper().Contains(GameSearchBar.Text.ToUpper());
-            else
-                e.Accepted = true;
+            GameList gl = e.Item as GameList;
+            e.Accepted &= gl.Title.ToUpper().Contains(GameSearchBar.Text.ToUpper());
+        }
+
+        public static string GTF;
+
+        public void GenreToFilter(string gtf)
+        {
+            GTF = gtf;
+            Console.WriteLine(GTF);
+            //somehow need to apply the filter from here
+        }
+
+        public void GenreFilter(object sender, FilterEventArgs e)
+        {
+            GameList gl = e.Item as GameList;
+            if (GTF != null)
+            {
+                e.Accepted &= gl.Genre.ToUpper().Contains(GTF.ToUpper());
+                Console.WriteLine(sender);
+            }
+            return;
         }
     }
 }

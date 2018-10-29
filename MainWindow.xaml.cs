@@ -24,6 +24,9 @@ namespace GameLauncher
         private ListViewModel listViewModel;
         private PosterViewModel posterViewModel;
         private SettingsViewModel settingsViewModel;
+        private Views.PosterView pv = new Views.PosterView();
+        private Views.BannerView bv = new Views.BannerView();
+        private Views.ListView lv = new Views.ListView();
 
         public MainWindow()
         {
@@ -56,6 +59,12 @@ namespace GameLauncher
             DialogFrame.Content = DialogEditGames;
             DialogEditGames.currentGuid(guid);
             DialogEditGames.EditGameDialog.IsOpen = true;
+        }
+
+        private void ApplyGenreFilter_OnClick(object sender, RoutedEventArgs e)
+        {
+            string genreToFilter = ((Button)sender).Tag.ToString();
+            pv.GenreToFilter(genreToFilter);
         }
 
         private void BannerButton_OnClick(object sender, RoutedEventArgs e)

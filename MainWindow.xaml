@@ -156,7 +156,6 @@
                         DockPanel.Dock="Top"
                         IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
-                    <!--Code needs to go here for genres -->
                     <StackPanel Orientation="Vertical">
                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 Content="All Genres" />
@@ -167,7 +166,9 @@
                                         <StackPanel>
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 Content="{Binding Name}"
-                                                Tag="{Binding Guid}" />
+                                                Tag="{Binding Name}"
+                                                Name="GenreButton"
+                                                Click="ApplyGenreFilter_OnClick" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>

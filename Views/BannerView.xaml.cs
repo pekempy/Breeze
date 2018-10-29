@@ -64,10 +64,8 @@ namespace GameLauncher.Views
 
         private void GameSearch(object sender, FilterEventArgs e)
         {
-            if (e.Item is GameList)
-                e.Accepted = (e.Item as GameList).Title.ToUpper().Contains(GameSearchBar.Text.ToUpper());
-            else
-                e.Accepted = true;
+            GameList gl = e.Item as GameList;
+            e.Accepted &= gl.Title.ToUpper().Contains(GameSearchBar.Text.ToUpper());
         }
     }
 }

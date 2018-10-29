@@ -16,8 +16,7 @@
     <UserControl.Resources>
         <CollectionViewSource x:Key="GameListCVS"
                               Source="{Binding PosterViewOC}"
-                              CollectionViewType="{x:Type dat:ListCollectionView}"
-                              Filter="GameSearch">
+                              CollectionViewType="{x:Type dat:ListCollectionView}">
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Title" />
             </CollectionViewSource.SortDescriptions>
