@@ -13,6 +13,7 @@ namespace GameLauncher.Views
     public partial class PosterView : UserControl
     {
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
+        private readonly CollectionViewSource GameListCVS;
 
         public PosterView()
         {
@@ -90,7 +91,6 @@ namespace GameLauncher.Views
                 e.Accepted &= gl.Genre.ToUpper().Contains(GTF.ToUpper());
                 Console.WriteLine(sender);
             }
-            return;
         }
     }
 }
