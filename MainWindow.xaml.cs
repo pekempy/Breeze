@@ -65,6 +65,8 @@ namespace GameLauncher
         {
             string genreToFilter = ((Button)sender).Tag.ToString();
             pv.GenreToFilter(genreToFilter);
+            pv.RefreshGenre();
+            MenuToggleButton.IsChecked = false;
         }
 
         private void BannerButton_OnClick(object sender, RoutedEventArgs e)
