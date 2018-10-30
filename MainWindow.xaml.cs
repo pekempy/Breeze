@@ -2,17 +2,11 @@
 using GameLauncher.Views;
 using System;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Data;
-using GameLauncher.Models;
 using GameLauncher.Properties;
 using MaterialDesignThemes.Wpf;
+using System.Windows.Data;
 
 namespace GameLauncher
 {
@@ -24,9 +18,10 @@ namespace GameLauncher
         private ListViewModel listViewModel;
         private PosterViewModel posterViewModel;
         private SettingsViewModel settingsViewModel;
-        private Views.PosterView pv = new Views.PosterView();
-        private Views.BannerView bv = new Views.BannerView();
+        private PosterView pv = new PosterView();
+        private BannerView bv = new BannerView();
         private Views.ListView lv = new Views.ListView();
+        public CollectionViewSource cvs;
 
         public MainWindow()
         {
@@ -62,10 +57,10 @@ namespace GameLauncher
         }
 
         private void ApplyGenreFilter_OnClick(object sender, RoutedEventArgs e)
-        {
+        { 
             string genreToFilter = ((Button)sender).Tag.ToString();
             pv.GenreToFilter(genreToFilter);
-            pv.RefreshList();
+            pv.RefreshList2(cvs);
             MenuToggleButton.IsChecked = false; //hide hamburger
         }
 
@@ -102,7 +97,7 @@ namespace GameLauncher
 
         private void PosterViewActive()
         {
-            posterViewModel = new PosterViewModel();
+            //posterViewModel = new PosterViewModel();
             posterViewModel.LoadGames();
             posterViewModel.LoadGenres();
             DataContext = posterViewModel;

@@ -13,6 +13,7 @@ namespace GameLauncher.Views
     public partial class PosterView : UserControl
     {
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
+        public CollectionViewSource GameListCVS;
 
         public PosterView()
         {
@@ -58,8 +59,18 @@ namespace GameLauncher.Views
         }
 
         public void RefreshList()
+       {
+            GameListCVS = ((CollectionViewSource)(FindResource("GameListCVS")));
+            MainWindow.cvs = GameListCVS;
+            GameListCVS.Filter += new FilterEventHandler(GenreFilter);
+            GameListCVS.Filter += new FilterEventHandler(GameSearch);
+            if (GameListCVS.View != null) //This is getting a null "GameListCVS.View" on genre only, works if searchbar updated
+                GameListCVS.View.Refresh();
+        }
+
+        public void RefreshList2(CollectionViewSource cvscvs)
         {
-            CollectionViewSource GameListCVS = (CollectionViewSource)FindResource("GameListCVS");
+            GameListCVS = cvscvs;
             GameListCVS.Filter += new FilterEventHandler(GenreFilter);
             GameListCVS.Filter += new FilterEventHandler(GameSearch);
             if (GameListCVS.View != null) //This is getting a null "GameListCVS.View" on genre only, works if searchbar updated
@@ -77,13 +88,28 @@ namespace GameLauncher.Views
         private void GameSearch(object sender, FilterEventArgs e)
         {
             GameList gl = e.Item as GameList;
-            e.Accepted &= gl.Title.ToUpper().Contains(GameSearchBar.Text.ToUpper());
+            if (GameSearchBar == null)
+            {
+                return;
+            }
+            else
+            {
+
+                e.Accepted &= gl.Title.ToUpper().Contains(GameSearchBar.Text.ToUpper());
+            }
         }
 
         public void GenreFilter(object sender, FilterEventArgs e)
         {
             GameList gl = e.Item as GameList;
-            e.Accepted &= gl.Genre.ToUpper().Contains(FilterGenreName.ToUpper());
+            if (FilterGenreName == null)
+            {
+                return;
+            }
+            else
+            {
+                e.Accepted &= gl.Genre.ToUpper().Contains(FilterGenreName.ToUpper());
+            }
         }
     }
 }
