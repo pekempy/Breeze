@@ -13,7 +13,6 @@ namespace GameLauncher.Views
     public partial class PosterView : UserControl
     {
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
-        private readonly CollectionViewSource GameListCVS;
 
         public PosterView()
         {
@@ -61,36 +60,30 @@ namespace GameLauncher.Views
         public void RefreshList()
         {
             CollectionViewSource GameListCVS = (CollectionViewSource)FindResource("GameListCVS");
-            GameListCVS.Filter += new FilterEventHandler(GameSearch);
             GameListCVS.Filter += new FilterEventHandler(GenreFilter);
-            if (GameListCVS != null)
-                GameListCVS.View.Refresh(); //This is getting a null "GameListCVS.View"
+            GameListCVS.Filter += new FilterEventHandler(GameSearch);
+            if (GameListCVS.View != null)
+                GameListCVS.View.Refresh(); //This is getting a null "GameListCVS.View" on genre only
+        }
+
+        public static string FilterGenreName;
+
+        public void GenreToFilter(string filtergenrename)
+        {
+            //Set public variable for use in GenreFilter
+            FilterGenreName = filtergenrename;
         }
 
         private void GameSearch(object sender, FilterEventArgs e)
-
         {
             GameList gl = e.Item as GameList;
             e.Accepted &= gl.Title.ToUpper().Contains(GameSearchBar.Text.ToUpper());
         }
 
-        public static string GTF;
-
-        public void GenreToFilter(string gtf)
-        {
-            GTF = gtf;
-            Console.WriteLine(GTF);
-            //somehow need to apply the filter from here
-        }
-
         public void GenreFilter(object sender, FilterEventArgs e)
         {
             GameList gl = e.Item as GameList;
-            if (GTF != null)
-            {
-                e.Accepted &= gl.Genre.ToUpper().Contains(GTF.ToUpper());
-                Console.WriteLine(sender);
-            }
+            e.Accepted &= gl.Genre.ToUpper().Contains(FilterGenreName.ToUpper());
         }
     }
 }
