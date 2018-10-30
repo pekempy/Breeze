@@ -54,23 +54,16 @@ namespace GameLauncher.Views
 
         private void SearchString_TextChanged(object sender, TextChangedEventArgs e)
         {
-            RefreshSearch();
+            RefreshList();
         }
 
-        public void RefreshSearch()
-        {
-            CollectionViewSource GameListCVS = (CollectionViewSource)FindResource("GameListCVS");
-            GameListCVS.Filter += new FilterEventHandler(GameSearch);
-            if (GameListCVS.View != null)
-                GameListCVS.View.Refresh();
-        }
-
-        public void RefreshGenre()
+        public void RefreshList()
         {
             CollectionViewSource GameListCVS = (CollectionViewSource)FindResource("GameListCVS");
             GameListCVS.Filter += new FilterEventHandler(GenreFilter);
-            if (GameListCVS.View != null)
-                GameListCVS.View.Refresh(); //This is getting a null "GameListCVS.View" on genre only
+            GameListCVS.Filter += new FilterEventHandler(GameSearch);
+            if (GameListCVS.View != null) //This is getting a null "GameListCVS.View" on genre only, works if searchbar updated
+                GameListCVS.View.Refresh();
         }
 
         public static string FilterGenreName;

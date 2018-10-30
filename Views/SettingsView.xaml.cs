@@ -104,7 +104,7 @@ namespace GameLauncher.Views
                     }
                 }
             }
-            ModifyFile.RemoveGenreFromFile(((Button)sender).Tag);
+            ModifyFile.RemoveGenreFromFile(((Button)sender).Tag.ToString());
             MainWindow.RefreshGames();
         }
 

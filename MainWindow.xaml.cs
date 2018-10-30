@@ -53,7 +53,7 @@ namespace GameLauncher
             DialogAddGames.AddGameDialog.IsOpen = true;
         }
 
-        public void OpenEditGameDialog(String guid)
+        public void OpenEditGameDialog(string guid)
         {
             DialogFrame.Visibility = Visibility.Visible;
             DialogFrame.Content = DialogEditGames;
@@ -65,8 +65,8 @@ namespace GameLauncher
         {
             string genreToFilter = ((Button)sender).Tag.ToString();
             pv.GenreToFilter(genreToFilter);
-            pv.RefreshGenre();
-            MenuToggleButton.IsChecked = false;
+            pv.RefreshList();
+            MenuToggleButton.IsChecked = false; //hide hamburger
         }
 
         private void BannerButton_OnClick(object sender, RoutedEventArgs e)
