@@ -57,7 +57,7 @@ namespace GameLauncher
         }
 
         private void ApplyGenreFilter_OnClick(object sender, RoutedEventArgs e)
-        { 
+        {
             string genreToFilter = ((Button)sender).Tag.ToString();
             pv.GenreToFilter(genreToFilter);
             pv.RefreshList2(cvs);
