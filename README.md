@@ -18,3 +18,6 @@ This isn't designed to be a competitor to steam, or any other game launcher. I j
 #### Planned updates:
 - Changing primary/accent colour from settings menu (MDIX 2.6.0)
 - Scraping images and user can select which to download
+
+
+© 2018 [Peter Kemp](https://github.com/Pekempy) & [John Campbell](https://github.com/JohnSandshrew) 
