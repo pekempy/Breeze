@@ -138,24 +138,10 @@
                             <Button.CommandParameter>
 
                                 <Grid
-                                    Width="Auto"
-                                    Height="Auto"
-                                    MinWidth="200"
-                                    MinHeight="200">
+                                    Width="220"
+                                    Height="350">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3*" />
@@ -171,72 +157,26 @@
                                         FontSize="20"
                                         Text="Pick your genre(s)" />
                                     <!--  Genres are hardcoded in  -->
-                                    <CheckBox
-                                        Name="Action"
-                                        Grid.Row="1"
-                                        Grid.ColumnSpan="3"
-                                        Margin="20,5,0,5"
-                                        Content="Action" />
-                                    <CheckBox
-                                        Name="Adventure"
-                                        Grid.Row="2"
-                                        Grid.ColumnSpan="3"
-                                        Margin="20,0,0,5"
-                                        Content="Adventure" />
-                                    <CheckBox
-                                        Name="Fantasy"
-                                        Grid.Row="3"
-                                        Grid.ColumnSpan="3"
-                                        Margin="20,0,0,5"
-                                        Content="Fantasy" />
-                                    <CheckBox
-                                        Name="FPS"
-                                        Grid.Row="4"
-                                        Grid.ColumnSpan="3"
-                                        Margin="20,0,0,5"
-                                        Content="FPS" />
-                                    <CheckBox
-                                        Name="Horror"
-                                        Grid.Row="5"
-                                        Grid.ColumnSpan="3"
-                                        Margin="20,0,0,5"
-                                        Content="Horror" />
-                                    <CheckBox
-                                        Name="OpenWorld"
-                                        Grid.Row="6"
-                                        Grid.ColumnSpan="3"
-                                        Margin="20,0,0,5"
-                                        Content="Open World" />
-                                    <CheckBox
-                                        Name="Platform"
-                                        Grid.Row="7"
-                                        Grid.ColumnSpan="3"
-                                        Margin="20,0,0,5"
-                                        Content="Platform" />
-                                    <CheckBox
-                                        Name="RolePlaying"
-                                        Grid.Row="8"
-                                        Grid.ColumnSpan="3"
-                                        Margin="20,0,0,5"
-                                        Content="Role-Playing" />
-                                    <CheckBox
-                                        Name="Shooter"
-                                        Grid.Row="9"
-                                        Grid.ColumnSpan="3"
-                                        Margin="20,0,0,5"
-                                        Content="Shooter" />
-                                    <CheckBox
-                                        Name="Simulation"
-                                        Grid.Row="10"
-                                        Grid.ColumnSpan="3"
-                                        Margin="20,0,0,5"
-                                        Content="Simulation" />
-                                    <CheckBox
-                                        Name="Thriller"
-                                        Grid.Row="11"
-                                        Grid.ColumnSpan="3"
-                                        Margin="20,0,0,5"
-                                        Content="Thriller" />
+                                    <ScrollViewer VerticalScrollBarVisibility="auto"
+                                                  Padding="0 30 0 30"
+                                                  Width="320"
+                                                  Grid.ColumnSpan="3">
+                                        <ItemsControl x:Name="GenreAGList"
+                                                      ItemsSource="{Binding Source={StaticResource GenreListCVS}}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal"
+                                                                Width="320">
+                                                        <CheckBox x:Name="genreCheckBox"
+                                                                  IsChecked="{Binding Checked, Mode=TwoWay}"
+                                                                  Margin="10 0 0 0" />
+                                                        <Label Content="{Binding Name}"
+                                                               Grid.ColumnSpan="3" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </ScrollViewer>
                                     <!--  CANCEL or ACCEPT buttons  -->
                                     <Button
                                         Grid.Row="50"
