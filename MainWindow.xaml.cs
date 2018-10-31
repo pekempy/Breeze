@@ -101,7 +101,7 @@ namespace GameLauncher
 
         private void PosterViewActive()
         {
-            //posterViewModel = new PosterViewModel();
+            posterViewModel = new PosterViewModel();
             posterViewModel.LoadGames();
             posterViewModel.LoadGenres();
             DataContext = posterViewModel;
