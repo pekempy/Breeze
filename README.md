@@ -1,4 +1,4 @@
-![Icon](https://i.imgur.com/DWaP66t.png)
+[![Icon](https://i.imgur.com/DWaP66t.png)](https://github.com/pekempy/Breeze/releases)]
 
 #### The Goal: 
 > To create a material design themed Game Launcher with multiple view types to display the games. The user can add all of their games and launch them from one central location. Supports .exe and .lnk (shortcuts). 
