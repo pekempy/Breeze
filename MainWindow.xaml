@@ -72,8 +72,8 @@
                         <TextBlock
                             Margin="20,0,0,0"
                             VerticalAlignment="Center"
-                            FontSize="20"
-                            FontWeight="SemiBold"
+                            FontSize="24"
+                            RenderOptions.EdgeMode="Aliased"
                             Text="Breeze" />
                         <!--  Top Right Overflow  -->
                         <materialDesign:PopupBox
