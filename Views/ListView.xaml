@@ -16,8 +16,7 @@
     <UserControl.Resources>
         <CollectionViewSource x:Key="GameListCVS"
                               Source="{Binding ListViewOC}"
-                              CollectionViewType="{x:Type dat:ListCollectionView}"
-                              Filter="GameSearch">
+                              CollectionViewType="{x:Type dat:ListCollectionView}">
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Title" />
             </CollectionViewSource.SortDescriptions>
@@ -31,10 +30,13 @@
         </CollectionViewSource>
     </UserControl.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <Button
+            Width="40"
+            Height="40"
+            Margin="0 -560 690 0"
+            Click="EnableFilteringCheat" 
+            Opacity="0"
+            Style="{StaticResource MaterialDesignFlatButton}"/>
         <!--  Search Bar  -->
         <materialDesign:ColorZone
             Grid.ColumnSpan="3"

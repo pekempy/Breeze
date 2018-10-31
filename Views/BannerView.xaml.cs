@@ -10,7 +10,9 @@ namespace GameLauncher.Views
 {
     public partial class BannerView : UserControl
     {
+        public static string FilterGenreName;
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
+        public CollectionViewSource GameListCVS;
 
         public BannerView()
         {
@@ -50,22 +52,60 @@ namespace GameLauncher.Views
             MainWindow.RefreshGames();
         }
 
+        //When text is changed in searchbar, apply filter
         private void SearchString_TextChanged(object sender, TextChangedEventArgs e)
         {
             RefreshList();
         }
 
-        private void RefreshList()
+        //Hacky method to set cvs in mainwindow on a hidden button
+        private void EnableFilteringCheat(object sender, RoutedEventArgs e)
         {
-            CollectionViewSource GameListCVS = (CollectionViewSource)FindResource("GameListCVS");
-            if (GameListCVS != null)
-                GameListCVS.View.Refresh();
+            GameListCVS = ((CollectionViewSource)(FindResource("GameListCVS")));
+            MainWindow.cvs = GameListCVS;
+            MainWindow.MenuToggleButton.IsChecked = true;
         }
 
+        //FILTERS GAMES BASED ON THE TITLE SEARCHED
         private void GameSearch(object sender, FilterEventArgs e)
         {
             GameList gl = e.Item as GameList;
             e.Accepted &= gl.Title.ToUpper().Contains(GameSearchBar.Text.ToUpper());
+        }
+
+        //FILTERS GAMES BASED ON THE GENRE SELECTED
+        public void GenreFilter(object sender, FilterEventArgs e)
+        {
+            GameList gl = e.Item as GameList;
+            e.Accepted &= gl.Genre.ToUpper().Contains(FilterGenreName.ToUpper());
+        }
+
+        //PULLS GENRENAME FROM MAINWINDOW
+        public void GenreToFilter(string filtergenrename)
+        {
+            //Set public variable for use in GenreFilter
+            FilterGenreName = filtergenrename;
+        }
+
+        //REFRESHES LIST AFTER SEARCH TEXT
+        public void RefreshList()
+        {
+            GameListCVS = ((CollectionViewSource)(FindResource("GameListCVS")));
+            MainWindow.cvs = GameListCVS;
+            if (FilterGenreName != null) { GameListCVS.Filter += new FilterEventHandler(GenreFilter); }
+            if (GameSearchBar.Text != null) { GameListCVS.Filter += new FilterEventHandler(GameSearch); }
+            if (GameListCVS.View != null) //This is getting a null "GameListCVS.View" on genre only, works if searchbar updated
+                GameListCVS.View.Refresh();
+        }
+
+        //REFRESHES LIST AFTER GENRE SELECTED
+        public void RefreshList2(CollectionViewSource cvscvs)
+        {
+            GameListCVS = cvscvs;
+            if (FilterGenreName != null) { GameListCVS.Filter += new FilterEventHandler(GenreFilter); }
+            if (GameSearchBar.Text != null) { GameListCVS.Filter += new FilterEventHandler(GameSearch); }
+            if (GameListCVS.View != null) //This is getting a null "GameListCVS.View" on genre only, works if searchbar updated
+                GameListCVS.View.Refresh();
         }
     }
 }

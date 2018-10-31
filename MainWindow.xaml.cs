@@ -18,8 +18,8 @@ namespace GameLauncher
         private ListViewModel listViewModel;
         private PosterViewModel posterViewModel;
         private SettingsViewModel settingsViewModel;
-        private PosterView pv = new PosterView();
-        private BannerView bv = new BannerView();
+        private Views.PosterView pv = new Views.PosterView();
+        private Views.BannerView bv = new Views.BannerView();
         private Views.ListView lv = new Views.ListView();
         public CollectionViewSource cvs;
 
@@ -61,6 +61,10 @@ namespace GameLauncher
             string genreToFilter = ((Button)sender).Tag.ToString();
             pv.GenreToFilter(genreToFilter);
             pv.RefreshList2(cvs);
+            bv.GenreToFilter(genreToFilter);
+            bv.RefreshList2(cvs);
+            lv.GenreToFilter(genreToFilter);
+            lv.RefreshList2(cvs);
             MenuToggleButton.IsChecked = false; //hide hamburger
         }
 
