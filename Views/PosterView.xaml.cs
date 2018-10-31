@@ -32,13 +32,6 @@ namespace GameLauncher.Views
             MainWindow.RefreshGames();
         }
 
-        private void EnableFiltering(object sender, RoutedEventArgs e)
-        {
-            GameListCVS = ((CollectionViewSource)(FindResource("GameListCVS")));
-            MainWindow.cvs = GameListCVS;
-            MainWindow.MenuToggleButton.IsChecked = true;
-        }
-
         private void GameLink_OnClick(object sender, RoutedEventArgs e)
         {
             object link = ((Button)sender).Tag;
@@ -47,19 +40,6 @@ namespace GameLauncher.Views
             if (linkstring != string.Empty)
             {
                 Process.Start(new ProcessStartInfo(linkstring));
-            }
-        }
-
-        private void GameSearch(object sender, FilterEventArgs e)
-        {
-            GameList gl = e.Item as GameList;
-            if (GameSearchBar == null)
-            {
-                return;
-            }
-            else
-            {
-                e.Accepted &= gl.Title.ToUpper().Contains(GameSearchBar.Text.ToUpper());
             }
         }
 
@@ -73,45 +53,58 @@ namespace GameLauncher.Views
             }
         }
 
+        //When text is changed in searchbar, apply filter
         private void SearchString_TextChanged(object sender, TextChangedEventArgs e)
         {
             RefreshList();
         }
 
+        //Hacky method to set cvs in mainwindow on a hidden button
+        private void EnableFilteringCheat(object sender, RoutedEventArgs e)
+        {
+            GameListCVS = ((CollectionViewSource)(FindResource("GameListCVS")));
+            MainWindow.cvs = GameListCVS;
+            MainWindow.MenuToggleButton.IsChecked = true;
+        }
+
+        //FILTERS GAMES BASED ON THE TITLE SEARCHED
+        private void GameSearch(object sender, FilterEventArgs e)
+        {
+            GameList gl = e.Item as GameList;
+            e.Accepted &= gl.Title.ToUpper().Contains(GameSearchBar.Text.ToUpper());
+        }
+
+        //FILTERS GAMES BASED ON THE GENRE SELECTED
         public void GenreFilter(object sender, FilterEventArgs e)
         {
             GameList gl = e.Item as GameList;
-            if (FilterGenreName == null)
-            {
-                return;
-            }
-            else
-            {
-                e.Accepted &= gl.Genre.ToUpper().Contains(FilterGenreName.ToUpper());
-            }
+            e.Accepted &= gl.Genre.ToUpper().Contains(FilterGenreName.ToUpper());
         }
 
+        //PULLS GENRENAME FROM MAINWINDOW
         public void GenreToFilter(string filtergenrename)
         {
             //Set public variable for use in GenreFilter
             FilterGenreName = filtergenrename;
         }
 
+        //REFRESHES LIST AFTER SEARCH TEXT
         public void RefreshList()
         {
             GameListCVS = ((CollectionViewSource)(FindResource("GameListCVS")));
             MainWindow.cvs = GameListCVS;
-            GameListCVS.Filter += new FilterEventHandler(GenreFilter);
-            GameListCVS.Filter += new FilterEventHandler(GameSearch);
+            if (FilterGenreName != null) { GameListCVS.Filter += new FilterEventHandler(GenreFilter); }
+            if (GameSearchBar.Text != null) { GameListCVS.Filter += new FilterEventHandler(GameSearch); }
             if (GameListCVS.View != null) //This is getting a null "GameListCVS.View" on genre only, works if searchbar updated
                 GameListCVS.View.Refresh();
         }
 
+        //REFRESHES LIST AFTER GENRE SELECTED
         public void RefreshList2(CollectionViewSource cvscvs)
         {
             GameListCVS = cvscvs;
-            GameListCVS.Filter += new FilterEventHandler(GenreFilter);
-            GameListCVS.Filter += new FilterEventHandler(GameSearch);
+            if (FilterGenreName != null) { GameListCVS.Filter += new FilterEventHandler(GenreFilter); }
+            if (GameSearchBar.Text != null) { GameListCVS.Filter += new FilterEventHandler(GameSearch); }
             if (GameListCVS.View != null) //This is getting a null "GameListCVS.View" on genre only, works if searchbar updated
                 GameListCVS.View.Refresh();
         }
