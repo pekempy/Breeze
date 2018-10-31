@@ -12,6 +12,8 @@ This isn't designed to be a competitor to steam, or any other game launcher. I j
 > User can change the theme to dark theme
 
 > User can filter from the sidebar
+ 
+> User can add and remove their own genres to categorise to their liking (90%)
 
 #### Planned updates:
 - Changing primary/accent colour from settings menu (MDIX 2.6.0)
