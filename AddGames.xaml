@@ -28,7 +28,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <CollectionViewSource x:Key="GenreListCVS"
-                              Source="{Binding GenreListOC}"
+                              Source="{Binding GenreListOC, Mode=TwoWay}"
                               CollectionViewType="{x:Type dat:ListCollectionView}">
                 <CollectionViewSource.SortDescriptions>
                     <scm:SortDescription PropertyName="Name" />
@@ -172,10 +172,10 @@
                                                                 VerticalAlignment="Center">
                                                         <CheckBox x:Name="genreCheckBox"
                                                                   IsChecked="{Binding Checked, Mode=TwoWay}"
-                                                                  Margin="10 0 0 0" />
-                                                        <Label Content="{Binding Name}"
-                                                               Grid.ColumnSpan="3"
-                                                               MinWidth=" 100" />
+                                                                  Margin="10 0 10 0"
+                                                                  Height="25"
+                                                                  Width="100"
+                                                                  Content="{Binding Name}" />
                                                     </StackPanel>
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>

@@ -13,6 +13,8 @@ namespace GameLauncher
 {
     public partial class AddGames : Page
     {
+        private LoadAllGames lag = new LoadAllGames();
+
         public AddGames()
         {
             InitializeComponent();
@@ -76,7 +78,6 @@ namespace GameLauncher
             //New way - Check what elements "Checked" = true in binding GenreList
             //Write out "Name" of each element into NewGameGenre.Text
             string genrePlaceHolder = null;
-
             //if (Action.IsChecked == true) { genrePlaceHolder += "Action "; }
             //if (Adventure.IsChecked == true) { genrePlaceHolder += "Adventure "; }
             //if (Fantasy.IsChecked == true) { genrePlaceHolder += "Fantasy "; }
