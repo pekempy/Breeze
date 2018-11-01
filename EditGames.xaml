@@ -191,6 +191,15 @@
                                         Content="CANCEL"
                                         IsDefault="False"
                                         Style="{DynamicResource MaterialDesignFlatButton}" />
+                                    <Button Click="CheckGenreBoxes"
+                                        Grid.Row="0"
+                                        Grid.ColumnSpan="3"
+                                        Margin="10,10,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                            Style="{DynamicResource MaterialDesignFlatAccentButton}">
+                                        <materialDesign:PackIcon Kind="Refresh" />
+                                    </Button>
                                     <Button
                                         Grid.Row="50"
                                         Grid.Column="2"

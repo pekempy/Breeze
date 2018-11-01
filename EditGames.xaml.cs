@@ -100,7 +100,8 @@ namespace GameLauncher
             ClearGenreBoxes();
         }
 
-        private void CheckGenreBoxes()
+        //CheckGenreBoxes currently linked to a button - NEED THIS TO BE AUTO WHEN DIALOG OPENS
+        private void CheckGenreBoxes(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < GenreAGList.Items.Count; i++)
             {
@@ -108,7 +109,7 @@ namespace GameLauncher
                 if (c != null)
                 {
                     CheckBox cb = c.ContentTemplate.FindName("genreCheckBox", c) as CheckBox;
-                    if (EditGenre.Text == cb.Name)
+                    if (EditGenre.Text.Contains(cb.Content.ToString()))
                     {
                         cb.IsChecked = true;
                     }
