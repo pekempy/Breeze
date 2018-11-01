@@ -1,9 +1,13 @@
-﻿using GameLauncher.ViewModels;
+﻿using GameLauncher.Models;
+using GameLauncher.ViewModels;
 using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections.ObjectModel;
+using System.Linq;
+using GameLauncher.Views;
 
 namespace GameLauncher
 {
@@ -71,8 +75,8 @@ namespace GameLauncher
         {
             //New way - Check what elements "Checked" = true in binding GenreList
             //Write out "Name" of each element into NewGameGenre.Text
-
             string genrePlaceHolder = null;
+
             //if (Action.IsChecked == true) { genrePlaceHolder += "Action "; }
             //if (Adventure.IsChecked == true) { genrePlaceHolder += "Adventure "; }
             //if (Fantasy.IsChecked == true) { genrePlaceHolder += "Fantasy "; }

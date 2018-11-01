@@ -51,10 +51,11 @@
         <Button
             Width="40"
             Height="40"
-            Margin="0 -130 170 0"
+            Margin="25 -50 0 0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
             Click="EnableFilteringCheat"
-            Opacity="0"
-            Style="{StaticResource MaterialDesignFlatButton}" />
+            Opacity="0" />
         <materialDesign:ColorZone
                             MaxHeight="60"
                             Margin="0,-60,70,58"
