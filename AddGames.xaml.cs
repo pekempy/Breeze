@@ -53,11 +53,13 @@ namespace GameLauncher
 
             clearFields();
             ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
+            ClearGenreBoxes();
             AddGameDialog.IsOpen = false;
         }
 
         private void CancelAddGame_OnClick(object sender, RoutedEventArgs e)
         {
+            ClearGenreBoxes();
             AddGameDialog.IsOpen = false;
             clearFields();
         }
@@ -75,20 +77,18 @@ namespace GameLauncher
 
         private void AddGenre_OnClick(object sender, RoutedEventArgs e)
         {
-            //New way - Check what elements "Checked" = true in binding GenreList
-            //Write out "Name" of each element into NewGameGenre.Text
             string genrePlaceHolder = null;
-            //if (Action.IsChecked == true) { genrePlaceHolder += "Action "; }
-            //if (Adventure.IsChecked == true) { genrePlaceHolder += "Adventure "; }
-            //if (Fantasy.IsChecked == true) { genrePlaceHolder += "Fantasy "; }
-            //if (FPS.IsChecked == true) { genrePlaceHolder += "FPS "; }
-            //if (Horror.IsChecked == true) { genrePlaceHolder += "Horror "; }
-            //if (OpenWorld.IsChecked == true) { genrePlaceHolder += "Open-World "; }
-            //if (Platform.IsChecked == true) { genrePlaceHolder += "Platform "; }
-            //if (RolePlaying.IsChecked == true) { genrePlaceHolder += "Role-Playing "; }
-            //if (Shooter.IsChecked == true) { genrePlaceHolder += "Shooter "; }
-            //if (Simulation.IsChecked == true) { genrePlaceHolder += "Simulation "; }
-            //if (Thriller.IsChecked == true) { genrePlaceHolder += "Thriller "; }
+            //Check the itemscontrol and for each checked item, add it to the list
+            for (int i = 0; i < GenreAGList.Items.Count; i++)
+            {
+                ContentPresenter c = (ContentPresenter)GenreAGList.ItemContainerGenerator.ContainerFromItem(GenreAGList.Items[i]);
+                CheckBox cb = c.ContentTemplate.FindName("genreCheckBox", c) as CheckBox;
+                if (cb.IsChecked.Value)
+                {
+                    genrePlaceHolder += cb.Content.ToString() + " ";
+                }
+            }
+
             if (genrePlaceHolder != null)
             {
                 genrePlaceHolder = genrePlaceHolder.Replace(" ", "; ");
@@ -96,7 +96,6 @@ namespace GameLauncher
                 genrePlaceHolder = genrePlaceHolder.TrimEnd(';');
             }
             NewGameGenre.Text = genrePlaceHolder;
-            ClearGenreBoxes();
             return;
         }
 
@@ -107,19 +106,15 @@ namespace GameLauncher
 
         private void ClearGenreBoxes()
         {
-            //Not sure if this even needed since it's done w/ binding now
-
-            //Action.IsChecked = false;
-            //Adventure.IsChecked = false;
-            //Fantasy.IsChecked = false;
-            //FPS.IsChecked = false;
-            //Horror.IsChecked = false;
-            //OpenWorld.IsChecked = false;
-            //Platform.IsChecked = false;
-            //RolePlaying.IsChecked = false;
-            //Shooter.IsChecked = false;
-            //Simulation.IsChecked = false;
-            //Thriller.IsChecked = false;
+            for (int i = 0; i < GenreAGList.Items.Count; i++)
+            {
+                ContentPresenter c = (ContentPresenter)GenreAGList.ItemContainerGenerator.ContainerFromItem(GenreAGList.Items[i]);
+                CheckBox cb = c.ContentTemplate.FindName("genreCheckBox", c) as CheckBox;
+                if (cb.IsChecked.Value)
+                {
+                    cb.IsChecked = false;
+                }
+            }
         }
 
         private void AttachLauncher_OnClick(object sender, RoutedEventArgs e)
