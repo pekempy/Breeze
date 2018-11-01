@@ -136,24 +136,10 @@
                             <Button.CommandParameter>
 
                                 <Grid
-                                    Width="Auto"
-                                    Height="Auto"
-                                    MinWidth="200"
-                                    MinHeight="200">
+                                    Width="270"
+                                    Height="330">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3*" />
@@ -184,10 +170,10 @@
                                                                 VerticalAlignment="Center">
                                                         <CheckBox x:Name="genreCheckBox"
                                                                   IsChecked="{Binding Checked, Mode=TwoWay}"
-                                                                  Margin="10 0 0 0" />
-                                                        <Label Content="{Binding Name}"
-                                                               Grid.ColumnSpan="3"
-                                                               MinWidth=" 100" />
+                                                                  Margin="10 0 10 0"
+                                                                  Height="25"
+                                                                  Width="100"
+                                                                  Content="{Binding Name}" />
                                                     </StackPanel>
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
