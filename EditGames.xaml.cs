@@ -73,17 +73,17 @@ namespace GameLauncher
         private void EditGenre_OnClick(object sender, RoutedEventArgs e)
         {
             string genrePlaceHolder = null;
-            if (Action.IsChecked == true) { genrePlaceHolder += "Action "; }
-            if (Adventure.IsChecked == true) { genrePlaceHolder += "Adventure "; }
-            if (Fantasy.IsChecked == true) { genrePlaceHolder += "Fantasy "; }
-            if (FPS.IsChecked == true) { genrePlaceHolder += "FPS "; }
-            if (Horror.IsChecked == true) { genrePlaceHolder += "Horror "; }
-            if (OpenWorld.IsChecked == true) { genrePlaceHolder += "Open-World "; }
-            if (Platform.IsChecked == true) { genrePlaceHolder += "Platform "; }
-            if (RolePlaying.IsChecked == true) { genrePlaceHolder += "Role-Playing "; }
-            if (Shooter.IsChecked == true) { genrePlaceHolder += "Shooter "; }
-            if (Simulation.IsChecked == true) { genrePlaceHolder += "Simulation "; }
-            if (Thriller.IsChecked == true) { genrePlaceHolder += "Thriller "; }
+            //if (Action.IsChecked == true) { genrePlaceHolder += "Action "; }
+            //if (Adventure.IsChecked == true) { genrePlaceHolder += "Adventure "; }
+            //if (Fantasy.IsChecked == true) { genrePlaceHolder += "Fantasy "; }
+            //if (FPS.IsChecked == true) { genrePlaceHolder += "FPS "; }
+            //if (Horror.IsChecked == true) { genrePlaceHolder += "Horror "; }
+            //if (OpenWorld.IsChecked == true) { genrePlaceHolder += "Open-World "; }
+            //if (Platform.IsChecked == true) { genrePlaceHolder += "Platform "; }
+            //if (RolePlaying.IsChecked == true) { genrePlaceHolder += "Role-Playing "; }
+            //if (Shooter.IsChecked == true) { genrePlaceHolder += "Shooter "; }
+            //if (Simulation.IsChecked == true) { genrePlaceHolder += "Simulation "; }
+            //if (Thriller.IsChecked == true) { genrePlaceHolder += "Thriller "; }
             if (genrePlaceHolder != null)
             {
                 genrePlaceHolder = genrePlaceHolder.Replace(" ", "; ");
@@ -102,17 +102,17 @@ namespace GameLauncher
 
         private void ClearGenreBoxes()
         {
-            Action.IsChecked = false;
-            Adventure.IsChecked = false;
-            Fantasy.IsChecked = false;
-            FPS.IsChecked = false;
-            Horror.IsChecked = false;
-            OpenWorld.IsChecked = false;
-            Platform.IsChecked = false;
-            RolePlaying.IsChecked = false;
-            Shooter.IsChecked = false;
-            Simulation.IsChecked = false;
-            Thriller.IsChecked = false;
+            //    Action.IsChecked = false;
+            //    Adventure.IsChecked = false;
+            //    Fantasy.IsChecked = false;
+            //    FPS.IsChecked = false;
+            //    Horror.IsChecked = false;
+            //    OpenWorld.IsChecked = false;
+            //    Platform.IsChecked = false;
+            //    RolePlaying.IsChecked = false;
+            //    Shooter.IsChecked = false;
+            //    Simulation.IsChecked = false;
+            //    Thriller.IsChecked = false;
         }
 
         private void AttachLauncher_OnClick(object sender, RoutedEventArgs e)

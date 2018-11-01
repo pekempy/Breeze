@@ -7,12 +7,12 @@
     xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
     Title="Game Launcher"
     d:DesignHeight="450"
     d:DesignWidth="800"
     d:DataContext="{d:DesignInstance Type=ViewModels:SettingsViewModel}"
     xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
     FontFamily="{StaticResource MaterialDesignFont}"
     TextElement.FontSize="13"
     TextElement.FontWeight="Regular"
@@ -156,7 +156,6 @@
                                         VerticalAlignment="Top"
                                         FontSize="20"
                                         Text="Pick your genre(s)" />
-                                    <!--  Genres are hardcoded in  -->
                                     <ScrollViewer VerticalScrollBarVisibility="auto"
                                                   Margin="0 40 0 30"
                                                   Grid.ColumnSpan="3">
