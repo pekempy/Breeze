@@ -183,8 +183,9 @@
                                     <Button
                                         Grid.Row="50"
                                         Grid.Column="0"
-                                        Margin="10,0,0,10"
-                                        HorizontalAlignment="Left"
+                                        Width="140"
+                                        Margin="10 10 0 5"
+                                        HorizontalAlignment="Center"
                                         VerticalAlignment="Bottom"
                                         Click="ClearGenreSelection_OnClick"
                                         Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
@@ -203,8 +204,9 @@
                                     <Button
                                         Grid.Row="50"
                                         Grid.Column="2"
-                                        Margin="0,0,10,10"
-                                        HorizontalAlignment="Right"
+                                        Width="140"
+                                        Margin="0 10 10 5"
+                                        HorizontalAlignment="Center"
                                         VerticalAlignment="Bottom"
                                         Click="EditGenre_OnClick"
                                         Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
