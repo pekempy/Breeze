@@ -1,4 +1,5 @@
 ﻿using GameLauncher.ViewModels;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using System;
 using System.IO;
@@ -14,7 +15,6 @@ namespace GameLauncher
         public EditGames()
         {
             InitializeComponent();
-            EditGenre.Text = "";
         }
 
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
@@ -98,6 +98,22 @@ namespace GameLauncher
         private void ClearGenreSelection_OnClick(object sender, RoutedEventArgs e)
         {
             ClearGenreBoxes();
+        }
+
+        private void CheckGenreBoxes()
+        {
+            for (int i = 0; i < GenreAGList.Items.Count; i++)
+            {
+                ContentPresenter c = (ContentPresenter)GenreAGList.ItemContainerGenerator.ContainerFromItem(GenreAGList.Items[i]);
+                if (c != null)
+                {
+                    CheckBox cb = c.ContentTemplate.FindName("genreCheckBox", c) as CheckBox;
+                    if (EditGenre.Text == cb.Name)
+                    {
+                        cb.IsChecked = true;
+                    }
+                }
+            }
         }
 
         private void ClearGenreBoxes()
