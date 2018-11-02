@@ -5,19 +5,17 @@
 This isn't designed to be a competitor to steam, or any other game launcher. I just struggled to find a material designed themed launcher that was customisable for me.
 
 #### Current features: 
-> Users can add games manually, and they will be displayed on all views
+> Add, Edit, and Delete your games to the program and view them in 3 different ways
 
-> Users can delete games, and edit existing games
+> Customise genres to your liking and categorise games *your* way
 
-> User can change the theme to dark theme
+> Filter by title or genre
 
-> User can filter from the sidebar
- 
-> User can add and remove their own genres to categorise to their liking
+> Switch the theme to a dark theme
 
 #### Planned updates:
-- Changing primary/accent colour from settings menu (MDIX 2.6.0)
-- Scraping images and user can select which to download
+- Changing primary/accent colour from settings menu (waiting for MDIX 2.6.0)
+- Built in browser to find images for each of the views and download them easier
 
 
 © 2018 [Peter Kemp](https://github.com/Pekempy) & [John Campbell](https://github.com/JohnSandshrew) 
