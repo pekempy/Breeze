@@ -1,4 +1,4 @@
-![Icon](https://i.imgur.com/DWaP66t.png)
+[![Icon](https://i.imgur.com/DWaP66t.png)](https://github.com/pekempy/Breeze/releases)
 
 #### The Goal: 
 > To create a material design themed Game Launcher with multiple view types to display the games. The user can add all of their games and launch them from one central location. Supports .exe and .lnk (shortcuts). 
@@ -13,7 +13,7 @@ This isn't designed to be a competitor to steam, or any other game launcher. I j
 
 > User can filter from the sidebar
  
-> User can add and remove their own genres to categorise to their liking (90%)
+> User can add and remove their own genres to categorise to their liking
 
 #### Planned updates:
 - Changing primary/accent colour from settings menu (MDIX 2.6.0)
