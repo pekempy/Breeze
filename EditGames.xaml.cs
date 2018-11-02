@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace GameLauncher
 {
@@ -113,6 +114,10 @@ namespace GameLauncher
                     {
                         cb.IsChecked = true;
                     }
+                    else if (!EditGenre.Text.Contains(cb.Content.ToString()))
+                    {
+                        cb.IsChecked = false;
+                    }
                 }
             }
         }
@@ -189,7 +194,7 @@ namespace GameLauncher
             }
         }
 
-        public void currentGuid(String currentGuid)
+        public void currentGuid(string currentGuid)
         {
             guid = currentGuid;
         }

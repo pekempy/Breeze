@@ -134,7 +134,6 @@
                                 VerticalAlignment="Center"
                                 Kind="DotsHorizontal" />
                             <Button.CommandParameter>
-
                                 <Grid
                                     Width="270"
                                     Height="330">
