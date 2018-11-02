@@ -58,6 +58,8 @@ namespace GameLauncher
 
         private void ApplyGenreFilter_OnClick(object sender, RoutedEventArgs e)
         {
+            if (DataContext == settingsViewModel)
+                DataContext = posterViewModel;
             string genreToFilter = ((Button)sender).Tag.ToString();
             pv.GenreToFilter(genreToFilter);
             pv.RefreshList2(cvs);
