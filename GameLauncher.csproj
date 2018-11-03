@@ -203,12 +203,6 @@
   <ItemGroup>
     <Resource Include="breeze.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\GenreList.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\GamesList.txt" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
