@@ -109,6 +109,7 @@ namespace GameLauncher
             for (int i = 0; i < GenreAGList.Items.Count; i++)
             {
                 ContentPresenter c = (ContentPresenter)GenreAGList.ItemContainerGenerator.ContainerFromItem(GenreAGList.Items[i]);
+                c.ApplyTemplate();
                 if (c != null)
                 {
                     CheckBox cb = c.ContentTemplate.FindName("genreCheckBox", c) as CheckBox;
