@@ -75,25 +75,9 @@ namespace GameLauncher
             BannerViewActive();
         }
 
-        private void BannerViewActive()
-        {
-            bannerViewModel = new BannerViewModel();
-            bannerViewModel.LoadGames();
-            bannerViewModel.LoadGenres();
-            DataContext = bannerViewModel;
-        }
-
         private void ListButton_OnClick(object sender, RoutedEventArgs e)
         {
             ListViewActive();
-        }
-
-        private void ListViewActive()
-        {
-            listViewModel = new ListViewModel();
-            listViewModel.LoadGames();
-            listViewModel.LoadGenres();
-            DataContext = listViewModel;
         }
 
         private void PosterButton_OnClick(object sender, RoutedEventArgs e)
@@ -101,11 +85,36 @@ namespace GameLauncher
             PosterViewActive();
         }
 
+        private void BannerViewActive()
+        {
+            if (bannerViewModel == null)
+            {
+                bannerViewModel = new BannerViewModel();
+                bannerViewModel.LoadGames();
+                bannerViewModel.LoadGenres();
+            }
+            DataContext = bannerViewModel;
+        }
+
+        private void ListViewActive()
+        {
+            if (listViewModel == null)
+            {
+                listViewModel = new ListViewModel();
+                listViewModel.LoadGames();
+                listViewModel.LoadGenres();
+            }
+            DataContext = listViewModel;
+        }
+
         private void PosterViewActive()
         {
-            posterViewModel = new PosterViewModel();
-            posterViewModel.LoadGames();
-            posterViewModel.LoadGenres();
+            if (posterViewModel == null)
+            {
+                posterViewModel = new PosterViewModel();
+                posterViewModel.LoadGames();
+                posterViewModel.LoadGenres();
+            }
             DataContext = posterViewModel;
         }
 
@@ -129,7 +138,10 @@ namespace GameLauncher
 
         private void RefreshGames_OnClick(object sender, RoutedEventArgs e)
         {
-            RefreshGames();
+            //RefreshGames();
+            if (DataContext == posterViewModel) { posterViewModel.LoadList(); }
+            if (DataContext == bannerViewModel) { bannerViewModel.LoadList(); }
+            if (DataContext == listViewModel) { listViewModel.LoadList(); }
         }
 
         public void RefreshGames()

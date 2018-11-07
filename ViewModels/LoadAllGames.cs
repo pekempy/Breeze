@@ -12,10 +12,11 @@ namespace GameLauncher.ViewModels
     {
         public ObservableCollection<GameList> Games { get; set; }
         public ObservableCollection<GenreList> Genres { get; set; }
+        private ObservableCollection<GameList> games = new ObservableCollection<GameList>();
+        private ObservableCollection<GenreList> genres = new ObservableCollection<GenreList>();
 
         public void LoadGames()
         {
-            ObservableCollection<GameList> games = new ObservableCollection<GameList>();
             if (File.Exists("./Resources/GamesList.txt"))
             {
                 //Read file to gameFile
@@ -47,7 +48,6 @@ namespace GameLauncher.ViewModels
 
         public void LoadGenres()
         {
-            ObservableCollection<GenreList> genres = new ObservableCollection<GenreList>();
             if (File.Exists("./Resources/GenreList.txt"))
             {
                 string genreFile = "./Resources/GenreList.txt";
@@ -67,6 +67,14 @@ namespace GameLauncher.ViewModels
                 }
             }
             Genres = genres;
+        }
+
+        public void ObservableList()
+        {
+            for (int i = 0; i < Games.Count; i++)
+            {
+                Console.WriteLine(string.Concat(Games[i].Title, " | ", Games[i].Genre));
+            }
         }
     }
 }

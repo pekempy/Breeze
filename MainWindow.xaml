@@ -154,7 +154,7 @@
                         Margin="16"
                         HorizontalAlignment="Right"
                         DockPanel.Dock="Top"
-                        IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
+                        IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay, FallbackValue='Missing element'}"
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
                     <StackPanel Orientation="Vertical">
                         <Button Style="{StaticResource MaterialDesignFlatButton}"

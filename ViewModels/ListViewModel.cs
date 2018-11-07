@@ -1,4 +1,5 @@
 ﻿using GameLauncher.Models;
+using System;
 using System.Collections.ObjectModel;
 
 namespace GameLauncher.ViewModels
@@ -19,6 +20,14 @@ namespace GameLauncher.ViewModels
         {
             lag.LoadGenres();
             GenreListOC = lag.Genres;
+        }
+
+        public void LoadList()
+        {
+            for (int i = 0; i < ListViewOC.Count; i++)
+            {
+                Console.WriteLine(string.Concat(ListViewOC[i].Title, " | ", ListViewOC[i].Genre, "|", ListViewOC[i].Path));
+            }
         }
     }
 }
