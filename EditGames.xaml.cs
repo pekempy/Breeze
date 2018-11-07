@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using IWshRuntimeLibrary;
 
 namespace GameLauncher
 {
@@ -151,8 +152,16 @@ namespace GameLauncher
             if (dialogResult == true)
             {
                 string ngLauncherFile = fileDialog.FileName;
+                CreateShortcutForLauncher(ngLauncherFile);
                 EditPath.Text = ngLauncherFile;
             }
+        }
+
+        public string ngLauncherShortcut;
+
+        private void CreateShortcutForLauncher(string inputFile)
+        {
+            ngLauncherShortcut = inputFile;
         }
 
         private void AttachIcon_OnClick(object sender, RoutedEventArgs e)
@@ -165,8 +174,8 @@ namespace GameLauncher
             if (dialogResult == true)
             {
                 string ngIconFile = fileDialog.FileName;
-                //File.Copy(ngIconFile, @"./Resources/img/" + NewGameTitle.Text + "-icon.png");
-                //NewGameIcon.Text = @"./Resources/img/" + NewGameTitle.Text + "-icon.png";
+                //File.Copy(ngIconFile, @"./Resources/img/" + EditTitle.Text + "-icon.png");
+                //NewGameIcon.Text = @"./Resources/img/" + EditTitle.Text + "-icon.png";
                 EditIcon.Text = ngIconFile;
             }
         }
@@ -181,8 +190,8 @@ namespace GameLauncher
             if (dialogResult == true)
             {
                 string ngPosterFile = fileDialog.FileName;
-                //File.Copy(ngIconFile, @"./Resources/img/" + NewGameTitle.Text + "-poster.png");
-                //NewGameIcon.Text = @"./Resources/img/" + NewGameTitle.Text + "-poster.png";
+                //File.Copy(ngIconFile, @"./Resources/img/" + EditTitle.Text + "-poster.png");
+                //NewGameIcon.Text = @"./Resources/img/" + EditTitle.Text + "-poster.png";
                 EditPoster.Text = ngPosterFile;
             }
         }
@@ -197,8 +206,8 @@ namespace GameLauncher
             if (dialogResult == true)
             {
                 string ngBannerFile = fileDialog.FileName;
-                //File.Copy(ngIconFile, @"./Resources/img/" + NewGameTitle.Text + "-banner.png");
-                //NewGameIcon.Text = @"./Resources/img/" + NewGameTitle.Text + "-banner.png";
+                //File.Copy(ngIconFile, @"./Resources/img/" + EditTitle.Text + "-banner.png");
+                //NewGameIcon.Text = @"./Resources/img/" + EditTitle.Text + "-banner.png";
                 EditBanner.Text = ngBannerFile;
             }
         }
