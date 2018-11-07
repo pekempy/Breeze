@@ -165,6 +165,8 @@ namespace GameLauncher
             if (dialogResult == true)
             {
                 string ngIconFile = fileDialog.FileName;
+                //File.Copy(ngIconFile, @"./Resources/img/" + NewGameTitle.Text + "-icon.png");
+                //NewGameIcon.Text = @"./Resources/img/" + NewGameTitle.Text + "-icon.png";
                 EditIcon.Text = ngIconFile;
             }
         }
@@ -179,6 +181,8 @@ namespace GameLauncher
             if (dialogResult == true)
             {
                 string ngPosterFile = fileDialog.FileName;
+                //File.Copy(ngIconFile, @"./Resources/img/" + NewGameTitle.Text + "-poster.png");
+                //NewGameIcon.Text = @"./Resources/img/" + NewGameTitle.Text + "-poster.png";
                 EditPoster.Text = ngPosterFile;
             }
         }
@@ -193,6 +197,8 @@ namespace GameLauncher
             if (dialogResult == true)
             {
                 string ngBannerFile = fileDialog.FileName;
+                //File.Copy(ngIconFile, @"./Resources/img/" + NewGameTitle.Text + "-banner.png");
+                //NewGameIcon.Text = @"./Resources/img/" + NewGameTitle.Text + "-banner.png";
                 EditBanner.Text = ngBannerFile;
             }
         }

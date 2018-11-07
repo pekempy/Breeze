@@ -35,6 +35,8 @@ namespace GameLauncher
             //Write all the fields to the text file
             try
             {
+                //string NewGameIconRelative = NewGameIcon.Text.Trim();
+                //Console.WriteLine(NewGameIconRelative);
                 TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
                 tsw.WriteLine(NewGameTitle.Text + "|" +
                               NewGameGenre.Text + "|" +
@@ -145,6 +147,8 @@ namespace GameLauncher
             if (dialogResult == true)
             {
                 string ngIconFile = fileDialog.FileName;
+                //File.Copy(ngIconFile, @"./Resources/img/" + NewGameTitle.Text + "-icon.png");
+                //NewGameIcon.Text = @"./Resources/img/" + NewGameTitle.Text + "-icon.png";
                 NewGameIcon.Text = ngIconFile;
             }
         }
@@ -159,6 +163,8 @@ namespace GameLauncher
             if (dialogResult == true)
             {
                 string ngPosterFile = fileDialog.FileName;
+                //File.Copy(ngIconFile, @"./Resources/img/" + NewGameTitle.Text + "-poster.png");
+                //NewGameIcon.Text = @"./Resources/img/" + NewGameTitle.Text + "-poster.png";
                 NewGamePoster.Text = ngPosterFile;
             }
         }
@@ -173,6 +179,8 @@ namespace GameLauncher
             if (dialogResult == true)
             {
                 string ngBannerFile = fileDialog.FileName;
+                //File.Copy(ngIconFile, @"./Resources/img/" + NewGameTitle.Text + "-banner.png");
+                //NewGameIcon.Text = @"./Resources/img/" + NewGameTitle.Text + "-banner.png";
                 NewGameBanner.Text = ngBannerFile;
             }
         }
