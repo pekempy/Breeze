@@ -28,8 +28,14 @@ namespace GameLauncher
             LoadSettings();
             InitializeComponent();
             posterViewModel = new PosterViewModel();
+            bannerViewModel = new BannerViewModel();
+            listViewModel = new ListViewModel();
             posterViewModel.LoadGames();
             posterViewModel.LoadGenres();
+            bannerViewModel.LoadGames();
+            bannerViewModel.LoadGenres();
+            listViewModel.LoadGames();
+            listViewModel.LoadGenres();
             DataContext = posterViewModel;
 
             //If games list doesn't exist, create directory and open ag dialog
@@ -62,6 +68,7 @@ namespace GameLauncher
             DialogEditGames.EditGameDialog.IsOpen = true;
         }
 
+        //Apply the selected genre filter
         private void ApplyGenreFilter_OnClick(object sender, RoutedEventArgs e)
         {
             if (DataContext == settingsViewModel)
@@ -76,6 +83,7 @@ namespace GameLauncher
             MenuToggleButton.IsChecked = false; //hide hamburger
         }
 
+        //Poster button
         private void PosterButton_OnClick(object sender, RoutedEventArgs e)
         {
             PosterViewActive();
@@ -83,15 +91,10 @@ namespace GameLauncher
 
         private void PosterViewActive()
         {
-            if (posterViewModel == null)
-            {
-                posterViewModel = new PosterViewModel();
-                posterViewModel.LoadGames();
-                posterViewModel.LoadGenres();
-            }
             DataContext = posterViewModel;
         }
 
+        //Banner button
         private void BannerButton_OnClick(object sender, RoutedEventArgs e)
         {
             BannerViewActive();
@@ -99,31 +102,21 @@ namespace GameLauncher
 
         private void BannerViewActive()
         {
-            if (bannerViewModel == null)
-            {
-                bannerViewModel = new BannerViewModel();
-                bannerViewModel.LoadGames();
-                bannerViewModel.LoadGenres();
-            }
             DataContext = bannerViewModel;
         }
 
-        private void ListViewActive()
-        {
-            if (listViewModel == null)
-            {
-                listViewModel = new ListViewModel();
-                listViewModel.LoadGames();
-                listViewModel.LoadGenres();
-            }
-            DataContext = listViewModel;
-        }
-
+        //List button
         private void ListButton_OnClick(object sender, RoutedEventArgs e)
         {
             ListViewActive();
         }
 
+        private void ListViewActive()
+        {
+            DataContext = listViewModel;
+        }
+
+        //Settings button
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
         {
             SettingsViewActive();
@@ -136,6 +129,7 @@ namespace GameLauncher
             DataContext = settingsViewModel;
         }
 
+        //Refresh button
         private void RefreshGames_OnClick(object sender, RoutedEventArgs e)
         {
             //RefreshGames();
@@ -172,6 +166,7 @@ namespace GameLauncher
             }
         }
 
+        //Load settings
         public void LoadSettings()
         {
             //Theme Light or Dark
