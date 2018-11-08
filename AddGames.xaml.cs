@@ -38,6 +38,7 @@ namespace GameLauncher
                 //string NewGameIconRelative = NewGameIcon.Text.Trim();
                 //Console.WriteLine(NewGameIconRelative);
                 TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
+                Guid gameGuid = Guid.NewGuid();
                 tsw.WriteLine(NewGameTitle.Text + "|" +
                               NewGameGenre.Text + "|" +
                               NewGamePath.Text + "|" +
@@ -45,14 +46,13 @@ namespace GameLauncher
                               NewGameIcon.Text + "|" +
                               NewGamePoster.Text + "|" +
                               NewGameBanner.Text + "|" +
-                              Guid.NewGuid());
+                              gameGuid);
                 tsw.Close();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Exception: " + ex.Message);
             }
-
             clearFields();
             ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
             ClearGenreBoxes();

@@ -17,32 +17,7 @@ namespace GameLauncher.ViewModels
 
         public void LoadGames()
         {
-            if (File.Exists("./Resources/GamesList.txt"))
-            {
-                //Read file to gameFile
-                string gameFile = "./Resources/GamesList.txt";
-                //gamesArr is array containing all game info per item
-                string[] gamesArr = File.ReadAllLines(gameFile);
-                //columns is array containing each element of particular game
-                string[] columns = new string[0];
-                int numberOfGames = 0;
-                foreach (var item in gamesArr)
-                {
-                    columns = gamesArr[numberOfGames].Split('|');
-                    games.Add(new GameList
-                    {
-                        Title = columns[0],
-                        Genre = columns[1],
-                        Path = columns[2],
-                        Link = columns[3],
-                        Icon = columns[4],
-                        Poster = columns[5],
-                        Banner = columns[6],
-                        Guid = columns[7]
-                    });
-                    numberOfGames++;
-                }
-            }
+            ReadFile(); //A new method to manually read the file
             Games = games;
         }
 
@@ -69,7 +44,37 @@ namespace GameLauncher.ViewModels
             Genres = genres;
         }
 
-        public void ObservableList()
+        public void ReadFile()
+        {
+            if (File.Exists("./Resources/GamesList.txt"))
+            {
+                //Read file to gameFile
+                string gameFile = "./Resources/GamesList.txt";
+                //gamesArr is array containing all game info per item
+                string[] gamesArr = File.ReadAllLines(gameFile);
+                //columns is array containing each element of particular game
+                string[] columns = new string[0];
+                int numberOfGames = 0;
+                foreach (var item in gamesArr)
+                {
+                    columns = gamesArr[numberOfGames].Split('|');
+                    games.Add(new GameList
+                    {
+                        Title = columns[0],
+                        Genre = columns[1],
+                        Path = columns[2],
+                        Link = columns[3],
+                        Icon = columns[4],
+                        Poster = columns[5],
+                        Banner = columns[6],
+                        Guid = columns[7]
+                    });
+                    numberOfGames++;
+                }
+            }
+        }
+
+        public void ObservableList() //Prints out contents of ObsCol
         {
             for (int i = 0; i < Games.Count; i++)
             {
