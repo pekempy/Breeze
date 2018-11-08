@@ -87,15 +87,8 @@ namespace GameLauncher
                 CheckBox cb = c.ContentTemplate.FindName("genreCheckBox", c) as CheckBox;
                 if (cb.IsChecked.Value)
                 {
-                    genrePlaceHolder += cb.Content.ToString() + " ";
+                    genrePlaceHolder += cb.Content.ToString() + ";";
                 }
-            }
-
-            if (genrePlaceHolder != null)
-            {
-                genrePlaceHolder = genrePlaceHolder.Replace(" ", "; ");
-                genrePlaceHolder = genrePlaceHolder.TrimEnd(' ');
-                genrePlaceHolder = genrePlaceHolder.TrimEnd(';');
             }
             NewGameGenre.Text = genrePlaceHolder;
             return;
