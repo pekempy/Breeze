@@ -99,28 +99,28 @@
                                    Grid.RowSpan="2"
                                    HorizontalAlignment="Left"
                                    Stretch="Fill"
-                                   Source="{Binding Icon, Mode=OneWay, FallbackValue='Missing element'}" />
+                                   Source="{Binding Icon, Mode=OneWay}" />
                                 <!-- Game Title-->
                                 <Label x:Name="GameTitle"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Margin="85,1,0,45"
                                    FontSize="20"
-                                   Content="{Binding Title, Mode=OneWay, FallbackValue='Missing element'}" />
+                                   Content="{Binding Title, Mode=OneWay}" />
                                 <!-- Game Genres -->
                                 <Label x:Name="GameGenre"
                                    VerticalAlignment="Top"
                                    HorizontalAlignment="Left"
                                    Margin="86,32,0,0"
                                    FontSize="10"
-                                   Content="{Binding Genre, Mode=OneWay, FallbackValue='Missing element'}"
+                                   Content="{Binding Genre, Mode=OneWay}"
                                    materialDesign:ColorZoneAssist.Mode="Accent" />
 
                                 <!-- Game Launcher -->
                                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     x:Name="GameLauncher"
                                     Click="LaunchButton_OnClick"
-                                    Tag="{Binding Path, Mode=OneWay, FallbackValue='Missing element'}"
+                                    Tag="{Binding Path, Mode=OneWay}"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     Height="80"
@@ -141,7 +141,7 @@
                                     <StackPanel>
                                         <!-- Link Button -->
                                         <Button Click="GameLink_OnClick"
-                                            Tag="{Binding Link, FallbackValue='Missing element'}">
+                                            Tag="{Binding Link}">
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="Earth"
                                                                      VerticalAlignment="Center" />
@@ -151,7 +151,7 @@
                                         </Button>
                                         <!-- Edit Button -->
                                         <Button Click="EditGame_OnClick"
-                                            Tag="{Binding Guid, FallbackValue='Missing element'}">
+                                            Tag="{Binding Guid}">
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="Pencil"
                                                                      VerticalAlignment="Center" />
@@ -161,7 +161,7 @@
                                         </Button>
                                         <!-- Delete Button -->
                                         <Button Click="DeleteGame_OnClick"
-                                            Tag="{Binding Guid, FallbackValue='Missing element'}">
+                                            Tag="{Binding Guid}">
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="Delete"
                                                                      VerticalAlignment="Center" />

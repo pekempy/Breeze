@@ -123,7 +123,7 @@
                                     <Image
                                         Width="180"
                                         Height="220"
-                                        Source="{Binding Poster, FallbackValue=null}"
+                                        Source="{Binding Poster}"
                                         Stretch="Fill" />
                                     <Button
                                         Width="180"
@@ -131,7 +131,7 @@
                                         Click="LaunchButton_OnClick"
                                         Opacity="0.1"
                                         Style="{StaticResource MaterialDesignFlatButton}"
-                                        Tag="{Binding Path, FallbackValue='Missing element'}" />
+                                        Tag="{Binding Path}" />
                                     <!-- stackpanel for the button -->
                                     <StackPanel
                                         Grid.Row="1"
@@ -146,7 +146,7 @@
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Bottom"
                                                 HorizontalContentAlignment="Left"
-                                                Content="{Binding Title, FallbackValue='Missing element'}"
+                                                Content="{Binding Title}"
                                                 Style="{StaticResource MaterialDesignFlatButton}" />
                                         </WrapPanel>
                                     </StackPanel>
@@ -163,21 +163,21 @@
                                         <!-- Items inside overflow -->
                                         <StackPanel>
                                             <!-- Link Button -->
-                                            <Button Click="GameLink_OnClick" Tag="{Binding Link, FallbackValue='Missing element'}">
+                                            <Button Click="GameLink_OnClick" Tag="{Binding Link}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon VerticalAlignment="Center" Kind="Earth" />
                                                     <TextBlock Margin="5 0 0 0" Text="Website" />
                                                 </StackPanel>
                                             </Button>
                                             <!-- Edit Button -->
-                                            <Button Click="EditGame_OnClick" Tag="{Binding Guid, FallbackValue='Missing element'}">
+                                            <Button Click="EditGame_OnClick" Tag="{Binding Guid}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon VerticalAlignment="Center" Kind="Pencil" />
                                                     <TextBlock Margin="5 0 0 0" Text="Edit" />
                                                 </StackPanel>
                                             </Button>
                                             <!-- Delete Button -->
-                                            <Button Click="DeleteGame_OnClick" Tag="{Binding Guid, FallbackValue='Missing element'}">
+                                            <Button Click="DeleteGame_OnClick" Tag="{Binding Guid}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon VerticalAlignment="Center" Kind="Delete" />
                                                     <TextBlock Margin="5 0 0 0" Text="Delete" />
