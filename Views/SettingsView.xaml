@@ -128,6 +128,7 @@
                     Style="{StaticResource MaterialDesignTextBox}"
                          Width="150"
                          Height="20"
+                         FontSize="15"
                          VerticalAlignment="Top" />
                 <Button Click="AddNewGenre_OnClick" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Top" Height="20">
                     <materialDesign:PackIcon Kind="Send"
@@ -143,19 +144,25 @@
                           Margin="0 0 0 10"
                           ItemsSource="{Binding Source={StaticResource GenreListCVS}}"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <WrapPanel>
-                                    <TextBlock Text="{Binding Name}" Width="180" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                <materialDesign:Card Margin="5 5 5 5">
+                                    <WrapPanel>
+                                        <TextBlock Padding="10 0 0 0" Text="{Binding Name}" Width="140" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
                                             Click="DeleteGenre_OnClick"
                                             Tag="{Binding Guid}"
-                                            Padding="0 0 0 0"
-                                            HorizontalAlignment="Right"
-                                            VerticalAlignment="Center">
-                                        <materialDesign:PackIcon Kind="Delete" HorizontalAlignment="Right" />
-                                    </Button>
-                                </WrapPanel>
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center" Padding="5 5 5 5">
+                                            <materialDesign:PackIcon Kind="Delete" HorizontalAlignment="Center" />
+                                        </Button>
+                                    </WrapPanel>
+                                </materialDesign:Card>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
