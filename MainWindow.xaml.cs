@@ -28,14 +28,8 @@ namespace GameLauncher
             LoadSettings();
             InitializeComponent();
             posterViewModel = new PosterViewModel();
-            bannerViewModel = new BannerViewModel();
-            listViewModel = new ListViewModel();
             posterViewModel.LoadGames();
             posterViewModel.LoadGenres();
-            bannerViewModel.LoadGames();
-            bannerViewModel.LoadGenres();
-            listViewModel.LoadGames();
-            listViewModel.LoadGenres();
             DataContext = posterViewModel;
 
             //If games list doesn't exist, create directory and open ag dialog
@@ -91,6 +85,9 @@ namespace GameLauncher
 
         private void PosterViewActive()
         {
+            posterViewModel = new PosterViewModel();
+            posterViewModel.LoadGames();
+            posterViewModel.LoadGenres();
             DataContext = posterViewModel;
         }
 
@@ -102,6 +99,9 @@ namespace GameLauncher
 
         private void BannerViewActive()
         {
+            bannerViewModel = new BannerViewModel();
+            bannerViewModel.LoadGames();
+            bannerViewModel.LoadGenres();
             DataContext = bannerViewModel;
         }
 
@@ -113,6 +113,9 @@ namespace GameLauncher
 
         private void ListViewActive()
         {
+            listViewModel = new ListViewModel();
+            listViewModel.LoadGames();
+            listViewModel.LoadGenres();
             DataContext = listViewModel;
         }
 
@@ -136,6 +139,7 @@ namespace GameLauncher
             if (DataContext == posterViewModel) { posterViewModel.LoadList(); }
             if (DataContext == bannerViewModel) { bannerViewModel.LoadList(); }
             if (DataContext == listViewModel) { listViewModel.LoadList(); }
+            RefreshGames();
         }
 
         public void RefreshGames()
