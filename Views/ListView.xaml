@@ -79,7 +79,9 @@
                       Grid.ColumnSpan="3"
                       Grid.RowSpan="7"
                       Margin="10 10 0 10"
-                      ItemsSource="{Binding Source={StaticResource GameListCVS}}">
+                      ItemsSource="{Binding Source={StaticResource GameListCVS}}"
+                      VirtualizingStackPanel.IsVirtualizing="True"
+                      VirtualizingStackPanel.VirtualizationMode="Recycling">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />

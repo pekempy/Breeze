@@ -41,6 +41,12 @@ namespace GameLauncher
             }
         }
 
+        private void OpenAddGameWindow_OnClick(object sender, RoutedEventArgs e)
+        {
+            OpenAddGameDialog();
+            RefreshGames();
+        }
+
         public void OpenAddGameDialog()
         {
             DialogFrame.Visibility = Visibility.Visible;
@@ -70,19 +76,25 @@ namespace GameLauncher
             MenuToggleButton.IsChecked = false; //hide hamburger
         }
 
-        private void BannerButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            BannerViewActive();
-        }
-
-        private void ListButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            ListViewActive();
-        }
-
         private void PosterButton_OnClick(object sender, RoutedEventArgs e)
         {
             PosterViewActive();
+        }
+
+        private void PosterViewActive()
+        {
+            if (posterViewModel == null)
+            {
+                posterViewModel = new PosterViewModel();
+                posterViewModel.LoadGames();
+                posterViewModel.LoadGenres();
+            }
+            DataContext = posterViewModel;
+        }
+
+        private void BannerButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            BannerViewActive();
         }
 
         private void BannerViewActive()
@@ -107,15 +119,9 @@ namespace GameLauncher
             DataContext = listViewModel;
         }
 
-        private void PosterViewActive()
+        private void ListButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (posterViewModel == null)
-            {
-                posterViewModel = new PosterViewModel();
-                posterViewModel.LoadGames();
-                posterViewModel.LoadGenres();
-            }
-            DataContext = posterViewModel;
+            ListViewActive();
         }
 
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
@@ -128,12 +134,6 @@ namespace GameLauncher
             settingsViewModel = new SettingsViewModel();
             settingsViewModel.LoadGenres();
             DataContext = settingsViewModel;
-        }
-
-        private void OpenAddGameWindow_OnClick(object sender, RoutedEventArgs e)
-        {
-            OpenAddGameDialog();
-            RefreshGames();
         }
 
         private void RefreshGames_OnClick(object sender, RoutedEventArgs e)
