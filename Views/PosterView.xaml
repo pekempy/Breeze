@@ -11,6 +11,7 @@
     xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
     xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
     mc:Ignorable="d"
+    xmlns:vwp="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
     d:DataContext="{d:DesignInstance Type=ViewModels:PosterViewModel}"
     d:DesignHeight="300"
     d:DesignWidth="300">
@@ -42,11 +43,6 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
@@ -98,13 +94,12 @@
             <ItemsControl
                 x:Name="gameListView"
                 Margin="10 10 0 10"
+                MaxHeight="10000"
                 ItemsSource="{Binding Source={StaticResource GameListCVS}}"
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                VirtualizingStackPanel.IsVirtualizing="True"
-                VirtualizingStackPanel.VirtualizationMode="Recycling">
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel />
+                        <vwp:VirtualizingWrapPanel />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
@@ -141,7 +136,7 @@
                                         Margin="0 0 0 0"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Bottom">
-                                        <WrapPanel Width="180">
+                                        <WrapPanel>
                                             <Button
                                                 x:Name="PosterGameTitle"
                                                 Width="180"
