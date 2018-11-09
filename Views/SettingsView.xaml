@@ -46,59 +46,80 @@
         materialDesign:ShadowAssist.ShadowDepth="Depth2"
         materialDesign:ShadowAssist.ShadowEdges="Bottom"
         Mode="PrimaryMid">
-            <!--  Negative margin to remove whitespace :D  -->
+            <!--  Tab Control  -->
             <StackPanel
             Margin="4"
             VerticalAlignment="Top"
             Orientation="Horizontal">
-                <RadioButton
-                Name="GeneralBtn"
-                Margin="4"
-                Content="GENERAL"
-                IsChecked="False"
-                Style="{StaticResource MaterialDesignTabRadioButton}" />
                 <RadioButton
                 Name="ThemeBtn"
                 Margin="4"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Content="THEMES"
-                IsChecked="False"
+                IsChecked="True"
                 Style="{StaticResource MaterialDesignTabRadioButton}" />
                 <RadioButton
                 Name="GenreBtn"
                 Margin="4"
                 Content="GENRES"
-                IsChecked="True"
+                IsChecked="False"
                 Style="{StaticResource MaterialDesignTabRadioButton}" />
             </StackPanel>
         </materialDesign:ColorZone>
-        <Grid Name="GeneralBlock"
-                  Margin="10 60 0 0"
-                  Visibility="{Binding ElementName=GeneralBtn, Path=IsChecked, Converter={StaticResource b2v}}">
-            <!-- CONTENT OF THE GENERAL TAB GOES IN HERE -->
-            <TextBlock>General</TextBlock>
-        </Grid>
         <!-- ############################################################################################################### -->
         <Grid Name="ThemeBlock"
-                  Margin="10 60 0 0"
-                  Grid.ColumnSpan="4"
+                  Margin="30 60 30 0"
+                  Grid.ColumnSpan="4" Grid.RowSpan="10"
                   Visibility="{Binding Path=IsChecked, ElementName=ThemeBtn, Converter={StaticResource b2v}}">
             <!-- CONTENT OF THE THEMES TAB GOES IN HERE -->
             <StackPanel HorizontalAlignment="Left">
-                <TextBlock Height="30">Enable Dark Mode</TextBlock>
-                <TextBlock Height="30">Primary Color for Light (coming soon)</TextBlock>
-                <TextBlock Height="30">Accent Color for Light (coming soon)</TextBlock>
-                <TextBlock Height="30">Primary Color for Dark (coming soon)</TextBlock>
-                <TextBlock Height="30">Accent Color for Dark (coming soon)</TextBlock>
+                <TextBlock Height="40">Enable Dark Mode</TextBlock>
+                <TextBlock Height="40">Primary Color for Light (coming soon)</TextBlock>
+                <TextBlock Height="40">Accent Color for Light (coming soon)</TextBlock>
+                <TextBlock Height="40">Primary Color for Dark (coming soon)</TextBlock>
+                <TextBlock Height="40">Accent Color for Dark (coming soon)</TextBlock>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Right">
+            <StackPanel HorizontalAlignment="Right" Width="85">
                 <ToggleButton x:Name="themeToggle"
-                    Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                              HorizontalAlignment="Right"
+                              Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
                               Checked="DarkModeToggle_Checked"
                               Unchecked="DarkModeToggle_Unchecked"
-                              VerticalAlignment="Top"
-                              Margin="0 0 10 0" />
+                              VerticalAlignment="Top" 
+                              Margin="0 0 20 0"/>
+                <StackPanel Orientation="Horizontal" Margin="0 15 0 0" Width="90">
+                    <TextBox x:Name="ColorPrimaryLight"
+                             Width="60"
+                             Height="30"
+                             materialDesign:HintAssist.Hint="Hex Code"
+                             KeyDown="ChangePrimaryLight" />
+                    <Rectangle x:Name="ColorPrimaryLightRect" Height="25" Width="25" Fill="White" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 5 0 0" Width="90">
+                    <TextBox x:Name="ColorAccentLight"
+                             Width="60"
+                             Height="30"
+                             materialDesign:HintAssist.Hint="Hex Code"
+                             KeyDown="ChangeAccentLight" />
+                    <Rectangle x:Name="ColorAccentLightRect" Height="25" Width="25" Fill="White" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 5 0 0" Width="90">
+                    <TextBox x:Name="ColorPrimaryDark"
+                             Width="60"
+                             Height="30"
+                             materialDesign:HintAssist.Hint="Hex Code"
+                             KeyDown="ChangePrimaryDark" />
+                    <Rectangle x:Name="ColorPrimaryDarkRect" Height="25" Width="25" Fill="White" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 5 0 0" Width="90">
+                    <TextBox x:Name="ColorAccentDark"
+                             Width="60"
+                             Height="30"
+                             materialDesign:HintAssist.Hint="Hex Code"
+                             KeyDown="ChangeAccentDark" />
+                    <Rectangle x:Name="ColorAccentDarkRect" Height="25" Width="25" Fill="White" />
+                </StackPanel>
             </StackPanel>
         </Grid>
         <!-- ############################################################################################################### -->
@@ -109,7 +130,7 @@
                   ScrollViewer.CanContentScroll="True"
                   Visibility="{Binding Path=IsChecked, ElementName=GenreBtn, Converter={StaticResource b2v}}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="60" />
+                <RowDefinition Height="80" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -122,13 +143,14 @@
                 <TextBlock Text="New Genre: "
                                FontWeight="Bold"
                            Margin="0 5 0 0"
-                           Height="20"
+                           Height="30"
                            VerticalAlignment="Top" />
                 <TextBox x:Name="NewGenreName"
                     Style="{StaticResource MaterialDesignTextBox}"
                          Width="150"
-                         Height="20"
+                         Height="25"
                          FontSize="15"
+                         Margin="10 0 0 0"
                          VerticalAlignment="Top" />
                 <Button Click="AddNewGenre_OnClick" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Top" Height="20">
                     <materialDesign:PackIcon Kind="Send"

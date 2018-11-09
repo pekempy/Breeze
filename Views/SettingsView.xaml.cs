@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace GameLauncher.Views
 {
@@ -20,7 +22,28 @@ namespace GameLauncher.Views
         public SettingsView()
         {
             InitializeComponent();
+            var converter = new System.Windows.Media.BrushConverter();
             if (Settings.Default.theme == "Dark") { themeToggle.IsChecked = true; }
+            if (Settings.Default.primarylight != null)
+            {
+                ColorPrimaryLight.Text = Settings.Default.primarylight;
+                ColorPrimaryLightRect.Fill = (Brush)converter.ConvertFromString("#" + ColorPrimaryLight.Text);
+            }
+            if (Settings.Default.accentlight != null)
+            {
+                ColorAccentLight.Text = Settings.Default.accentlight;
+                ColorAccentLightRect.Fill = (Brush)converter.ConvertFromString("#" + ColorAccentLight.Text);
+            }
+            if (Settings.Default.primarydark != null)
+            {
+                ColorPrimaryDark.Text = Settings.Default.primarydark;
+                ColorPrimaryDarkRect.Fill = (Brush)converter.ConvertFromString("#" + ColorPrimaryDark.Text);
+            }
+            if (Settings.Default.accentdark != null)
+            {
+                ColorAccentDark.Text = Settings.Default.accentdark;
+                ColorAccentDarkRect.Fill = (Brush)converter.ConvertFromString("#" + ColorAccentDark.Text);
+            }
         }
 
         private void DarkModeToggle_Checked(object sender, RoutedEventArgs e)
@@ -35,6 +58,54 @@ namespace GameLauncher.Views
             ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Light);
             Properties.Settings.Default.theme = "Light";
             SaveSettings();
+        }
+
+        private void ChangePrimaryLight(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                var converter = new System.Windows.Media.BrushConverter();
+                var brush = (Brush)converter.ConvertFromString("#" + ColorPrimaryLight.Text);
+                Properties.Settings.Default.primarylight = ColorPrimaryLight.Text;
+                SaveSettings();
+                ColorPrimaryLightRect.Fill = brush;
+            }
+        }
+
+        private void ChangeAccentLight(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                var converter = new System.Windows.Media.BrushConverter();
+                var brush = (Brush)converter.ConvertFromString("#" + ColorAccentLight.Text);
+                Properties.Settings.Default.accentlight = ColorAccentLight.Text;
+                SaveSettings();
+                ColorAccentLightRect.Fill = brush;
+            }
+        }
+
+        private void ChangePrimaryDark(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                var converter = new System.Windows.Media.BrushConverter();
+                var brush = (Brush)converter.ConvertFromString("#" + ColorPrimaryDark.Text);
+                Properties.Settings.Default.primarydark = ColorPrimaryDark.Text;
+                SaveSettings();
+                ColorPrimaryDarkRect.Fill = brush;
+            }
+        }
+
+        private void ChangeAccentDark(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                var converter = new System.Windows.Media.BrushConverter();
+                var brush = (Brush)converter.ConvertFromString("#" + ColorAccentDark.Text);
+                Properties.Settings.Default.accentdark = ColorAccentDark.Text;
+                SaveSettings();
+                ColorAccentDarkRect.Fill = brush;
+            }
         }
 
         private void AddNewGenre_OnClick(object sender, RoutedEventArgs e)

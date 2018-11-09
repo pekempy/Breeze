@@ -34,5 +34,53 @@ namespace GameLauncher.Properties {
                 this["theme"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string primarylight {
+            get {
+                return ((string)(this["primarylight"]));
+            }
+            set {
+                this["primarylight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string accentlight {
+            get {
+                return ((string)(this["accentlight"]));
+            }
+            set {
+                this["accentlight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string primarydark {
+            get {
+                return ((string)(this["primarydark"]));
+            }
+            set {
+                this["primarydark"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string accentdark {
+            get {
+                return ((string)(this["accentdark"]));
+            }
+            set {
+                this["accentdark"] = value;
+            }
+        }
     }
 }
