@@ -5,6 +5,7 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -64,11 +65,15 @@ namespace GameLauncher.Views
         {
             if (e.Key == Key.Return)
             {
-                var converter = new System.Windows.Media.BrushConverter();
-                var brush = (Brush)converter.ConvertFromString("#" + ColorPrimaryLight.Text);
-                Properties.Settings.Default.primarylight = ColorPrimaryLight.Text;
-                SaveSettings();
-                ColorPrimaryLightRect.Fill = brush;
+                var regexColorCode = new Regex("^#[a-fA-F0-9]{6}$");
+                if (regexColorCode.IsMatch("#" + ColorPrimaryLight.Text.Trim()))
+                {
+                    var converter = new System.Windows.Media.BrushConverter();
+                    var brush = (Brush)converter.ConvertFromString("#" + ColorPrimaryLight.Text);
+                    Properties.Settings.Default.primarylight = ColorPrimaryLight.Text;
+                    SaveSettings();
+                    ColorPrimaryLightRect.Fill = brush;
+                }
             }
         }
 
@@ -76,11 +81,15 @@ namespace GameLauncher.Views
         {
             if (e.Key == Key.Return)
             {
-                var converter = new System.Windows.Media.BrushConverter();
-                var brush = (Brush)converter.ConvertFromString("#" + ColorAccentLight.Text);
-                Properties.Settings.Default.accentlight = ColorAccentLight.Text;
-                SaveSettings();
-                ColorAccentLightRect.Fill = brush;
+                var regexColorCode = new Regex("^#[a-fA-F0-9]{6}$");
+                if (regexColorCode.IsMatch("#" + ColorPrimaryLight.Text.Trim()))
+                {
+                    var converter = new System.Windows.Media.BrushConverter();
+                    var brush = (Brush)converter.ConvertFromString("#" + ColorAccentLight.Text);
+                    Properties.Settings.Default.accentlight = ColorAccentLight.Text;
+                    SaveSettings();
+                    ColorAccentLightRect.Fill = brush;
+                }
             }
         }
 
@@ -88,11 +97,15 @@ namespace GameLauncher.Views
         {
             if (e.Key == Key.Return)
             {
-                var converter = new System.Windows.Media.BrushConverter();
-                var brush = (Brush)converter.ConvertFromString("#" + ColorPrimaryDark.Text);
-                Properties.Settings.Default.primarydark = ColorPrimaryDark.Text;
-                SaveSettings();
-                ColorPrimaryDarkRect.Fill = brush;
+                var regexColorCode = new Regex("^#[a-fA-F0-9]{6}$");
+                if (regexColorCode.IsMatch("#" + ColorPrimaryLight.Text.Trim()))
+                {
+                    var converter = new System.Windows.Media.BrushConverter();
+                    var brush = (Brush)converter.ConvertFromString("#" + ColorPrimaryDark.Text);
+                    Properties.Settings.Default.primarydark = ColorPrimaryDark.Text;
+                    SaveSettings();
+                    ColorPrimaryDarkRect.Fill = brush;
+                }
             }
         }
 
@@ -100,11 +113,15 @@ namespace GameLauncher.Views
         {
             if (e.Key == Key.Return)
             {
-                var converter = new System.Windows.Media.BrushConverter();
-                var brush = (Brush)converter.ConvertFromString("#" + ColorAccentDark.Text);
-                Properties.Settings.Default.accentdark = ColorAccentDark.Text;
-                SaveSettings();
-                ColorAccentDarkRect.Fill = brush;
+                var regexColorCode = new Regex("^#[a-fA-F0-9]{6}$");
+                if (regexColorCode.IsMatch("#" + ColorPrimaryLight.Text.Trim()))
+                {
+                    var converter = new System.Windows.Media.BrushConverter();
+                    var brush = (Brush)converter.ConvertFromString("#" + ColorAccentDark.Text);
+                    Properties.Settings.Default.accentdark = ColorAccentDark.Text;
+                    SaveSettings();
+                    ColorAccentDarkRect.Fill = brush;
+                }
             }
         }
 
