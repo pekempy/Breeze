@@ -190,7 +190,9 @@ namespace GameLauncher
             {
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
-                string ngPosterFile = fileDialog.FileName; //PROBLEM - IF YOU EDIT POSTER WHILE ON POSTERVIEW, IT CRASHES AS FILE IS IN USE
+                string ngPosterFile = fileDialog.FileName;
+                //PROBLEM - IF YOU EDIT POSTER WHILE ON POSTERVIEW, IT CRASHES AS FILE IS IN USE
+                //NEED TO BE ABLE TO OVERWRITE IT WITH CHOSEN FILE
                 if (System.IO.File.Exists(installPath + "Resources/img/" + EditTitle.Text + "-poster.png")) { System.IO.File.Delete(installPath + "Resources/img/" + EditTitle.Text + "-poster.png"); }
                 System.IO.File.Copy(ngPosterFile, @"./Resources/img/" + EditTitle.Text + "-poster.png");
                 EditPoster.Text = installPath + "Resources/img/" + EditTitle.Text + "-poster.png";
@@ -235,7 +237,6 @@ namespace GameLauncher
             {
                 System.IO.Directory.CreateDirectory(installPath + "\\Resources\\shortcuts");
             }
-            //create shortcut from linkname, place shortut in dir
             WshShell wsh = new WshShell();
             IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(
                 installPath + "\\Resources\\shortcuts" + "\\" + EditTitle.Text + ".lnk") as IWshRuntimeLibrary.IWshShortcut;
