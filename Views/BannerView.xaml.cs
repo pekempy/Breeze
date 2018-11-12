@@ -49,6 +49,7 @@ namespace GameLauncher.Views
         private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.RemoveGameFromFile(((Button)sender).Tag);
+            ModifyFile.DeleteGameImages(((Button)sender).CommandParameter.ToString());
             MainWindow.RefreshGames();
         }
 

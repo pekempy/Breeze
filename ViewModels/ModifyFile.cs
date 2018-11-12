@@ -64,6 +64,17 @@ namespace GameLauncher.ViewModels
             }
         }
 
+        public static void DeleteGameImages(string title)
+        {
+            string installPath = AppDomain.CurrentDomain.BaseDirectory;
+            installPath = installPath.Replace("\\", "/");
+            //need to bypass the files being in use problem :|
+            File.Delete(installPath + "Resources/img/" + title + "-icon.png");
+            File.Delete(installPath + "Resources/img/" + title + "-poster.png");
+            File.Delete(installPath + "Resources/img/" + title + "-banner.png");
+            File.Delete(installPath + "Resources/shortcuts/" + title + ".lnk");
+        }
+
         public static void RemoveGenreFromFile(object genreGuid)
         {
             genreGuid = genreGuid.ToString();

@@ -17,7 +17,7 @@ namespace GameLauncher.ViewModels
 
         public void LoadGames()
         {
-            ReadFile(); //A new method to manually read the file
+            ReadFile();
             Games = games;
         }
 
@@ -55,6 +55,30 @@ namespace GameLauncher.ViewModels
                 //columns is array containing each element of particular game
                 string[] columns = new string[0];
                 int numberOfGames = 0;
+                foreach (var item in gamesArr)
+                {
+                    //Copy the files to a working dir, to prevent overwrites
+                    columns = gamesArr[numberOfGames].Split('|');
+                    string gameTitle = columns[0];
+                    string fileToCopy;
+                    string targetFile;
+                    string installPath = AppDomain.CurrentDomain.BaseDirectory;
+                    if (!Directory.Exists(installPath + "Resources/working/")) { Directory.CreateDirectory(installPath + "Resources/working/"); }
+                    installPath = installPath.Replace("\\", "/");
+                    fileToCopy = installPath + "Resources/img/" + gameTitle + "-icon.png";
+                    targetFile = installPath + "Resources/working/" + gameTitle + "-icon.png";
+                    if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
+                    fileToCopy = installPath + "Resources/img/" + gameTitle + "-poster.png";
+                    targetFile = installPath + "Resources/working/" + gameTitle + "-poster.png";
+                    if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
+                    fileToCopy = installPath + "Resources/img/" + gameTitle + "-banner.png";
+                    targetFile = installPath + "Resources/working/" + gameTitle + "-banner.png";
+                    if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
+                    fileToCopy = installPath + "Resources/shortcuts/" + gameTitle + ".lnk";
+                    targetFile = installPath + "Resources/working/" + gameTitle + ".lnk";
+                    if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
+                    numberOfGames++;
+                }
                 foreach (var item in gamesArr)
                 {
                     columns = gamesArr[numberOfGames].Split('|');

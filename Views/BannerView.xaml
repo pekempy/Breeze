@@ -161,7 +161,8 @@
                                                 </Button>
                                                 <!-- Delete Button -->
                                                 <Button Click="DeleteGame_OnClick"
-                                                    Tag="{Binding Guid}">
+                                                    Tag="{Binding Guid}"
+                                                    CommandParameter="{Binding Title}">
                                                     <StackPanel Orientation="Horizontal">
                                                         <materialDesign:PackIcon Kind="Delete"
                                                                              VerticalAlignment="Center" />
