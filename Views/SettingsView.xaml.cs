@@ -25,22 +25,22 @@ namespace GameLauncher.Views
             InitializeComponent();
             var converter = new System.Windows.Media.BrushConverter();
             if (Settings.Default.theme == "Dark") { themeToggle.IsChecked = true; }
-            if (Settings.Default.primarylight != null)
+            if (Settings.Default.primarylight != "")
             {
                 ColorPrimaryLight.Text = Settings.Default.primarylight;
                 ColorPrimaryLightRect.Fill = (Brush)converter.ConvertFromString("#" + ColorPrimaryLight.Text);
             }
-            if (Settings.Default.accentlight != null)
+            if (Settings.Default.accentlight != "")
             {
                 ColorAccentLight.Text = Settings.Default.accentlight;
                 ColorAccentLightRect.Fill = (Brush)converter.ConvertFromString("#" + ColorAccentLight.Text);
             }
-            if (Settings.Default.primarydark != null)
+            if (Settings.Default.primarydark != "")
             {
                 ColorPrimaryDark.Text = Settings.Default.primarydark;
                 ColorPrimaryDarkRect.Fill = (Brush)converter.ConvertFromString("#" + ColorPrimaryDark.Text);
             }
-            if (Settings.Default.accentdark != null)
+            if (Settings.Default.accentdark != "")
             {
                 ColorAccentDark.Text = Settings.Default.accentdark;
                 ColorAccentDarkRect.Fill = (Brush)converter.ConvertFromString("#" + ColorAccentDark.Text);
