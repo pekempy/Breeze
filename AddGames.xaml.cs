@@ -131,7 +131,7 @@ namespace GameLauncher
                 string ngNewShortcut = installPath + "Resources/shortcuts/" + NewGameTitle.Text + ".lnk";
                 NewGamePath.Text = ngNewShortcut;
             }
-            else
+            else if (dialogResult == true && NewGameTitle.Text == "")
             {
                 MessageBox.Show("Please enter a game title first.");
             }
@@ -159,7 +159,7 @@ namespace GameLauncher
                     NewGameIcon.Text = installPath + "Resources/img/" + NewGameTitle.Text + "-icon.png";
                 }
             }
-            else
+            else if (dialogResult == true && NewGameTitle.Text == "")
             {
                 MessageBox.Show("Please enter a game title first.");
             }
@@ -176,18 +176,18 @@ namespace GameLauncher
             {
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
-                string ngIconFile = fileDialog.FileName;
+                string ngPosterFile = fileDialog.FileName;
                 if (System.IO.File.Exists(@"./Resources/img/" + NewGameTitle.Text + "-poster.png"))
                 {
                     MessageBox.Show("A game with that name already exists");
                 }
                 else
                 {
-                    System.IO.File.Copy(ngIconFile, @"./Resources/img/" + NewGameTitle.Text + "-poster.png");
+                    System.IO.File.Copy(ngPosterFile, @"./Resources/img/" + NewGameTitle.Text + "-poster.png");
                     NewGamePoster.Text = installPath + "Resources/img/" + NewGameTitle.Text + "-poster.png";
                 }
             }
-            else
+            else if (dialogResult == true && NewGameTitle.Text == "")
             {
                 MessageBox.Show("Please enter a game title first.");
             }
@@ -204,14 +204,14 @@ namespace GameLauncher
             {
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
-                string ngIconFile = fileDialog.FileName;
+                string ngBannerFile = fileDialog.FileName;
                 if (System.IO.File.Exists(@"./Resources/img/" + NewGameTitle.Text + "-banner.png"))
                 {
                     MessageBox.Show("A game with that name already exists");
                 }
-                else
+                else if (dialogResult == true && NewGameTitle.Text == "")
                 {
-                    System.IO.File.Copy(ngIconFile, @"./Resources/img/" + NewGameTitle.Text + "-banner.png");
+                    System.IO.File.Copy(ngBannerFile, @"./Resources/img/" + NewGameTitle.Text + "-banner.png");
                     NewGameBanner.Text = installPath + "Resources/img/" + NewGameTitle.Text + "-banner.png";
                 }
             }
