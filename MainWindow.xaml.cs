@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using GameLauncher.Properties;
 using MaterialDesignThemes.Wpf;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace GameLauncher
 {

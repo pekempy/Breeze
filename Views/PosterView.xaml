@@ -11,6 +11,7 @@
     xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
     xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
     mc:Ignorable="d"
+    xmlns:vwp="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
     d:DataContext="{d:DesignInstance Type=ViewModels:PosterViewModel}"
     d:DesignHeight="300"
     d:DesignWidth="300">
@@ -34,13 +35,12 @@
         </CollectionViewSource>
     </UserControl.Resources>
 
-    <Grid Margin="0 5 0 0">
+    <Grid>
         <!-- Define columns and rows -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="8*" />
-            <ColumnDefinition Width="17*" />
-            <ColumnDefinition Width="25*" />
-            <ColumnDefinition Width="25*" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -54,11 +54,11 @@
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Click="EnableFilteringCheat"
-            Opacity="0" Grid.ColumnSpan="2" />
+            Opacity="0" />
         <materialDesign:ColorZone
-            Grid.Column="3"
+            Grid.Column="2"
             MaxHeight="60"
-            Margin="0,-60,70,0"
+            Margin="0,-60,70,58"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             CornerRadius="2"
@@ -87,59 +87,57 @@
         </materialDesign:ColorZone>
         <!-- This section displays one card per game in GamesList-->
         <ScrollViewer
-            Grid.RowSpan="2"
-            Grid.ColumnSpan="4"
-            VerticalScrollBarVisibility="Auto"
-            CanContentScroll="False">
-            <VirtualizingStackPanel
-                            VirtualizingStackPanel.VirtualizationMode="Recycling">
-                <!-- ItemsControl is bound to OC to know how many cards to make-->
-                <ItemsControl
+            Grid.RowSpan="7"
+            Grid.ColumnSpan="3"
+            VerticalScrollBarVisibility="Auto">
+            <!-- ItemsControl is bound to OC to know how many cards to make-->
+            <ItemsControl
                 x:Name="gameListView"
                 Margin="10 10 0 10"
+                MaxHeight="10000"
                 ItemsSource="{Binding Source={StaticResource GameListCVS}}"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <!-- The card -->
-                                <materialDesign:Card
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <vwp:VirtualizingWrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <!-- The card -->
+                            <materialDesign:Card
                                 MinWidth="180"
                                 MaxWidth="180"
                                 Margin="10 10 10 10">
-                                    <Grid>
-                                        <!-- This grid positions content on the card -->
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="22*" />
-                                            <RowDefinition Height="5*" />
-                                            <RowDefinition />
-                                        </Grid.RowDefinitions>
-                                        <Image
+                                <Grid>
+                                    <!-- This grid positions content on the card -->
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="22*" />
+                                        <RowDefinition Height="5*" />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Image
                                         Width="180"
                                         Height="220"
                                         Source="{Binding Poster}"
                                         Stretch="Fill" />
-                                        <Button
+                                    <Button
                                         Width="180"
                                         Height="220"
                                         Click="LaunchButton_OnClick"
                                         Opacity="0.1"
                                         Style="{StaticResource MaterialDesignFlatButton}"
                                         Tag="{Binding Path}" />
-                                        <!-- stackpanel for the button -->
-                                        <StackPanel
+                                    <!-- stackpanel for the button -->
+                                    <StackPanel
                                         Grid.Row="1"
                                         Grid.RowSpan="2"
                                         Margin="0 0 0 0"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Bottom">
-                                            <WrapPanel>
-                                                <Button
+                                        <WrapPanel>
+                                            <Button
                                                 x:Name="PosterGameTitle"
                                                 Width="180"
                                                 HorizontalAlignment="Left"
@@ -147,10 +145,10 @@
                                                 HorizontalContentAlignment="Left"
                                                 Content="{Binding Title}"
                                                 Style="{StaticResource MaterialDesignFlatButton}" />
-                                            </WrapPanel>
-                                        </StackPanel>
-                                        <!-- Overflow -->
-                                        <materialDesign:PopupBox
+                                        </WrapPanel>
+                                    </StackPanel>
+                                    <!-- Overflow -->
+                                    <materialDesign:PopupBox
                                         Grid.Row="1"
                                         Grid.RowSpan="2"
                                         Width="26"
@@ -159,38 +157,37 @@
                                         Padding="0 0 0 0"
                                         PlacementMode="LeftAndAlignTopEdges"
                                         StaysOpen="False">
-                                            <!-- Items inside overflow -->
-                                            <StackPanel>
-                                                <!-- Link Button -->
-                                                <Button Click="GameLink_OnClick" Tag="{Binding Link}">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <materialDesign:PackIcon VerticalAlignment="Center" Kind="Earth" />
-                                                        <TextBlock Margin="5 0 0 0" Text="Website" />
-                                                    </StackPanel>
-                                                </Button>
-                                                <!-- Edit Button -->
-                                                <Button Click="EditGame_OnClick" Tag="{Binding Guid}">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <materialDesign:PackIcon VerticalAlignment="Center" Kind="Pencil" />
-                                                        <TextBlock Margin="5 0 0 0" Text="Edit" />
-                                                    </StackPanel>
-                                                </Button>
-                                                <!-- Delete Button -->
-                                                <Button Click="DeleteGame_OnClick" Tag="{Binding Guid}">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <materialDesign:PackIcon VerticalAlignment="Center" Kind="Delete" />
-                                                        <TextBlock Margin="5 0 0 0" Text="Delete" />
-                                                    </StackPanel>
-                                                </Button>
-                                            </StackPanel>
-                                        </materialDesign:PopupBox>
-                                    </Grid>
-                                </materialDesign:Card>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </VirtualizingStackPanel>
+                                        <!-- Items inside overflow -->
+                                        <StackPanel>
+                                            <!-- Link Button -->
+                                            <Button Click="GameLink_OnClick" Tag="{Binding Link}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Earth" />
+                                                    <TextBlock Margin="5 0 0 0" Text="Website" />
+                                                </StackPanel>
+                                            </Button>
+                                            <!-- Edit Button -->
+                                            <Button Click="EditGame_OnClick" Tag="{Binding Guid}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Pencil" />
+                                                    <TextBlock Margin="5 0 0 0" Text="Edit" />
+                                                </StackPanel>
+                                            </Button>
+                                            <!-- Delete Button -->
+                                            <Button Click="DeleteGame_OnClick" Tag="{Binding Guid}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Delete" />
+                                                    <TextBlock Margin="5 0 0 0" Text="Delete" />
+                                                </StackPanel>
+                                            </Button>
+                                        </StackPanel>
+                                    </materialDesign:PopupBox>
+                                </Grid>
+                            </materialDesign:Card>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </ScrollViewer>
     </Grid>
 </UserControl>
