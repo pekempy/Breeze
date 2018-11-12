@@ -38,79 +38,79 @@
             HorizontalAlignment="Left"
             Click="EnableFilteringCheat"
             Opacity="0" />
-        <!--  Search Bar  -->
+        <!-- Search bar -->
         <materialDesign:ColorZone
-            Grid.ColumnSpan="3"
-                            MaxHeight="60"
-                            Margin="0,-60,70,58"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                            CornerRadius="2"
-                            Grid.Column="2"
-                            Mode="Light">
+            Grid.Column="2"
+            MaxHeight="60"
+            Margin="0,-60,70,58"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            CornerRadius="2"
+            materialDesign:ShadowAssist.ShadowDepth="Depth1"
+            Mode="Light">
             <StackPanel
-                                MaxHeight="20"
-                                Margin="16"
-                                Orientation="Horizontal">
+                MaxHeight="20"
+                Margin="16"
+                Orientation="Horizontal">
                 <!--  Search bar Icon  -->
                 <materialDesign:PackIcon
-                                    VerticalAlignment="Center"
-                                    Kind="Magnify"
-                                    Opacity=".56" />
+                    VerticalAlignment="Center"
+                    Kind="Magnify"
+                    Opacity=".56" />
                 <!--  Search text  -->
                 <TextBox
-                                    x:Name="GameSearchBar"
-                                    TextChanged="SearchString_TextChanged"
-                                    MinWidth="150"
-                                    Margin="8,0,0,0"
-                                    VerticalAlignment="Center"
-                                    materialDesign:HintAssist.Hint="Please search..."
-                                    materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                                    BorderThickness="0"
-                                    FontSize="11" />
+                    x:Name="GameSearchBar"
+                    MinWidth="150"
+                    Margin="8,0,0,0"
+                    VerticalAlignment="Center"
+                    BorderThickness="0"
+                    materialDesign:HintAssist.Hint="Please search..."
+                    materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                    TextChanged="SearchString_TextChanged" />
             </StackPanel>
         </materialDesign:ColorZone>
         <ScrollViewer VerticalScrollBarVisibility="Auto"
                       Grid.ColumnSpan="3">
-            <!-- This section displays one card per game in GamesList-->
-            <!-- ItemsControl is bound to OC to know how many cards to make-->
-            <ItemsControl x:Name="gameListView"
+            <VirtualizingStackPanel
+                            VirtualizingStackPanel.VirtualizationMode="Recycling">
+                <!-- This section displays one card per game in GamesList-->
+                <!-- ItemsControl is bound to OC to know how many cards to make-->
+                <ItemsControl x:Name="gameListView"
                       Grid.ColumnSpan="3"
                       Grid.RowSpan="7"
                       Margin="10 10 0 10"
                       ItemsSource="{Binding Source={StaticResource GameListCVS}}"
                       VirtualizingStackPanel.IsVirtualizing="True"
                       VirtualizingStackPanel.VirtualizationMode="Recycling">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
 
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
 
-                        <!-- The card -->
-                        <materialDesign:Card Margin="10 5 10 0"
+                            <!-- The card -->
+                            <materialDesign:Card Margin="10 5 10 0"
                                                  Height="80">
-                            <Grid Width="330">
-                                <!-- Game Image -->
-                                <Image x:Name="GameIcon"
+                                <Grid Width="330">
+                                    <!-- Game Image -->
+                                    <Image x:Name="GameIcon"
                                    Width="80"
                                    Grid.RowSpan="2"
                                    HorizontalAlignment="Left"
                                    Stretch="Fill"
                                    Source="{Binding Icon, Mode=OneWay}" />
-                                <!-- Game Title-->
-                                <Label x:Name="GameTitle"
+                                    <!-- Game Title-->
+                                    <Label x:Name="GameTitle"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Margin="85,1,0,45"
                                    FontSize="20"
                                    Content="{Binding Title, Mode=OneWay}" />
-                                <!-- Game Genres -->
-                                <Label x:Name="GameGenre"
+                                    <!-- Game Genres -->
+                                    <Label x:Name="GameGenre"
                                    VerticalAlignment="Top"
                                    HorizontalAlignment="Left"
                                    Margin="86,32,0,0"
@@ -118,8 +118,8 @@
                                    Content="{Binding Genre, Mode=OneWay}"
                                    materialDesign:ColorZoneAssist.Mode="Accent" />
 
-                                <!-- Game Launcher -->
-                                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    <!-- Game Launcher -->
+                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     x:Name="GameLauncher"
                                     Click="LaunchButton_OnClick"
                                     Tag="{Binding Path, Mode=OneWay}"
@@ -130,8 +130,8 @@
                                     Margin="0"
                                     Padding="0,0,0,0"
                                     Opacity="0.1" />
-                                <!-- Overflow -->
-                                <materialDesign:PopupBox PlacementMode="LeftAndAlignTopEdges"
+                                    <!-- Overflow -->
+                                    <materialDesign:PopupBox PlacementMode="LeftAndAlignTopEdges"
                                                      StaysOpen="False"
                                                      HorizontalAlignment="Right"
                                                      Margin="0,0,0,50"
@@ -139,45 +139,46 @@
                                                      Grid.RowSpan="1"
                                                      Width="34"
                                                      Padding="0 0 0 0">
-                                    <!-- Items inside overflow -->
-                                    <StackPanel>
-                                        <!-- Link Button -->
-                                        <Button Click="GameLink_OnClick"
+                                        <!-- Items inside overflow -->
+                                        <StackPanel>
+                                            <!-- Link Button -->
+                                            <Button Click="GameLink_OnClick"
                                             Tag="{Binding Link}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="Earth"
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="Earth"
                                                                      VerticalAlignment="Center" />
-                                                <TextBlock Text="Website"
+                                                    <TextBlock Text="Website"
                                                        Margin="5 0 0 0" />
-                                            </StackPanel>
-                                        </Button>
-                                        <!-- Edit Button -->
-                                        <Button Click="EditGame_OnClick"
+                                                </StackPanel>
+                                            </Button>
+                                            <!-- Edit Button -->
+                                            <Button Click="EditGame_OnClick"
                                             Tag="{Binding Guid}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="Pencil"
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="Pencil"
                                                                      VerticalAlignment="Center" />
-                                                <TextBlock Text="Edit"
+                                                    <TextBlock Text="Edit"
                                                        Margin="5 0 0 0" />
-                                            </StackPanel>
-                                        </Button>
-                                        <!-- Delete Button -->
-                                        <Button Click="DeleteGame_OnClick"
+                                                </StackPanel>
+                                            </Button>
+                                            <!-- Delete Button -->
+                                            <Button Click="DeleteGame_OnClick"
                                             Tag="{Binding Guid}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="Delete"
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="Delete"
                                                                      VerticalAlignment="Center" />
-                                                <TextBlock Text="Delete"
+                                                    <TextBlock Text="Delete"
                                                        Margin="5 0 0 0" />
-                                            </StackPanel>
-                                        </Button>
-                                    </StackPanel>
-                                </materialDesign:PopupBox>
-                            </Grid>
-                        </materialDesign:Card>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                                                </StackPanel>
+                                            </Button>
+                                        </StackPanel>
+                                    </materialDesign:PopupBox>
+                                </Grid>
+                            </materialDesign:Card>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </VirtualizingStackPanel>
         </ScrollViewer>
     </Grid>
 </UserControl>
