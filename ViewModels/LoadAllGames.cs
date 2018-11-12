@@ -54,17 +54,19 @@ namespace GameLauncher.ViewModels
                 string[] gamesArr = File.ReadAllLines(gameFile);
                 //columns is array containing each element of particular game
                 string[] columns = new string[0];
+                int numOfGames = 0;
                 int numberOfGames = 0;
                 foreach (var item in gamesArr)
                 {
                     //Copy the files to a working dir, to prevent overwrites
-                    columns = gamesArr[numberOfGames].Split('|');
+                    columns = gamesArr[numOfGames].Split('|');
                     string gameTitle = columns[0];
                     string fileToCopy;
                     string targetFile;
                     string installPath = AppDomain.CurrentDomain.BaseDirectory;
-                    if (!Directory.Exists(installPath + "Resources/working/")) { Directory.CreateDirectory(installPath + "Resources/working/"); }
                     installPath = installPath.Replace("\\", "/");
+                    if (!Directory.Exists(installPath + "Resources/working/")) { Directory.CreateDirectory(installPath + "Resources/working/"); }
+                    if (gameTitle.Contains(":")) { gameTitle = gameTitle.Replace(":", " -"); }
                     fileToCopy = installPath + "Resources/img/" + gameTitle + "-icon.png";
                     targetFile = installPath + "Resources/working/" + gameTitle + "-icon.png";
                     if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
@@ -77,11 +79,22 @@ namespace GameLauncher.ViewModels
                     fileToCopy = installPath + "Resources/shortcuts/" + gameTitle + ".lnk";
                     targetFile = installPath + "Resources/working/" + gameTitle + ".lnk";
                     if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
-                    numberOfGames++;
+                    numOfGames++;
                 }
                 foreach (var item in gamesArr)
                 {
+                    string installPath = AppDomain.CurrentDomain.BaseDirectory;
+                    installPath = installPath.Replace("\\", "/");
+                    string imgPath = installPath + "Resources/img/";
+                    string shortcutPath = installPath + "Resources/shortcuts/";
+                    string workingPath = installPath + "Resources/working/";
                     columns = gamesArr[numberOfGames].Split('|');
+
+                    //Fix paths
+                    columns[2] = columns[2].Replace(shortcutPath, workingPath);
+                    columns[4] = columns[4].Replace(imgPath, workingPath);
+                    columns[5] = columns[5].Replace(imgPath, workingPath);
+                    columns[6] = columns[6].Replace(imgPath, workingPath);
                     games.Add(new GameList
                     {
                         Title = columns[0],

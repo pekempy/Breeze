@@ -125,10 +125,11 @@ namespace GameLauncher
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && NewGameTitle.Text != "")
             {
+                if (NewGameTitle.Text.Contains(":")) { newgametitle = NewGameTitle.Text.Replace(":", " -"); }
                 CreateShortcut(fileDialog.FileName);
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
-                string ngNewShortcut = installPath + "Resources/shortcuts/" + NewGameTitle.Text + ".lnk";
+                string ngNewShortcut = installPath + "Resources/shortcuts/" + newgametitle + ".lnk";
                 NewGamePath.Text = ngNewShortcut;
             }
             else if (dialogResult == true && NewGameTitle.Text == "")
@@ -136,6 +137,8 @@ namespace GameLauncher
                 MessageBox.Show("Please enter a game title first.");
             }
         }
+
+        public string newgametitle;
 
         private void AttachIcon_OnClick(object sender, RoutedEventArgs e)
         {
@@ -149,17 +152,21 @@ namespace GameLauncher
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
                 string ngIconFile = fileDialog.FileName;
-                if (System.IO.File.Exists(@"./Resources/img/" + NewGameTitle.Text + "-icon.png"))
+                if (NewGameTitle.Text.Contains(":"))
+                {
+                    newgametitle = NewGameTitle.Text.Replace(":", " -");
+                }
+                if (System.IO.File.Exists(@"./Resources/img/" + newgametitle + "-icon.png"))
                 {
                     MessageBox.Show("A game with that name already exists");
                 }
                 else
                 {
-                    System.IO.File.Copy(ngIconFile, @"./Resources/img/" + NewGameTitle.Text + "-icon.png");
-                    NewGameIcon.Text = installPath + "Resources/img/" + NewGameTitle.Text + "-icon.png";
+                    System.IO.File.Copy(ngIconFile, @"./Resources/img/" + newgametitle + "-icon.png");
+                    NewGameIcon.Text = installPath + "Resources/img/" + newgametitle + "-icon.png";
                 }
             }
-            else if (dialogResult == true && NewGameTitle.Text == "")
+            else if (dialogResult == true && newgametitle == "")
             {
                 MessageBox.Show("Please enter a game title first.");
             }
@@ -177,14 +184,18 @@ namespace GameLauncher
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
                 string ngPosterFile = fileDialog.FileName;
+                if (NewGameTitle.Text.Contains(":"))
+                {
+                    newgametitle = NewGameTitle.Text.Replace(":", " -");
+                }
                 if (System.IO.File.Exists(@"./Resources/img/" + NewGameTitle.Text + "-poster.png"))
                 {
                     MessageBox.Show("A game with that name already exists");
                 }
                 else
                 {
-                    System.IO.File.Copy(ngPosterFile, @"./Resources/img/" + NewGameTitle.Text + "-poster.png");
-                    NewGamePoster.Text = installPath + "Resources/img/" + NewGameTitle.Text + "-poster.png";
+                    System.IO.File.Copy(ngPosterFile, @"./Resources/img/" + newgametitle + "-poster.png");
+                    NewGamePoster.Text = installPath + "Resources/img/" + newgametitle + "-poster.png";
                 }
             }
             else if (dialogResult == true && NewGameTitle.Text == "")
@@ -205,17 +216,21 @@ namespace GameLauncher
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
                 string ngBannerFile = fileDialog.FileName;
-                if (System.IO.File.Exists(@"./Resources/img/" + NewGameTitle.Text + "-banner.png"))
+                if (NewGameTitle.Text.Contains(":"))
+                {
+                    newgametitle = NewGameTitle.Text.Replace(":", " -");
+                }
+                if (System.IO.File.Exists(@"./Resources/img/" + newgametitle + "-banner.png"))
                 {
                     MessageBox.Show("A game with that name already exists");
                 }
-                else if (dialogResult == true && NewGameTitle.Text == "")
+                else
                 {
-                    System.IO.File.Copy(ngBannerFile, @"./Resources/img/" + NewGameTitle.Text + "-banner.png");
-                    NewGameBanner.Text = installPath + "Resources/img/" + NewGameTitle.Text + "-banner.png";
+                    System.IO.File.Copy(ngBannerFile, @"./Resources/img/" + newgametitle + "-banner.png");
+                    NewGameBanner.Text = installPath + "Resources/img/" + newgametitle + "-banner.png";
                 }
             }
-            else
+            else if (dialogResult == true && NewGameTitle.Text == "")
             {
                 MessageBox.Show("Please enter a game title first.");
             }
@@ -223,6 +238,7 @@ namespace GameLauncher
 
         private void CreateShortcut(string linkname)
         {
+            if (NewGameTitle.Text.Contains(":")) { newgametitle = NewGameTitle.Text.Replace(":", " -"); }
             string installPath = AppDomain.CurrentDomain.BaseDirectory;
             if (!Directory.Exists(installPath + "\\Resources\\shortcuts"))
             {
@@ -231,11 +247,11 @@ namespace GameLauncher
             //create shortcut from linkname, place shortut in dir
             WshShell wsh = new WshShell();
             IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(
-                installPath + "\\Resources\\shortcuts" + "\\" + NewGameTitle.Text + ".lnk") as IWshRuntimeLibrary.IWshShortcut;
+                installPath + "\\Resources\\shortcuts" + "\\" + newgametitle + ".lnk") as IWshRuntimeLibrary.IWshShortcut;
             shortcut.Arguments = "";
             shortcut.TargetPath = linkname;
             shortcut.WindowStyle = 1;
-            shortcut.Description = "Shortcut to " + NewGameTitle.Text;
+            shortcut.Description = "Shortcut to " + newgametitle;
             shortcut.WorkingDirectory = "C:\\App";
             shortcut.IconLocation = linkname;
             shortcut.Save();
