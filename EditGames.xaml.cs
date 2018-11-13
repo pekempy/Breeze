@@ -197,8 +197,14 @@ namespace GameLauncher
                 installPath = installPath.Replace("\\", "/");
                 string filedialogoutput = fileDialog.FileName;
                 string imgpath = installPath + "Resources/img/" + edittitle + "-poster.png";
-                try { System.IO.File.Copy(filedialogoutput, imgpath, true); } //trips here if editing twice
-                catch { Console.WriteLine("We've got an error! /img/ file is locked!!!!! :C "); }
+                try
+                {
+                    System.IO.File.Copy(filedialogoutput, imgpath, true);
+                } //trips here if editing twice
+                catch
+                {
+                    Console.WriteLine("We've got an error! /img/ file is locked!!!!! :C ");
+                }
 
                 DeleteFile(edittitle, "poster"); //method to pass in games modified title, and "poster" as the edited type
                 EditPoster.Text = installPath + "Resources/img/" + edittitle + "-poster.png";
@@ -291,9 +297,20 @@ namespace GameLauncher
             try
             {
                 System.IO.File.Delete(workingfile);//will sometimes delete, if you select some text in poster box before closing
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("We've got an error! Delete working File is locked :'( ");
+            }
+            try
+            {
                 System.IO.File.Copy(imgfile, workingfile, true);
             }
-            catch (Exception e) { Console.WriteLine("We've got an error! File is locked :'( "); }
+            catch (Exception e)
+            {
+                Console.WriteLine("We've got an error! copy File is locked :'( " + e);
+            }
+            
 
             MainWindow.PosterViewActive("working");
             MainWindow.pv.gameListView.ApplyTemplate();
