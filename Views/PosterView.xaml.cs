@@ -23,13 +23,13 @@ namespace GameLauncher.Views
         private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.RemoveGameFromFile(((Button)sender).Tag);
-            MainWindow.RefreshGames();
+            MainWindow.RefreshGames("working");
         }
 
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.EditGameInfile(((Button)sender).Tag);
-            MainWindow.RefreshGames();
+            MainWindow.RefreshGames("working");
         }
 
         private void GameLink_OnClick(object sender, RoutedEventArgs e)

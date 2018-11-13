@@ -15,6 +15,7 @@ namespace GameLauncher
     public partial class AddGames : Page
     {
         private LoadAllGames lag = new LoadAllGames();
+        public string installPath = AppDomain.CurrentDomain.BaseDirectory;
 
         public AddGames()
         {
@@ -55,7 +56,7 @@ namespace GameLauncher
                 Console.WriteLine("Exception: " + ex.Message);
             }
             clearFields();
-            ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
+            ((MainWindow)Application.Current.MainWindow)?.RefreshGames("working");
             ClearGenreBoxes();
             AddGameDialog.IsOpen = false;
         }
@@ -127,7 +128,6 @@ namespace GameLauncher
             {
                 if (NewGameTitle.Text.Contains(":")) { newgametitle = NewGameTitle.Text.Replace(":", " -"); }
                 CreateShortcut(fileDialog.FileName);
-                string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
                 string ngNewShortcut = installPath + "Resources/shortcuts/" + newgametitle + ".lnk";
                 NewGamePath.Text = ngNewShortcut;
@@ -149,7 +149,6 @@ namespace GameLauncher
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && NewGameTitle.Text != "")
             {
-                string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
                 string ngIconFile = fileDialog.FileName;
                 if (NewGameTitle.Text.Contains(":"))
@@ -181,7 +180,6 @@ namespace GameLauncher
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && NewGameTitle.Text != "")
             {
-                string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
                 string ngPosterFile = fileDialog.FileName;
                 if (NewGameTitle.Text.Contains(":"))
@@ -213,7 +211,6 @@ namespace GameLauncher
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && NewGameTitle.Text != "")
             {
-                string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
                 string ngBannerFile = fileDialog.FileName;
                 if (NewGameTitle.Text.Contains(":"))
@@ -239,7 +236,6 @@ namespace GameLauncher
         private void CreateShortcut(string linkname)
         {
             if (NewGameTitle.Text.Contains(":")) { newgametitle = NewGameTitle.Text.Replace(":", " -"); }
-            string installPath = AppDomain.CurrentDomain.BaseDirectory;
             if (!Directory.Exists(installPath + "\\Resources\\shortcuts"))
             {
                 System.IO.Directory.CreateDirectory(installPath + "\\Resources\\shortcuts");

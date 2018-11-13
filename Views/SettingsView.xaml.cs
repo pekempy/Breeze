@@ -139,7 +139,7 @@ namespace GameLauncher.Views
                 Console.WriteLine("Exception: " + ex.Message);
             }
             lag.LoadGenres();
-            MainWindow.RefreshGames();
+            MainWindow.RefreshGames("working");
             CollectionViewSource GenreListCVS = (CollectionViewSource)FindResource("GenreListCVS");
             if (GenreListCVS != null)
                 GenreListCVS.View.Refresh();
@@ -193,7 +193,7 @@ namespace GameLauncher.Views
                 }
             }
             ModifyFile.RemoveGenreFromFile(((Button)sender).Tag.ToString());
-            MainWindow.RefreshGames();
+            MainWindow.RefreshGames("working");
         }
 
         public void SaveSettings()

@@ -12,7 +12,7 @@ namespace GameLauncher.ViewModels
 
         public void LoadGames()
         {
-            lag.LoadGames();
+            lag.LoadGames("working");
             ListViewOC = lag.Games;
         }
 

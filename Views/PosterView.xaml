@@ -122,7 +122,7 @@
                                         <Image
                                         Width="180"
                                         Height="220"
-                                        Source="{Binding Poster}"
+                                        Source="{Binding Poster, Mode=OneWay}"
                                         Stretch="Fill" />
                                         <Button
                                         Width="180"

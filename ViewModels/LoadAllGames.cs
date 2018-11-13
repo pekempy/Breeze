@@ -15,9 +15,10 @@ namespace GameLauncher.ViewModels
         private ObservableCollection<GameList> games = new ObservableCollection<GameList>();
         private ObservableCollection<GenreList> genres = new ObservableCollection<GenreList>();
 
-        public void LoadGames()
+        public void LoadGames(string dirToUse)
         {
-            ReadFile();
+            if (dirToUse == "working") { ReadFile("working"); }
+            else if (dirToUse != "working") { ReadFile(""); }
             Games = games;
         }
 
@@ -44,7 +45,7 @@ namespace GameLauncher.ViewModels
             Genres = genres;
         }
 
-        public void ReadFile()
+        public void ReadFile(string dirToUse)
         {
             if (File.Exists("./Resources/GamesList.txt"))
             {
@@ -91,10 +92,13 @@ namespace GameLauncher.ViewModels
                     columns = gamesArr[numberOfGames].Split('|');
 
                     //Fix paths
-                    columns[2] = columns[2].Replace(shortcutPath, workingPath);
-                    columns[4] = columns[4].Replace(imgPath, workingPath);
-                    columns[5] = columns[5].Replace(imgPath, workingPath);
-                    columns[6] = columns[6].Replace(imgPath, workingPath);
+                    if (dirToUse == "working")
+                    {
+                        columns[2] = columns[2].Replace(shortcutPath, workingPath);
+                        columns[4] = columns[4].Replace(imgPath, workingPath);
+                        columns[5] = columns[5].Replace(imgPath, workingPath);
+                        columns[6] = columns[6].Replace(imgPath, workingPath);
+                    }
                     games.Add(new GameList
                     {
                         Title = columns[0],

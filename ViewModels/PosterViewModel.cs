@@ -10,9 +10,9 @@ namespace GameLauncher.ViewModels
         public static ObservableCollection<GameList> PosterViewOC { get; set; }
         public static ObservableCollection<GenreList> GenreListOC { get; set; }
 
-        public void LoadGames()
+        public void LoadGames(string mode)
         {
-            lag.LoadGames();
+            lag.LoadGames(mode);
             PosterViewOC = lag.Games;
         }
 

@@ -12,7 +12,10 @@ namespace GameLauncher
 {
     public partial class EditGames : Page
     {
+        private LoadAllGames lag = new LoadAllGames();
         private string guid;
+        public string edittitle;
+        public string installPath = AppDomain.CurrentDomain.BaseDirectory;
 
         public EditGames()
         {
@@ -53,7 +56,7 @@ namespace GameLauncher
             clearFields();
             ClearGenreBoxes();
             ModifyFile.RemoveGameFromFile(guid);
-            ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
+            ((MainWindow)Application.Current.MainWindow)?.RefreshGames("working");
             EditGameDialog.IsOpen = false;
         }
 
@@ -145,10 +148,11 @@ namespace GameLauncher
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && EditTitle.Text != "")
             {
+                if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text.Replace(":", " -"); }
                 CreateShortcut(fileDialog.FileName);
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
-                string ngNewShortcut = installPath + "Resources/shortcuts/" + EditTitle.Text + ".lnk";
+                string ngNewShortcut = installPath + "Resources/shortcuts/" + edittitle + ".lnk";
                 EditPath.Text = ngNewShortcut;
             }
             else if (dialogResult == true && EditTitle.Text == "")
@@ -166,12 +170,11 @@ namespace GameLauncher
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && EditTitle.Text != "")
             {
-                string installPath = AppDomain.CurrentDomain.BaseDirectory;
+                if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text.Replace(":", " -"); }
                 installPath = installPath.Replace("\\", "/");
                 string ngIconFile = fileDialog.FileName;
-                if (System.IO.File.Exists(installPath + "Resources/img/" + EditTitle.Text + "-icon.png")) { System.IO.File.Delete(installPath + "Resources/img/" + EditTitle.Text + "-icon.png"); }
-                System.IO.File.Copy(ngIconFile, @"./Resources/img/" + EditTitle.Text + "-icon.png");
-                EditIcon.Text = installPath + "Resources/img/" + EditTitle.Text + "-icon.png";
+                DeleteFile(ngIconFile, "icon");
+                EditIcon.Text = installPath + "Resources/img/" + edittitle + "-icon.png";
             }
             else if (dialogResult == true && EditTitle.Text == "")
             {
@@ -188,14 +191,12 @@ namespace GameLauncher
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && EditTitle.Text != "")
             {
+                if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text.Replace(":", " -"); }
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
                 string ngPosterFile = fileDialog.FileName;
-                //PROBLEM - IF YOU EDIT POSTER WHILE ON POSTERVIEW, IT CRASHES AS FILE IS IN USE
-                //NEED TO BE ABLE TO OVERWRITE IT WITH CHOSEN FILE
-                if (System.IO.File.Exists(installPath + "Resources/img/" + EditTitle.Text + "-poster.png")) { System.IO.File.Delete(installPath + "Resources/img/" + EditTitle.Text + "-poster.png"); }
-                System.IO.File.Copy(ngPosterFile, @"./Resources/img/" + EditTitle.Text + "-poster.png");
-                EditPoster.Text = installPath + "Resources/img/" + EditTitle.Text + "-poster.png";
+                DeleteFile(edittitle, "poster");
+                EditPoster.Text = installPath + "Resources/img/" + edittitle + "-poster.png";
             }
             else if (dialogResult == true && EditTitle.Text == "")
             {
@@ -212,12 +213,12 @@ namespace GameLauncher
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && EditTitle.Text != "")
             {
+                if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text.Replace(":", " -"); }
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
                 string ngBannerFile = fileDialog.FileName;
-                if (System.IO.File.Exists(installPath + "Resources/img/" + EditTitle.Text + "-banner.png")) { System.IO.File.Delete(installPath + "Resources/img/" + EditTitle.Text + "-banner.png"); }
-                System.IO.File.Copy(ngBannerFile, @"./Resources/img/" + EditTitle.Text + "-banner.png");
-                EditBanner.Text = installPath + "Resources/img/" + EditTitle.Text + "-banner.png";
+                DeleteFile(ngBannerFile, "banner");
+                EditBanner.Text = installPath + "Resources/img/" + edittitle + "-banner.png";
             }
             else if (dialogResult == true && EditTitle.Text == "")
             {
@@ -232,7 +233,6 @@ namespace GameLauncher
 
         private void CreateShortcut(string linkname)
         {
-            string installPath = AppDomain.CurrentDomain.BaseDirectory;
             if (!Directory.Exists(installPath + "\\Resources\\shortcuts"))
             {
                 System.IO.Directory.CreateDirectory(installPath + "\\Resources\\shortcuts");
@@ -247,6 +247,48 @@ namespace GameLauncher
             shortcut.WorkingDirectory = "C:\\App";
             shortcut.IconLocation = linkname;
             shortcut.Save();
+        }
+
+        private void DeleteFile(string gametitle, string type)
+        {
+            //This needs to be ran in EditGame_OnClick I think?
+            //1. if (type=poster) > else if (type=icon) > etc
+            //2. Set particular images to be located in /resources/img instead of /resources/working (??? is this possible cos binding)
+            //3. Delete image in /working
+            //4. Copy file from /img to /working
+            //5. Set images to be located in /working
+            //potentially need to refresh the UI at times but not sure when
+            PosterViewModel pvm = new PosterViewModel();
+            if (type == "icon")
+            {
+            }
+            else if (type == "poster")
+            {
+                MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
+                pvm.LoadGames("norm");
+                //Delete images from working
+                gametitle = installPath + "Resources/working/" + gametitle;
+                gametitle = gametitle.Replace("\\", "/");
+                string gametitlenorm = gametitle.Replace("Resources/working", "Resources/img");
+                string gametitlework = gametitle.Replace("Resources/img", "Resources/working");
+                //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                //Need to make the UI use /img/ first, but MainWindow is null
+                //How can we refresh the UI here, and also at the v end if MW is null?
+                //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                MainWindow.PosterViewActive("norm");//This SHOULD be settings the mainwindow context to posterview, but with the /img/ as path
+                //It appears to work but still the file is in use! e.g. PosterViewOC contains "/resources/img" in the poster path
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                System.IO.File.Delete(gametitlework + "-poster.png");
+                System.IO.File.Copy(gametitlenorm + "-poster.png", gametitlework + "-poster.png", true);
+                MainWindow.PosterViewActive("working");
+            }
+            else if (type == "banner")
+            {
+            }
+            else if (type == "shortcut")
+            {
+            }
         }
     }
 }

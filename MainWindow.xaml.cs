@@ -19,9 +19,9 @@ namespace GameLauncher
         private ListViewModel listViewModel;
         private PosterViewModel posterViewModel;
         private SettingsViewModel settingsViewModel;
-        private Views.PosterView pv = new Views.PosterView();
-        private Views.BannerView bv = new Views.BannerView();
-        private Views.ListView lv = new Views.ListView();
+        public Views.PosterView pv = new Views.PosterView();
+        public Views.BannerView bv = new Views.BannerView();
+        public Views.ListView lv = new Views.ListView();
         public CollectionViewSource cvs;
 
         public MainWindow()
@@ -29,7 +29,7 @@ namespace GameLauncher
             LoadSettings();
             InitializeComponent();
             posterViewModel = new PosterViewModel();
-            posterViewModel.LoadGames();
+            posterViewModel.LoadGames("working");
             posterViewModel.LoadGenres();
             DataContext = posterViewModel;
 
@@ -38,14 +38,14 @@ namespace GameLauncher
             {
                 Directory.CreateDirectory("./Resources/");
                 OpenAddGameDialog();
-                RefreshGames();
+                RefreshGames("working");
             }
         }
 
         private void OpenAddGameWindow_OnClick(object sender, RoutedEventArgs e)
         {
             OpenAddGameDialog();
-            RefreshGames();
+            RefreshGames("working");
         }
 
         public void OpenAddGameDialog()
@@ -81,13 +81,13 @@ namespace GameLauncher
         //Poster button
         private void PosterButton_OnClick(object sender, RoutedEventArgs e)
         {
-            PosterViewActive();
+            PosterViewActive("working");
         }
 
-        private void PosterViewActive()
+        public void PosterViewActive(string mode)
         {
             posterViewModel = new PosterViewModel();
-            posterViewModel.LoadGames();
+            posterViewModel.LoadGames(mode);
             posterViewModel.LoadGenres();
             DataContext = posterViewModel;
         }
@@ -98,7 +98,7 @@ namespace GameLauncher
             BannerViewActive();
         }
 
-        private void BannerViewActive()
+        public void BannerViewActive()
         {
             bannerViewModel = new BannerViewModel();
             bannerViewModel.LoadGames();
@@ -112,7 +112,7 @@ namespace GameLauncher
             ListViewActive();
         }
 
-        private void ListViewActive()
+        public void ListViewActive()
         {
             listViewModel = new ListViewModel();
             listViewModel.LoadGames();
@@ -140,10 +140,10 @@ namespace GameLauncher
             if (DataContext == posterViewModel) { posterViewModel.LoadList(); }
             if (DataContext == bannerViewModel) { bannerViewModel.LoadList(); }
             if (DataContext == listViewModel) { listViewModel.LoadList(); }
-            RefreshGames();
+            RefreshGames("working");
         }
 
-        public void RefreshGames()
+        public void RefreshGames(string mode)
         {
             if (DataContext == listViewModel)
             {
@@ -153,7 +153,7 @@ namespace GameLauncher
             else if (DataContext == posterViewModel)
             {
                 Console.WriteLine("Poster");
-                PosterViewActive();
+                PosterViewActive(mode);
             }
             else if (DataContext == bannerViewModel)
             {
