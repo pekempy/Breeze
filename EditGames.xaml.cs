@@ -201,10 +201,10 @@ namespace GameLauncher
                 {
                     System.IO.File.Copy(filedialogoutput, imgpath, true);
                 } //trips here if editing twice
-                catch (Exception e)
+                catch (Exception err)
                 {
                     Console.WriteLine("We've got an error! /img/ file is locked!!!!! :C (Edit twice error)");
-                    Console.WriteLine(e);
+                    Console.WriteLine(err);
                 }
 
                 DeleteFile(edittitle, "poster"); //method to pass in games modified title, and "poster" as the edited type
@@ -299,19 +299,19 @@ namespace GameLauncher
             {
                 System.IO.File.Delete(workingfile);//will sometimes delete, if you select some text in poster box before closing
             }
-            catch (Exception e)
+            catch (Exception err)
             {
                 Console.WriteLine("We've got an error! Delete working File is locked :'( (Can't delete)");
-                Console.WriteLine(e);
+                Console.WriteLine(err);
             }
             try
             {
                 System.IO.File.Copy(imgfile, workingfile, true);
             }
-            catch (Exception e)
+            catch (Exception err)
             {
                 Console.WriteLine("We've got an error! copy File is locked :'( (can't copy)");
-                Console.WriteLine(e);
+                Console.WriteLine(err);
             }
             
 
