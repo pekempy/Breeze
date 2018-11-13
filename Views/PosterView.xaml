@@ -161,6 +161,13 @@
                                         StaysOpen="False">
                                             <!-- Items inside overflow -->
                                             <StackPanel>
+                                                <!--DebugButton-->
+                                                <Button Click="DEBUG" Tag="{Binding Poster}">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <materialDesign:PackIcon VerticalAlignment="Center" Kind="SETTINGS" />
+                                                        <TextBlock Margin="5 0 0 0" Text="DEBUG" />
+                                                    </StackPanel>
+                                                </Button>
                                                 <!-- Link Button -->
                                                 <Button Click="GameLink_OnClick" Tag="{Binding Link}">
                                                     <StackPanel Orientation="Horizontal">

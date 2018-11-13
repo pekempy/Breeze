@@ -56,6 +56,7 @@ namespace GameLauncher
             clearFields();
             ClearGenreBoxes();
             ModifyFile.RemoveGameFromFile(guid);
+            Deletelocalfiles(edittitle);
             ((MainWindow)Application.Current.MainWindow)?.RefreshGames("working");
             EditGameDialog.IsOpen = false;
         }
@@ -194,8 +195,12 @@ namespace GameLauncher
                 if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text.Replace(":", " -"); }
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
-                string ngPosterFile = fileDialog.FileName;
-                DeleteFile(edittitle, "poster");
+                string filedialogoutput = fileDialog.FileName;
+                string imgpath = installPath + "Resources/img/" + edittitle + "-poster.png";
+                try { System.IO.File.Copy(filedialogoutput, imgpath, true); } //trips here if editing twice
+                catch { Console.WriteLine("We've got an error! /img/ file is locked!!!!! :C "); }
+
+                DeleteFile(edittitle, "poster"); //method to pass in games modified title, and "poster" as the edited type
                 EditPoster.Text = installPath + "Resources/img/" + edittitle + "-poster.png";
             }
             else if (dialogResult == true && EditTitle.Text == "")
@@ -251,13 +256,6 @@ namespace GameLauncher
 
         private void DeleteFile(string gametitle, string type)
         {
-            //This needs to be ran in EditGame_OnClick I think?
-            //1. if (type=poster) > else if (type=icon) > etc
-            //2. Set particular images to be located in /resources/img instead of /resources/working (??? is this possible cos binding)
-            //3. Delete image in /working
-            //4. Copy file from /img to /working
-            //5. Set images to be located in /working
-            //potentially need to refresh the UI at times but not sure when
             PosterViewModel pvm = new PosterViewModel();
             if (type == "icon")
             {
@@ -271,17 +269,8 @@ namespace GameLauncher
                 gametitle = gametitle.Replace("\\", "/");
                 string gametitlenorm = gametitle.Replace("Resources/working", "Resources/img");
                 string gametitlework = gametitle.Replace("Resources/img", "Resources/working");
-                //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                //Need to make the UI use /img/ first, but MainWindow is null
-                //How can we refresh the UI here, and also at the v end if MW is null?
-                //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                MainWindow.PosterViewActive("norm");//This SHOULD be settings the mainwindow context to posterview, but with the /img/ as path
-                //It appears to work but still the file is in use! e.g. PosterViewOC contains "/resources/img" in the poster path
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                System.IO.File.Delete(gametitlework + "-poster.png");
-                System.IO.File.Copy(gametitlenorm + "-poster.png", gametitlework + "-poster.png", true);
-                MainWindow.PosterViewActive("working");
+                MainWindow.PosterViewActive("norm");
+                MainWindow.pv.gameListView.ApplyTemplate();
             }
             else if (type == "banner")
             {
@@ -289,6 +278,25 @@ namespace GameLauncher
             else if (type == "shortcut")
             {
             }
+        }
+
+        public void Deletelocalfiles(string gametitle)
+        {
+            MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
+            string workingfile = installPath + "Resources/working/" + gametitle + "-poster.png";
+            string imgfile = installPath + "Resources/img/" + gametitle + "-poster.png";
+            workingfile = workingfile.Replace("\\", "/");
+            imgfile = imgfile.Replace("\\", "/");
+
+            try
+            {
+                System.IO.File.Delete(workingfile);//will sometimes delete, if you select some text in poster box before closing
+                System.IO.File.Copy(imgfile, workingfile, true);
+            }
+            catch (Exception e) { Console.WriteLine("We've got an error! File is locked :'( "); }
+
+            MainWindow.PosterViewActive("working");
+            MainWindow.pv.gameListView.ApplyTemplate();
         }
     }
 }
