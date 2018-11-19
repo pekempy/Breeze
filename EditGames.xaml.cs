@@ -20,6 +20,7 @@ namespace GameLauncher
         public EditGames()
         {
             InitializeComponent();
+            installPath = installPath.Replace("\\", "/");
         }
 
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
@@ -56,7 +57,6 @@ namespace GameLauncher
             clearFields();
             ClearGenreBoxes();
             ModifyFile.RemoveGameFromFile(guid);
-            Deletelocalfiles(edittitle);
             ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
             EditGameDialog.IsOpen = false;
         }
@@ -152,7 +152,6 @@ namespace GameLauncher
                 if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text.Replace(":", " -"); }
                 CreateShortcut(fileDialog.FileName);
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
-                installPath = installPath.Replace("\\", "/");
                 string ngNewShortcut = installPath + "Resources/shortcuts/" + edittitle + ".lnk";
                 EditPath.Text = ngNewShortcut;
             }
@@ -172,9 +171,7 @@ namespace GameLauncher
             if (dialogResult == true && EditTitle.Text != "")
             {
                 if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text.Replace(":", " -"); }
-                installPath = installPath.Replace("\\", "/");
                 string ngIconFile = fileDialog.FileName;
-                DeleteFile(ngIconFile, "icon");
                 EditIcon.Text = installPath + "Resources/img/" + edittitle + "-icon.png";
             }
             else if (dialogResult == true && EditTitle.Text == "")
@@ -193,14 +190,10 @@ namespace GameLauncher
             if (dialogResult == true && EditTitle.Text != "")
             {
                 if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text.Replace(":", " -"); }
+                else if (!EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text; }
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
-                installPath = installPath.Replace("\\", "/");
                 string filedialogoutput = fileDialog.FileName;
-                string imgpath = installPath + "Resources/img/" + edittitle + "-poster.png";
-                try { System.IO.File.Copy(filedialogoutput, imgpath, true); } //trips here if editing twice
-                catch { Console.WriteLine("We've got an error! /img/ file is locked!!!!! :C "); }
-
-                DeleteFile(edittitle, "poster"); //method to pass in games modified title, and "poster" as the edited type
+                UpdateFile(edittitle, filedialogoutput, "poster");
                 EditPoster.Text = installPath + "Resources/img/" + edittitle + "-poster.png";
             }
             else if (dialogResult == true && EditTitle.Text == "")
@@ -220,9 +213,7 @@ namespace GameLauncher
             {
                 if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text.Replace(":", " -"); }
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
-                installPath = installPath.Replace("\\", "/");
                 string ngBannerFile = fileDialog.FileName;
-                DeleteFile(ngBannerFile, "banner");
                 EditBanner.Text = installPath + "Resources/img/" + edittitle + "-banner.png";
             }
             else if (dialogResult == true && EditTitle.Text == "")
@@ -254,23 +245,15 @@ namespace GameLauncher
             shortcut.Save();
         }
 
-        private void DeleteFile(string gametitle, string type)
+        private void UpdateFile(string gametitle, string sourcefile, string type)
         {
-            PosterViewModel pvm = new PosterViewModel();
             if (type == "icon")
             {
             }
             else if (type == "poster")
             {
-                MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
-                pvm.LoadGames();
-                //Delete images from working
-                gametitle = installPath + "Resources/working/" + gametitle;
-                gametitle = gametitle.Replace("\\", "/");
-                string gametitlenorm = gametitle.Replace("Resources/working", "Resources/img");
-                string gametitlework = gametitle.Replace("Resources/img", "Resources/working");
-                MainWindow.PosterViewActive();
-                MainWindow.pv.gameListView.ApplyTemplate();
+                gametitle = installPath + "Resources/img/" + gametitle + "-poster.png";
+                System.IO.File.Copy(sourcefile, gametitle, true);
             }
             else if (type == "banner")
             {
@@ -278,24 +261,6 @@ namespace GameLauncher
             else if (type == "shortcut")
             {
             }
-        }
-
-        public void Deletelocalfiles(string gametitle)
-        {
-            MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
-            string workingfile = installPath + "Resources/working/" + gametitle + "-poster.png";
-            string imgfile = installPath + "Resources/img/" + gametitle + "-poster.png";
-            workingfile = workingfile.Replace("\\", "/");
-            imgfile = imgfile.Replace("\\", "/");
-            try
-            {
-                System.IO.File.Delete(workingfile);//will sometimes delete, if you select some text in poster box before closing
-                System.IO.File.Copy(imgfile, workingfile, true);
-            }
-            catch (Exception e) { Console.WriteLine("We've got an error! File is locked :'( "); }
-
-            MainWindow.PosterViewActive();
-            MainWindow.pv.gameListView.ApplyTemplate();
         }
     }
 }
