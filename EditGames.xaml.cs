@@ -57,7 +57,7 @@ namespace GameLauncher
             ClearGenreBoxes();
             ModifyFile.RemoveGameFromFile(guid);
             Deletelocalfiles(edittitle);
-            ((MainWindow)Application.Current.MainWindow)?.RefreshGames("working");
+            ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
             EditGameDialog.IsOpen = false;
         }
 
@@ -263,13 +263,13 @@ namespace GameLauncher
             else if (type == "poster")
             {
                 MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
-                pvm.LoadGames("norm");
+                pvm.LoadGames();
                 //Delete images from working
                 gametitle = installPath + "Resources/working/" + gametitle;
                 gametitle = gametitle.Replace("\\", "/");
                 string gametitlenorm = gametitle.Replace("Resources/working", "Resources/img");
                 string gametitlework = gametitle.Replace("Resources/img", "Resources/working");
-                MainWindow.PosterViewActive("norm");
+                MainWindow.PosterViewActive();
                 MainWindow.pv.gameListView.ApplyTemplate();
             }
             else if (type == "banner")
@@ -287,7 +287,6 @@ namespace GameLauncher
             string imgfile = installPath + "Resources/img/" + gametitle + "-poster.png";
             workingfile = workingfile.Replace("\\", "/");
             imgfile = imgfile.Replace("\\", "/");
-
             try
             {
                 System.IO.File.Delete(workingfile);//will sometimes delete, if you select some text in poster box before closing
@@ -295,7 +294,7 @@ namespace GameLauncher
             }
             catch (Exception e) { Console.WriteLine("We've got an error! File is locked :'( "); }
 
-            MainWindow.PosterViewActive("working");
+            MainWindow.PosterViewActive();
             MainWindow.pv.gameListView.ApplyTemplate();
         }
     }

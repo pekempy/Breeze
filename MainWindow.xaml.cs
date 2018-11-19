@@ -29,7 +29,7 @@ namespace GameLauncher
             LoadSettings();
             InitializeComponent();
             posterViewModel = new PosterViewModel();
-            posterViewModel.LoadGames("working");
+            posterViewModel.LoadGames();
             posterViewModel.LoadGenres();
             DataContext = posterViewModel;
 
@@ -38,14 +38,14 @@ namespace GameLauncher
             {
                 Directory.CreateDirectory("./Resources/");
                 OpenAddGameDialog();
-                RefreshGames("working");
+                RefreshGames();
             }
         }
 
         private void OpenAddGameWindow_OnClick(object sender, RoutedEventArgs e)
         {
             OpenAddGameDialog();
-            RefreshGames("working");
+            RefreshGames();
         }
 
         public void OpenAddGameDialog()
@@ -81,13 +81,13 @@ namespace GameLauncher
         //Poster button
         private void PosterButton_OnClick(object sender, RoutedEventArgs e)
         {
-            PosterViewActive("working");
+            PosterViewActive();
         }
 
-        public void PosterViewActive(string mode)
+        public void PosterViewActive()
         {
             posterViewModel = new PosterViewModel();
-            posterViewModel.LoadGames(mode);
+            posterViewModel.LoadGames();
             posterViewModel.LoadGenres();
             DataContext = posterViewModel;
         }
@@ -140,10 +140,10 @@ namespace GameLauncher
             if (DataContext == posterViewModel) { posterViewModel.LoadList(); }
             if (DataContext == bannerViewModel) { bannerViewModel.LoadList(); }
             if (DataContext == listViewModel) { listViewModel.LoadList(); }
-            RefreshGames("working");
+            RefreshGames();
         }
 
-        public void RefreshGames(string mode)
+        public void RefreshGames()
         {
             if (DataContext == listViewModel)
             {
@@ -153,7 +153,7 @@ namespace GameLauncher
             else if (DataContext == posterViewModel)
             {
                 Console.WriteLine("Poster");
-                PosterViewActive(mode);
+                PosterViewActive();
             }
             else if (DataContext == bannerViewModel)
             {

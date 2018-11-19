@@ -43,14 +43,14 @@ namespace GameLauncher.Views
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.EditGameInfile(((Button)sender).Tag);
-            MainWindow.RefreshGames("working");
+            MainWindow.RefreshGames();
         }
 
         private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.RemoveGameFromFile(((Button)sender).Tag);
             ModifyFile.DeleteGameImages(((Button)sender).CommandParameter.ToString());
-            MainWindow.RefreshGames("working");
+            MainWindow.RefreshGames();
         }
 
         //When text is changed in searchbar, apply filter
