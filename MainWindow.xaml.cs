@@ -36,6 +36,8 @@ namespace GameLauncher
             if (!File.Exists("./Resources/GamesList.txt"))
             {
                 Directory.CreateDirectory("./Resources/");
+                if (!File.Exists("./Resources/img/")) { Directory.CreateDirectory("./Resources/img/"); }
+                if (!File.Exists("./Resources/shortcuts/")) { Directory.CreateDirectory("./Resources/shortcuts/"); }
                 OpenAddGameDialog();
                 RefreshGames();
             }
