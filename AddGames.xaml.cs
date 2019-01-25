@@ -1,4 +1,4 @@
-﻿using GameLauncher.Models;
+using GameLauncher.Models;
 using GameLauncher.ViewModels;
 using Microsoft.Win32;
 using System;
