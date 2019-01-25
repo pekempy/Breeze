@@ -18,9 +18,9 @@ namespace GameLauncher
         private ListViewModel listViewModel;
         private PosterViewModel posterViewModel;
         private SettingsViewModel settingsViewModel;
-        private Views.PosterView pv = new Views.PosterView();
-        private Views.BannerView bv = new Views.BannerView();
-        private Views.ListView lv = new Views.ListView();
+        public Views.PosterView pv = new Views.PosterView();
+        public Views.BannerView bv = new Views.BannerView();
+        public Views.ListView lv = new Views.ListView();
         public CollectionViewSource cvs;
 
         public MainWindow()
@@ -85,7 +85,7 @@ namespace GameLauncher
             PosterViewActive();
         }
 
-        private void PosterViewActive()
+        public void PosterViewActive()
         {
             posterViewModel = new PosterViewModel();
             posterViewModel.LoadGames();
@@ -99,7 +99,7 @@ namespace GameLauncher
             BannerViewActive();
         }
 
-        private void BannerViewActive()
+        public void BannerViewActive()
         {
             bannerViewModel = new BannerViewModel();
             bannerViewModel.LoadGames();
@@ -113,7 +113,7 @@ namespace GameLauncher
             ListViewActive();
         }
 
-        private void ListViewActive()
+        public void ListViewActive()
         {
             listViewModel = new ListViewModel();
             listViewModel.LoadGames();
