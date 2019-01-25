@@ -20,7 +20,7 @@ namespace GameLauncher.Views
             InitializeComponent();
         }
 
-        private void DEBUG(object sender, RoutedEventArgs e)
+        private void DEBUG_OnClick(object sender, RoutedEventArgs e)
         {
             Console.WriteLine(((Button)sender).Tag.ToString());
         }

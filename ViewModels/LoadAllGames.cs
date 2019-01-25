@@ -102,10 +102,9 @@ namespace GameLauncher.ViewModels
                 foreach (var item in gamesArr)
                 {
                     string installPath = AppDomain.CurrentDomain.BaseDirectory;
-                    installPath = installPath.Replace("\\", "/");
-                    string imgPath = installPath + "Resources/img/";
-                    string shortcutPath = installPath + "Resources/shortcuts/";
-                    string workingPath = installPath + "Resources/working/";
+                    string imgPath = "/img/";
+                    string shortcutPath = "/shortcuts/";
+                    string workingPath = "/working/";
                     columns = gamesArr[numberOfGames].Split('|');
 
                     //Fix paths
@@ -113,6 +112,11 @@ namespace GameLauncher.ViewModels
                     columns[4] = columns[4].Replace(imgPath, workingPath);
                     columns[5] = columns[5].Replace(imgPath, workingPath);
                     columns[6] = columns[6].Replace(imgPath, workingPath);
+                    //Here, we need to somehow release the file in /working/game-x.png
+                    //Then we need to overwrite it with the one from /img/game-x.png
+                    //Then we need to load the game icon from /working/game-x.png again
+                    //This should allow the UI to refresh the icon, as currently the /working/ dir
+                    //cannot be updated while the UI is using it
                     games.Add(new GameList
                     {
                         Title = columns[0],

@@ -26,6 +26,7 @@ namespace GameLauncher
         public MainWindow()
         {
             LoadSettings();
+            DeleteWorkingDirContents();
             InitializeComponent();
             posterViewModel = new PosterViewModel();
             posterViewModel.LoadGames();
@@ -172,6 +173,10 @@ namespace GameLauncher
             }
         }
 
+        public void DeleteWorkingDirContents()
+        {
+            Directory.Delete(@"Resources/working", true);
+        }
         //Load settings
         public void LoadSettings()
         {
