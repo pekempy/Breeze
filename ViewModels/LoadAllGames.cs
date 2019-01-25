@@ -1,4 +1,4 @@
-﻿using GameLauncher.Models;
+using GameLauncher.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -61,24 +61,42 @@ namespace GameLauncher.ViewModels
                     //Copy the files to a working dir, to prevent overwrites
                     columns = gamesArr[numOfGames].Split('|');
                     string gameTitle = columns[0];
+                    string gameLauncher = columns[2];
+                    string gameIcon = columns[4];
+                    string gamePoster = columns[5];
+                    string gameBanner = columns[6];
                     string fileToCopy;
                     string targetFile;
                     string installPath = AppDomain.CurrentDomain.BaseDirectory;
                     installPath = installPath.Replace("\\", "/");
                     if (!Directory.Exists(installPath + "Resources/working/")) { Directory.CreateDirectory(installPath + "Resources/working/"); }
                     if (gameTitle.Contains(":")) { gameTitle = gameTitle.Replace(":", " -"); }
-                    fileToCopy = installPath + "Resources/img/" + gameTitle + "-icon.png";
-                    targetFile = installPath + "Resources/working/" + gameTitle + "-icon.png";
-                    if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
-                    fileToCopy = installPath + "Resources/img/" + gameTitle + "-poster.png";
-                    targetFile = installPath + "Resources/working/" + gameTitle + "-poster.png";
-                    if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
-                    fileToCopy = installPath + "Resources/img/" + gameTitle + "-banner.png";
-                    targetFile = installPath + "Resources/working/" + gameTitle + "-banner.png";
-                    if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
-                    fileToCopy = installPath + "Resources/shortcuts/" + gameTitle + ".lnk";
-                    targetFile = installPath + "Resources/working/" + gameTitle + ".lnk";
-                    if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
+
+                    //check if there is an icon befor doing this
+                    if (gameIcon != "")
+                    {
+                        fileToCopy = installPath + "Resources/img/" + gameTitle + "-icon.png";
+                        targetFile = installPath + "Resources/working/" + gameTitle + "-icon.png";
+                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
+                    }
+                    if (gamePoster != "")
+                    {
+                        fileToCopy = installPath + "Resources/img/" + gameTitle + "-poster.png";
+                        targetFile = installPath + "Resources/working/" + gameTitle + "-poster.png";
+                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
+                    }
+                    if (gameBanner != "")
+                    {
+                        fileToCopy = installPath + "Resources/img/" + gameTitle + "-banner.png";
+                        targetFile = installPath + "Resources/working/" + gameTitle + "-banner.png";
+                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
+                    }
+                    if (gameLauncher != "")
+                    {
+                        fileToCopy = installPath + "Resources/shortcuts/" + gameTitle + ".lnk";
+                        targetFile = installPath + "Resources/working/" + gameTitle + ".lnk";
+                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
+                    }
                     numOfGames++;
                 }
                 foreach (var item in gamesArr)
