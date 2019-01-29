@@ -1,5 +1,6 @@
 ﻿using GameLauncher.Properties;
 using GameLauncher.ViewModels;
+using MaterialDesignColors;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Configuration;
@@ -27,23 +28,13 @@ namespace GameLauncher.Views
             if (Settings.Default.theme == "Dark") { themeToggle.IsChecked = true; }
             if (Settings.Default.primarylight != "")
             {
-                ColorPrimaryLight.Text = Settings.Default.primarylight;
-                ColorPrimaryLightRect.Fill = (Brush)converter.ConvertFromString("#" + ColorPrimaryLight.Text);
+                ColorPrimary.Text = Settings.Default.primarylight;
+                ColorPrimaryRect.Fill = (Brush)converter.ConvertFromString("#" + ColorPrimary.Text);
             }
             if (Settings.Default.accentlight != "")
             {
-                ColorAccentLight.Text = Settings.Default.accentlight;
-                ColorAccentLightRect.Fill = (Brush)converter.ConvertFromString("#" + ColorAccentLight.Text);
-            }
-            if (Settings.Default.primarydark != "")
-            {
-                ColorPrimaryDark.Text = Settings.Default.primarydark;
-                ColorPrimaryDarkRect.Fill = (Brush)converter.ConvertFromString("#" + ColorPrimaryDark.Text);
-            }
-            if (Settings.Default.accentdark != "")
-            {
-                ColorAccentDark.Text = Settings.Default.accentdark;
-                ColorAccentDarkRect.Fill = (Brush)converter.ConvertFromString("#" + ColorAccentDark.Text);
+                ColorAccent.Text = Settings.Default.accentlight;
+                ColorAccentRect.Fill = (Brush)converter.ConvertFromString("#" + ColorAccent.Text);
             }
         }
 
@@ -61,69 +52,40 @@ namespace GameLauncher.Views
             SaveSettings();
         }
 
-        private void ChangePrimaryLight(object sender, KeyEventArgs e)
+        private void ChangePrimary(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
             {
                 var regexColorCode = new Regex("^#[a-fA-F0-9]{6}$");
-                if (regexColorCode.IsMatch("#" + ColorPrimaryLight.Text.Trim()))
+                if (regexColorCode.IsMatch("#" + ColorPrimary.Text.Trim()))
                 {
                     var converter = new System.Windows.Media.BrushConverter();
-                    var brush = (Brush)converter.ConvertFromString("#" + ColorPrimaryLight.Text);
-                    Properties.Settings.Default.primarylight = ColorPrimaryLight.Text;
+                    var brush = (Brush)converter.ConvertFromString("#" + ColorPrimary.Text);
+                    Properties.Settings.Default.primarylight = ColorPrimary.Text;
                     SaveSettings();
-                    ColorPrimaryLightRect.Fill = brush;
+                    ColorPrimaryRect.Fill = brush;
+                    //new PaletteHelper().ReplacePrimaryColor(brush.ToString());
+                    //brush.ToString() doesn't work lol, needs a "swatch"
                 }
             }
         }
 
-        private void ChangeAccentLight(object sender, KeyEventArgs e)
+        private void ChangeAccent(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
             {
                 var regexColorCode = new Regex("^#[a-fA-F0-9]{6}$");
-                if (regexColorCode.IsMatch("#" + ColorPrimaryLight.Text.Trim()))
+                if (regexColorCode.IsMatch("#" + ColorPrimary.Text.Trim()))
                 {
                     var converter = new System.Windows.Media.BrushConverter();
-                    var brush = (Brush)converter.ConvertFromString("#" + ColorAccentLight.Text);
-                    Properties.Settings.Default.accentlight = ColorAccentLight.Text;
+                    var brush = (Brush)converter.ConvertFromString("#" + ColorAccent.Text);
+                    Properties.Settings.Default.accentlight = ColorAccent.Text;
                     SaveSettings();
-                    ColorAccentLightRect.Fill = brush;
+                    ColorAccentRect.Fill = brush;
                 }
             }
         }
 
-        private void ChangePrimaryDark(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return)
-            {
-                var regexColorCode = new Regex("^#[a-fA-F0-9]{6}$");
-                if (regexColorCode.IsMatch("#" + ColorPrimaryLight.Text.Trim()))
-                {
-                    var converter = new System.Windows.Media.BrushConverter();
-                    var brush = (Brush)converter.ConvertFromString("#" + ColorPrimaryDark.Text);
-                    Properties.Settings.Default.primarydark = ColorPrimaryDark.Text;
-                    SaveSettings();
-                    ColorPrimaryDarkRect.Fill = brush;
-                }
-            }
-        }
-
-        private void ChangeAccentDark(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return)
-            {
-                var regexColorCode = new Regex("^#[a-fA-F0-9]{6}$");
-                if (regexColorCode.IsMatch("#" + ColorPrimaryLight.Text.Trim()))
-                {
-                    var converter = new System.Windows.Media.BrushConverter();
-                    var brush = (Brush)converter.ConvertFromString("#" + ColorAccentDark.Text);
-                    Properties.Settings.Default.accentdark = ColorAccentDark.Text;
-                    SaveSettings();
-                    ColorAccentDarkRect.Fill = brush;
-                }
-            }
-        }
 
         private void AddNewGenre_OnClick(object sender, RoutedEventArgs e)
         {
