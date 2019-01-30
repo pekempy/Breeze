@@ -25,7 +25,11 @@ namespace GameLauncher
 
         public MainWindow()
         {
+            LoadAllGames lag = new LoadAllGames();
             LoadSettings();
+            MakeDirectories();
+            MakeDefaultGenres();
+            lag.LoadGenres();
             DeleteWorkingDirContents();
             InitializeComponent();
             posterViewModel = new PosterViewModel();
@@ -33,17 +37,45 @@ namespace GameLauncher
             posterViewModel.LoadGenres();
             DataContext = posterViewModel;
 
-            //If games list doesn't exist, create directory and open ag dialog
             if (!File.Exists("./Resources/GamesList.txt"))
             {
-                Directory.CreateDirectory("./Resources/");
-                if (!File.Exists("./Resources/img/")) { Directory.CreateDirectory("./Resources/img/"); }
-                if (!File.Exists("./Resources/shortcuts/")) { Directory.CreateDirectory("./Resources/shortcuts/"); }
                 OpenAddGameDialog();
                 RefreshGames();
             }
+
+        }
+        public void MakeDirectories()
+        {
+            if (!Directory.Exists("./Resources/")) { Directory.CreateDirectory("./Resources/"); }
+            if (!Directory.Exists("./Resources/img/")) { Directory.CreateDirectory("./Resources/img/"); }
+            if (!Directory.Exists("./Resources/shortcuts/")) { Directory.CreateDirectory("./Resources/shortcuts/"); }
+            if (!Directory.Exists("./Resources/working/")) { Directory.CreateDirectory("./Resources/working/"); }
         }
 
+        public void MakeDefaultGenres()
+        {
+            if (!File.Exists("./Resources/GenreList.txt"))
+            {
+                TextWriter tsw = new StreamWriter(@"./Resources/GenreList.txt", true);
+                Guid gameGuid = Guid.NewGuid();
+                tsw.WriteLine("Action|" + Guid.NewGuid());
+                tsw.WriteLine("Adventure|" + Guid.NewGuid());
+                tsw.WriteLine("Casual|" + Guid.NewGuid());
+                tsw.WriteLine("Emulator|" + Guid.NewGuid());
+                tsw.WriteLine("Indie|" + Guid.NewGuid());
+                tsw.WriteLine("MMO|" + Guid.NewGuid());
+                tsw.WriteLine("Open World|" + Guid.NewGuid());
+                tsw.WriteLine("Platform|" + Guid.NewGuid());
+                tsw.WriteLine("Racing|" + Guid.NewGuid());
+                tsw.WriteLine("Retro|" + Guid.NewGuid());
+                tsw.WriteLine("RPG|" + Guid.NewGuid());
+                tsw.WriteLine("Simulation|" + Guid.NewGuid());
+                tsw.WriteLine("Sport|" + Guid.NewGuid());
+                tsw.WriteLine("Strategy|" + Guid.NewGuid());
+                tsw.WriteLine("VR|" + Guid.NewGuid());
+                tsw.Close();
+            }
+        }
         private void OpenAddGameWindow_OnClick(object sender, RoutedEventArgs e)
         {
             OpenAddGameDialog();

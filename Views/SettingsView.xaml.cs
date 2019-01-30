@@ -66,7 +66,7 @@ namespace GameLauncher.Views
             try
             {
                 TextWriter tsw = new StreamWriter(@"./Resources/GenreList.txt", true);
-                tsw.WriteLine(NewGenreName.Text + "|False|" + Guid.NewGuid());
+                tsw.WriteLine(NewGenreName.Text + Guid.NewGuid());
                 tsw.Close();
                 NewGenreName.Text = "";
             }

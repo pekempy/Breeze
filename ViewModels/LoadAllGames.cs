@@ -35,8 +35,7 @@ namespace GameLauncher.ViewModels
                     genres.Add(new GenreList
                     {
                         Name = columns[0],
-                        Checked = columns[1],
-                        Guid = columns[2]
+                        Guid = columns[1]
                     });
                     numberOfGenres++;
                 }
