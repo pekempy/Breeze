@@ -183,6 +183,8 @@ namespace GameLauncher
             //Theme Light or Dark
             if (Settings.Default.theme.ToString() == "Dark") { ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark); }
             else if (Settings.Default.theme.ToString() == "Light") { ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Light); }
+            if (Settings.Default.primary.ToString() != "") { new PaletteHelper().ReplacePrimaryColor(Settings.Default.primary.ToString()); }
+            if (Settings.Default.accent.ToString() != "") { new PaletteHelper().ReplaceAccentColor(Settings.Default.accent.ToString()); }
         }
     }
 }

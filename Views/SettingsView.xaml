@@ -73,35 +73,83 @@
                   Grid.ColumnSpan="4" Grid.RowSpan="10"
                   Visibility="{Binding Path=IsChecked, ElementName=ThemeBtn, Converter={StaticResource b2v}}">
             <!-- CONTENT OF THE THEMES TAB GOES IN HERE -->
-            <StackPanel HorizontalAlignment="Left">
-                <TextBlock Height="40">Enable Dark Mode</TextBlock>
-                <TextBlock Height="40">Primary Color (coming soon)</TextBlock>
-                <TextBlock Height="40">Accent Color (coming soon)</TextBlock>
-            </StackPanel>
-            <StackPanel HorizontalAlignment="Right" Width="85">
-                <ToggleButton x:Name="themeToggle"
-                              HorizontalAlignment="Right"
-                              Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
-                              Checked="DarkModeToggle_Checked"
-                              Unchecked="DarkModeToggle_Unchecked"
-                              VerticalAlignment="Top" 
-                              Margin="0 0 20 0"/>
-                <StackPanel Orientation="Horizontal" Margin="0 15 0 0" Width="90">
-                    <TextBox x:Name="ColorPrimary"
-                             Width="60"
-                             Height="30"
-                             materialDesign:HintAssist.Hint="Hex Code"
-                             KeyDown="ChangePrimary" 
-                             MaxLength="6"/>
-                    <Rectangle x:Name="ColorPrimaryRect" Height="25" Width="25" Fill="White" />
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Enable Dark Mode</TextBlock>
+                    <ToggleButton x:Name="themeToggle"
+                        Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                                  Margin="60 0 0 0"
+                        HorizontalAlignment="Right"
+                        Checked="DarkModeToggle_Checked"
+                        Unchecked="DarkModeToggle_Unchecked" />
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 5 0 0" Width="90">
-                    <TextBox x:Name="ColorAccent"
-                             Width="60"
-                             Height="30"
-                             materialDesign:HintAssist.Hint="Hex Code"
-                             KeyDown="ChangeAccent" />
-                    <Rectangle x:Name="ColorAccentRect" Height="25" Width="25" Fill="White" />
+                <TextBlock />
+                <TextBlock HorizontalAlignment="Left" Width="160" Height="16" VerticalAlignment="Top"><Run Text="Primary Colour"/></TextBlock>
+                <StackPanel Margin="0 5 0 0" Height="125" VerticalAlignment="Top">
+                    <WrapPanel Width="auto" Height="125">
+                        <!-- Row One Buttons (PRIMARY) -->
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="PPink" Background="#e91e63" Tag="Pink" Click="ChangePrimary_OnClick"/>
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="PRed" Background="#f44336" Tag="Red" Click="ChangePrimary_OnClick"/>
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="PDeepOrange" Background="#ff5722" Tag="DeepOrange" Click="ChangePrimary_OnClick"/>
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="POrange" Background="#ffc107" Tag="Orange" Click="ChangePrimary_OnClick"/>
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="PYellow" Background="#ffeb3b" Tag="Yellow" Click="ChangePrimary_OnClick"/>
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="PLime" Background="#8bc34a" Tag="Lime" Click="ChangePrimary_OnClick" />
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="PGreen" Background="#4caf50" Tag="Green" Click="ChangePrimary_OnClick" />
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="PTeal" Background="#009688" Tag="Teal" Click="ChangePrimary_OnClick" />
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="PCyan" Background="#00bcd4" Tag="Cyan" Click="ChangePrimary_OnClick" />
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="PBlue" Background="#3369e8" Tag="Blue" Click="ChangePrimary_OnClick" />
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="PIndigo" Background="#3f51b5" Tag="Indigo" Click="ChangePrimary_OnClick" />
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="PDeepPurple" Background="#673ab7" Tag="DeepPurple" Click="ChangePrimary_OnClick" />
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="PPurple" Background="#9c27b0" Tag="Purple" Click="ChangePrimary_OnClick" />
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="PBlueGrey" Background="#607d8b" Tag="BlueGrey" Click="ChangePrimary_OnClick" />
+                    </WrapPanel>
+                </StackPanel>
+                <TextBlock />
+                <TextBlock HorizontalAlignment="Left" Width="160" Height="16" VerticalAlignment="Top"><Run Text="Accent Colour"/></TextBlock>
+                <StackPanel  Margin="0 5 0 0" Height="125" VerticalAlignment="Top">
+                    <WrapPanel Width="auto" Height="125">
+                        <!-- Row Two Buttons (ACCENT) -->
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="APink" Background="#e91e63" Tag="Pink" Click="ChangeAccent_OnClick"/>
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="ARed" Background="#f44336" Tag="Red" Click="ChangeAccent_OnClick"/>
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="ADeepOrange" Background="#ff5722" Tag="DeepOrange" Click="ChangeAccent_OnClick"/>
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="AOrange" Background="#ffc107" Tag="Orange" Click="ChangeAccent_OnClick"/>
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="AYellow" Background="#ffeb3b" Tag="Yellow" Click="ChangeAccent_OnClick"/>
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="ALime" Background="#8bc34a" Tag="Lime" Click="ChangeAccent_OnClick" />
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="AGreen" Background="#4caf50" Tag="Green" Click="ChangeAccent_OnClick" />
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="ATeal" Background="#009688" Tag="Teal" Click="ChangeAccent_OnClick" />
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="ACyan" Background="#00bcd4" Tag="Cyan" Click="ChangeAccent_OnClick" />
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="ABlue" Background="#3369e8" Tag="Blue" Click="ChangeAccent_OnClick" />
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="AIndigo" Background="#3f51b5" Tag="Indigo" Click="ChangeAccent_OnClick" />
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="ADeepPurple" Background="#673ab7" Tag="DeepPurple" Click="ChangeAccent_OnClick" />
+                        <Button Margin="5,5,5,5" MaxHeight="50" MaxWidth="50" BorderThickness="0"
+                                x:Name="APurple" Background="#9c27b0" Tag="Purple" Click="ChangeAccent_OnClick" />
+                    </WrapPanel>
                 </StackPanel>
             </StackPanel>
         </Grid>

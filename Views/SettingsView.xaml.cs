@@ -26,16 +26,6 @@ namespace GameLauncher.Views
             InitializeComponent();
             var converter = new System.Windows.Media.BrushConverter();
             if (Settings.Default.theme == "Dark") { themeToggle.IsChecked = true; }
-            if (Settings.Default.primarylight != "")
-            {
-                ColorPrimary.Text = Settings.Default.primarylight;
-                ColorPrimaryRect.Fill = (Brush)converter.ConvertFromString("#" + ColorPrimary.Text);
-            }
-            if (Settings.Default.accentlight != "")
-            {
-                ColorAccent.Text = Settings.Default.accentlight;
-                ColorAccentRect.Fill = (Brush)converter.ConvertFromString("#" + ColorAccent.Text);
-            }
         }
 
         private void DarkModeToggle_Checked(object sender, RoutedEventArgs e)
@@ -52,38 +42,22 @@ namespace GameLauncher.Views
             SaveSettings();
         }
 
-        private void ChangePrimary(object sender, KeyEventArgs e)
+        private void ChangePrimary_OnClick(object sender, RoutedEventArgs e)
         {
-            if (e.Key == Key.Return)
-            {
-                var regexColorCode = new Regex("^#[a-fA-F0-9]{6}$");
-                if (regexColorCode.IsMatch("#" + ColorPrimary.Text.Trim()))
-                {
-                    var converter = new System.Windows.Media.BrushConverter();
-                    var brush = (Brush)converter.ConvertFromString("#" + ColorPrimary.Text);
-                    Properties.Settings.Default.primarylight = ColorPrimary.Text;
-                    SaveSettings();
-                    ColorPrimaryRect.Fill = brush;
-                    //new PaletteHelper().ReplacePrimaryColor(brush.ToString());
-                    //brush.ToString() doesn't work lol, needs a "swatch"
-                }
-            }
+            Console.WriteLine(((Button)sender).Tag.ToString());
+            string newPrimaryColour = ((Button)sender).Tag.ToString();
+            new PaletteHelper().ReplacePrimaryColor(newPrimaryColour);
+            Properties.Settings.Default.primary = newPrimaryColour;
+            SaveSettings();
         }
 
-        private void ChangeAccent(object sender, KeyEventArgs e)
+        private void ChangeAccent_OnClick(object sender, RoutedEventArgs e)
         {
-            if (e.Key == Key.Return)
-            {
-                var regexColorCode = new Regex("^#[a-fA-F0-9]{6}$");
-                if (regexColorCode.IsMatch("#" + ColorPrimary.Text.Trim()))
-                {
-                    var converter = new System.Windows.Media.BrushConverter();
-                    var brush = (Brush)converter.ConvertFromString("#" + ColorAccent.Text);
-                    Properties.Settings.Default.accentlight = ColorAccent.Text;
-                    SaveSettings();
-                    ColorAccentRect.Fill = brush;
-                }
-            }
+            Console.WriteLine(((Button)sender).Tag.ToString());
+            string newAccentColour = ((Button)sender).Tag.ToString();
+            new PaletteHelper().ReplaceAccentColor(newAccentColour);
+            Properties.Settings.Default.accent = newAccentColour;
+            SaveSettings();
         }
 
 

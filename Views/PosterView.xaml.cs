@@ -108,8 +108,8 @@ namespace GameLauncher.Views
         public void RefreshList2(CollectionViewSource cvscvs)
         {
             GameListCVS = cvscvs;
-            if (FilterGenreName != null) { GameListCVS.Filter += new FilterEventHandler(GenreFilter); }
-            if (GameSearchBar.Text != null) { GameListCVS.Filter += new FilterEventHandler(GameSearch); }
+            if (FilterGenreName != null || FilterGenreName != "") { GameListCVS.Filter += new FilterEventHandler(GenreFilter);  }
+            if (GameSearchBar.Text != null) {GameListCVS.Filter += new FilterEventHandler(GameSearch); }
             if (GameListCVS.View != null) //This is getting a null "GameListCVS.View" on genre only, works if searchbar updated
                 GameListCVS.View.Refresh();
         }

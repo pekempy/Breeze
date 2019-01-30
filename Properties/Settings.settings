@@ -5,16 +5,10 @@
     <Setting Name="theme" Type="System.String" Scope="User">
       <Value Profile="(Default)">dark</Value>
     </Setting>
-    <Setting Name="primarylight" Type="System.String" Scope="User">
+    <Setting Name="primary" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="accentlight" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="primarydark" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="accentdark" Type="System.String" Scope="User">
+    <Setting Name="accent" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>
