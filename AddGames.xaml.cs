@@ -107,7 +107,6 @@ namespace GameLauncher
                 ContentPresenter c = (ContentPresenter)GenreAGList.ItemContainerGenerator.ContainerFromItem(GenreAGList.Items[i]);
                 if (c != null)
                 {
-                    //Below line sometimes causes crash
                     CheckBox cb = c.ContentTemplate.FindName("genreCheckBox", c) as CheckBox;
                     if (cb.IsChecked.Value)
                     {

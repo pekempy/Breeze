@@ -176,27 +176,19 @@ namespace GameLauncher
         {
             if (DataContext == listViewModel)
             {
-                Console.WriteLine("List");
                 ListViewActive();
             }
             else if (DataContext == posterViewModel)
             {
-                Console.WriteLine("Poster");
                 PosterViewActive();
             }
             else if (DataContext == bannerViewModel)
             {
-                Console.WriteLine("Banner");
                 BannerViewActive();
             }
             else if (DataContext == settingsViewModel)
             {
-                Console.WriteLine("Settings");
                 SettingsViewActive();
-            }
-            else
-            {
-                Console.WriteLine("Nothing");
             }
         }
 
