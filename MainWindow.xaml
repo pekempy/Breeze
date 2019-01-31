@@ -156,12 +156,12 @@
                         DockPanel.Dock="Top"
                         IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay, FallbackValue='Missing element'}"
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
-                    <StackPanel Orientation="Vertical">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel Orientation="Vertical">
                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                 Content="All Genres"
                                 Tag =""
                                 Click="ApplyGenreFilter_OnClick" />
-                        <ScrollViewer VerticalScrollBarVisibility="Auto">
                             <ItemsControl x:Name="GenreSidebar" ItemsSource="{Binding Source={StaticResource GenreListCVS}}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
@@ -175,13 +175,12 @@
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-                        </ScrollViewer>
-                    </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
         </materialDesign:DrawerHost>
         <!--  FAB for adding new games  -->
-
         <Button
             Name="AddGameButton"
             Grid.Row="5"
