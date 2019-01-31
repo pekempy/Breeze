@@ -9,9 +9,9 @@ This isn't designed to be a competitor to steam, or any other game launcher. I j
 - Customise genres to your liking and categorise games *your* way
 - Filter by title or genre
 - Switch the theme to a dark theme
+- Changing primary/accent colour from settings menu
 
 #### Planned updates:
-- Changing primary/accent colour from settings menu (waiting for MDIX 2.6.0)
 - Built in browser to find images for each of the views and download them easier
 
 
