@@ -85,97 +85,124 @@
                 </StackPanel>
                 <TextBlock />
                 <TextBlock HorizontalAlignment="Left" Width="160" Height="16" VerticalAlignment="Top"><Run Text="Primary Colour"/></TextBlock>
-                <StackPanel Margin="0 5 0 0" Height="125" VerticalAlignment="Top">
-                    <WrapPanel Width="auto" Height="125">
+                <StackPanel Margin="0 5 0 0" MaxHeight="180" VerticalAlignment="Top">
+                    <WrapPanel Width="auto" MaxHeight="180">
                         <!-- Row One Buttons (PRIMARY) -->
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Pink"
                                 x:Name="PPink" Background="#e91e63" Tag="Pink" Click="ChangePrimary_OnClick">
-                            <materialDesign:PackIcon Name="PPinkIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="PPinkIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Red"
                                 x:Name="PRed" Background="#f44336" Tag="Red" Click="ChangePrimary_OnClick">
-                            <materialDesign:PackIcon Name="PRedIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="PRedIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Deep Orange"
                                 x:Name="PDeepOrange" Background="#ff5722" Tag="DeepOrange" Click="ChangePrimary_OnClick">
-                            <materialDesign:PackIcon Name="PDeepOrangeIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="PDeepOrangeIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Orange"
                                 x:Name="POrange" Background="#ffc107" Tag="Orange" Click="ChangePrimary_OnClick">
-                            <materialDesign:PackIcon Name="POrangeIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="POrangeIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Yellow"
                                 x:Name="PYellow" Background="#ffeb3b" Tag="Yellow" Click="ChangePrimary_OnClick">
-                            <materialDesign:PackIcon Name="PYellowIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="PYellowIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Lime"
                                 x:Name="PLime" Background="#8bc34a" Tag="Lime" Click="ChangePrimary_OnClick" >
-                            <materialDesign:PackIcon Name="PLimeIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="PLimeIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Green"
                                 x:Name="PGreen" Background="#4caf50" Tag="Green" Click="ChangePrimary_OnClick" >
-                            <materialDesign:PackIcon Name="PGreenIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="PGreenIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Teal"
                                 x:Name="PTeal" Background="#009688" Tag="Teal" Click="ChangePrimary_OnClick">
-                            <materialDesign:PackIcon Name="PTealIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="PTealIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Cyan"
                                 x:Name="PCyan" Background="#00bcd4" Tag="Cyan" Click="ChangePrimary_OnClick">
-                            <materialDesign:PackIcon Name="PCyanIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="PCyanIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Blue"
                                 x:Name="PBlue" Background="#2196f3" Tag="Blue" Click="ChangePrimary_OnClick">
-                            <materialDesign:PackIcon Name="PBlueIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="PBlueIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Indigo"
                                 x:Name="PIndigo" Background="#3f51b5" Tag="Indigo" Click="ChangePrimary_OnClick">
-                            <materialDesign:PackIcon Name="PIndigoIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="PIndigoIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Deep Purple"
                                 x:Name="PDeepPurple" Background="#673ab7" Tag="DeepPurple" Click="ChangePrimary_OnClick">
-                            <materialDesign:PackIcon Name="PDeepPurpleIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="PDeepPurpleIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Purple"
                                 x:Name="PPurple" Background="#9c27b0" Tag="Purple" Click="ChangePrimary_OnClick" >
-                            <materialDesign:PackIcon Name="PPurpleIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="PPurpleIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Blue Grey"
                                 x:Name="PBlueGrey" Background="#607d8b" Tag="BlueGrey" Click="ChangePrimary_OnClick" >
-                            <materialDesign:PackIcon Name="PBlueGreyIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="PBlueGreyIcon" Kind="Tick"/>
+                        </Button>
                     </WrapPanel>
                 </StackPanel>
                 <TextBlock />
                 <TextBlock HorizontalAlignment="Left" Width="160" Height="16" VerticalAlignment="Top"><Run Text="Accent Colour"/></TextBlock>
-                <StackPanel  Margin="0 5 0 0" Height="125" VerticalAlignment="Top">
-                    <WrapPanel Width="auto" Height="125">
+                <StackPanel  Margin="0 5 0 0" MaxHeight="180" VerticalAlignment="Top">
+                    <WrapPanel Width="auto" MaxHeight="180">
                         <!-- Row Two Buttons (ACCENT) -->
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Pink"
                                 x:Name="APink" Background="#f50057" Tag="Pink" Click="ChangeAccent_OnClick">
-                            <materialDesign:PackIcon Name="APinkIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="APinkIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Red"
                                 x:Name="ARed" Background="#ff1744" Tag="Red" Click="ChangeAccent_OnClick">
-                            <materialDesign:PackIcon Name="ARedIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="ARedIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Deep Orange"
                                 x:Name="ADeepOrange" Background="#ff1744" Tag="DeepOrange" Click="ChangeAccent_OnClick">
-                            <materialDesign:PackIcon Name="ADeepOrangeIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="ADeepOrangeIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Orange"
                                 x:Name="AOrange" Background="#ff9100" Tag="Orange" Click="ChangeAccent_OnClick">
-                            <materialDesign:PackIcon Name="AOrangeIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="AOrangeIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Yellow"
                                 x:Name="AYellow" Background="#ffea00" Tag="Yellow" Click="ChangeAccent_OnClick">
-                            <materialDesign:PackIcon Name="AYellowIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="AYellowIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Lime"
                                 x:Name="ALime" Background="#c6ff00" Tag="Lime" Click="ChangeAccent_OnClick" >
-                            <materialDesign:PackIcon Name="ALimeIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="ALimeIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Green"
                                 x:Name="AGreen" Background="#00e676" Tag="Green" Click="ChangeAccent_OnClick">
-                            <materialDesign:PackIcon Name="AGreenIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="AGreenIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Teal"
                                 x:Name="ATeal" Background="#1de9b6" Tag="Teal" Click="ChangeAccent_OnClick">
-                            <materialDesign:PackIcon Name="ATealIcon" Kind="Tick"/> </Button>
+                            <materialDesign:PackIcon Name="ATealIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Cyan"
                                 x:Name="ACyan" Background="#1de9b6" Tag="Cyan" Click="ChangeAccent_OnClick">
-                            <materialDesign:PackIcon Name="ACyanIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="ACyanIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Blue"
                                 x:Name="ABlue" Background="#2979ff" Tag="Blue" Click="ChangeAccent_OnClick">
-                            <materialDesign:PackIcon Name="ABlueIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="ABlueIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Indigo"
                                 x:Name="AIndigo" Background="#3d5afe" Tag="Indigo" Click="ChangeAccent_OnClick">
-                            <materialDesign:PackIcon Name="AIndigoIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="AIndigoIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Deep Purple"
                                 x:Name="ADeepPurple" Background="#651fff" Tag="DeepPurple" Click="ChangeAccent_OnClick">
-                            <materialDesign:PackIcon Name="ADeepPurpleIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="ADeepPurpleIcon" Kind="Tick"/>
+                        </Button>
                         <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Purple"
                                 x:Name="APurple" Background="#d500f9" Tag="Purple" Click="ChangeAccent_OnClick" >
-                            <materialDesign:PackIcon Name="APurpleIcon" Kind="Tick"/></Button>
+                            <materialDesign:PackIcon Name="APurpleIcon" Kind="Tick"/>
+                            </Button>
                     </WrapPanel>
                 </StackPanel>
             </StackPanel>

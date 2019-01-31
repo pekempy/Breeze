@@ -100,7 +100,7 @@ namespace GameLauncher.Views
             MainWindow.cvs = GameListCVS;
             if (FilterGenreName != null) { GameListCVS.Filter += new FilterEventHandler(GenreFilter); }
             if (GameSearchBar.Text != null) { GameListCVS.Filter += new FilterEventHandler(GameSearch); }
-            if (GameListCVS.View != null) //This is getting a null "GameListCVS.View" on genre only, works if searchbar updated
+            if (GameListCVS.View != null) 
                 GameListCVS.View.Refresh();
         }
 
@@ -111,7 +111,7 @@ namespace GameLauncher.Views
             GameListCVS = cvscvs;
             if (FilterGenreName != null || FilterGenreName != "") { GameListCVS.Filter += new FilterEventHandler(GenreFilter);  }
             if (GameSearchBar.Text != null) {GameListCVS.Filter += new FilterEventHandler(GameSearch); }
-            if (GameListCVS.View != null) //This is getting a null "GameListCVS.View" on genre only, works if searchbar updated
+            if (GameListCVS.View != null) 
                 GameListCVS.View.Refresh();
             }
         }
