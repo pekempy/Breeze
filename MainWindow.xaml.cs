@@ -36,12 +36,7 @@ namespace GameLauncher
             posterViewModel.LoadGames();
             posterViewModel.LoadGenres();
             DataContext = posterViewModel;
-
-            if (!File.Exists("./Resources/GamesList.txt"))
-            {
-                OpenAddGameDialog();
-                RefreshGames();
-            }
+            
 
         }
         public void MakeDirectories()

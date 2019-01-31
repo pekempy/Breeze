@@ -54,9 +54,9 @@ namespace GameLauncher
             {
                 Console.WriteLine("Exception: " + ex.Message);
             }
+            ClearGenreBoxes();
             clearFields();
             ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
-            ClearGenreBoxes();
             AddGameDialog.IsOpen = false;
         }
 

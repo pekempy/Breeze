@@ -250,6 +250,8 @@ namespace GameLauncher
         {
             if (type == "icon")
             {
+                gametitle = installPath + "Resources/img/" + gametitle + "-icon.png";
+                System.IO.File.Copy(sourcefile, gametitle, true);
             }
             else if (type == "poster")
             {
@@ -258,9 +260,13 @@ namespace GameLauncher
             }
             else if (type == "banner")
             {
+                gametitle = installPath + "Resources/img/" + gametitle + "-banner.png";
+                System.IO.File.Copy(sourcefile, gametitle, true);
             }
             else if (type == "shortcut")
             {
+                gametitle = installPath + "Resources/shortcuts/" + gametitle + ".lnk";
+                System.IO.File.Copy(sourcefile, gametitle, true);
             }
         }
     }
