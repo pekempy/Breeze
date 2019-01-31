@@ -1,11 +1,11 @@
 ﻿<Page
     x:Class="GameLauncher.EditGames"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:GameLauncher"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:GameLauncher"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Game Launcher"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -13,8 +13,8 @@
     TextElement.FontSize="13"
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
-    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+	xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+	xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
     mc:Ignorable="d">
@@ -34,7 +34,6 @@
             </CollectionViewSource>
         </ResourceDictionary>
     </Page.Resources>
-
     <materialDesign:DialogHost
         x:Name="EditGameDialog"
         CloseOnClickAway="False"
@@ -61,7 +60,6 @@
                             <ColumnDefinition Width="3*" />
                             <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
-
                         <!--  EditGame Dialog Title  -->
                         <TextBlock
                             Grid.Row="0"
@@ -72,7 +70,6 @@
                             VerticalAlignment="Top"
                             FontSize="20"
                             Text="Edit an existing game" />
-
                         <!--  EditTitle  -->
                         <TextBox
                             Name="EditTitle"
@@ -81,7 +78,6 @@
                             Margin="40,0,40,0"
                             materialDesign:HintAssist.Hint="Title"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-
                         <!--  EditPath  -->
                         <TextBox
                             Name="EditPath"
@@ -106,7 +102,6 @@
                                 VerticalAlignment="Center"
                                 Kind="Attachment" />
                         </Button>
-
                         <!--  EditGenres  -->
                         <TextBox
                             Name="EditGenre"
@@ -116,7 +111,6 @@
                             materialDesign:HintAssist.Hint="Genre(s)"
                             IsReadOnly="True"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-
                         <!--  Genre picker button  -->
                         <Button
                             Grid.Row="3"
@@ -215,7 +209,6 @@
                                 </Grid>
                             </Button.CommandParameter>
                         </Button>
-
                         <!--  EditLink  -->
                         <TextBox
                             Name="EditLink"
@@ -224,7 +217,6 @@
                             Margin="40,0,40,0"
                             materialDesign:HintAssist.Hint="Web link"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-
                         <!--  EditIcon  -->
                         <TextBox
                             Name="EditIcon"
@@ -249,7 +241,6 @@
                                 VerticalAlignment="Center"
                                 Kind="Attachment" />
                         </Button>
-
                         <!--  EditPoster  -->
                         <TextBox
                             Name="EditPoster"
@@ -274,7 +265,6 @@
                                 VerticalAlignment="Center"
                                 Kind="Attachment" />
                         </Button>
-
                         <!--  EditBanner  -->
                         <TextBox
                             Name="EditBanner"
@@ -299,7 +289,6 @@
                                 VerticalAlignment="Center"
                                 Kind="Attachment" />
                         </Button>
-
                         <!--  CANCEL or ACCEPT button  -->
                         <Button
                             Grid.Row="12"

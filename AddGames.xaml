@@ -1,18 +1,18 @@
 ﻿<Page
     x:Class="GameLauncher.AddGames"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:GameLauncher"
-    xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:GameLauncher"
+	xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Game Launcher"
     d:DesignHeight="450"
     d:DesignWidth="800"
     d:DataContext="{d:DesignInstance Type=ViewModels:SettingsViewModel}"
-    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
-    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+	xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+	xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
     FontFamily="{StaticResource MaterialDesignFont}"
     TextElement.FontSize="13"
     TextElement.FontWeight="Regular"
@@ -36,7 +36,6 @@
             </CollectionViewSource>
         </ResourceDictionary>
     </Page.Resources>
-
     <materialDesign:DialogHost
         x:Name="AddGameDialog"
         CloseOnClickAway="False"
@@ -63,7 +62,6 @@
                             <ColumnDefinition Width="3*" />
                             <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
-
                         <!--  AddGame Dialog Title  -->
                         <TextBlock
                             Grid.Row="0"
@@ -74,7 +72,6 @@
                             VerticalAlignment="Top"
                             FontSize="20"
                             Text="Add a new game" />
-
                         <!--  NewGameTitle  -->
                         <TextBox
                             Name="NewGameTitle"
@@ -83,7 +80,6 @@
                             Margin="40,0,40,0"
                             materialDesign:HintAssist.Hint="Title"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-
                         <!--  NewGamePath  -->
                         <TextBox
                             Name="NewGamePath"
@@ -108,7 +104,6 @@
                                 VerticalAlignment="Center"
                                 Kind="Attachment" />
                         </Button>
-
                         <!--  NewGameGenres  -->
                         <TextBox
                             Name="NewGameGenre"
@@ -118,7 +113,6 @@
                             materialDesign:HintAssist.Hint="Genre(s)"
                             IsReadOnly="True"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-
                         <!--  Genre picker button  -->
                         <Button
                             Grid.Row="3"
@@ -136,7 +130,6 @@
                                 VerticalAlignment="Center"
                                 Kind="DotsHorizontal" />
                             <Button.CommandParameter>
-
                                 <Grid
                                     Width="270"
                                     Height="330">
@@ -209,7 +202,6 @@
                                 </Grid>
                             </Button.CommandParameter>
                         </Button>
-
                         <!--  NewGameLink  -->
                         <TextBox
                             Name="NewGameLink"
@@ -218,7 +210,6 @@
                             Margin="40,0,40,0"
                             materialDesign:HintAssist.Hint="Web link"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-
                         <!--  NewGameIcon  -->
                         <TextBox
                             Name="NewGameIcon"
@@ -243,7 +234,6 @@
                                 VerticalAlignment="Center"
                                 Kind="Attachment" />
                         </Button>
-
                         <!--  NewGamePoster  -->
                         <TextBox
                             Name="NewGamePoster"
@@ -268,7 +258,6 @@
                                 VerticalAlignment="Center"
                                 Kind="Attachment" />
                         </Button>
-
                         <!--  NewGameBanner  -->
                         <TextBox
                             Name="NewGameBanner"
@@ -293,7 +282,6 @@
                                 VerticalAlignment="Center"
                                 Kind="Attachment" />
                         </Button>
-
                         <!--  CANCEL or ACCEPT button  -->
                         <Button
                             Grid.Row="12"

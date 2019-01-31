@@ -1,11 +1,12 @@
-﻿<Window xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+﻿<Window
+	xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
     x:Class="GameLauncher.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:viewmodels="clr-namespace:GameLauncher.ViewModels"
-    xmlns:views="clr-namespace:GameLauncher.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+	xmlns:viewmodels="clr-namespace:GameLauncher.ViewModels"
+	xmlns:views="clr-namespace:GameLauncher.Views"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     Title="Breeze"
     Width="800"
     Height="600"
@@ -16,12 +17,11 @@
     Icon="breeze.ico"
     TextElement.FontSize="13"
     TextElement.FontWeight="Regular"
-    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+	xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
     WindowStartupLocation="CenterScreen">
-
     <!--  Required to make different views work  -->
     <Window.Resources>
         <DataTemplate x:Name="bannerViewTemplate" DataType="{x:Type viewmodels:BannerViewModel}">
@@ -45,7 +45,6 @@
         </CollectionViewSource>
     </Window.Resources>
     <Grid>
-
         <!--  DrawerHost is the main "host" to have the hamburger  -->
         <materialDesign:DrawerHost
             Grid.RowSpan="5"
@@ -138,14 +137,12 @@
                         </materialDesign:PopupBox>
                     </DockPanel>
                 </materialDesign:ColorZone>
-
                 <ContentControl
                     Grid.Row="0"
                     Grid.Column="0"
                     Margin="0,64,0,0"
                     Content="{Binding}" />
             </Grid>
-
             <!--  Content for hamburger  -->
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <DockPanel MinWidth="212">
@@ -158,7 +155,7 @@
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <StackPanel Orientation="Vertical">
-                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
                                 Content="All Genres"
                                 Tag =""
                                 Click="ApplyGenreFilter_OnClick" />
@@ -193,14 +190,12 @@
             Click="OpenAddGameWindow_OnClick"
             Style="{StaticResource MaterialDesignFloatingActionButton}"
             ToolTip="Add a game">
-
             <materialDesign:PackIcon
                 Width="30"
                 Height="30"
                 VerticalAlignment="Center"
                 Kind="Plus" />
         </Button>
-
         <Border>
             <Frame
                 x:Name="DialogFrame"
