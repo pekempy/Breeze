@@ -23,41 +23,48 @@ namespace GameLauncher
 
         private void AddGame_OnClick(object sender, RoutedEventArgs e)
         {
-            //This part repairs the link so it launches properly
-            string ngl = NewGameLink.Text;
-            if (!ngl.Contains("http") && (ngl != ""))
+            if (NewGameTitle.Text != "" || NewGameTitle.Text != null)
             {
-                UriBuilder uriBuilder = new UriBuilder();
-                uriBuilder.Scheme = "http";
-                uriBuilder.Host = NewGameLink.Text;
-                Uri uri = uriBuilder.Uri;
-                NewGameLink.Text = uri.ToString();
+                //This part repairs the link so it launches properly
+                string ngl = NewGameLink.Text;
+                if (!ngl.Contains("http") && (ngl != ""))
+                {
+                    UriBuilder uriBuilder = new UriBuilder();
+                    uriBuilder.Scheme = "http";
+                    uriBuilder.Host = NewGameLink.Text;
+                    Uri uri = uriBuilder.Uri;
+                    NewGameLink.Text = uri.ToString();
+                }
+                //Write all the fields to the text file
+                try
+                {
+                    //string NewGameIconRelative = NewGameIcon.Text.Trim();
+                    //Console.WriteLine(NewGameIconRelative);
+                    TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
+                    Guid gameGuid = Guid.NewGuid();
+                    tsw.WriteLine(NewGameTitle.Text + "|" +
+                                  NewGameGenre.Text + "|" +
+                                  NewGamePath.Text + "|" +
+                                  NewGameLink.Text + "|" +
+                                  NewGameIcon.Text + "|" +
+                                  NewGamePoster.Text + "|" +
+                                  NewGameBanner.Text + "|" +
+                                  gameGuid);
+                    tsw.Close();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Exception: " + ex.Message);
+                }
+                ClearGenreBoxes();
+                clearFields();
+                ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
+                AddGameDialog.IsOpen = false;
             }
-            //Write all the fields to the text file
-            try
+            else
             {
-                //string NewGameIconRelative = NewGameIcon.Text.Trim();
-                //Console.WriteLine(NewGameIconRelative);
-                TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
-                Guid gameGuid = Guid.NewGuid();
-                tsw.WriteLine(NewGameTitle.Text + "|" +
-                              NewGameGenre.Text + "|" +
-                              NewGamePath.Text + "|" +
-                              NewGameLink.Text + "|" +
-                              NewGameIcon.Text + "|" +
-                              NewGamePoster.Text + "|" +
-                              NewGameBanner.Text + "|" +
-                              gameGuid);
-                tsw.Close();
+                MessageBox.Show("Please enter a game title first.");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception: " + ex.Message);
-            }
-            ClearGenreBoxes();
-            clearFields();
-            ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
-            AddGameDialog.IsOpen = false;
         }
 
         private void CancelAddGame_OnClick(object sender, RoutedEventArgs e)
@@ -125,7 +132,7 @@ namespace GameLauncher
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && NewGameTitle.Text != "")
             {
-                newgametitle = NewGameTitle.Text.Replace(":", " -"); 
+                newgametitle = NewGameTitle.Text.Replace(":", " -");
                 CreateShortcut(fileDialog.FileName);
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
@@ -229,7 +236,7 @@ namespace GameLauncher
 
         private void CreateShortcut(string linkname)
         {
-            newgametitle = NewGameTitle.Text.Replace(":", " -"); 
+            newgametitle = NewGameTitle.Text.Replace(":", " -");
             string installPath = AppDomain.CurrentDomain.BaseDirectory;
             if (!Directory.Exists(installPath + "\\Resources\\shortcuts"))
             {
