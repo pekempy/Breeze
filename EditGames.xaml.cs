@@ -18,6 +18,7 @@ namespace GameLauncher
         public string NewTitle;
         public string OldTitle;
         public string oldtitle;
+        public string alltitles;
         public string installPath = AppDomain.CurrentDomain.BaseDirectory;
 
         public EditGames()
@@ -38,32 +39,52 @@ namespace GameLauncher
                 Uri uri = uriBuilder.Uri;
                 EditLink.Text = uri.ToString();
             }
-            //Write all the fields to the text file
-            try
+            if (System.IO.File.Exists("./Resources/GamesList.txt"))
             {
-                TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
-                tsw.WriteLine(EditTitle.Text + "|" +
-                              EditGenre.Text + "|" +
-                              EditPath.Text + "|" +
-                              EditLink.Text + "|" +
-                              EditIcon.Text + "|" +
-                              EditPoster.Text + "|" +
-                              EditBanner.Text + "|" +
-                              Guid.NewGuid());
-                tsw.Close();
+                string[] allgames = System.IO.File.ReadAllLines("./Resources/GamesList.txt");
+                string[] columns = new string[0];
+                int numofgames = 0;
+                foreach (var item in allgames)
+                {
+                    columns = allgames[numofgames].Split('|');
+                    string gametitle = columns[0];
+                    gametitle = columns[0];
+                    gametitle = gametitle.Trim().ToLower();
+                    alltitles += " | " + gametitle + " | ";
+                    numofgames++;
+                }
+                if (alltitles.Contains(" | " + NewTitle.Trim().ToLower() + " | "))
+                {
+                    MessageBox.Show("A game with this title already exists");
+                }
+                else
+                {
+                    try
+                    {
+                        TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
+                        tsw.WriteLine(EditTitle.Text + "|" +
+                                      EditGenre.Text + "|" +
+                                      EditPath.Text + "|" +
+                                      EditLink.Text + "|" +
+                                      EditIcon.Text + "|" +
+                                      EditPoster.Text + "|" +
+                                      EditBanner.Text + "|" +
+                                      Guid.NewGuid());
+                        tsw.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Exception: " + ex.Message);
+                    }
+                }
+                RenameFiles(OldTitle, NewTitle);
+                clearFields();
+                ClearGenreBoxes();
+                ModifyFile.RemoveGameFromFile(guid);
+                ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
+                EditGameDialog.IsOpen = false;
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exception: " + ex.Message);
-            }
-            RenameFiles(OldTitle, NewTitle);
-            clearFields();
-            ClearGenreBoxes();
-            ModifyFile.RemoveGameFromFile(guid);
-            ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
-            EditGameDialog.IsOpen = false;
         }
-
         private void RenameFiles(string OldTitle, string NewTitle)
         {
             if (OldTitle != NewTitle)
@@ -78,20 +99,32 @@ namespace GameLauncher
                 string newshortcut;
                 oldicon = installPath + "Resources/img/" + OldTitle + "-icon.png";
                 newicon = installPath + "Resources/img/" + EditTitle.Text + "-icon.png";
-                System.IO.File.Copy(oldicon, newicon, true);
-                System.IO.File.Delete(oldicon);
+                if (System.IO.File.Exists(oldicon))
+                {
+                    System.IO.File.Copy(oldicon, newicon, true);
+                    System.IO.File.Delete(oldicon);
+                }
                 oldposter = installPath + "Resources/img/" + OldTitle + "-poster.png";
                 newposter = installPath + "Resources/img/" + EditTitle.Text + "-poster.png";
-                System.IO.File.Copy(oldposter, newposter, true);
-                System.IO.File.Delete(oldposter);
+                if (System.IO.File.Exists(oldposter))
+                {
+                    System.IO.File.Copy(oldposter, newposter, true);
+                    System.IO.File.Delete(oldposter);
+                }
                 oldbanner = installPath + "Resources/img/" + OldTitle + "-banner.png";
                 newbanner = installPath + "Resources/img/" + EditTitle.Text + "-banner.png";
-                System.IO.File.Copy(oldbanner, newbanner, true);
-                System.IO.File.Delete(oldbanner);
+                if (System.IO.File.Exists(oldbanner))
+                {
+                    System.IO.File.Copy(oldbanner, newbanner, true);
+                    System.IO.File.Delete(oldbanner);
+                }
                 oldshortcut = installPath + "Resources/shortcuts/" + OldTitle + ".lnk";
                 newshortcut = installPath + "Resources/shortcuts/" + EditTitle.Text + ".lnk";
-                System.IO.File.Copy(oldshortcut, newshortcut, true);
-                System.IO.File.Delete(oldshortcut);
+                if (System.IO.File.Exists(oldshortcut))
+                {
+                    System.IO.File.Copy(oldshortcut, newshortcut, true);
+                    System.IO.File.Delete(oldshortcut);
+                }
             }
         }
         private void CancelEditGame_OnClick(object sender, RoutedEventArgs e)
@@ -287,7 +320,6 @@ namespace GameLauncher
         private void EditTitle_TextChanged(object sender, TextChangedEventArgs e)
         {
             NewTitle = EditTitle.Text;
-            Console.WriteLine(NewTitle);
         }
         private void UpdateFile(string gametitle, string sourcefile, string type)
         {

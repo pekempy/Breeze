@@ -15,7 +15,7 @@ namespace GameLauncher
     public partial class AddGames : Page
     {
         private LoadAllGames lag = new LoadAllGames();
-
+        public string alltitles;
         public AddGames()
         {
             InitializeComponent();
@@ -35,24 +35,45 @@ namespace GameLauncher
                     Uri uri = uriBuilder.Uri;
                     NewGameLink.Text = uri.ToString();
                 }
-                //Write all the fields to the text file
-                try
+                if (System.IO.File.Exists("./Resources/GamesList.txt"))
                 {
-                    TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
-                    Guid gameGuid = Guid.NewGuid();
-                    tsw.WriteLine(NewGameTitle.Text + "|" +
-                                  NewGameGenre.Text + "|" +
-                                  NewGamePath.Text + "|" +
-                                  NewGameLink.Text + "|" +
-                                  NewGameIcon.Text + "|" +
-                                  NewGamePoster.Text + "|" +
-                                  NewGameBanner.Text + "|" +
-                                  gameGuid);
-                    tsw.Close();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Exception: " + ex.Message);
+                    string[] allgames = System.IO.File.ReadAllLines("./Resources/GamesList.txt");
+                    string[] columns = new string[0];
+                    int numofgames = 0;
+                    foreach (var item in allgames)
+                    {
+                        columns = allgames[numofgames].Split('|');
+                        string gametitle = columns[0];
+                        gametitle = columns[0];
+                        gametitle = gametitle.Trim().ToLower();
+                        alltitles += " | " + gametitle + " | ";
+                        numofgames++;
+                    }
+                    if (alltitles.Contains(" | " + NewGameTitle.Text.Trim().ToLower() + " | "))
+                    {
+                        MessageBox.Show("A game with this title already exists");
+                    }
+                    else
+                    {
+                        try
+                        {
+                            TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
+                            Guid gameGuid = Guid.NewGuid();
+                            tsw.WriteLine(NewGameTitle.Text + "|" +
+                                          NewGameGenre.Text + "|" +
+                                          NewGamePath.Text + "|" +
+                                          NewGameLink.Text + "|" +
+                                          NewGameIcon.Text + "|" +
+                                          NewGamePoster.Text + "|" +
+                                          NewGameBanner.Text + "|" +
+                                          gameGuid);
+                            tsw.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Exception: " + ex.Message);
+                        }
+                    }
                 }
                 ClearGenreBoxes();
                 clearFields();
@@ -150,7 +171,7 @@ namespace GameLauncher
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Multiselect = false;
             fileDialog.RestoreDirectory = true;
-            fileDialog.Filter = "Images (*.jpg;*.png;*.bmp | *.jpg;*.png;*.bmp";
+            fileDialog.Filter = "Images (*.jpg;*.png;*.bmp) | *.jpg;*.png;*.bmp";
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && NewGameTitle.Text != "")
             {
@@ -164,7 +185,7 @@ namespace GameLauncher
                 }
                 else
                 {
-                    System.IO.File.Copy(ngIconFile, @"./Resources/img/" + newgametitle + "-icon.png");
+                    System.IO.File.Copy(ngIconFile, @"./Resources/img/" + newgametitle + "-icon.png", true);
                     NewGameIcon.Text = installPath + "Resources/img/" + newgametitle + "-icon.png";
                 }
             }
@@ -179,7 +200,7 @@ namespace GameLauncher
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Multiselect = false;
             fileDialog.RestoreDirectory = true;
-            fileDialog.Filter = "Images (*.jpg;*.png;*.bmp | *.jpg;*.png;*.bmp";
+            fileDialog.Filter = "Images (*.jpg;*.png;*.bmp) | *.jpg;*.png;*.bmp";
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && NewGameTitle.Text != "")
             {
@@ -208,7 +229,7 @@ namespace GameLauncher
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.RestoreDirectory = true;
             fileDialog.Multiselect = false;
-            fileDialog.Filter = "Images (*.jpg;*.png;*.bmp | *.jpg;*.png;*.bmp";
+            fileDialog.Filter = "Images (*.jpg;*.png;*.bmp) | *.jpg;*.png;*.bmp";
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && NewGameTitle.Text != "")
             {
