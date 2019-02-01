@@ -323,6 +323,10 @@ namespace GameLauncher
         private void EditTitle_TextChanged(object sender, TextChangedEventArgs e)
         {
             NewTitle = EditTitle.Text;
+            EditIcon.Text = EditIcon.Text.Replace(OldTitle, NewTitle);
+            EditPoster.Text = EditPoster.Text.Replace(OldTitle, NewTitle);
+            EditBanner.Text = EditBanner.Text.Replace(OldTitle, NewTitle);
+            EditPath.Text = EditPath.Text.Replace(OldTitle, NewTitle);
         }
         private void UpdateFile(string gametitle, string sourcefile, string type)
         {
