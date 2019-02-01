@@ -52,6 +52,7 @@ namespace GameLauncher
                     if (alltitles.Contains(" | " + NewGameTitle.Text.Trim().ToLower() + " | "))
                     {
                         MessageBox.Show("A game with this title already exists");
+                        NewGameTitle.Text = "";
                     }
                     else
                     {
@@ -73,12 +74,39 @@ namespace GameLauncher
                         {
                             Console.WriteLine("Exception: " + ex.Message);
                         }
+                        ClearGenreBoxes();
+                        clearFields();
+                        ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
+                        AddGameDialog.IsOpen = false;
                     }
                 }
-                ClearGenreBoxes();
-                clearFields();
-                ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
-                AddGameDialog.IsOpen = false;
+                else
+
+                {
+                    try
+                    {
+                        TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
+                        Guid gameGuid = Guid.NewGuid();
+                        tsw.WriteLine(NewGameTitle.Text + "|" +
+                                      NewGameGenre.Text + "|" +
+                                      NewGamePath.Text + "|" +
+                                      NewGameLink.Text + "|" +
+                                      NewGameIcon.Text + "|" +
+                                      NewGamePoster.Text + "|" +
+                                      NewGameBanner.Text + "|" +
+                                      gameGuid);
+                        tsw.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Exception: " + ex.Message);
+                    }
+                    ClearGenreBoxes();
+                    clearFields();
+                    ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
+                    AddGameDialog.IsOpen = false;
+
+                }
             }
             else
             {
