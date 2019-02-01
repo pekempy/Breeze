@@ -1,19 +1,25 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<UserControl
-	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:Models="clr-namespace:GameLauncher.Models"
-	xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
-	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
-	xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
-	xmlns:local="clr-namespace:GameLauncher.Views"
-	xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="GameLauncher.Views.SettingsView" d:DataContext="{d:DesignInstance Type=ViewModels:SettingsViewModel}" d:DesignHeight="300" d:DesignWidth="300" mc:Ignorable="d">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<UserControl x:Class="GameLauncher.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Models="clr-namespace:GameLauncher.Models"
+             xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+             xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
+             xmlns:local="clr-namespace:GameLauncher.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             d:DataContext="{d:DesignInstance Type=ViewModels:SettingsViewModel}"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="b2v" />
-        <CollectionViewSource x:Key="GenreListCVS" Source="{Binding GenreListOC}" CollectionViewType="{x:Type dat:ListCollectionView}">
+        <CollectionViewSource x:Key="GenreListCVS"
+                              CollectionViewType="{x:Type dat:ListCollectionView}"
+                              Source="{Binding GenreListOC}">
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Name" />
             </CollectionViewSource.SortDescriptions>
@@ -34,124 +40,378 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <materialDesign:ColorZone Grid.ColumnSpan="40" Margin="0,0,0,0" materialDesign:ShadowAssist.ShadowDepth="Depth2" materialDesign:ShadowAssist.ShadowEdges="Bottom" Mode="PrimaryMid">
+        <materialDesign:ColorZone Grid.ColumnSpan="40"
+                                  Margin="0,0,0,0"
+                                  materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                  materialDesign:ShadowAssist.ShadowEdges="Bottom"
+                                  Mode="PrimaryMid">
             <!--  Tab Control  -->
-            <StackPanel Margin="4" VerticalAlignment="Top" Orientation="Horizontal">
-                <RadioButton Name="ThemeBtn" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Content="THEMES" IsChecked="True" Style="{StaticResource MaterialDesignTabRadioButton}" />
-                <RadioButton Name="GenreBtn" Margin="4" Content="GENRES" IsChecked="False" Style="{StaticResource MaterialDesignTabRadioButton}" />
+            <StackPanel Margin="4"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                <RadioButton Name="ThemeBtn"
+                             Margin="4"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             Content="THEMES"
+                             IsChecked="True"
+                             Style="{StaticResource MaterialDesignTabRadioButton}" />
+                <RadioButton Name="GenreBtn"
+                             Margin="4"
+                             Content="GENRES"
+                             IsChecked="False"
+                             Style="{StaticResource MaterialDesignTabRadioButton}" />
             </StackPanel>
         </materialDesign:ColorZone>
-        <!-- ############################################################################################################### -->
-        <Grid Name="ThemeBlock" Margin="30 60 30 0" Grid.ColumnSpan="4" Grid.RowSpan="10" Visibility="{Binding Path=IsChecked, ElementName=ThemeBtn, Converter={StaticResource b2v}}">
-            <!-- CONTENT OF THE THEMES TAB GOES IN HERE -->
+        <Grid Name="ThemeBlock"
+              Grid.RowSpan="10"
+              Grid.ColumnSpan="4"
+              Margin="30,60,30,0"
+              Visibility="{Binding Path=IsChecked, ElementName=ThemeBtn, Converter={StaticResource b2v}}">
+            <!--  CONTENT OF THE THEMES TAB GOES IN HERE  -->
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock>Enable Dark Mode</TextBlock>
-                    <ToggleButton x:Name="themeToggle" Style="{StaticResource MaterialDesignSwitchAccentToggleButton}" Margin="60 0 0 0" HorizontalAlignment="Right" Checked="DarkModeToggle_Checked" Unchecked="DarkModeToggle_Unchecked" />
+                    <ToggleButton x:Name="themeToggle"
+                                  Margin="60,0,0,0"
+                                  HorizontalAlignment="Right"
+                                  Checked="DarkModeToggle_Checked"
+                                  Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                                  Unchecked="DarkModeToggle_Unchecked" />
                 </StackPanel>
                 <TextBlock />
-                <TextBlock HorizontalAlignment="Left" Width="160" Height="16" VerticalAlignment="Top">
-					<Run Text="Primary Colour" />
+                <TextBlock Width="160"
+                           Height="16"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">
+                    <Run Text="Primary Colour" />
                 </TextBlock>
-                <StackPanel Margin="0 5 0 0" MaxHeight="180" VerticalAlignment="Top">
+                <StackPanel MaxHeight="180"
+                            Margin="0,5,0,0"
+                            VerticalAlignment="Top">
                     <WrapPanel Width="auto" MaxHeight="180">
-                        <!-- Row One Buttons (PRIMARY) -->
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Pink" x:Name="PPink" Background="#e91e63" Tag="Pink" Click="ChangePrimary_OnClick">
+                        <!--  Row One Buttons (PRIMARY)  -->
+                        <Button x:Name="PPink"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#e91e63"
+                                BorderThickness="0"
+                                Click="ChangePrimary_OnClick"
+                                Tag="Pink"
+                                ToolTip="Pink">
                             <materialDesign:PackIcon Name="PPinkIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Red" x:Name="PRed" Background="#f44336" Tag="Red" Click="ChangePrimary_OnClick">
+                        <Button x:Name="PRed"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#f44336"
+                                BorderThickness="0"
+                                Click="ChangePrimary_OnClick"
+                                Tag="Red"
+                                ToolTip="Red">
                             <materialDesign:PackIcon Name="PRedIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Deep Orange" x:Name="PDeepOrange" Background="#ff5722" Tag="DeepOrange" Click="ChangePrimary_OnClick">
+                        <Button x:Name="PDeepOrange"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#ff5722"
+                                BorderThickness="0"
+                                Click="ChangePrimary_OnClick"
+                                Tag="DeepOrange"
+                                ToolTip="Deep Orange">
                             <materialDesign:PackIcon Name="PDeepOrangeIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Orange" x:Name="POrange" Background="#ffc107" Tag="Orange" Click="ChangePrimary_OnClick">
+                        <Button x:Name="POrange"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#ffc107"
+                                BorderThickness="0"
+                                Click="ChangePrimary_OnClick"
+                                Tag="Orange"
+                                ToolTip="Orange">
                             <materialDesign:PackIcon Name="POrangeIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Yellow" x:Name="PYellow" Background="#ffeb3b" Tag="Yellow" Click="ChangePrimary_OnClick">
+                        <Button x:Name="PYellow"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#ffeb3b"
+                                BorderThickness="0"
+                                Click="ChangePrimary_OnClick"
+                                Tag="Yellow"
+                                ToolTip="Yellow">
                             <materialDesign:PackIcon Name="PYellowIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Lime" x:Name="PLime" Background="#8bc34a" Tag="Lime" Click="ChangePrimary_OnClick">
+                        <Button x:Name="PLime"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#8bc34a"
+                                BorderThickness="0"
+                                Click="ChangePrimary_OnClick"
+                                Tag="Lime"
+                                ToolTip="Lime">
                             <materialDesign:PackIcon Name="PLimeIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Green" x:Name="PGreen" Background="#4caf50" Tag="Green" Click="ChangePrimary_OnClick">
+                        <Button x:Name="PGreen"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#4caf50"
+                                BorderThickness="0"
+                                Click="ChangePrimary_OnClick"
+                                Tag="Green"
+                                ToolTip="Green">
                             <materialDesign:PackIcon Name="PGreenIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Teal" x:Name="PTeal" Background="#009688" Tag="Teal" Click="ChangePrimary_OnClick">
+                        <Button x:Name="PTeal"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#009688"
+                                BorderThickness="0"
+                                Click="ChangePrimary_OnClick"
+                                Tag="Teal"
+                                ToolTip="Teal">
                             <materialDesign:PackIcon Name="PTealIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Cyan" x:Name="PCyan" Background="#00bcd4" Tag="Cyan" Click="ChangePrimary_OnClick">
+                        <Button x:Name="PCyan"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#00bcd4"
+                                BorderThickness="0"
+                                Click="ChangePrimary_OnClick"
+                                Tag="Cyan"
+                                ToolTip="Cyan">
                             <materialDesign:PackIcon Name="PCyanIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Blue" x:Name="PBlue" Background="#2196f3" Tag="Blue" Click="ChangePrimary_OnClick">
+                        <Button x:Name="PBlue"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#2196f3"
+                                BorderThickness="0"
+                                Click="ChangePrimary_OnClick"
+                                Tag="Blue"
+                                ToolTip="Blue">
                             <materialDesign:PackIcon Name="PBlueIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Indigo" x:Name="PIndigo" Background="#3f51b5" Tag="Indigo" Click="ChangePrimary_OnClick">
+                        <Button x:Name="PIndigo"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#3f51b5"
+                                BorderThickness="0"
+                                Click="ChangePrimary_OnClick"
+                                Tag="Indigo"
+                                ToolTip="Indigo">
                             <materialDesign:PackIcon Name="PIndigoIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Deep Purple" x:Name="PDeepPurple" Background="#673ab7" Tag="DeepPurple" Click="ChangePrimary_OnClick">
+                        <Button x:Name="PDeepPurple"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#673ab7"
+                                BorderThickness="0"
+                                Click="ChangePrimary_OnClick"
+                                Tag="DeepPurple"
+                                ToolTip="Deep Purple">
                             <materialDesign:PackIcon Name="PDeepPurpleIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Purple" x:Name="PPurple" Background="#9c27b0" Tag="Purple" Click="ChangePrimary_OnClick">
+                        <Button x:Name="PPurple"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#9c27b0"
+                                BorderThickness="0"
+                                Click="ChangePrimary_OnClick"
+                                Tag="Purple"
+                                ToolTip="Purple">
                             <materialDesign:PackIcon Name="PPurpleIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Blue Grey" x:Name="PBlueGrey" Background="#607d8b" Tag="BlueGrey" Click="ChangePrimary_OnClick">
+                        <Button x:Name="PBlueGrey"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#607d8b"
+                                BorderThickness="0"
+                                Click="ChangePrimary_OnClick"
+                                Tag="BlueGrey"
+                                ToolTip="Blue Grey">
                             <materialDesign:PackIcon Name="PBlueGreyIcon" Kind="Tick" />
                         </Button>
                     </WrapPanel>
                 </StackPanel>
                 <TextBlock />
-                <TextBlock HorizontalAlignment="Left" Width="160" Height="16" VerticalAlignment="Top">
-					<Run Text="Accent Colour" />
+                <TextBlock Width="160"
+                           Height="16"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top">
+                    <Run Text="Accent Colour" />
                 </TextBlock>
-                <StackPanel Margin="0 5 0 0" MaxHeight="180" VerticalAlignment="Top">
+                <StackPanel MaxHeight="180"
+                            Margin="0,5,0,0"
+                            VerticalAlignment="Top">
                     <WrapPanel Width="auto" MaxHeight="180">
-                        <!-- Row Two Buttons (ACCENT) -->
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Pink" x:Name="APink" Background="#f50057" Tag="Pink" Click="ChangeAccent_OnClick">
+                        <!--  Row Two Buttons (ACCENT)  -->
+                        <Button x:Name="APink"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#f50057"
+                                BorderThickness="0"
+                                Click="ChangeAccent_OnClick"
+                                Tag="Pink"
+                                ToolTip="Pink">
                             <materialDesign:PackIcon Name="APinkIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Red" x:Name="ARed" Background="#ff1744" Tag="Red" Click="ChangeAccent_OnClick">
+                        <Button x:Name="ARed"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#ff1744"
+                                BorderThickness="0"
+                                Click="ChangeAccent_OnClick"
+                                Tag="Red"
+                                ToolTip="Red">
                             <materialDesign:PackIcon Name="ARedIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Deep Orange" x:Name="ADeepOrange" Background="#ff1744" Tag="DeepOrange" Click="ChangeAccent_OnClick">
+                        <Button x:Name="ADeepOrange"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#ff1744"
+                                BorderThickness="0"
+                                Click="ChangeAccent_OnClick"
+                                Tag="DeepOrange"
+                                ToolTip="Deep Orange">
                             <materialDesign:PackIcon Name="ADeepOrangeIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Orange" x:Name="AOrange" Background="#ff9100" Tag="Orange" Click="ChangeAccent_OnClick">
+                        <Button x:Name="AOrange"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#ff9100"
+                                BorderThickness="0"
+                                Click="ChangeAccent_OnClick"
+                                Tag="Orange"
+                                ToolTip="Orange">
                             <materialDesign:PackIcon Name="AOrangeIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Yellow" x:Name="AYellow" Background="#ffea00" Tag="Yellow" Click="ChangeAccent_OnClick">
+                        <Button x:Name="AYellow"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#ffea00"
+                                BorderThickness="0"
+                                Click="ChangeAccent_OnClick"
+                                Tag="Yellow"
+                                ToolTip="Yellow">
                             <materialDesign:PackIcon Name="AYellowIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Lime" x:Name="ALime" Background="#c6ff00" Tag="Lime" Click="ChangeAccent_OnClick">
+                        <Button x:Name="ALime"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#c6ff00"
+                                BorderThickness="0"
+                                Click="ChangeAccent_OnClick"
+                                Tag="Lime"
+                                ToolTip="Lime">
                             <materialDesign:PackIcon Name="ALimeIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Green" x:Name="AGreen" Background="#00e676" Tag="Green" Click="ChangeAccent_OnClick">
+                        <Button x:Name="AGreen"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#00e676"
+                                BorderThickness="0"
+                                Click="ChangeAccent_OnClick"
+                                Tag="Green"
+                                ToolTip="Green">
                             <materialDesign:PackIcon Name="AGreenIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Teal" x:Name="ATeal" Background="#1de9b6" Tag="Teal" Click="ChangeAccent_OnClick">
+                        <Button x:Name="ATeal"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#1de9b6"
+                                BorderThickness="0"
+                                Click="ChangeAccent_OnClick"
+                                Tag="Teal"
+                                ToolTip="Teal">
                             <materialDesign:PackIcon Name="ATealIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Cyan" x:Name="ACyan" Background="#1de9b6" Tag="Cyan" Click="ChangeAccent_OnClick">
+                        <Button x:Name="ACyan"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#1de9b6"
+                                BorderThickness="0"
+                                Click="ChangeAccent_OnClick"
+                                Tag="Cyan"
+                                ToolTip="Cyan">
                             <materialDesign:PackIcon Name="ACyanIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Blue" x:Name="ABlue" Background="#2979ff" Tag="Blue" Click="ChangeAccent_OnClick">
+                        <Button x:Name="ABlue"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#2979ff"
+                                BorderThickness="0"
+                                Click="ChangeAccent_OnClick"
+                                Tag="Blue"
+                                ToolTip="Blue">
                             <materialDesign:PackIcon Name="ABlueIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Indigo" x:Name="AIndigo" Background="#3d5afe" Tag="Indigo" Click="ChangeAccent_OnClick">
+                        <Button x:Name="AIndigo"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#3d5afe"
+                                BorderThickness="0"
+                                Click="ChangeAccent_OnClick"
+                                Tag="Indigo"
+                                ToolTip="Indigo">
                             <materialDesign:PackIcon Name="AIndigoIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Deep Purple" x:Name="ADeepPurple" Background="#651fff" Tag="DeepPurple" Click="ChangeAccent_OnClick">
+                        <Button x:Name="ADeepPurple"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#651fff"
+                                BorderThickness="0"
+                                Click="ChangeAccent_OnClick"
+                                Tag="DeepPurple"
+                                ToolTip="Deep Purple">
                             <materialDesign:PackIcon Name="ADeepPurpleIcon" Kind="Tick" />
                         </Button>
-                        <Button Margin="5,5,5,5" Height="50" Width="50" BorderThickness="0" ToolTip="Purple" x:Name="APurple" Background="#d500f9" Tag="Purple" Click="ChangeAccent_OnClick">
+                        <Button x:Name="APurple"
+                                Width="50"
+                                Height="50"
+                                Margin="5,5,5,5"
+                                Background="#d500f9"
+                                BorderThickness="0"
+                                Click="ChangeAccent_OnClick"
+                                Tag="Purple"
+                                ToolTip="Purple">
                             <materialDesign:PackIcon Name="APurpleIcon" Kind="Tick" />
                         </Button>
                     </WrapPanel>
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <!-- ############################################################################################################### -->
-        <Grid Name="GenreBlock" Margin="10 60 10 10" Grid.RowSpan="6" Grid.ColumnSpan="4" ScrollViewer.CanContentScroll="True" Visibility="{Binding Path=IsChecked, ElementName=GenreBtn, Converter={StaticResource b2v}}">
+        <Grid Name="GenreBlock"
+              Grid.RowSpan="6"
+              Grid.ColumnSpan="4"
+              Margin="10,60,10,10"
+              ScrollViewer.CanContentScroll="True"
+              Visibility="{Binding Path=IsChecked, ElementName=GenreBtn, Converter={StaticResource b2v}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80" />
                 <RowDefinition Height="*" />
@@ -159,19 +419,45 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <!-- CONTENT OF THE GENRES TAB GOES IN HERE-->
-            <StackPanel Orientation="Horizontal" Grid.RowSpan="1" Height="25" VerticalAlignment="Top">
-                <TextBlock Text="New Genre: " FontWeight="Bold" Margin="0 5 0 0" Height="30" VerticalAlignment="Top" />
-                <TextBox x:Name="NewGenreName" Style="{StaticResource MaterialDesignTextBox}" Width="150" Height="25" FontSize="15" Margin="10 0 0 0" VerticalAlignment="Top" />
-                <Button Click="AddNewGenre_OnClick" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Top" Height="20">
-                    <materialDesign:PackIcon Kind="Send" Opacity=".56" VerticalAlignment="Center" />
+            <!--  CONTENT OF THE GENRES TAB GOES IN HERE  -->
+            <StackPanel Grid.RowSpan="1"
+                        Height="25"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                <TextBlock Height="30"
+                           Margin="0,5,0,0"
+                           VerticalAlignment="Top"
+                           FontWeight="Bold"
+                           Text="New Genre: " />
+                <TextBox x:Name="NewGenreName"
+                         Width="150"
+                         Height="25"
+                         Margin="10,0,0,0"
+                         VerticalAlignment="Top"
+                         FontSize="15"
+                         Style="{StaticResource MaterialDesignTextBox}" />
+                <Button Height="20"
+                        VerticalAlignment="Top"
+                        Click="AddNewGenre_OnClick"
+                        Style="{DynamicResource MaterialDesignToolButton}">
+                    <materialDesign:PackIcon VerticalAlignment="Center"
+                                             Kind="Send"
+                                             Opacity=".56" />
                 </Button>
             </StackPanel>
-            <TextBlock Text="Current Genres:" Margin="0 45 0 0" FontWeight="Bold" />
-            <ScrollViewer Grid.Row="1" Grid.RowSpan="4" VerticalScrollBarVisibility="auto" HorizontalScrollBarVisibility="Disabled">
+            <TextBlock Margin="0,45,0,0"
+                       FontWeight="Bold"
+                       Text="Current Genres:" />
+            <ScrollViewer Grid.Row="1"
+                          Grid.RowSpan="4"
+                          HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="auto">
                 <StackPanel>
-                    <!--Need to get the list of current genres to fill this-->
-                    <ItemsControl x:Name="genreListView" Margin="0 0 0 10" ItemsSource="{Binding Source={StaticResource GenreListCVS}}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <!--  Need to get the list of current genres to fill this  -->
+                    <ItemsControl x:Name="genreListView"
+                                  Margin="0,0,0,10"
+                                  ItemsSource="{Binding Source={StaticResource GenreListCVS}}"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel />
@@ -179,11 +465,21 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <materialDesign:Card Margin="5 5 5 5">
+                                <materialDesign:Card Margin="5,5,5,5">
                                     <WrapPanel>
-                                        <TextBlock Padding="10 0 0 0" Text="{Binding Name}" Width="140" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                        <Button Style="{StaticResource MaterialDesignFlatButton}" Click="DeleteGenre_OnClick" Tag="{Binding Guid}" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5 5 5 5">
-                                            <materialDesign:PackIcon Kind="Delete" HorizontalAlignment="Center" />
+                                        <TextBlock Width="140"
+                                                   Height="20"
+                                                   Padding="10,0,0,0"
+                                                   HorizontalAlignment="Left"
+                                                   VerticalAlignment="Center"
+                                                   Text="{Binding Name}" />
+                                        <Button Padding="5,5,5,5"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Click="DeleteGenre_OnClick"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Tag="{Binding Guid}">
+                                            <materialDesign:PackIcon HorizontalAlignment="Center" Kind="Delete" />
                                         </Button>
                                     </WrapPanel>
                                 </materialDesign:Card>
