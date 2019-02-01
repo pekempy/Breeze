@@ -54,33 +54,35 @@
             Click="EnableFilteringCheat"
             Opacity="0" />
         <materialDesign:ColorZone
-            Grid.Column="2"
-            MaxHeight="60"
-            Margin="0,-60,70,58"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            CornerRadius="2"
-            materialDesign:ShadowAssist.ShadowDepth="Depth1"
-            Mode="Light">
+            Grid.ColumnSpan="3"
+                            MaxHeight="60"
+                            Margin="0,-60,70,58"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                            CornerRadius="2"
+                            Grid.Column="2"
+                            Mode="Light">
             <StackPanel
-                MaxHeight="20"
-                Margin="16"
-                Orientation="Horizontal">
+                                MaxHeight="20"
+                                Margin="16"
+                                Orientation="Horizontal">
                 <!--  Search bar Icon  -->
                 <materialDesign:PackIcon
-                    VerticalAlignment="Center"
-                    Kind="Magnify"
-                    Opacity=".56" />
+                                    VerticalAlignment="Center"
+                                    Kind="Magnify"
+                                    Opacity=".56" />
                 <!--  Search text  -->
                 <TextBox
-                    x:Name="GameSearchBar"
-                    MinWidth="150"
-                    Margin="8,0,0,0"
-                    VerticalAlignment="Center"
-                    BorderThickness="0"
-                    materialDesign:HintAssist.Hint="Please search..."
-                    materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                    TextChanged="SearchString_TextChanged" />
+                                    x:Name="GameSearchBar"
+                                    TextChanged="SearchString_TextChanged"
+                                    MinWidth="150"
+                                    Margin="8,0,0,0"
+                                    VerticalAlignment="Center"
+                                    materialDesign:HintAssist.Hint="Please search..."
+                                    materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                                    BorderThickness="0"
+                                    FontSize="11" />
             </StackPanel>
         </materialDesign:ColorZone>
         <!-- This section displays one card per game in GamesList-->

@@ -10,7 +10,8 @@
 	xmlns:Models="clr-namespace:GameLauncher.Models"
 	xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
     mc:Ignorable="d"
-	xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+	xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"	
+    xmlns:vwp="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
     d:DataContext="{d:DesignInstance Type=ViewModels:BannerViewModel}"
     d:DesignHeight="300"
     d:DesignWidth="300">
@@ -56,13 +57,14 @@
             Click="EnableFilteringCheat"
             Opacity="0" />
         <materialDesign:ColorZone
+            Grid.ColumnSpan="3"
                             MaxHeight="60"
                             Margin="0,-60,70,58"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
                             materialDesign:ShadowAssist.ShadowDepth="Depth1"
                             CornerRadius="2"
-            Grid.Column="2"
+                            Grid.Column="2"
                             Mode="Light">
             <StackPanel
                                 MaxHeight="20"
@@ -99,7 +101,7 @@
                           VirtualizingStackPanel.VirtualizationMode="Recycling">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel />
+                        <vwp:VirtualizingWrapPanel />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>

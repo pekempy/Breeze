@@ -10,6 +10,7 @@
 	xmlns:Models="clr-namespace:GameLauncher.Models"
              x:Class="GameLauncher.Views.ListView"
 	xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+    xmlns:vwp="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
              d:DataContext="{d:DesignInstance Type=ViewModels:ListViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="600"
@@ -31,6 +32,21 @@
         </CollectionViewSource>
     </UserControl.Resources>
     <Grid>
+        <!-- Define columns and rows -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
         <Button
             Width="40"
             Height="40"
@@ -72,8 +88,9 @@
                                     FontSize="11" />
             </StackPanel>
         </materialDesign:ColorZone>
-        <ScrollViewer VerticalScrollBarVisibility="Auto"
-                      Grid.ColumnSpan="3">
+        <ScrollViewer Grid.RowSpan="7"
+                      Grid.ColumnSpan="3"
+                      VerticalScrollBarVisibility="Auto">
             <!-- This section displays one card per game in GamesList-->
             <!-- ItemsControl is bound to OC to know how many cards to make-->
             <ItemsControl x:Name="gameListView"
@@ -85,7 +102,7 @@
                       VirtualizingStackPanel.VirtualizationMode="Recycling">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel />
+                        <vwp:VirtualizingWrapPanel />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
