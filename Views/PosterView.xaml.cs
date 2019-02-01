@@ -1,11 +1,15 @@
 ﻿using GameLauncher.Models;
 using GameLauncher.ViewModels;
+using HtmlAgilityPack;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Xml;
 
 namespace GameLauncher.Views
 {
@@ -20,11 +24,29 @@ namespace GameLauncher.Views
             InitializeComponent();
         }
 
+        public List<string> ThumbList;
+        public List<string> LinkList;
         private void DEBUG_OnClick(object sender, RoutedEventArgs e)
         {
             Console.WriteLine(((Button)sender).Tag.ToString());
+            var url = "https://www.qwant.com/?q=skyrim%20poster&t=images";
+            HtmlAgilityPack.HtmlWeb hw = new HtmlAgilityPack.HtmlWeb();
+            HtmlAgilityPack.HtmlDocument doc = hw.Load(url);
+            List<string> ThumbList = new List<string>();
+            List<string> LinkList = new List<string>();
+            foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//img"))
+            {
+                string imgValue = link.GetAttributeValue("src", string.Empty);
+                ThumbList.Add(imgValue);
+                string[] imgLink = imgValue.Split('=');
+                string imglink = imgLink[1].Replace("%3A", ":");
+                imglink = imglink.Replace("%2F", "/");
+                imglink = imglink.Remove(imglink.Length - 3);
+                Console.WriteLine("----------");
+                Console.WriteLine("Thumbnail: "+imgValue);
+                Console.WriteLine("Link: " + imglink);
+            }
         }
-
         private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.RemoveGameFromFile(((Button)sender).Tag);

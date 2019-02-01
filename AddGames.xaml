@@ -4,7 +4,6 @@
       xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
-      xmlns:local="clr-namespace:GameLauncher"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
