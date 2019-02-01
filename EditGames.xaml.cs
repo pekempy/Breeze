@@ -317,7 +317,7 @@ namespace GameLauncher
 
         private void OldTitle_Focused(object sender, EventArgs e)
         {
-            if(OldTitle == null)
+            if (OldTitle == null)
                 OldTitle = EditTitle.Text;
         }
         private void EditTitle_TextChanged(object sender, TextChangedEventArgs e)
@@ -377,6 +377,6 @@ namespace GameLauncher
                 }
             }
         }
-        
+
     }
 }

@@ -29,7 +29,7 @@ namespace GameLauncher.ViewModels
                         text[i] = "";
                         text = text.Where(x => !string.IsNullOrEmpty(x)).ToArray();
                         File.WriteAllLines("./Resources/GamesList.txt", text);
-                        if(new FileInfo("./Resources/GamesList.txt").Length == 0)
+                        if (new FileInfo("./Resources/GamesList.txt").Length == 0)
                         {
                             File.Delete("./Resources/GamesList.txt");
                         }

@@ -95,7 +95,7 @@ namespace GameLauncher.Views
             MainWindow.cvs = GameListCVS;
             if (FilterGenreName != null) { GameListCVS.Filter += new FilterEventHandler(GenreFilter); }
             if (GameSearchBar.Text != null) { GameListCVS.Filter += new FilterEventHandler(GameSearch); }
-            if (GameListCVS.View != null) 
+            if (GameListCVS.View != null)
                 GameListCVS.View.Refresh();
         }
 

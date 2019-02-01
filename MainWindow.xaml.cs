@@ -36,7 +36,7 @@ namespace GameLauncher
             posterViewModel.LoadGames();
             posterViewModel.LoadGenres();
             DataContext = posterViewModel;
-            
+
 
         }
         public void MakeDirectories()
