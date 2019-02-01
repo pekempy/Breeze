@@ -38,8 +38,6 @@ namespace GameLauncher
                 //Write all the fields to the text file
                 try
                 {
-                    //string NewGameIconRelative = NewGameIcon.Text.Trim();
-                    //Console.WriteLine(NewGameIconRelative);
                     TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
                     Guid gameGuid = Guid.NewGuid();
                     tsw.WriteLine(NewGameTitle.Text + "|" +

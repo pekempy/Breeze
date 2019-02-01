@@ -77,6 +77,8 @@
                             Grid.ColumnSpan="3"
                             Margin="40,0,40,0"
                             materialDesign:HintAssist.Hint="Title"
+                            GotFocus="OldTitle_Focused"
+                            TextChanged="EditTitle_TextChanged"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         <!--  EditPath  -->
                         <TextBox

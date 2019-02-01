@@ -15,6 +15,9 @@ namespace GameLauncher
         private LoadAllGames lag = new LoadAllGames();
         private string guid;
         public string edittitle;
+        public string NewTitle;
+        public string OldTitle;
+        public string oldtitle;
         public string installPath = AppDomain.CurrentDomain.BaseDirectory;
 
         public EditGames()
@@ -53,7 +56,7 @@ namespace GameLauncher
             {
                 Console.WriteLine("Exception: " + ex.Message);
             }
-
+            RenameFiles(OldTitle, NewTitle);
             clearFields();
             ClearGenreBoxes();
             ModifyFile.RemoveGameFromFile(guid);
@@ -61,6 +64,36 @@ namespace GameLauncher
             EditGameDialog.IsOpen = false;
         }
 
+        private void RenameFiles(string OldTitle, string NewTitle)
+        {
+            if (OldTitle != NewTitle)
+            {
+                string oldicon;
+                string newicon;
+                string oldposter;
+                string newposter;
+                string oldbanner;
+                string newbanner;
+                string oldshortcut;
+                string newshortcut;
+                oldicon = installPath + "Resources/img/" + OldTitle + "-icon.png";
+                newicon = installPath + "Resources/img/" + EditTitle.Text + "-icon.png";
+                System.IO.File.Copy(oldicon, newicon, true);
+                System.IO.File.Delete(oldicon);
+                oldposter = installPath + "Resources/img/" + OldTitle + "-poster.png";
+                newposter = installPath + "Resources/img/" + EditTitle.Text + "-poster.png";
+                System.IO.File.Copy(oldposter, newposter, true);
+                System.IO.File.Delete(oldposter);
+                oldbanner = installPath + "Resources/img/" + OldTitle + "-banner.png";
+                newbanner = installPath + "Resources/img/" + EditTitle.Text + "-banner.png";
+                System.IO.File.Copy(oldbanner, newbanner, true);
+                System.IO.File.Delete(oldbanner);
+                oldshortcut = installPath + "Resources/shortcuts/" + OldTitle + ".lnk";
+                newshortcut = installPath + "Resources/shortcuts/" + EditTitle.Text + ".lnk";
+                System.IO.File.Copy(oldshortcut, newshortcut, true);
+                System.IO.File.Delete(oldshortcut);
+            }
+        }
         private void CancelEditGame_OnClick(object sender, RoutedEventArgs e)
         {
             EditGameDialog.IsOpen = false;
@@ -246,28 +279,69 @@ namespace GameLauncher
             shortcut.Save();
         }
 
+        private void OldTitle_Focused(object sender, EventArgs e)
+        {
+            if(OldTitle == null)
+                OldTitle = EditTitle.Text;
+        }
+        private void EditTitle_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            NewTitle = EditTitle.Text;
+            Console.WriteLine(NewTitle);
+        }
         private void UpdateFile(string gametitle, string sourcefile, string type)
         {
-            if (type == "icon")
+            if (OldTitle == gametitle)
             {
-                gametitle = installPath + "Resources/img/" + gametitle + "-icon.png";
-                System.IO.File.Copy(sourcefile, gametitle, true);
+                if (type == "icon")
+                {
+                    gametitle = installPath + "Resources/img/" + gametitle + "-icon.png";
+                    System.IO.File.Copy(sourcefile, gametitle, true);
+                }
+                else if (type == "poster")
+                {
+                    gametitle = installPath + "Resources/img/" + gametitle + "-poster.png";
+                    System.IO.File.Copy(sourcefile, gametitle, true);
+                }
+                else if (type == "banner")
+                {
+                    gametitle = installPath + "Resources/img/" + gametitle + "-banner.png";
+                    System.IO.File.Copy(sourcefile, gametitle, true);
+                }
+                else if (type == "shortcut")
+                {
+                    gametitle = installPath + "Resources/shortcuts/" + gametitle + ".lnk";
+                    System.IO.File.Copy(sourcefile, gametitle, true);
+                }
             }
-            else if (type == "poster")
+            else
             {
-                gametitle = installPath + "Resources/img/" + gametitle + "-poster.png";
-                System.IO.File.Copy(sourcefile, gametitle, true);
-            }
-            else if (type == "banner")
-            {
-                gametitle = installPath + "Resources/img/" + gametitle + "-banner.png";
-                System.IO.File.Copy(sourcefile, gametitle, true);
-            }
-            else if (type == "shortcut")
-            {
-                gametitle = installPath + "Resources/shortcuts/" + gametitle + ".lnk";
-                System.IO.File.Copy(sourcefile, gametitle, true);
+                if (type == "icon")
+                {
+                    oldtitle = installPath + "Resources/img/" + OldTitle + "-icon.png";
+                    gametitle = installPath + "Resources/img/" + gametitle + "-icon.png";
+                    System.IO.File.Copy(oldtitle, gametitle, true);
+                }
+                else if (type == "poster")
+                {
+                    oldtitle = installPath + "Resources/img/" + OldTitle + "-poster.png";
+                    gametitle = installPath + "Resources/img/" + gametitle + "-poster.png";
+                    System.IO.File.Copy(oldtitle, gametitle, true);
+                }
+                else if (type == "banner")
+                {
+                    oldtitle = installPath + "Resources/img/" + OldTitle + "-banner.png";
+                    gametitle = installPath + "Resources/img/" + gametitle + "-banner.png";
+                    System.IO.File.Copy(oldtitle, gametitle, true);
+                }
+                else if (type == "shortcut")
+                {
+                    oldtitle = installPath + "Resources/img/" + OldTitle + ".lnk";
+                    gametitle = installPath + "Resources/img/" + gametitle + ".lnk";
+                    System.IO.File.Copy(oldtitle, gametitle, true);
+                }
             }
         }
+        
     }
 }
