@@ -23,7 +23,7 @@ namespace GameLauncher
 
         private void AddGame_OnClick(object sender, RoutedEventArgs e)
         {
-            if (NewGameTitle.Text != "" || NewGameTitle.Text != null)
+            if (NewGameTitle.Text != "")
             {
                 //This part repairs the link so it launches properly
                 string ngl = NewGameLink.Text;
