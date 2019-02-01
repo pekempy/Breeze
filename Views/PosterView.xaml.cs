@@ -28,8 +28,8 @@ namespace GameLauncher.Views
         public List<string> LinkList;
         private void DEBUG_OnClick(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(((Button)sender).Tag.ToString());
-            var url = "https://www.qwant.com/?q=skyrim%20poster&t=images";
+            string gametitle = ((Button)sender).Tag.ToString();
+            var url = "https://www.qwant.com/?q="+ gametitle +"%20poster&t=images";
             HtmlAgilityPack.HtmlWeb hw = new HtmlAgilityPack.HtmlWeb();
             HtmlAgilityPack.HtmlDocument doc = hw.Load(url);
             List<string> ThumbList = new List<string>();
@@ -41,7 +41,8 @@ namespace GameLauncher.Views
                 string[] imgLink = imgValue.Split('=');
                 string imglink = imgLink[1].Replace("%3A", ":");
                 imglink = imglink.Replace("%2F", "/");
-                imglink = imglink.Remove(imglink.Length - 3);
+                imglink = imglink.Remove(imglink.Length - 2);
+                imgValue = "http:" + imgValue;
                 Console.WriteLine("----------");
                 Console.WriteLine("Thumbnail: "+imgValue);
                 Console.WriteLine("Link: " + imglink);
