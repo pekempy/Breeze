@@ -15,6 +15,7 @@ namespace GameLauncher.ViewModels
         public static void RemoveGameFromFile(object gameGuid)
         {
             gameGuid = gameGuid.ToString();
+            string[] columns = new string[0];
             var text = File.ReadAllLines("./Resources/GamesList.txt", Encoding.UTF8);
             for (int i = 0; i < text.Length; i++)
             {
@@ -22,8 +23,10 @@ namespace GameLauncher.ViewModels
                 {
                     try
                     {
+                        columns = text[i].Split('|');
+                        string title = columns[0];
+                        DeleteGameImages(title);
                         text[i] = "";
-
                         text = text.Where(x => !string.IsNullOrEmpty(x)).ToArray();
                         File.WriteAllLines("./Resources/GamesList.txt", text);
                         if(new FileInfo("./Resources/GamesList.txt").Length == 0)
@@ -72,7 +75,6 @@ namespace GameLauncher.ViewModels
         {
             string installPath = AppDomain.CurrentDomain.BaseDirectory;
             installPath = installPath.Replace("\\", "/");
-            //need to bypass the files being in use problem :|
             File.Delete(installPath + "Resources/img/" + title + "-icon.png");
             File.Delete(installPath + "Resources/img/" + title + "-poster.png");
             File.Delete(installPath + "Resources/img/" + title + "-banner.png");
