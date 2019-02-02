@@ -11,11 +11,6 @@
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
-    <Window.Resources>
-        <CollectionViewSource x:Key="SearchCVS"
-                              CollectionViewType="{x:Type dat:ListCollectionView}"
-                              Source="{Binding SearchList}"/>
-    </Window.Resources>
     <Grid>
         <Grid>
             <materialDesign:ColorZone Height="65"
@@ -35,7 +30,7 @@
             <ItemsControl x:Name="SearchView"
                           MaxHeight="10000"
                           Margin="10 50 0 10"
-                          ItemsSource="{Binding Source={StaticResource SearchCVS}}"
+                          ItemsSource="{Binding SearchList}"
                           ScrollViewer.HorizontalScrollBarVisibility="Auto">
 
                 <ItemsControl.ItemsPanel>
@@ -50,8 +45,9 @@
                                                  Width="180"
                                                 Margin="10,10,10,10">
                                 <Grid>
-                                    <Image Source="{Binding Thumbnail}"
-                                       Stretch="Fill"/></Grid>
+                                    <Image Source="{Binding Image}"
+                                       Stretch="Fill"/>
+                                </Grid>
                             </materialDesign:Card>
                         </StackPanel>
                     </DataTemplate>
