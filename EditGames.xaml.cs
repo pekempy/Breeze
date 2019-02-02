@@ -246,7 +246,11 @@ namespace GameLauncher
             if (dialogResult == true && EditTitle.Text != "")
             {
                 if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text.Replace(":", " -"); }
-                string ngIconFile = fileDialog.FileName;
+                else if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text; }
+                else { edittitle = EditTitle.Text; }
+                string installPath = AppDomain.CurrentDomain.BaseDirectory;
+                string filedialogoutput = fileDialog.FileName;
+                UpdateFile(EditTitle.Text, filedialogoutput, "icon");
                 EditIcon.Text = installPath + "Resources/img/" + edittitle + "-icon.png";
             }
             else if (dialogResult == true && EditTitle.Text == "")
@@ -265,10 +269,11 @@ namespace GameLauncher
             if (dialogResult == true && EditTitle.Text != "")
             {
                 if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text.Replace(":", " -"); }
-                else if (!EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text; }
+                else if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text; }
+                else { edittitle = EditTitle.Text; }
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 string filedialogoutput = fileDialog.FileName;
-                UpdateFile(edittitle, filedialogoutput, "poster");
+                UpdateFile(EditTitle.Text, filedialogoutput, "poster");
                 EditPoster.Text = installPath + "Resources/img/" + edittitle + "-poster.png";
             }
             else if (dialogResult == true && EditTitle.Text == "")
@@ -280,15 +285,18 @@ namespace GameLauncher
         private void AttachBanner_OnClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.RestoreDirectory = true;
             fileDialog.Multiselect = false;
+            fileDialog.RestoreDirectory = true;
             fileDialog.Filter = "Images (*.jpg;*.png;*.bmp | *.jpg;*.png;*.bmp";
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && EditTitle.Text != "")
             {
                 if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text.Replace(":", " -"); }
+                else if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text; }
+                else { edittitle = EditTitle.Text; }
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
-                string ngBannerFile = fileDialog.FileName;
+                string filedialogoutput = fileDialog.FileName;
+                UpdateFile(EditTitle.Text, filedialogoutput, "banner");
                 EditBanner.Text = installPath + "Resources/img/" + edittitle + "-banner.png";
             }
             else if (dialogResult == true && EditTitle.Text == "")
@@ -318,12 +326,6 @@ namespace GameLauncher
             shortcut.WorkingDirectory = "C:\\App";
             shortcut.IconLocation = linkname;
             shortcut.Save();
-        }
-
-        private void OldTitle_Focused(object sender, EventArgs e)
-        {
-            if (OldTitle == null)
-                OldTitle = EditTitle.Text;
         }
         private void EditTitle_TextChanged(object sender, TextChangedEventArgs e)
         {

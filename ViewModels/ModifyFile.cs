@@ -62,6 +62,7 @@ namespace GameLauncher.ViewModels
                         MainWindow.DialogEditGames.EditPoster.Text = column[5];
                         MainWindow.DialogEditGames.EditBanner.Text = column[6];
                         MainWindow.OpenEditGameDialog(gameGuid.ToString());
+                        MainWindow.DialogEditGames.OldTitle = column[0];
                     }
                     catch (Exception e)
                     {
