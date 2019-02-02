@@ -25,26 +25,30 @@ namespace GameLauncher.ViewModels
         {
             searchstring = searchstring.Replace(" ", "%20");
             var url = "https://www.qwant.com/?q=" + searchstring +"&t=images";
-            HtmlAgilityPack.HtmlWeb hw = new HtmlAgilityPack.HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = hw.Load(url);
-            List<string> ThumbList = new List<string>();
-            List<string> LinkList = new List<string>();
-            foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//img"))
+            try
             {
-                string imgValue = link.GetAttributeValue("src", string.Empty);
-                ThumbList.Add(imgValue);
-                string[] imgLink = imgValue.Split('=');
-                string imglink = imgLink[1].Replace("%3A", ":");
-                imglink = imglink.Replace("%2F", "/");
-                imglink = imglink.Remove(imglink.Length - 2);
-                imgValue = "http:" + imgValue;
-                searchlist.Add(new SearchResults
+                HtmlAgilityPack.HtmlWeb hw = new HtmlAgilityPack.HtmlWeb();
+                HtmlAgilityPack.HtmlDocument doc = hw.Load(url);
+                List<string> ThumbList = new List<string>();
+                List<string> LinkList = new List<string>();
+                foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//img"))
                 {
-                    Thumbnail = imgValue,
-                    Image = imglink
-                });
+                    string imgValue = link.GetAttributeValue("src", string.Empty);
+                    ThumbList.Add(imgValue);
+                    string[] imgLink = imgValue.Split('=');
+                    string imglink = imgLink[1].Replace("%3A", ":");
+                    imglink = imglink.Replace("%2F", "/");
+                    imglink = imglink.Remove(imglink.Length - 2);
+                    imgValue = "http:" + imgValue;
+                    searchlist.Add(new SearchResults
+                    {
+                        Thumbnail = imgValue,
+                        Image = imglink
+                    });
+                }
+                SearchList = searchlist;
             }
-            SearchList = searchlist;
+            catch (Exception e) { }
         }
     }
 }

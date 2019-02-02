@@ -61,6 +61,7 @@ namespace GameLauncher
                 }
                 else
                 {
+                    RenameFiles(OldTitle, NewTitle);
                     try
                     {
                         TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
@@ -78,7 +79,6 @@ namespace GameLauncher
                     {
                         Console.WriteLine("Exception: " + ex.Message);
                     }
-                    RenameFiles(OldTitle, NewTitle);
                     clearFields();
                     ClearGenreBoxes();
                     alltitles = null;
@@ -105,6 +105,7 @@ namespace GameLauncher
                 newicon = installPath + "Resources/img/" + EditTitle.Text + "-icon.png";
                 if (System.IO.File.Exists(oldicon))
                 {
+                    EditIcon.Text = EditIcon.Text.Replace(OldTitle, NewTitle);
                     System.IO.File.Copy(oldicon, newicon, true);
                     System.IO.File.Delete(oldicon);
                 }
@@ -112,6 +113,7 @@ namespace GameLauncher
                 newposter = installPath + "Resources/img/" + EditTitle.Text + "-poster.png";
                 if (System.IO.File.Exists(oldposter))
                 {
+                    EditPoster.Text = EditPoster.Text.Replace(OldTitle, NewTitle);
                     System.IO.File.Copy(oldposter, newposter, true);
                     System.IO.File.Delete(oldposter);
                 }
@@ -119,6 +121,7 @@ namespace GameLauncher
                 newbanner = installPath + "Resources/img/" + EditTitle.Text + "-banner.png";
                 if (System.IO.File.Exists(oldbanner))
                 {
+                    EditBanner.Text = EditBanner.Text.Replace(OldTitle, NewTitle);
                     System.IO.File.Copy(oldbanner, newbanner, true);
                     System.IO.File.Delete(oldbanner);
                 }
@@ -126,6 +129,7 @@ namespace GameLauncher
                 newshortcut = installPath + "Resources/shortcuts/" + EditTitle.Text + ".lnk";
                 if (System.IO.File.Exists(oldshortcut))
                 {
+                    EditPath.Text = EditPath.Text.Replace(OldTitle, NewTitle);
                     System.IO.File.Copy(oldshortcut, newshortcut, true);
                     System.IO.File.Delete(oldshortcut);
                 }
@@ -324,12 +328,6 @@ namespace GameLauncher
         private void EditTitle_TextChanged(object sender, TextChangedEventArgs e)
         {
             NewTitle = EditTitle.Text;
-            if ( NewTitle != OldTitle && NewTitle != null && OldTitle != null)
-            {
-                EditIcon.Text = EditIcon.Text.Replace(OldTitle, NewTitle);
-                EditPoster.Text = EditPoster.Text.Replace(OldTitle, NewTitle);
-                EditBanner.Text = EditBanner.Text.Replace(OldTitle, NewTitle);
-                EditPath.Text = EditPath.Text.Replace(OldTitle, NewTitle); }
         }
         private void UpdateFile(string gametitle, string sourcefile, string type)
         {
