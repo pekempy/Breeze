@@ -59,8 +59,7 @@
                                   HorizontalAlignment="Right"
                                   VerticalAlignment="Top"
                                   materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                                  CornerRadius="2"
-                                  Mode="Light">
+                                  CornerRadius="2">
             <StackPanel MaxHeight="20"
                         Margin="16"
                         Orientation="Horizontal">
