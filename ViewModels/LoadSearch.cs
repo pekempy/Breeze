@@ -37,6 +37,7 @@ namespace GameLauncher.ViewModels
                     imglink = imglink.Replace("%2F", "/");
                     imglink = imglink.Remove(imglink.Length - 2);
                     imgValue = "http:" + imgValue;
+                    imgValue = imgValue.Substring(0, imgValue.LastIndexOf("&q="));
                     searchlist.Add(new SearchResults
                     {
                         Thumbnail = imgValue,
