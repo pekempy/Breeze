@@ -221,6 +221,20 @@
                                                      VerticalAlignment="Center"
                                                      Kind="Attachment" />
                         </Button>
+                        <Button Grid.Row="5"
+                                Grid.Column="2"
+                                Margin="0,0,50,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Click="SearchIcon_OnClick"
+                                IsDefault="False"
+                                Style="{DynamicResource MaterialDesignToolButton}"
+                                ToolTip="Search for an icon">
+                            <materialDesign:PackIcon Width="20"
+                                                     Height="20"
+                                                     VerticalAlignment="Center"
+                                                     Kind="Web" />
+                        </Button>
                         <!--  EditPoster  -->
                         <TextBox Name="EditPoster"
                                  Grid.Row="6"

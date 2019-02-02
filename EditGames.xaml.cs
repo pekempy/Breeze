@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using IWshRuntimeLibrary;
+using GameLauncher.Views;
 
 namespace GameLauncher
 {
@@ -323,10 +324,12 @@ namespace GameLauncher
         private void EditTitle_TextChanged(object sender, TextChangedEventArgs e)
         {
             NewTitle = EditTitle.Text;
-            EditIcon.Text = EditIcon.Text.Replace(OldTitle, NewTitle);
-            EditPoster.Text = EditPoster.Text.Replace(OldTitle, NewTitle);
-            EditBanner.Text = EditBanner.Text.Replace(OldTitle, NewTitle);
-            EditPath.Text = EditPath.Text.Replace(OldTitle, NewTitle);
+            if ( NewTitle != OldTitle && NewTitle != null && OldTitle != null)
+            {
+                EditIcon.Text = EditIcon.Text.Replace(OldTitle, NewTitle);
+                EditPoster.Text = EditPoster.Text.Replace(OldTitle, NewTitle);
+                EditBanner.Text = EditBanner.Text.Replace(OldTitle, NewTitle);
+                EditPath.Text = EditPath.Text.Replace(OldTitle, NewTitle); }
         }
         private void UpdateFile(string gametitle, string sourcefile, string type)
         {
@@ -380,6 +383,16 @@ namespace GameLauncher
                     System.IO.File.Copy(oldtitle, gametitle, true);
                 }
             }
+        }
+        private void SearchIcon_OnClick(object sender, RoutedEventArgs e)
+        {
+            LoadSearch ls = new LoadSearch();
+            string gametitle = EditTitle.Text;
+            string imagetype = "icon";
+            string searchstring = gametitle + " poster";
+            ls.SearchLinks(gametitle, imagetype, searchstring);
+            ImageDownload iw = new ImageDownload(gametitle, searchstring, imagetype);
+            iw.Show();
         }
 
     }

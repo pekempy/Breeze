@@ -121,15 +121,21 @@
     <Compile Include="EditGames.xaml.cs">
       <DependentUpon>EditGames.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\GenreModel.cs" />
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="ViewModels\LoadSearch.cs" />
     <Compile Include="ViewModels\LoadAllGames.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\PosterViewModel.cs" />
     <Compile Include="ViewModels\BannerViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\ModifyFile.cs" />
+    <Compile Include="ImageDownload.xaml.cs">
+      <DependentUpon>ImageDownload.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PosterView.xaml.cs">
       <DependentUpon>PosterView.xaml</DependentUpon>
     </Compile>
@@ -162,6 +168,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ImageDownload.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PosterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -29,24 +29,6 @@ namespace GameLauncher.Views
         private void DEBUG_OnClick(object sender, RoutedEventArgs e)
         {
             string gametitle = ((Button)sender).Tag.ToString();
-            var url = "https://www.qwant.com/?q="+ gametitle +"%20poster&t=images";
-            HtmlAgilityPack.HtmlWeb hw = new HtmlAgilityPack.HtmlWeb();
-            HtmlAgilityPack.HtmlDocument doc = hw.Load(url);
-            List<string> ThumbList = new List<string>();
-            List<string> LinkList = new List<string>();
-            foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//img"))
-            {
-                string imgValue = link.GetAttributeValue("src", string.Empty);
-                ThumbList.Add(imgValue);
-                string[] imgLink = imgValue.Split('=');
-                string imglink = imgLink[1].Replace("%3A", ":");
-                imglink = imglink.Replace("%2F", "/");
-                imglink = imglink.Remove(imglink.Length - 2);
-                imgValue = "http:" + imgValue;
-                Console.WriteLine("----------");
-                Console.WriteLine("Thumbnail: "+imgValue);
-                Console.WriteLine("Link: " + imglink);
-            }
         }
         private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
         {

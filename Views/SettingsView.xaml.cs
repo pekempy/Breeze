@@ -205,5 +205,10 @@ namespace GameLauncher.Views
         {
             Properties.Settings.Default.Save();
         }
+
+        internal static void Show()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
