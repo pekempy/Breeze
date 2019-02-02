@@ -6,12 +6,10 @@
              xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:vwp="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
-             d:DataContext="{d:DesignInstance Type=ViewModels:PosterViewModel}"
+             d:DataContext="{d:DesignInstance Type=ViewModels:SearchViewModel}"
              d:DesignHeight="300"
              d:DesignWidth="300"
-             SizeToContent="WidthAndHeight"
              mc:Ignorable="d">
     <Window.Resources>
         <CollectionViewSource x:Key="SearchCVS"
@@ -36,8 +34,9 @@
             </materialDesign:ColorZone>
             <ItemsControl x:Name="SearchView"
                           MaxHeight="10000"
-                          Margin="10 10 0 10"
-                          ItemsSource="{Binding Source={StaticResource SearchCVS}}">
+                          Margin="10 50 0 10"
+                          ItemsSource="{Binding Source={StaticResource SearchCVS}}"
+                          ScrollViewer.HorizontalScrollBarVisibility="Auto">
 
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -47,10 +46,12 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:Card MinWidth="180"
-                                                MaxWidth="180"
+                            <materialDesign:Card Height="220"
+                                                 Width="180"
                                                 Margin="10,10,10,10">
-                                
+                                <Grid>
+                                    <Image Source="{Binding Thumbnail}"
+                                       Stretch="Fill"/></Grid>
                             </materialDesign:Card>
                         </StackPanel>
                     </DataTemplate>

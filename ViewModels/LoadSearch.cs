@@ -12,8 +12,8 @@ namespace GameLauncher.ViewModels
 {
     public class LoadSearch
     {
-        public List<SearchResults> SearchList { get; set; }
-        private List<SearchResults> searchlist = new List<SearchResults>();
+        public ObservableCollection<SearchResults> SearchList { get; set; }
+        private ObservableCollection<SearchResults> searchlist = new ObservableCollection<SearchResults>();
 
         public void Search(string gametitle, string imagetype, string searchstring)
         {
@@ -29,12 +29,9 @@ namespace GameLauncher.ViewModels
             {
                 HtmlAgilityPack.HtmlWeb hw = new HtmlAgilityPack.HtmlWeb();
                 HtmlAgilityPack.HtmlDocument doc = hw.Load(url);
-                List<string> ThumbList = new List<string>();
-                List<string> LinkList = new List<string>();
                 foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//img"))
                 {
                     string imgValue = link.GetAttributeValue("src", string.Empty);
-                    ThumbList.Add(imgValue);
                     string[] imgLink = imgValue.Split('=');
                     string imglink = imgLink[1].Replace("%3A", ":");
                     imglink = imglink.Replace("%2F", "/");
@@ -47,8 +44,16 @@ namespace GameLauncher.ViewModels
                     });
                 }
                 SearchList = searchlist;
+                ObservableList();
             }
-            catch (Exception e) { }
+            catch (Exception e) { Console.WriteLine("Error: " + e); }
+        }
+        public void ObservableList() //Prints out contents of ObsCol
+        {
+            for (int i = 0; i < SearchList.Count; i++)
+            {
+                Console.WriteLine(string.Concat(SearchList[i].Thumbnail, " | ", SearchList[i].Image));
+            }
         }
     }
 }

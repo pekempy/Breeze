@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameLauncher.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,8 +22,11 @@ namespace GameLauncher
     {
         public ImageDownload(string gametitle, string searchstring, string imagetype)
         {
+            SearchViewModel svm = new SearchViewModel();
+            svm.LoadSearch(gametitle, imagetype,searchstring);
             InitializeComponent();
             windowTitle.Text = "Breeze Image Search: " + searchstring;
+
         }
     }
 }
