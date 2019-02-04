@@ -54,12 +54,7 @@ namespace GameLauncher
                     alltitles += " | " + gametitle + " | ";
                     numofgames++;
                 }
-                if (alltitles.Contains(" | " + NewTitle.Trim().ToLower() + " | "))
-                {
-                    MessageBox.Show("A game with this title already exists. If you need to fix capitalisation, add a character, save, then edit again (Sorry)");
-                    EditTitle.Text = OldTitle;
-                }
-                else
+                try
                 {
                     RenameFiles(OldTitle, NewTitle);
                     try
@@ -87,6 +82,7 @@ namespace GameLauncher
                     ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
                     EditGameDialog.IsOpen = false;
                 }
+                catch (Exception ex) { Console.WriteLine("Error message EditGames.xaml.cs: " + ex); }
             }
         }
         private void RenameFiles(string OldTitle, string NewTitle)
