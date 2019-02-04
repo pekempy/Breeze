@@ -133,7 +133,7 @@
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\ModifyFile.cs" />
-    <Compile Include="ImageDownload.xaml.cs">
+    <Compile Include="Views\ImageDownload.xaml.cs">
       <DependentUpon>ImageDownload.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PosterView.xaml.cs">
@@ -168,7 +168,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ImageDownload.xaml">
+    <Page Include="Views\ImageDownload.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

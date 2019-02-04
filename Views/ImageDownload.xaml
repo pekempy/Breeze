@@ -1,4 +1,4 @@
-﻿<Window x:Class="GameLauncher.ImageDownload"
+﻿<Window x:Class="GameLauncher.Views.ImageDownload"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
@@ -7,10 +7,14 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vwp="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
-             d:DataContext="{d:DesignInstance Type=ViewModels:SearchViewModel}"
+        xmlns:local="clr-namespace:GameLauncher.Views"
+        d:DataContext="{d:DesignInstance Type=ViewModels:SearchViewModel}"
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
+    <Window.Resources>
+        <local:StringToImage x:Key="StringToImage"/>
+    </Window.Resources>
     <Grid>
         <Grid>
             <materialDesign:ColorZone Height="65"
@@ -43,9 +47,9 @@
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:Card Height="220"
                                                  Width="180"
-                                                Margin="10,10,10,10">
+                                                Margin="10,10,10,10" Background="Red">
                                 <Grid>
-                                    <Image Source="{Binding Image}"
+                                    <Image Source="{Binding Image, Converter={StaticResource StringToImage}}"
                                        Stretch="Fill"/>
                                 </Grid>
                             </materialDesign:Card>
