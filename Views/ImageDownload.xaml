@@ -53,7 +53,7 @@
                                             Click="DownloadImage_OnClick"
                                             Opacity="0.1"
                                             Style="{StaticResource MaterialDesignFlatButton}"
-                                            Tag="{Binding Image}"/>
+                                            Tag="{Binding Thumbnail}" />
                                     </Grid>
                                 </materialDesign:Card>
                             </DataTemplate>
@@ -68,18 +68,27 @@
                     materialDesign:ShadowAssist.ShadowDepth="Depth2"
                     DockPanel.Dock="Top"
                     Mode="PrimaryMid">
-                    <StackPanel Orientation="Horizontal">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
                         <TextBlock
                             x:Name="windowTitle"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
                             Margin="20,0,0,0"
                             VerticalAlignment="Center"
                             FontSize="24"
                             RenderOptions.EdgeMode="Aliased"
                             Text="Breeze Image Search" />
                         <Button
+                            Grid.Column="3"
                             Width="45"
                             Height="45"
-                            Margin="70,0,0,0"
+                            Margin="0,0,0,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
                             HorizontalContentAlignment="Left"
@@ -87,7 +96,7 @@
                             Style="{StaticResource MaterialDesignRaisedAccentButton}">
                             <materialDesign:PackIcon Padding="0,0,0,0" Kind="Close" />
                         </Button>
-                    </StackPanel>
+                    </Grid>
                 </materialDesign:ColorZone>
             </Grid>
         </materialDesign:DialogHost.DialogContent>

@@ -385,7 +385,7 @@ namespace GameLauncher
             LoadSearch ls = new LoadSearch();
             string gametitle = EditTitle.Text;
             string imagetype = "icon";
-            string searchstring = gametitle + " icon";
+            string searchstring = gametitle + " game icon";
             ls.SearchLinks(gametitle, imagetype, searchstring);
             ((MainWindow)Application.Current.MainWindow)?.OpenImageDL(gametitle, searchstring, imagetype);
         }
@@ -394,7 +394,7 @@ namespace GameLauncher
             LoadSearch ls = new LoadSearch();
             string gametitle = EditTitle.Text;
             string imagetype = "poster";
-            string searchstring = gametitle + " poster";
+            string searchstring = gametitle + " game poster";
             ls.SearchLinks(gametitle, imagetype, searchstring);
             ((MainWindow)Application.Current.MainWindow)?.OpenImageDL(gametitle, searchstring, imagetype);
         }
@@ -403,7 +403,7 @@ namespace GameLauncher
             LoadSearch ls = new LoadSearch();
             string gametitle = EditTitle.Text;
             string imagetype = "banner";
-            string searchstring = gametitle + " banner";
+            string searchstring = gametitle + " game banner";
             ls.SearchLinks(gametitle, imagetype, searchstring);
             ((MainWindow)Application.Current.MainWindow)?.OpenImageDL(gametitle, searchstring, imagetype);
         }

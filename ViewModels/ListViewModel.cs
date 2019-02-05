@@ -9,7 +9,14 @@ namespace GameLauncher.ViewModels
         public ObservableCollection<GameList> ListViewOC { get; set; }
         public static ObservableCollection<GenreList> GenreListOC { get; set; }
         private LoadAllGames lag = new LoadAllGames();
+        private LoadSearch ls = new LoadSearch();
+        public static ObservableCollection<SearchResults> SearchList { get; set; }
 
+        public void LoadSearch(string gametitle, string imagetype, string searchstring)
+        {
+            ls.Search(gametitle, imagetype, searchstring);
+            SearchList = ls.SearchList;
+        }
         public void LoadGames()
         {
             lag.LoadGames();

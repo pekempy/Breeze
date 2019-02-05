@@ -126,7 +126,6 @@ namespace GameLauncher
                 }
                 else { Console.WriteLine("Not sure which dialog is open, whoops!"); }
             }
-            Console.WriteLine(DialogFrame.Content.ToString());
         }
 
         public void DownloadImage(string url)

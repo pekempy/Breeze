@@ -301,5 +301,32 @@ namespace GameLauncher
             shortcut.IconLocation = linkname;
             shortcut.Save();
         }
+        private void SearchIcon_OnClick(object sender, RoutedEventArgs e)
+        {
+            LoadSearch ls = new LoadSearch();
+            string gametitle = NewGameTitle.Text;
+            string imagetype = "icon";
+            string searchstring = gametitle + " game icon";
+            ls.SearchLinks(gametitle, imagetype, searchstring);
+            ((MainWindow)Application.Current.MainWindow)?.OpenImageDL(gametitle, searchstring, imagetype);
+        }
+        private void SearchPoster_OnClick(object sender, RoutedEventArgs e)
+        {
+            LoadSearch ls = new LoadSearch();
+            string gametitle = NewGameTitle.Text;
+            string imagetype = "poster";
+            string searchstring = gametitle + " game poster";
+            ls.SearchLinks(gametitle, imagetype, searchstring);
+            ((MainWindow)Application.Current.MainWindow)?.OpenImageDL(gametitle, searchstring, imagetype);
+        }
+        private void SearchBanner_OnClick(object sender, RoutedEventArgs e)
+        {
+            LoadSearch ls = new LoadSearch();
+            string gametitle = NewGameTitle.Text;
+            string imagetype = "banner";
+            string searchstring = gametitle + " game banner";
+            ls.SearchLinks(gametitle, imagetype, searchstring);
+            ((MainWindow)Application.Current.MainWindow)?.OpenImageDL(gametitle, searchstring, imagetype);
+        }
     }
 }
