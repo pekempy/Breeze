@@ -173,7 +173,7 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Click="OpenAddGameWindow_OnClick"
-                Style="{StaticResource MaterialDesignFloatingActionButton}"
+                Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
                 ToolTip="Add a game">
             <materialDesign:PackIcon Width="30"
                                      Height="30"

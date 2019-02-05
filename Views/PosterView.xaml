@@ -1,28 +1,31 @@
-﻿<UserControl x:Class="GameLauncher.Views.PosterView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-             xmlns:vwp="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
-             d:DataContext="{d:DesignInstance Type=ViewModels:PosterViewModel}"
-             d:DesignHeight="300"
-             d:DesignWidth="300"
-             mc:Ignorable="d">
+﻿<UserControl
+    x:Class="GameLauncher.Views.PosterView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:vwp="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
+    d:DataContext="{d:DesignInstance Type=ViewModels:PosterViewModel}"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
     <UserControl.Resources>
-        <CollectionViewSource x:Key="GameListCVS"
-                              CollectionViewType="{x:Type dat:ListCollectionView}"
-                              Source="{Binding PosterViewOC}">
+        <CollectionViewSource
+            x:Key="GameListCVS"
+            CollectionViewType="{x:Type dat:ListCollectionView}"
+            Source="{Binding PosterViewOC}">
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Title" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
-        <CollectionViewSource x:Key="GenreListCVS"
-                              CollectionViewType="{x:Type dat:ListCollectionView}"
-                              Source="{Binding GenreListOC}">
+        <CollectionViewSource
+            x:Key="GenreListCVS"
+            CollectionViewType="{x:Type dat:ListCollectionView}"
+            Source="{Binding GenreListOC}">
             <CollectionViewSource.SortDescriptions>
                 <scm:SortDescription PropertyName="Name" />
             </CollectionViewSource.SortDescriptions>
@@ -40,50 +43,57 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <!--  Search Bar  -->
-        <Button Width="40"
-                Height="40"
-                Margin="25,-50,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Click="EnableFilteringCheat"
-                Opacity="0" />
-        <materialDesign:ColorZone Grid.Column="2"
-                                  Grid.ColumnSpan="3"
-                                  MaxHeight="60"
-                                  Margin="0,-60,70,58"
-                                  HorizontalAlignment="Right"
-                                  VerticalAlignment="Top"
-                                  materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                                  CornerRadius="2">
-            <StackPanel MaxHeight="20"
-                        Margin="16"
-                        Orientation="Horizontal">
+        <Button
+            Width="40"
+            Height="40"
+            Margin="25,-50,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="EnableFilteringCheat"
+            Opacity="0" />
+        <materialDesign:ColorZone
+            Grid.Column="2"
+            Grid.ColumnSpan="3"
+            MaxHeight="60"
+            Margin="0,-60,70,58"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            materialDesign:ShadowAssist.ShadowDepth="Depth1"
+            CornerRadius="2">
+            <StackPanel
+                MaxHeight="20"
+                Margin="16"
+                Orientation="Horizontal">
                 <!--  Search bar Icon  -->
-                <materialDesign:PackIcon VerticalAlignment="Center"
-                                         Kind="Magnify"
-                                         Opacity=".56" />
+                <materialDesign:PackIcon
+                    VerticalAlignment="Center"
+                    Kind="Magnify"
+                    Opacity=".56" />
                 <!--  Search text  -->
-                <TextBox x:Name="GameSearchBar"
-                         MinWidth="150"
-                         Margin="8,0,0,0"
-                         VerticalAlignment="Center"
-                         materialDesign:HintAssist.Hint="Please search..."
-                         materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                         BorderThickness="0"
-                         FontSize="11"
-                         TextChanged="SearchString_TextChanged" />
+                <TextBox
+                    x:Name="GameSearchBar"
+                    MinWidth="150"
+                    Margin="8,0,0,0"
+                    VerticalAlignment="Center"
+                    materialDesign:HintAssist.Hint="Please search..."
+                    materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                    BorderThickness="0"
+                    FontSize="11"
+                    TextChanged="SearchString_TextChanged" />
             </StackPanel>
         </materialDesign:ColorZone>
         <!--  This section displays one card per game in GamesList  -->
-        <ScrollViewer Grid.RowSpan="7"
-                      Grid.ColumnSpan="3"
-                      VerticalScrollBarVisibility="Auto">
+        <ScrollViewer
+            Grid.RowSpan="7"
+            Grid.ColumnSpan="3"
+            VerticalScrollBarVisibility="Auto">
             <!--  ItemsControl is bound to OC to know how many cards to make  -->
-            <ItemsControl x:Name="gameListView"
-                          MaxHeight="10000"
-                          Margin="10,10,0,10"
-                          ItemsSource="{Binding Source={StaticResource GameListCVS}}"
-                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl
+                x:Name="gameListView"
+                MaxHeight="10000"
+                Margin="10,10,0,10"
+                ItemsSource="{Binding Source={StaticResource GameListCVS}}"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <vwp:VirtualizingWrapPanel />
@@ -93,9 +103,10 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <!--  The card  -->
-                            <materialDesign:Card MinWidth="180"
-                                                 MaxWidth="180"
-                                                 Margin="10,10,10,10">
+                            <materialDesign:Card
+                                MinWidth="180"
+                                MaxWidth="180"
+                                Margin="10,10,10,10">
                                 <Grid>
                                     <!--  This grid positions content on the card  -->
                                     <Grid.RowDefinitions>
@@ -103,41 +114,46 @@
                                         <RowDefinition Height="5*" />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    <Image Width="180"
-                                           Height="220"
-                                           Source="{Binding Poster}"
-                                           Stretch="Fill" />
-                                    <Button Width="180"
-                                            Height="220"
-                                            Click="LaunchButton_OnClick"
-                                            Opacity="0.1"
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            Tag="{Binding Path}" />
+                                    <Image
+                                        Width="180"
+                                        Height="220"
+                                        Source="{Binding Poster}"
+                                        Stretch="Fill" />
+                                    <Button
+                                        Width="180"
+                                        Height="220"
+                                        Click="LaunchButton_OnClick"
+                                        Opacity="0.1"
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                        Tag="{Binding Path}" />
                                     <!--  stackpanel for the button  -->
-                                    <StackPanel Grid.Row="1"
-                                                Grid.RowSpan="2"
-                                                Margin="0,0,0,0"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Bottom">
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Grid.RowSpan="2"
+                                        Margin="0,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Bottom">
                                         <WrapPanel>
-                                            <Button x:Name="PosterGameTitle"
-                                                    Width="180"
-                                                    HorizontalAlignment="Left"
-                                                    VerticalAlignment="Bottom"
-                                                    HorizontalContentAlignment="Left"
-                                                    Content="{Binding Title}"
-                                                    Style="{StaticResource MaterialDesignFlatButton}" />
+                                            <Button
+                                                x:Name="PosterGameTitle"
+                                                Width="180"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Bottom"
+                                                HorizontalContentAlignment="Left"
+                                                Content="{Binding Title}"
+                                                Style="{StaticResource MaterialDesignFlatButton}" />
                                         </WrapPanel>
                                     </StackPanel>
                                     <!--  Overflow  -->
-                                    <materialDesign:PopupBox Grid.Row="1"
-                                                             Grid.RowSpan="2"
-                                                             Width="26"
-                                                             Margin="154,1,0,0"
-                                                             Padding="0,0,0,0"
-                                                             HorizontalAlignment="Center"
-                                                             PlacementMode="LeftAndAlignTopEdges"
-                                                             StaysOpen="False">
+                                    <materialDesign:PopupBox
+                                        Grid.Row="1"
+                                        Grid.RowSpan="2"
+                                        Width="26"
+                                        Margin="154,1,0,0"
+                                        Padding="0,0,0,0"
+                                        HorizontalAlignment="Center"
+                                        PlacementMode="LeftAndAlignTopEdges"
+                                        StaysOpen="False">
                                         <!--  Items inside overflow  -->
                                         <StackPanel>
                                             <Button Click="DEBUG_OnClick" Tag="{Binding Title}">

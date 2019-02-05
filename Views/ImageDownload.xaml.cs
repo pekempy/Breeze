@@ -19,17 +19,22 @@ namespace GameLauncher.Views
     /// <summary>
     /// Interaction logic for ImageDownload.xaml
     /// </summary>
-    public partial class ImageDownload : Window
+    public partial class ImageDownload : Page
     {
         public ImageDownload(string gametitle, string searchstring, string imagetype)
         {
-            SearchViewModel svm = new SearchViewModel();
-            svm.LoadSearch(gametitle, imagetype,searchstring);
+            PosterViewModel pvm = new PosterViewModel();
+            pvm.LoadSearch(gametitle, imagetype,searchstring);
             InitializeComponent();
             windowTitle.Text = "Breeze Image Search: " + searchstring;
 
         }
+        private void closeImageDLButton(object sender, RoutedEventArgs e)
+        {
+            ((MainWindow)Application.Current.MainWindow)?.OpenImageDL("string", "string", "string");
+        }
     }
+
     public class StringToImage : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

@@ -385,10 +385,27 @@ namespace GameLauncher
             LoadSearch ls = new LoadSearch();
             string gametitle = EditTitle.Text;
             string imagetype = "icon";
+            string searchstring = gametitle + " icon";
+            ls.SearchLinks(gametitle, imagetype, searchstring);
+            ((MainWindow)Application.Current.MainWindow)?.OpenImageDL(gametitle, searchstring, imagetype);
+        }
+        private void SearchPoster_OnClick(object sender, RoutedEventArgs e)
+        {
+            LoadSearch ls = new LoadSearch();
+            string gametitle = EditTitle.Text;
+            string imagetype = "poster";
             string searchstring = gametitle + " poster";
             ls.SearchLinks(gametitle, imagetype, searchstring);
-            ImageDownload iw = new ImageDownload(gametitle, searchstring, imagetype);
-            iw.Show();
+            ((MainWindow)Application.Current.MainWindow)?.OpenImageDL(gametitle, searchstring, imagetype);
+        }
+        private void SearchBanner_OnClick(object sender, RoutedEventArgs e)
+        {
+            LoadSearch ls = new LoadSearch();
+            string gametitle = EditTitle.Text;
+            string imagetype = "banner";
+            string searchstring = gametitle + " banner";
+            ls.SearchLinks(gametitle, imagetype, searchstring);
+            ((MainWindow)Application.Current.MainWindow)?.OpenImageDL(gametitle, searchstring, imagetype);
         }
 
     }

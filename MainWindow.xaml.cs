@@ -22,10 +22,12 @@ namespace GameLauncher
         public Views.BannerView bv = new Views.BannerView();
         public Views.ListView lv = new Views.ListView();
         public CollectionViewSource cvs;
+        public string dialogOpen;
 
         public MainWindow()
         {
             LoadAllGames lag = new LoadAllGames();
+            LoadSearch ls = new LoadSearch();
             LoadSettings();
             MakeDirectories();
             MakeDefaultGenres();
@@ -81,6 +83,7 @@ namespace GameLauncher
         {
             DialogFrame.Visibility = Visibility.Visible;
             DialogFrame.Content = DialogAddGames;
+            dialogOpen = "add";
             DialogAddGames.AddGameDialog.IsOpen = true;
         }
 
@@ -88,8 +91,37 @@ namespace GameLauncher
         {
             DialogFrame.Visibility = Visibility.Visible;
             DialogFrame.Content = DialogEditGames;
+            dialogOpen = "edit";
             DialogEditGames.currentGuid(guid);
             DialogEditGames.EditGameDialog.IsOpen = true;
+        }
+        public void OpenImageDL(string gametitle, string searchstring, string imagetype)
+        {
+            ImageDownload DialogImageDL = new ImageDownload(gametitle, searchstring, imagetype);
+            if (DialogFrame.Content.ToString() == "GameLauncher.EditGames" || DialogFrame.Content.ToString() == "GameLauncher.AddGames") {
+            DialogFrame.Visibility = Visibility.Visible;
+            DialogFrame.Content = DialogImageDL;
+            DialogAddGames.AddGameDialog.IsOpen = false;
+            DialogEditGames.EditGameDialog.IsOpen = false;
+            DialogImageDL.DownloadDialog.IsOpen = true;
+            }
+            else if (DialogFrame.Content.ToString() == "GameLauncher.Views.ImageDownload")
+            {
+                if (dialogOpen == "edit")
+                {
+                    DialogFrame.Content = DialogEditGames;
+                    DialogEditGames.EditGameDialog.IsOpen = true;
+                    DialogImageDL.DownloadDialog.IsOpen = false;
+                }
+                else if (dialogOpen == "add")
+                {
+                    DialogFrame.Content = DialogAddGames;
+                    DialogAddGames.AddGameDialog.IsOpen = true;
+                    DialogImageDL.DownloadDialog.IsOpen = false;
+                }
+                else { Console.WriteLine("Not sure which dialog is open, whoops!"); }
+            }
+            Console.WriteLine(DialogFrame.Content.ToString());
         }
 
         //Apply the selected genre filter
