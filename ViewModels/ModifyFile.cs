@@ -16,6 +16,7 @@ namespace GameLauncher.ViewModels
         {
             gameGuid = gameGuid.ToString();
             string[] columns = new string[0];
+            string[] columns2 = new string[0];
             var text = File.ReadAllLines("./Resources/GamesList.txt", Encoding.UTF8);
             for (int i = 0; i < text.Length; i++)
             {
@@ -25,7 +26,15 @@ namespace GameLauncher.ViewModels
                     {
                         columns = text[i].Split('|');
                         string title = columns[0];
-                        //DeleteGameImages(title); - uncomment this once we add a way to double check if there's another game added with that name
+                        int titlecount = 0;
+                        for (int j = 0; j<text.Length; j++)
+                        {
+                            columns2 = text[j].Split('|');
+                            if (columns2[0] == title)
+                                titlecount++;
+                        }
+                        if (titlecount == 1) //only delete if title occurs once
+                            DeleteGameImages(title); 
                         text[i] = "";
                         text = text.Where(x => !string.IsNullOrEmpty(x)).ToArray();
                         File.WriteAllLines("./Resources/GamesList.txt", text);
