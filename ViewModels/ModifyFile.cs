@@ -25,7 +25,7 @@ namespace GameLauncher.ViewModels
                     {
                         columns = text[i].Split('|');
                         string title = columns[0];
-                        DeleteGameImages(title);
+                        //DeleteGameImages(title); - uncomment this once we add a way to double check if there's another game added with that name
                         text[i] = "";
                         text = text.Where(x => !string.IsNullOrEmpty(x)).ToArray();
                         File.WriteAllLines("./Resources/GamesList.txt", text);

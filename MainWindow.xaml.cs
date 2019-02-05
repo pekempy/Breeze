@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using GameLauncher.Properties;
 using MaterialDesignThemes.Wpf;
 using System.Windows.Data;
+using System.Net;
 
 namespace GameLauncher
 {
@@ -23,6 +24,8 @@ namespace GameLauncher
         public Views.ListView lv = new Views.ListView();
         public CollectionViewSource cvs;
         public string dialogOpen;
+        public string DLGameTitle;
+        public string DLImgType;
 
         public MainWindow()
         {
@@ -98,6 +101,8 @@ namespace GameLauncher
         public void OpenImageDL(string gametitle, string searchstring, string imagetype)
         {
             ImageDownload DialogImageDL = new ImageDownload(gametitle, searchstring, imagetype);
+            DLGameTitle = gametitle;
+            DLImgType = imagetype;
             if (DialogFrame.Content.ToString() == "GameLauncher.EditGames" || DialogFrame.Content.ToString() == "GameLauncher.AddGames") {
             DialogFrame.Visibility = Visibility.Visible;
             DialogFrame.Content = DialogImageDL;
@@ -122,6 +127,68 @@ namespace GameLauncher
                 else { Console.WriteLine("Not sure which dialog is open, whoops!"); }
             }
             Console.WriteLine(DialogFrame.Content.ToString());
+        }
+
+        public void DownloadImage(string url)
+        {
+            if (!File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png")){
+                using (WebClient client = new WebClient())
+                {
+                    client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
+                    SetPath(DLGameTitle, DLImgType, dialogOpen);
+                } }
+            else if (File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png")){
+                File.Delete(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png");
+                using (WebClient client = new WebClient())
+                {
+                    client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
+                    SetPath(DLGameTitle, DLImgType, dialogOpen);
+                }
+            }
+        }
+
+        public void SetPath(string title, string imagetype, string dialogType)
+        {
+            string imgpath = AppDomain.CurrentDomain.BaseDirectory + "Resources\\img\\" + DLGameTitle + "-" + DLImgType + ".png";
+            if (imagetype == "icon")
+            {
+                if (dialogType == "edit")
+                {
+                    DialogEditGames.EditIcon.Text = imgpath;
+                    OpenImageDL("closes", "the", "dialog");
+                }
+                else if (dialogType == "add")
+                {
+                    DialogAddGames.NewGameIcon.Text = imgpath;
+                    OpenImageDL("closes", "the", "dialog");
+                }
+            }
+            else if (imagetype == "poster")
+            {
+                if (dialogType == "edit")
+                {
+                    DialogEditGames.EditPoster.Text = imgpath;
+                    OpenImageDL("closes", "the", "dialog");
+                }
+                else if (dialogType == "add")
+                {
+                    DialogAddGames.NewGamePoster.Text = imgpath;
+                    OpenImageDL("closes", "the", "dialog");
+                }
+            }
+            else if (imagetype == "banner")
+            {
+                if (dialogType == "edit")
+                {
+                    DialogEditGames.EditBanner.Text = imgpath;
+                    OpenImageDL("closes", "the", "dialog");
+                }
+                else if (dialogType == "add")
+                {
+                    DialogAddGames.NewGameBanner.Text = imgpath;
+                    OpenImageDL("closes", "the", "dialog");
+                }
+            }
         }
 
         //Apply the selected genre filter

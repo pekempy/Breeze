@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,6 +35,15 @@ namespace GameLauncher.Views
         {
             ((MainWindow)Application.Current.MainWindow)?.OpenImageDL("string", "string", "string");
         }
+        private void DownloadImage_OnClick(object sender, RoutedEventArgs e)
+        {
+            string url = ((Button)sender).Tag.ToString();
+            ((MainWindow)Application.Current.MainWindow)?.DownloadImage(url);
+        }
+    }
+
+    internal class Bitmap
+    {
     }
 
     public class StringToImage : IValueConverter

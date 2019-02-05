@@ -36,7 +36,7 @@
                         ScrollViewer.HorizontalScrollBarVisibility="Auto">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <vwp:VirtualizingWrapPanel MaxWidth="{Binding ElementName=MainWindow, Path=ActualWidth}" />
+                                <vwp:VirtualizingWrapPanel />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
@@ -47,6 +47,13 @@
                                     Margin="5,5,5,5">
                                     <Grid>
                                         <Image Source="{Binding Image, Converter={StaticResource StringToImage}}" Stretch="Fill" />
+                                        <Button
+                                            Width="180"
+                                            Height="220"
+                                            Click="DownloadImage_OnClick"
+                                            Opacity="0.1"
+                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                            Tag="{Binding Image}"/>
                                     </Grid>
                                 </materialDesign:Card>
                             </DataTemplate>
@@ -72,14 +79,13 @@
                         <Button
                             Width="45"
                             Height="45"
-                            Margin="40 0 0 0"
+                            Margin="70,0,0,0"
+                            HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
                             HorizontalContentAlignment="Left"
                             Click="closeImageDLButton"
-                            HorizontalAlignment="Right"
                             Style="{StaticResource MaterialDesignRaisedAccentButton}">
-                            <materialDesign:PackIcon Kind="Close" 
-                                                     Padding="0 0 0 0"/>
+                            <materialDesign:PackIcon Padding="0,0,0,0" Kind="Close" />
                         </Button>
                     </StackPanel>
                 </materialDesign:ColorZone>
