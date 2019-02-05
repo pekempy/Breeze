@@ -6,9 +6,9 @@ namespace GameLauncher.ViewModels
 {
     internal class BannerViewModel
     {
-        public static ObservableCollection<GenreList> GenreListOC { get; set; }
-        public ObservableCollection<GameList> BannerViewOC { get; set; }
         private LoadAllGames lag = new LoadAllGames();
+        public static ObservableCollection<GameList> BannerViewOC { get; set; }
+        public static ObservableCollection<GenreList> GenreListOC { get; set; }
         private LoadSearch ls = new LoadSearch();
         public static ObservableCollection<SearchResults> SearchList { get; set; }
 

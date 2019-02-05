@@ -26,7 +26,11 @@ namespace GameLauncher.Views
         public ImageDownload(string gametitle, string searchstring, string imagetype)
         {
             PosterViewModel pvm = new PosterViewModel();
+            BannerViewModel bvm = new BannerViewModel();
+            ListViewModel lvm = new ListViewModel();
             pvm.LoadSearch(gametitle, imagetype,searchstring);
+            bvm.LoadSearch(gametitle, imagetype, searchstring);
+            lvm.LoadSearch(gametitle, imagetype, searchstring);
             InitializeComponent();
             windowTitle.Text = "Breeze Image Search: " + searchstring;
 

@@ -156,12 +156,6 @@
                                         StaysOpen="False">
                                         <!--  Items inside overflow  -->
                                         <StackPanel>
-                                            <Button Click="DEBUG_OnClick" Tag="{Binding Title}">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Earth" />
-                                                    <TextBlock Margin="5,0,0,0" Text="DEBUG" />
-                                                </StackPanel>
-                                            </Button>
                                             <!--  Link Button  -->
                                             <Button Click="GameLink_OnClick" Tag="{Binding Link}">
                                                 <StackPanel Orientation="Horizontal">

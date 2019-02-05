@@ -23,13 +23,7 @@ namespace GameLauncher.Views
         {
             InitializeComponent();
         }
-
-        public List<string> ThumbList;
-        public List<string> LinkList;
-        private void DEBUG_OnClick(object sender, RoutedEventArgs e)
-        {
-            string gametitle = ((Button)sender).Tag.ToString();
-        }
+        
         private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.RemoveGameFromFile(((Button)sender).Tag);
