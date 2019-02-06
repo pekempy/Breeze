@@ -9,6 +9,7 @@
       Title="Game Launcher"
       d:DesignHeight="450"
       d:DesignWidth="800"
+      materialDesign:ThemeAssist.Theme="Inherit"
       FontFamily="{StaticResource MaterialDesignFont}"
       TextElement.FontSize="13"
       TextElement.FontWeight="Regular"

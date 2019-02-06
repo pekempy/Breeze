@@ -27,7 +27,7 @@ namespace GameLauncher
         }
 
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
-        {
+        { //TODO - Check if title already exists, if so, messagebox.show
             //This part repairs the link so it launches properly
             string ngl = EditLink.Text;
             if (!ngl.Contains("http") && (ngl != ""))
