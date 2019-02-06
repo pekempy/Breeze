@@ -60,15 +60,15 @@
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate>
-                                                    <materialDesign:Card Width="180"
+                                                    <materialDesign:Card Width="500"
                                                                          Height="220"
                                                                          Margin="5,5,5,5">
                                                         <StackPanel>
-                                                            <Image Source="{Binding Image, Converter={StaticResource StringToImage}}" Stretch="Fill" />
+                                                            <Image Source="/Breeze;component/err.png" Stretch="Fill" />
                                                             <TextBlock FontSize="20">Whoops! Nothing here</TextBlock>
                                                             <TextBlock>Try these things first:</TextBlock>
                                                             <TextBlock>1. Close this window and try again</TextBlock>
-                                                            <TextBlock><Hyperlink NavigateUri="https://www.qwant.com/?q=test">2. Go to qwant.com and complete captcha.</Hyperlink></TextBlock>
+                                                            <TextBlock>2. Go to qwant.com, perform a search, and complete captcha.</TextBlock>
                                                         </StackPanel>
                                                     </materialDesign:Card>
                                                 </ControlTemplate>

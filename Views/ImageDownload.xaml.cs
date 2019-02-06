@@ -25,6 +25,11 @@ namespace GameLauncher.Views
             windowTitle.Text = "Breeze Image Search: " + searchstring;
 
         }
+
+        private void qwantlink()
+        {
+            System.Diagnostics.Process.Start("https://www.qwant.com/?q=test");
+        }
         private void closeImageDLButton(object sender, RoutedEventArgs e)
         {
             ((MainWindow)Application.Current.MainWindow)?.OpenImageDL("string", "string", "string");
