@@ -9,22 +9,21 @@ namespace GameLauncher.ViewModels
     {
         public ObservableCollection<SearchResults> SearchList { get; set; }
         private ObservableCollection<SearchResults> searchlist = new ObservableCollection<SearchResults>();
-
-        public void Search(string gametitle, string imagetype, string searchstring)
+        public int numofitems = 0;
+        public void Search(string gametitle, string imagetype, string searchstring, int offset)
         {
-            SearchLinks(gametitle, imagetype, searchstring);
+            SearchLinks(gametitle, imagetype, searchstring, 0);
             SearchList = searchlist;
         }
 
-        public void SearchLinks(string gametitle, string imagetype, string searchstring)
+        public void SearchLinks(string gametitle, string imagetype, string searchstring, int offset)
         {
             searchstring = searchstring.Replace(" ", "%20");
-            var url = "https://www.qwant.com/?q=" + searchstring +"&t=images";
+            var url = "https://www.qwant.com/?q=" + searchstring +"&t=images&offset=" + offset;
             try
             {
                 HtmlWeb hw = new HtmlWeb();
                 HtmlDocument doc = hw.Load(url);
-                int numofitems = 0;
                 foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//img"))
                 {
                     string imgValue = link.GetAttributeValue("src", string.Empty);

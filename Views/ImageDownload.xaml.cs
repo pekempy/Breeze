@@ -17,12 +17,13 @@ namespace GameLauncher.Views
     {
         public ImageDownload(string gametitle, string searchstring, string imagetype)
         {
+            int offset = 0;
             PosterViewModel pvm = new PosterViewModel();
             BannerViewModel bvm = new BannerViewModel();
             ListViewModel lvm = new ListViewModel();
-            pvm.LoadSearch(gametitle, imagetype,searchstring);
-            bvm.LoadSearch(gametitle, imagetype, searchstring);
-            lvm.LoadSearch(gametitle, imagetype, searchstring);
+            pvm.LoadSearch(gametitle, imagetype,searchstring, offset);
+            bvm.LoadSearch(gametitle, imagetype, searchstring, offset);
+            lvm.LoadSearch(gametitle, imagetype, searchstring, offset);
             InitializeComponent();
             windowTitle.Text = searchstring.ToUpperInvariant();
 

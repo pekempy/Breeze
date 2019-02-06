@@ -28,7 +28,7 @@
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="auto">
                     <ItemsControl x:Name="SearchView"
                                   Grid.Row="1"
-                                  MaxHeight="10000"
+                                  MaxHeight="1000000"
                                   Margin="5,5,5,5"
                                   ItemsSource="{Binding SearchList}"
                                   ScrollViewer.HorizontalScrollBarVisibility="Auto">

@@ -12,9 +12,9 @@ namespace GameLauncher.ViewModels
         private LoadSearch ls = new LoadSearch();
         public static ObservableCollection<SearchResults> SearchList { get; set; }
 
-        public void LoadSearch(string gametitle, string imagetype, string searchstring)
+        public void LoadSearch(string gametitle, string imagetype, string searchstring, int offset)
         {
-            ls.Search(gametitle, imagetype, searchstring);
+            ls.Search(gametitle, imagetype, searchstring, offset);
             SearchList = ls.SearchList;
         }
         public void LoadGames()

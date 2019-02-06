@@ -17,6 +17,7 @@ namespace GameLauncher
         public string OldTitle;
         public string oldtitle;
         public string alltitles;
+        public int offset;
         public string installPath = AppDomain.CurrentDomain.BaseDirectory;
 
         public EditGames()
@@ -394,7 +395,7 @@ namespace GameLauncher
             string gametitle = EditTitle.Text;
             string imagetype = "icon";
             string searchstring = gametitle + " game icon";
-            ls.SearchLinks(gametitle, imagetype, searchstring);
+            ls.SearchLinks(gametitle, imagetype, searchstring, offset);
             ((MainWindow)Application.Current.MainWindow)?.OpenImageDL(gametitle, searchstring, imagetype);
         }
         private void SearchPoster_OnClick(object sender, RoutedEventArgs e)
@@ -403,7 +404,7 @@ namespace GameLauncher
             string gametitle = EditTitle.Text;
             string imagetype = "poster";
             string searchstring = gametitle + " game poster";
-            ls.SearchLinks(gametitle, imagetype, searchstring);
+            ls.SearchLinks(gametitle, imagetype, searchstring, offset);
             ((MainWindow)Application.Current.MainWindow)?.OpenImageDL(gametitle, searchstring, imagetype);
         }
         private void SearchBanner_OnClick(object sender, RoutedEventArgs e)
@@ -412,7 +413,7 @@ namespace GameLauncher
             string gametitle = EditTitle.Text;
             string imagetype = "banner";
             string searchstring = gametitle + " game banner";
-            ls.SearchLinks(gametitle, imagetype, searchstring);
+            ls.SearchLinks(gametitle, imagetype, searchstring, offset);
             ((MainWindow)Application.Current.MainWindow)?.OpenImageDL(gametitle, searchstring, imagetype);
         }
 
