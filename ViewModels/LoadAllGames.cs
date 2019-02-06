@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media.Imaging;
 
 namespace GameLauncher.ViewModels
 {
@@ -51,76 +52,42 @@ namespace GameLauncher.ViewModels
                 string gameFile = "./Resources/GamesList.txt";
                 string[] gamesArr = File.ReadAllLines(gameFile);
                 string[] columns = new string[0];
-                int numOfGames = 0;
                 int numberOfGames = 0;
                 foreach (var item in gamesArr)
                 {
-                    //Copy the files to a working dir, to prevent overwrites
-                    columns = gamesArr[numOfGames].Split('|');
-                    string gameTitle = columns[0];
-                    string gameLauncher = columns[2];
-                    string gameIcon = columns[4];
-                    string gamePoster = columns[5];
-                    string gameBanner = columns[6];
-                    string fileToCopy;
-                    string targetFile;
-                    string installPath = AppDomain.CurrentDomain.BaseDirectory;
-                    installPath = installPath.Replace("\\", "/");
-                    if (!Directory.Exists(installPath + "Resources/working/")) { Directory.CreateDirectory(installPath + "Resources/working/"); }
-                    //check if there is an icon befor doing this
-                    if (gameIcon != "")
-                    {
-                        fileToCopy = installPath + "Resources/img/" + gameTitle + "-icon.png";
-                        targetFile = installPath + "Resources/working/" + gameTitle + "-icon.png";
-                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile, true); }
-                    }
-                    if (gamePoster != "")
-                    {
-                        fileToCopy = installPath + "Resources/img/" + gameTitle + "-poster.png";
-                        targetFile = installPath + "Resources/working/" + gameTitle + "-poster.png";
-                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile, true); }
-                    }
-                    if (gameBanner != "")
-                    {
-                        fileToCopy = installPath + "Resources/img/" + gameTitle + "-banner.png";
-                        targetFile = installPath + "Resources/working/" + gameTitle + "-banner.png";
-                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile, true); }
-                    }
-                    if (gameLauncher != "")
-                    {
-                        fileToCopy = installPath + "Resources/shortcuts/" + gameTitle + ".lnk";
-                        targetFile = installPath + "Resources/working/" + gameTitle + ".lnk";
-                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile, true); }
-                    }
-                    numOfGames++;
-                }
-                foreach (var item in gamesArr)
-                {
-                    string installPath = AppDomain.CurrentDomain.BaseDirectory;
-                    string imgPath = "\\img\\";
-                    string shortcutPath = "\\shortcuts\\";
-                    string workingPath = "\\working\\";
                     columns = gamesArr[numberOfGames].Split('|');
+                    //these lines convert the strings to bitmapimages
+                    BitmapImage icon = new BitmapImage();
+                    BitmapImage poster = new BitmapImage();
+                    BitmapImage banner = new BitmapImage();
+                    icon.BeginInit();
+                    poster.BeginInit();
+                    banner.BeginInit();
+                    icon.UriSource = new Uri(columns[4]);
+                    poster.UriSource = new Uri(columns[5]);
+                    banner.UriSource = new Uri(columns[6]);
+                    icon.DecodePixelWidth = 200;
+                    poster.DecodePixelWidth = 200;
+                    banner.DecodePixelWidth = 200;
+                    icon.CacheOption = BitmapCacheOption.OnLoad;
+                    poster.CacheOption = BitmapCacheOption.OnLoad;
+                    banner.CacheOption = BitmapCacheOption.OnLoad;
+                    icon.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                    poster.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                    banner.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                    icon.EndInit();
+                    poster.EndInit();
+                    banner.EndInit();
 
-                    //Fix paths
-                    columns[2] = columns[2].Replace(shortcutPath, workingPath);
-                    columns[4] = columns[4].Replace(imgPath, workingPath);
-                    columns[5] = columns[5].Replace(imgPath, workingPath);
-                    columns[6] = columns[6].Replace(imgPath, workingPath);
-                    //Here, we need to somehow release the file in /working/game-x.png
-                    //Then we need to overwrite it with the one from /img/game-x.png
-                    //Then we need to load the game icon from /working/game-x.png again
-                    //This should allow the UI to refresh the icon, as currently the /working/ dir
-                    //cannot be updated while the UI is using it
                     games.Add(new GameList
                     {
                         Title = columns[0],
                         Genre = columns[1],
                         Path = columns[2],
                         Link = columns[3],
-                        Icon = columns[4],
-                        Poster = columns[5],
-                        Banner = columns[6],
+                        Icon = icon,
+                        Poster = poster,
+                        Banner = banner,
                         Guid = columns[7]
                     });
                     numberOfGames++;

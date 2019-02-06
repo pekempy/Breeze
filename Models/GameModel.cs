@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace GameLauncher.Models
@@ -11,9 +12,9 @@ namespace GameLauncher.Models
         private string _genre;
         private string _path;
         private string _link;
-        private string _icon;
-        private string _poster;
-        private string _banner;
+        private BitmapImage _icon;
+        private BitmapImage _poster;
+        private BitmapImage _banner;
         private string _guid;
 
         public string Title { get { return _title; } set { _title = value; OnPropertyChanged("Title"); } }
@@ -24,15 +25,16 @@ namespace GameLauncher.Models
 
         public string Link { get { return _link; } set { _link = value; OnPropertyChanged("Link"); } }
 
-        public string Icon { get { return _icon; } set { _icon = value; OnPropertyChanged("Icon"); } }
+        public BitmapImage Icon { get { return _icon; } set { _icon = value; OnPropertyChanged("Icon"); } }
 
-        public string Poster { get { return _poster; } set { _poster = value; OnPropertyChanged("Poster"); } }
+        public BitmapImage Poster { get { return _poster; } set { _poster = value; OnPropertyChanged("Poster"); } }
 
-        public string Banner { get { return _banner; } set { _banner = value; OnPropertyChanged("Banner"); } }
+        public BitmapImage Banner { get { return _banner; } set { _banner = value; OnPropertyChanged("Banner"); } }
 
         public string Guid { get { return _guid; } set { _guid = value; OnPropertyChanged("Guid"); } }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
 
         private void OnPropertyChanged(string propertyName)
         {

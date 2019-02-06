@@ -23,7 +23,6 @@ namespace GameLauncher.Views
         {
             InitializeComponent();
         }
-        
         private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.RemoveGameFromFile(((Button)sender).Tag);
