@@ -27,8 +27,7 @@ namespace GameLauncher
         }
 
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
-        { //TODO - Check if title already exists, if so, messagebox.show
-            //This part repairs the link so it launches properly
+        { 
             string ngl = EditLink.Text;
             if (!ngl.Contains("http") && (ngl != ""))
             {
@@ -54,31 +53,38 @@ namespace GameLauncher
                 }
                 try
                 {
-                    RenameFiles(OldTitle, NewTitle);
-                    try
+                    if (!alltitles.Contains(NewTitle + " |"))
                     {
-                        TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
-                        tsw.WriteLine(EditTitle.Text + "|" +
-                                      EditGenre.Text + "|" +
-                                      EditPath.Text + "|" +
-                                      EditLink.Text + "|" +
-                                      EditIcon.Text + "|" +
-                                      EditPoster.Text + "|" +
-                                      EditBanner.Text + "|" +
-                                      Guid.NewGuid());
-                        tsw.Close();
+                        RenameFiles(OldTitle, NewTitle);
+                        try
+                        {
+                            TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
+                            tsw.WriteLine(EditTitle.Text + "|" +
+                                          EditGenre.Text + "|" +
+                                          EditPath.Text + "|" +
+                                          EditLink.Text + "|" +
+                                          EditIcon.Text + "|" +
+                                          EditPoster.Text + "|" +
+                                          EditBanner.Text + "|" +
+                                          Guid.NewGuid());
+                            tsw.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Exception: " + ex.Message);
+                        }
+                        clearFields();
+                        ClearGenreBoxes();
+                        alltitles = null;
+                        OldTitle = null;
+                        ModifyFile.RemoveGameFromFile(guid);
+                        ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
+                        EditGameDialog.IsOpen = false;
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        Console.WriteLine("Exception: " + ex.Message);
+                        MessageBox.Show("That game already exists!");
                     }
-                    clearFields();
-                    ClearGenreBoxes();
-                    alltitles = null;
-                    OldTitle = null;
-                    ModifyFile.RemoveGameFromFile(guid);
-                    ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
-                    EditGameDialog.IsOpen = false;
                 }
                 catch (Exception ex) { Console.WriteLine("Error message EditGames.xaml.cs: " + ex); }
             }
