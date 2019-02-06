@@ -1,15 +1,10 @@
-using GameLauncher.Models;
 using GameLauncher.ViewModels;
 using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Collections.ObjectModel;
-using System.Linq;
-using GameLauncher.Views;
 using IWshRuntimeLibrary;
-using System.Text.RegularExpressions;
 
 namespace GameLauncher
 {

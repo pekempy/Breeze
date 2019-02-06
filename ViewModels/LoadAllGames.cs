@@ -1,10 +1,8 @@
 using GameLauncher.Models;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
 namespace GameLauncher.ViewModels
@@ -64,7 +62,7 @@ namespace GameLauncher.ViewModels
                         icon = new BitmapImage();
                         icon.BeginInit();
                         icon.UriSource = new Uri(columns[4]);
-                        icon.DecodePixelWidth = 200;
+                        icon.DecodePixelWidth = 80;
                         icon.CacheOption = BitmapCacheOption.OnLoad;
                         icon.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                         icon.EndInit();
