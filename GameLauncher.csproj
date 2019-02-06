@@ -85,8 +85,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="VirtualizingWrapPanel, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\VirtualizingWrapPanel.1.1.1\lib\net45\VirtualizingWrapPanel.dll</HintPath>
+    <Reference Include="VirtualizingWrapPanel, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\VirtualizingWrapPanel.1.2.2\lib\net45\VirtualizingWrapPanel.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -235,6 +235,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="err.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="template\styles\main.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Fody.3.3.5\build\Fody.targets" Condition="Exists('packages\Fody.3.3.5\build\Fody.targets')" />

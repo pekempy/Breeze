@@ -133,6 +133,10 @@ namespace GameLauncher
                 {
                     try
                     {
+                        ServicePointManager.Expect100Continue = true;
+                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                        client.UseDefaultCredentials = true;
+                        client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
                         client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
                         SetPath(DLGameTitle, DLImgType, dialogOpen);
                     }catch(Exception e) { Console.WriteLine("Error:" + e); }
@@ -143,6 +147,10 @@ namespace GameLauncher
                 {
                     try
                     {
+                        ServicePointManager.Expect100Continue = true;
+                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                        client.UseDefaultCredentials = true;
+                        client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
                         client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
                         SetPath(DLGameTitle, DLImgType, dialogOpen);
                     }

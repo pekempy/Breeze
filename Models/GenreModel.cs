@@ -7,13 +7,10 @@ namespace GameLauncher.Models
     public class GenreList : INotifyPropertyChanged
     {
         private string _name;
-        private string _checked;
         private string _guid;
 
         public string Name { get { return _name; } set { _name = value; OnPropertyChanged("Name"); } }
-
-        public string Checked { get { return _checked; } set { _checked = value; OnPropertyChanged("Checked"); } }
-
+        
         public string Guid { get { return _guid; } set { _guid = value; OnPropertyChanged("Guid"); } }
 
         public event PropertyChangedEventHandler PropertyChanged;

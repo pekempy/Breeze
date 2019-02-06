@@ -14,6 +14,7 @@
         <local:StringToImage x:Key="StringToImage" />
     </Page.Resources>
     <materialDesign:DialogHost x:Name="DownloadDialog"
+                               materialDesign:ThemeAssist.Theme="Inherit"
                                CloseOnClickAway="False"
                                IsOpen="False"
                                Visibility="Visible">
@@ -42,7 +43,7 @@
                                                      Height="220"
                                                      Margin="5,5,5,5">
                                     <Grid>
-                                        <Image Source="{Binding Image, Converter={StaticResource StringToImage}}" Stretch="Fill" />
+                                        <Image Source="{Binding Thumbnail, Converter={StaticResource StringToImage}}" Stretch="Fill" />
                                         <Button Width="180"
                                                 Height="220"
                                                 Click="DownloadImage_OnClick"
@@ -64,7 +65,10 @@
                                                                          Height="220"
                                                                          Margin="5,5,5,5">
                                                         <StackPanel>
-                                                            <Image Source="/Breeze;component/err.png" Stretch="Fill" />
+                                                            <Image Width="70"
+                                                                   Height="70"
+                                                                   Source="/Breeze;component/err.png"
+                                                                   Stretch="Fill" />
                                                             <TextBlock FontSize="20">Whoops! Nothing here</TextBlock>
                                                             <TextBlock>Try these things first:</TextBlock>
                                                             <TextBlock>1. Close this window and try again</TextBlock>

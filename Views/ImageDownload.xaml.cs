@@ -1,6 +1,8 @@
 ﻿using GameLauncher.ViewModels;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Globalization;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -22,7 +24,7 @@ namespace GameLauncher.Views
             bvm.LoadSearch(gametitle, imagetype, searchstring);
             lvm.LoadSearch(gametitle, imagetype, searchstring);
             InitializeComponent();
-            windowTitle.Text = "Breeze Image Search: " + searchstring;
+            windowTitle.Text = searchstring.ToUpperInvariant();
 
         }
 
