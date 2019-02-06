@@ -161,11 +161,15 @@ namespace GameLauncher
                 ContentPresenter c = (ContentPresenter)GenreAGList.ItemContainerGenerator.ContainerFromItem(GenreAGList.Items[i]);
                 if (c != null)
                 {
-                    CheckBox cb = c.ContentTemplate.FindName("genreCheckBox", c) as CheckBox;
-                    if (cb.IsChecked.Value)
+                    try
                     {
-                        cb.IsChecked = false;
+                        CheckBox cb = c.ContentTemplate.FindName("genreCheckBox", c) as CheckBox;
+                        if (cb.IsChecked.Value)
+                        {
+                            cb.IsChecked = false;
+                        }
                     }
+                    catch (Exception e) { Console.WriteLine("Error: " + e); }
                 }
             }
         }
