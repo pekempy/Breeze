@@ -159,11 +159,15 @@ namespace GameLauncher
             for (int i = 0; i < GenreAGList.Items.Count; i++)
             {
                 ContentPresenter c = (ContentPresenter)GenreAGList.ItemContainerGenerator.ContainerFromItem(GenreAGList.Items[i]);
-                CheckBox cb = c.ContentTemplate.FindName("genreCheckBox", c) as CheckBox;
-                if (cb.IsChecked.Value)
+                try
                 {
-                    genrePlaceHolder += cb.Content.ToString() + ";";
+                    CheckBox cb = c.ContentTemplate.FindName("genreCheckBox", c) as CheckBox;
+                    if (cb.IsChecked.Value)
+                    {
+                        genrePlaceHolder += cb.Content.ToString() + ";";
+                    }
                 }
+                catch(Exception exc) { Console.WriteLine("Error: " + exc); }
             }
             EditGenre.Text = genrePlaceHolder;
             return;
@@ -182,15 +186,19 @@ namespace GameLauncher
                 ContentPresenter c = (ContentPresenter)GenreAGList.ItemContainerGenerator.ContainerFromItem(GenreAGList.Items[i]);
                 if (c != null)
                 {
-                    CheckBox cb = c.ContentTemplate.FindName("genreCheckBox", c) as CheckBox;
-                    if (EditGenre.Text.Contains(cb.Content.ToString()))
+                    try
                     {
-                        cb.IsChecked = true;
+                        CheckBox cb = c.ContentTemplate.FindName("genreCheckBox", c) as CheckBox;
+                        if (EditGenre.Text.Contains(cb.Content.ToString()))
+                        {
+                            cb.IsChecked = true;
+                        }
+                        else if (!EditGenre.Text.Contains(cb.Content.ToString()))
+                        {
+                            cb.IsChecked = false;
+                        }
                     }
-                    else if (!EditGenre.Text.Contains(cb.Content.ToString()))
-                    {
-                        cb.IsChecked = false;
-                    }
+                    catch (Exception exce) { Console.WriteLine("Error: " + exce); }
                 }
             }
         }

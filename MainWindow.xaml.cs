@@ -60,6 +60,7 @@ namespace GameLauncher
                 tsw.WriteLine("Adventure|" + Guid.NewGuid());
                 tsw.WriteLine("Casual|" + Guid.NewGuid());
                 tsw.WriteLine("Emulator|" + Guid.NewGuid());
+                tsw.WriteLine("Horror|" + Guid.NewGuid());
                 tsw.WriteLine("Indie|" + Guid.NewGuid());
                 tsw.WriteLine("MMO|" + Guid.NewGuid());
                 tsw.WriteLine("Open World|" + Guid.NewGuid());
