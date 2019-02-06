@@ -16,7 +16,9 @@ namespace GameLauncher.ViewModels
         private ObservableCollection<GameList> games = new ObservableCollection<GameList>();
         private ObservableCollection<GenreList> genres = new ObservableCollection<GenreList>();
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
-
+        public BitmapImage icon;
+        public BitmapImage poster;
+        public BitmapImage banner;
         public void LoadGames()
         {
             ReadFile();
@@ -57,27 +59,36 @@ namespace GameLauncher.ViewModels
                 {
                     columns = gamesArr[numberOfGames].Split('|');
                     //these lines convert the strings to bitmapimages
-                    BitmapImage icon = new BitmapImage();
-                    BitmapImage poster = new BitmapImage();
-                    BitmapImage banner = new BitmapImage();
-                    icon.BeginInit();
-                    poster.BeginInit();
-                    banner.BeginInit();
-                    icon.UriSource = new Uri(columns[4]);
-                    poster.UriSource = new Uri(columns[5]);
-                    banner.UriSource = new Uri(columns[6]);
-                    icon.DecodePixelWidth = 200;
-                    poster.DecodePixelWidth = 200;
-                    banner.DecodePixelWidth = 200;
-                    icon.CacheOption = BitmapCacheOption.OnLoad;
-                    poster.CacheOption = BitmapCacheOption.OnLoad;
-                    banner.CacheOption = BitmapCacheOption.OnLoad;
-                    icon.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                    poster.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                    banner.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                    icon.EndInit();
-                    poster.EndInit();
-                    banner.EndInit();
+                    if (columns[4] != "")
+                    {
+                        icon = new BitmapImage();
+                        icon.BeginInit();
+                        icon.UriSource = new Uri(columns[4]);
+                        icon.DecodePixelWidth = 200;
+                        icon.CacheOption = BitmapCacheOption.OnLoad;
+                        icon.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        icon.EndInit();
+                    }
+                    if (columns[5] != "")
+                    {
+                        poster = new BitmapImage();
+                        poster.BeginInit();
+                        poster.UriSource = new Uri(columns[5]);
+                        poster.DecodePixelWidth = 200;
+                        poster.CacheOption = BitmapCacheOption.OnLoad;
+                        poster.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        poster.EndInit();
+                    }
+                    if (columns[6] != "")
+                    {
+                        banner = new BitmapImage();
+                        banner.BeginInit();
+                        banner.UriSource = new Uri(columns[6]);
+                        banner.DecodePixelWidth = 300;
+                        banner.CacheOption = BitmapCacheOption.OnLoad;
+                        banner.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        banner.EndInit();
+                    }
 
                     games.Add(new GameList
                     {
@@ -90,6 +101,9 @@ namespace GameLauncher.ViewModels
                         Banner = banner,
                         Guid = columns[7]
                     });
+                    icon = null;
+                    poster = null;
+                    banner = null;
                     numberOfGames++;
                 }
             }

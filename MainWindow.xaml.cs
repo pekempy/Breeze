@@ -133,8 +133,11 @@ namespace GameLauncher
             if (!File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png")){
                 using (WebClient client = new WebClient())
                 {
-                    client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
-                    SetPath(DLGameTitle, DLImgType, dialogOpen);
+                    try
+                    {
+                        client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
+                        SetPath(DLGameTitle, DLImgType, dialogOpen);
+                    }catch(Exception e) { Console.WriteLine("Error:" + e); }
                 } }
             else if (File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png")){
                 File.Delete(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png");

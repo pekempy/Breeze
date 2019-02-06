@@ -42,13 +42,13 @@
                                                      Height="220"
                                                      Margin="5,5,5,5">
                                     <Grid>
-                                        <Image Source="{Binding Image, Converter={StaticResource StringToImage}}" Stretch="Fill" />
+                                        <Image Source="{Binding Thumbnail, Converter={StaticResource StringToImage}}" Stretch="Fill" />
                                         <Button Width="180"
                                                 Height="220"
                                                 Click="DownloadImage_OnClick"
                                                 Opacity="0.1"
                                                 Style="{StaticResource MaterialDesignFlatButton}"
-                                                Tag="{Binding Thumbnail}" />
+                                                Tag="{Binding Image}" />
                                     </Grid>
                                 </materialDesign:Card>
                             </DataTemplate>
