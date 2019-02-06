@@ -1,12 +1,7 @@
 using GameLauncher.Models;
 using HtmlAgilityPack;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.IO;
-using System.Windows;
-using System.Windows.Data;
 
 namespace GameLauncher.ViewModels
 {
@@ -27,8 +22,9 @@ namespace GameLauncher.ViewModels
             var url = "https://www.qwant.com/?q=" + searchstring +"&t=images";
             try
             {
-                HtmlAgilityPack.HtmlWeb hw = new HtmlAgilityPack.HtmlWeb();
-                HtmlAgilityPack.HtmlDocument doc = hw.Load(url);
+                HtmlWeb hw = new HtmlWeb();
+                HtmlDocument doc = hw.Load(url);
+                int numofitems = 0;
                 foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//img"))
                 {
                     string imgValue = link.GetAttributeValue("src", string.Empty);
@@ -43,6 +39,11 @@ namespace GameLauncher.ViewModels
                         Thumbnail = imgValue,
                         Image = imglink
                     });
+                    Console.WriteLine("Game #" + numofitems);
+                    Console.WriteLine("Thumbnail:" + imgValue);
+                    Console.WriteLine("Image: " + imglink);
+                    Console.WriteLine();
+                    numofitems++;
                 }
                 SearchList = searchlist;
             }

@@ -139,7 +139,7 @@ namespace GameLauncher
                         client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
                         client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
                         SetPath(DLGameTitle, DLImgType, dialogOpen);
-                    }catch(Exception e) { Console.WriteLine("Error:" + e); }
+                    }catch(Exception e) { Console.WriteLine("Error:" + e); MessageBox.Show("Sorry! That's failed, Try again or try another image"); }
                 } }
             else if (File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png")){
                 File.Delete(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png");
