@@ -14,6 +14,7 @@ namespace GameLauncher.ViewModels
         public ObservableCollection<GenreList> Genres { get; set; }
         private ObservableCollection<GameList> games = new ObservableCollection<GameList>();
         private ObservableCollection<GenreList> genres = new ObservableCollection<GenreList>();
+        private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
 
         public void LoadGames()
         {
@@ -47,11 +48,8 @@ namespace GameLauncher.ViewModels
         {
             if (File.Exists("./Resources/GamesList.txt"))
             {
-                //Read file to gameFile
                 string gameFile = "./Resources/GamesList.txt";
-                //gamesArr is array containing all game info per item
                 string[] gamesArr = File.ReadAllLines(gameFile);
-                //columns is array containing each element of particular game
                 string[] columns = new string[0];
                 int numOfGames = 0;
                 int numberOfGames = 0;
@@ -69,41 +67,39 @@ namespace GameLauncher.ViewModels
                     string installPath = AppDomain.CurrentDomain.BaseDirectory;
                     installPath = installPath.Replace("\\", "/");
                     if (!Directory.Exists(installPath + "Resources/working/")) { Directory.CreateDirectory(installPath + "Resources/working/"); }
-                    if (gameTitle.Contains(":")) { gameTitle = gameTitle.Replace(":", " -"); }
-
                     //check if there is an icon befor doing this
                     if (gameIcon != "")
                     {
                         fileToCopy = installPath + "Resources/img/" + gameTitle + "-icon.png";
                         targetFile = installPath + "Resources/working/" + gameTitle + "-icon.png";
-                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
+                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile, true); }
                     }
                     if (gamePoster != "")
                     {
                         fileToCopy = installPath + "Resources/img/" + gameTitle + "-poster.png";
                         targetFile = installPath + "Resources/working/" + gameTitle + "-poster.png";
-                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
+                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile, true); }
                     }
                     if (gameBanner != "")
                     {
                         fileToCopy = installPath + "Resources/img/" + gameTitle + "-banner.png";
                         targetFile = installPath + "Resources/working/" + gameTitle + "-banner.png";
-                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
+                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile, true); }
                     }
                     if (gameLauncher != "")
                     {
                         fileToCopy = installPath + "Resources/shortcuts/" + gameTitle + ".lnk";
                         targetFile = installPath + "Resources/working/" + gameTitle + ".lnk";
-                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile); }
+                        if (!File.Exists(targetFile)) { File.Copy(fileToCopy, targetFile, true); }
                     }
                     numOfGames++;
                 }
                 foreach (var item in gamesArr)
                 {
                     string installPath = AppDomain.CurrentDomain.BaseDirectory;
-                    string imgPath = "/img/";
-                    string shortcutPath = "/shortcuts/";
-                    string workingPath = "/working/";
+                    string imgPath = "\\img\\";
+                    string shortcutPath = "\\shortcuts\\";
+                    string workingPath = "\\working\\";
                     columns = gamesArr[numberOfGames].Split('|');
 
                     //Fix paths
@@ -129,14 +125,6 @@ namespace GameLauncher.ViewModels
                     });
                     numberOfGames++;
                 }
-            }
-        }
-
-        public void ObservableList() //Prints out contents of ObsCol
-        {
-            for (int i = 0; i < Games.Count; i++)
-            {
-                Console.WriteLine(string.Concat(Games[i].Title, " | ", Games[i].Genre));
             }
         }
     }

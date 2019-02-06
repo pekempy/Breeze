@@ -140,8 +140,12 @@ namespace GameLauncher
                 File.Delete(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png");
                 using (WebClient client = new WebClient())
                 {
-                    client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
-                    SetPath(DLGameTitle, DLImgType, dialogOpen);
+                    try
+                    {
+                        client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
+                        SetPath(DLGameTitle, DLImgType, dialogOpen);
+                    }
+                    catch (Exception e) { Console.WriteLine("Error: " + e); }
                 }
             }
         }
@@ -292,16 +296,29 @@ namespace GameLauncher
 
         public void DeleteWorkingDirContents()
         {
-            Directory.Delete(@"Resources/working", true);
+            if (Directory.Exists(@"Resources/working"))
+                Directory.Delete(@"Resources/working", true);
         }
         //Load settings
         public void LoadSettings()
         {
             //Theme Light or Dark
-            if (Settings.Default.theme.ToString() == "Dark") { ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark); }
-            else if (Settings.Default.theme.ToString() == "Light") { ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Light); }
-            if (Settings.Default.primary.ToString() != "") { new PaletteHelper().ReplacePrimaryColor(Settings.Default.primary.ToString()); }
-            if (Settings.Default.accent.ToString() != "") { new PaletteHelper().ReplaceAccentColor(Settings.Default.accent.ToString()); }
+            if (Settings.Default.theme.ToString() == "Dark")
+            {
+                ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark);
+            }
+            else if (Settings.Default.theme.ToString() == "Light")
+            {
+                ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Light);
+            }
+            if (Settings.Default.primary.ToString() != "")
+            {
+                new PaletteHelper().ReplacePrimaryColor(Settings.Default.primary.ToString());
+            }
+            if (Settings.Default.accent.ToString() != "")
+            {
+                new PaletteHelper().ReplaceAccentColor(Settings.Default.accent.ToString());
+            }
         }
     }
 }

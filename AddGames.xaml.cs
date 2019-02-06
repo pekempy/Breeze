@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using GameLauncher.Views;
 using IWshRuntimeLibrary;
+using System.Text.RegularExpressions;
 
 namespace GameLauncher
 {
@@ -132,6 +133,14 @@ namespace GameLauncher
             NewGameBanner.Text = "";
         }
 
+        private void TitleTextChanged(object sender, EventArgs e)
+        {
+            if ( NewGameTitle.Text.IndexOfAny(Path.GetInvalidFileNameChars()) > -1)
+            {
+                MessageBox.Show("Unfortunately your title must be valid to save files. This means it cannot contain characters like : ? \\ / etc.");
+            }
+        }
+
         private void AddGenre_OnClick(object sender, RoutedEventArgs e)
         {
             string genrePlaceHolder = null;
@@ -211,15 +220,8 @@ namespace GameLauncher
                 installPath = installPath.Replace("\\", "/");
                 string ngIconFile = fileDialog.FileName;
                 newgametitle = NewGameTitle.Text.Replace(":", " -");
-                if (System.IO.File.Exists(@"./Resources/img/" + newgametitle + "-icon.png"))
-                {
-                    MessageBox.Show("A game with that name already exists");
-                }
-                else
-                {
-                    System.IO.File.Copy(ngIconFile, @"./Resources/img/" + newgametitle + "-icon.png", true);
-                    NewGameIcon.Text = installPath + "Resources/img/" + newgametitle + "-icon.png";
-                }
+                System.IO.File.Copy(ngIconFile, @"./Resources/img/" + newgametitle + "-icon.png", true);
+                NewGameIcon.Text = installPath + "Resources/img/" + newgametitle + "-icon.png";
             }
             else if (dialogResult == true && newgametitle == "")
             {
@@ -240,15 +242,8 @@ namespace GameLauncher
                 installPath = installPath.Replace("\\", "/");
                 string ngPosterFile = fileDialog.FileName;
                 newgametitle = NewGameTitle.Text.Replace(":", " -"); //this line needs to be used to block any chars that cant be used
-                if (System.IO.File.Exists(@"./Resources/img/" + NewGameTitle.Text + "-poster.png"))
-                {
-                    MessageBox.Show("A game with that name already exists");
-                }
-                else
-                {
-                    System.IO.File.Copy(ngPosterFile, @"./Resources/img/" + newgametitle + "-poster.png");
-                    NewGamePoster.Text = installPath + "Resources/img/" + newgametitle + "-poster.png";
-                }
+                System.IO.File.Copy(ngPosterFile, @"./Resources/img/" + newgametitle + "-poster.png", true);
+                NewGamePoster.Text = installPath + "Resources/img/" + newgametitle + "-poster.png";
             }
             else if (dialogResult == true && NewGameTitle.Text == "")
             {
@@ -268,16 +263,8 @@ namespace GameLauncher
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
                 string ngBannerFile = fileDialog.FileName;
-                newgametitle = NewGameTitle.Text.Replace(":", " -");
-                if (System.IO.File.Exists(@"./Resources/img/" + newgametitle + "-banner.png"))
-                {
-                    MessageBox.Show("A game with that name already exists");
-                }
-                else
-                {
-                    System.IO.File.Copy(ngBannerFile, @"./Resources/img/" + newgametitle + "-banner.png");
+                    System.IO.File.Copy(ngBannerFile, @"./Resources/img/" + newgametitle + "-banner.png", true);
                     NewGameBanner.Text = installPath + "Resources/img/" + newgametitle + "-banner.png";
-                }
             }
             else if (dialogResult == true && NewGameTitle.Text == "")
             {

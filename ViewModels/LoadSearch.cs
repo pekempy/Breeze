@@ -45,16 +45,8 @@ namespace GameLauncher.ViewModels
                     });
                 }
                 SearchList = searchlist;
-                ObservableList();
             }
             catch (Exception e) { Console.WriteLine("Error: " + e); }
-        }
-        public void ObservableList() //Prints out contents of ObsCol
-        {
-            for (int i = 0; i < SearchList.Count; i++)
-            {
-                Console.WriteLine(string.Concat(SearchList[i].Thumbnail, " | ", SearchList[i].Image));
-            }
         }
     }
 }

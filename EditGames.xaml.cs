@@ -199,14 +199,18 @@ namespace GameLauncher
                 if (c != null)
                 {
                     this.ApplyTemplate();
-                    if (c.ContentTemplate.FindName("genreCheckBox", c) != null)
+                    try
                     {
-                        CheckBox cb = c.ContentTemplate.FindName("genreCheckBox", c) as CheckBox;
-                        if (cb.IsChecked.Value)
+                        if (c.ContentTemplate.FindName("genreCheckBox", c) != null)
                         {
-                            cb.IsChecked = false;
+                            CheckBox cb = c.ContentTemplate.FindName("genreCheckBox", c) as CheckBox;
+                            if (cb.IsChecked.Value)
+                            {
+                                cb.IsChecked = false;
+                            }
                         }
                     }
+                    catch(Exception e) { Console.WriteLine("Error: " + e); }
                 }
             }
         }
@@ -325,7 +329,14 @@ namespace GameLauncher
         }
         private void EditTitle_TextChanged(object sender, TextChangedEventArgs e)
         {
-            NewTitle = EditTitle.Text;
+            if (EditTitle.Text.IndexOfAny(Path.GetInvalidFileNameChars()) > -1)
+            {
+                MessageBox.Show("Unfortunately your title must be valid to save files. This means it cannot contain characters like : ? \\ \" / etc.");
+            }
+            else
+            {
+                NewTitle = EditTitle.Text;
+            }
         }
         private void UpdateFile(string gametitle, string sourcefile, string type)
         {
