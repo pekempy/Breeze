@@ -35,7 +35,6 @@ namespace GameLauncher
             MakeDirectories();
             MakeDefaultGenres();
             lag.LoadGenres();
-            DeleteWorkingDirContents();
             InitializeComponent();
             posterViewModel = new PosterViewModel();
             posterViewModel.LoadGames();
@@ -49,7 +48,6 @@ namespace GameLauncher
             if (!Directory.Exists("./Resources/")) { Directory.CreateDirectory("./Resources/"); }
             if (!Directory.Exists("./Resources/img/")) { Directory.CreateDirectory("./Resources/img/"); }
             if (!Directory.Exists("./Resources/shortcuts/")) { Directory.CreateDirectory("./Resources/shortcuts/"); }
-            if (!Directory.Exists("./Resources/working/")) { Directory.CreateDirectory("./Resources/working/"); }
         }
 
         public void MakeDefaultGenres()
@@ -297,11 +295,6 @@ namespace GameLauncher
             }
         }
 
-        public void DeleteWorkingDirContents()
-        {
-            if (Directory.Exists(@"Resources/working"))
-                Directory.Delete(@"Resources/working", true);
-        }
         //Load settings
         public void LoadSettings()
         {
