@@ -315,7 +315,7 @@ namespace GameLauncher
         {
             if (isDownloadOpen == true)
             {
-                //code to change size
+                ImageDownload.ChangeWindowSize(this.ActualWidth * 0.8, this.ActualHeight * 0.8);
             }
         }
 

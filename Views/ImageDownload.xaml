@@ -24,7 +24,10 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <ScrollViewer Grid.Row="0" Grid.RowSpan="2" VerticalScrollBarVisibility="auto" Margin="0,65,0,0">
+                <ScrollViewer Grid.Row="0"
+                              Grid.RowSpan="2"
+                              Margin="0,65,0,0"
+                              VerticalScrollBarVisibility="auto">
                     <ItemsControl x:Name="SearchView"
                                   Grid.Row="0"
                                   Grid.RowSpan="2"

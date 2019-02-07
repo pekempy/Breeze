@@ -16,8 +16,10 @@ namespace GameLauncher.Views
     public partial class ImageDownload : Page
     {
         public string ImageType;
+        public static ImageDownload id;
         public ImageDownload(string gametitle, string searchstring, string imagetype)
         {
+            id = this;
             int offset = 0;
             ImageType = imagetype;
             PosterViewModel pvm = new PosterViewModel();
@@ -81,6 +83,11 @@ namespace GameLauncher.Views
         {
             string url = ((Button)sender).Tag.ToString();
             ((MainWindow)Application.Current.MainWindow)?.DownloadImage(url);
+        }
+        public static void ChangeWindowSize(double height, double width)
+        {
+            id.DownloadGrid.Height = ((MainWindow)Application.Current.MainWindow).ActualHeight * 0.8;
+            id.DownloadGrid.Width = ((MainWindow)Application.Current.MainWindow).ActualWidth * 0.8;
         }
     }
     
