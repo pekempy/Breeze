@@ -26,6 +26,7 @@ namespace GameLauncher
         public string dialogOpen;
         public string DLGameTitle;
         public string DLImgType;
+        public bool isDownloadOpen;
 
         public MainWindow()
         {
@@ -42,6 +43,7 @@ namespace GameLauncher
             posterViewModel.LoadGames();
             posterViewModel.LoadGenres();
             DataContext = posterViewModel;
+            isDownloadOpen = false;
 
 
         }
@@ -110,6 +112,7 @@ namespace GameLauncher
             DialogAddGames.AddGameDialog.IsOpen = false;
             DialogEditGames.EditGameDialog.IsOpen = false;
             DialogImageDL.DownloadDialog.IsOpen = true;
+            isDownloadOpen = true;
             }
             else if (DialogFrame.Content.ToString() == "GameLauncher.Views.ImageDownload")
             {
@@ -118,12 +121,14 @@ namespace GameLauncher
                     DialogFrame.Content = DialogEditGames;
                     DialogEditGames.EditGameDialog.IsOpen = true;
                     DialogImageDL.DownloadDialog.IsOpen = false;
+                    isDownloadOpen = false;
                 }
                 else if (dialogOpen == "add")
                 {
                     DialogFrame.Content = DialogAddGames;
                     DialogAddGames.AddGameDialog.IsOpen = true;
                     DialogImageDL.DownloadDialog.IsOpen = false;
+                    isDownloadOpen = false;
                 }
                 else { Console.WriteLine("Not sure which dialog is open, whoops!"); }
             }
@@ -303,6 +308,14 @@ namespace GameLauncher
             else if (DataContext == settingsViewModel)
             {
                 SettingsViewActive();
+            }
+        }
+
+        private void MWSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (isDownloadOpen == true)
+            {
+                //code to change size
             }
         }
 
