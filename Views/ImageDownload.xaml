@@ -19,15 +19,15 @@
                                IsOpen="False"
                                Visibility="Visible">
         <materialDesign:DialogHost.DialogContent>
-            <!--  MaxWidth here sets the size of the dialog, need to find a way to make it stretch tho  -->
-            <Grid MaxWidth="550">
+            <Grid x:Name="DownloadGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="auto">
+                <ScrollViewer Grid.Row="0" Grid.RowSpan="2" VerticalScrollBarVisibility="auto" Margin="0,65,0,0">
                     <ItemsControl x:Name="SearchView"
-                                  Grid.Row="1"
+                                  Grid.Row="0"
+                                  Grid.RowSpan="2"
                                   MaxHeight="1000000"
                                   Margin="5,5,5,5"
                                   ItemsSource="{Binding SearchList}"
@@ -46,7 +46,8 @@
                                                      Loaded="ImageDownload_Loaded">
                                     <Grid>
                                         <Image Source="{Binding Thumbnail, Converter={StaticResource StringToImage}}" Stretch="Fill" />
-                                        <Button Width="180"
+                                        <Button x:Name="DTButton"
+                                                Width="180"
                                                 Height="220"
                                                 Click="DownloadImage_OnClick"
                                                 Opacity="0.1"
@@ -107,8 +108,8 @@
                                    VerticalAlignment="Center"
                                    FontSize="24"
                                    RenderOptions.EdgeMode="Aliased"
-                                   TextWrapping="Wrap"
-                                   Text="Breeze Image Search" />
+                                   Text="Breeze Image Search"
+                                   TextWrapping="Wrap" />
                         <Button Grid.Column="3"
                                 Width="45"
                                 Height="45"

@@ -27,6 +27,8 @@ namespace GameLauncher.Views
             bvm.LoadSearch(gametitle, imagetype, searchstring, offset);
             lvm.LoadSearch(gametitle, imagetype, searchstring, offset);
             InitializeComponent();
+            DownloadGrid.Height = ((MainWindow)Application.Current.MainWindow).ActualHeight * 0.8;
+            DownloadGrid.Width = ((MainWindow)Application.Current.MainWindow).ActualWidth * 0.8;
             windowTitle.Text = searchstring.ToUpperInvariant();
 
         }
@@ -40,20 +42,27 @@ namespace GameLauncher.Views
                     try
                     {
                         Card card = c.ContentTemplate.FindName("DTCard", c) as Card;
+                        Button button = c.ContentTemplate.FindName("DTButton", c) as Button;
                         if (ImageType == "icon")
                         {
                             card.Width = 80;
                             card.Height = 80;
+                            button.Width = 80;
+                            button.Height = 80;
                         }
                         if (ImageType == "poster")
                         {
                             card.Width = 180;
                             card.Height = 220;
+                            button.Width = 180;
+                            button.Height = 220;
                         }
                         if (ImageType == "banner")
                         {
                             card.Width = 290;
                             card.Height = 100;
+                            button.Width = 290;
+                            button.Height = 100;
                         }
                     }
                     catch (Exception ex) { Console.WriteLine("Error: " + ex); }

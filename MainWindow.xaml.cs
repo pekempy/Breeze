@@ -29,6 +29,8 @@ namespace GameLauncher
 
         public MainWindow()
         {
+            this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 0.75);
+            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 0.75);
             LoadAllGames lag = new LoadAllGames();
             LoadSearch ls = new LoadSearch();
             LoadSettings();

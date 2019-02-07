@@ -7,8 +7,6 @@
         xmlns:viewmodels="clr-namespace:GameLauncher.ViewModels"
         xmlns:views="clr-namespace:GameLauncher.Views"
         Title="Breeze"
-        Width="800"
-        Height="600"
         MinWidth="400"
         MinHeight="600"
         Background="{DynamicResource MaterialDesignPaper}"
