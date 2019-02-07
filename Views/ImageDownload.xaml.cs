@@ -15,9 +15,11 @@ namespace GameLauncher.Views
     /// </summary>
     public partial class ImageDownload : Page
     {
+        public string ImageType;
         public ImageDownload(string gametitle, string searchstring, string imagetype)
         {
             int offset = 0;
+            ImageType = imagetype;
             PosterViewModel pvm = new PosterViewModel();
             BannerViewModel bvm = new BannerViewModel();
             ListViewModel lvm = new ListViewModel();
@@ -28,7 +30,36 @@ namespace GameLauncher.Views
             windowTitle.Text = searchstring.ToUpperInvariant();
 
         }
-
+        protected void ImageDownload_Loaded(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < SearchView.Items.Count; i++)
+            {
+                ContentPresenter c = (ContentPresenter)SearchView.ItemContainerGenerator.ContainerFromItem(SearchView.Items[i]);
+                if (c != null)
+                {
+                    try
+                    {
+                        Card card = c.ContentTemplate.FindName("DTCard", c) as Card;
+                        if (ImageType == "icon")
+                        {
+                            card.Width = 80;
+                            card.Height = 80;
+                        }
+                        if (ImageType == "poster")
+                        {
+                            card.Width = 180;
+                            card.Height = 220;
+                        }
+                        if (ImageType == "banner")
+                        {
+                            card.Width = 290;
+                            card.Height = 100;
+                        }
+                    }
+                    catch (Exception ex) { Console.WriteLine("Error: " + ex); }
+                }
+            }
+        }
         private void qwantlink()
         {
             System.Diagnostics.Process.Start("https://www.qwant.com/?q=test");
@@ -43,10 +74,7 @@ namespace GameLauncher.Views
             ((MainWindow)Application.Current.MainWindow)?.DownloadImage(url);
         }
     }
-
-    internal class Bitmap
-    {
-    }
+    
 
     public class StringToImage : IValueConverter
     {

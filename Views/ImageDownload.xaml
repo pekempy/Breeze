@@ -39,9 +39,11 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <materialDesign:Card Width="180"
+                                <materialDesign:Card x:Name="DTCard"
+                                                     Width="180"
                                                      Height="220"
-                                                     Margin="5,5,5,5">
+                                                     Margin="5,5,5,5"
+                                                     Loaded="ImageDownload_Loaded">
                                     <Grid>
                                         <Image Source="{Binding Thumbnail, Converter={StaticResource StringToImage}}" Stretch="Fill" />
                                         <Button Width="180"
@@ -105,6 +107,7 @@
                                    VerticalAlignment="Center"
                                    FontSize="24"
                                    RenderOptions.EdgeMode="Aliased"
+                                   TextWrapping="Wrap"
                                    Text="Breeze Image Search" />
                         <Button Grid.Column="3"
                                 Width="45"
