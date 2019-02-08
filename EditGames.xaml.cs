@@ -236,10 +236,9 @@ namespace GameLauncher
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && EditTitle.Text != "")
             {
-                if (EditTitle.Text.Contains(":")) { edittitle = EditTitle.Text.Replace(":", " -"); }
                 CreateShortcut(fileDialog.FileName);
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
-                string ngNewShortcut = installPath + "Resources/shortcuts/" + edittitle + ".lnk";
+                string ngNewShortcut = installPath + "Resources/shortcuts/" + EditTitle.Text + ".lnk";
                 EditPath.Text = ngNewShortcut;
             }
             else if (dialogResult == true && EditTitle.Text == "")
