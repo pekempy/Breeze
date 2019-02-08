@@ -47,7 +47,8 @@
                 VerticalAlignment="Top"
                 Click="EnableFilteringCheat"
                 Opacity="0" />
-        <materialDesign:ColorZone Grid.Column="2"
+        <materialDesign:ColorZone x:Name="BannerTop"
+                                  Grid.Column="2"
                                   Grid.ColumnSpan="3"
                                   MaxHeight="60"
                                   Margin="0,-60,70,58"

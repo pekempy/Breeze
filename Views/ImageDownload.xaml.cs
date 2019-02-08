@@ -6,6 +6,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace GameLauncher.Views
@@ -71,9 +72,12 @@ namespace GameLauncher.Views
                 }
             }
         }
-        private void qwantlink()
+        private void QwantBrowse(object sender, ExecutedRoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://www.qwant.com/?q=test");
+        }
+        private void QwantCanExecute(object sender, CanExecuteRoutedEventArgs e) {
+            e.CanExecute = true;
         }
         private void closeImageDLButton(object sender, RoutedEventArgs e)
         {

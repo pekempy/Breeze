@@ -13,6 +13,11 @@
     <Page.Resources>
         <local:StringToImage x:Key="StringToImage" />
     </Page.Resources>
+    <Page.CommandBindings>
+        <CommandBinding CanExecute="QwantCanExecute"
+                        Command="ApplicationCommands.New"
+                        Executed="QwantBrowse" />
+    </Page.CommandBindings>
     <materialDesign:DialogHost x:Name="DownloadDialog"
                                materialDesign:ThemeAssist.Theme="Inherit"
                                CloseOnClickAway="False"
@@ -79,6 +84,8 @@
                                                             <TextBlock>Try these things first:</TextBlock>
                                                             <TextBlock>1. Close this window and try again</TextBlock>
                                                             <TextBlock>2. Go to qwant.com, perform a search, and complete captcha.</TextBlock>
+
+                                                            <Button Command="ApplicationCommands.New">Qwant</Button>
                                                         </StackPanel>
                                                     </materialDesign:Card>
                                                 </ControlTemplate>

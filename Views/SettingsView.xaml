@@ -37,7 +37,8 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <materialDesign:ColorZone Grid.ColumnSpan="40"
+        <materialDesign:ColorZone x:Name="BannerTop"
+                                  Grid.ColumnSpan="40"
                                   Margin="0,0,0,0"
                                   materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                   materialDesign:ShadowAssist.ShadowEdges="Bottom"
@@ -400,6 +401,19 @@
                             <materialDesign:PackIcon Name="APurpleIcon" Kind="Tick" />
                         </Button>
                     </WrapPanel>
+                </StackPanel>
+                <StackPanel>
+                    <Grid x:Name="ChooseColoursOfParts">
+                        <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
+                            <TextBlock>Primary/Accent FAB</TextBlock>
+                            <ToggleButton x:Name="FABToggle"
+                                          Margin="60,0,0,0"
+                                          HorizontalAlignment="Right"
+                                          Checked="FabColour_Checked"
+                                          Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                                          Unchecked="FabColour_Unchecked" />
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
             </StackPanel>
         </Grid>

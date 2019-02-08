@@ -128,6 +128,16 @@ namespace GameLauncher.Views
             APurpleIcon.Opacity = 0;
             APurpleIcon.Opacity = 0;
         }
+
+        private void FabColour_Checked(object sender, RoutedEventArgs e)
+        {
+            MainWindow.AddGameButton.Style = Application.Current.Resources["MaterialDesignFloatingActionButton"] as Style;
+        }
+        private void FabColour_Unchecked(object sender, RoutedEventArgs e)
+        {
+            MainWindow.AddGameButton.Style = Application.Current.Resources["MaterialDesignFloatingActionAccentButton"] as Style;
+        }
+        
         private void AddNewGenre_OnClick(object sender, RoutedEventArgs e)
         {
             try
