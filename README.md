@@ -10,10 +10,10 @@ This isn't designed to be a competitor to steam, or any other game launcher. I j
 - Filter by title or genre
 - Switch the theme to a dark theme
 - Changing primary/accent colour from settings menu
-
-#### Planned updates:
 - Built in browser to find images for each of the views and download them easier
 
+#### Planned updates:
+- Nothing! Could do with suggestions :)
 
 
 
