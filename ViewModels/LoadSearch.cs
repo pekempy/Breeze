@@ -13,13 +13,19 @@ namespace GameLauncher.ViewModels
         public void Search(string gametitle, string imagetype, string searchstring, int offset)
         {
             SearchLinks(gametitle, imagetype, searchstring, 0);
+            searchstring = gametitle + imagetype;
+            SearchLinks(gametitle, imagetype, searchstring, 0);
+            searchstring = imagetype + " for " + gametitle;
+            SearchLinks(gametitle, imagetype, searchstring, 0);
+            searchstring = gametitle + imagetype + " png";
+            SearchLinks(gametitle, imagetype, searchstring, 0);
             SearchList = searchlist;
         }
 
         public void SearchLinks(string gametitle, string imagetype, string searchstring, int offset)
         {
             searchstring = searchstring.Replace(" ", "%20");
-            var url = "https://www.qwant.com/?q=" + searchstring +"&t=images&offset=" + offset;
+            var url = "https://www.qwant.com/?q=" + searchstring +"&t=images&count=" + offset;
             try
             {
                 HtmlWeb hw = new HtmlWeb();
@@ -38,10 +44,6 @@ namespace GameLauncher.ViewModels
                         Thumbnail = imgValue,
                         Image = imglink
                     });
-                    Console.WriteLine("Game #" + numofitems);
-                    Console.WriteLine("Thumbnail:" + imgValue);
-                    Console.WriteLine("Image: " + imglink);
-                    Console.WriteLine();
                     numofitems++;
                 }
                 SearchList = searchlist;
