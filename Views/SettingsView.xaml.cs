@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using GameLauncher.Models;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -17,9 +18,15 @@ namespace GameLauncher.Views
 {
     public partial class SettingsView : UserControl
     {
+        private ExeSearch es = new ExeSearch();
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
         private LoadAllGames lag = new LoadAllGames();
         public string DeletedGenre;
+
+        public void SearchForGames(object sender, RoutedEventArgs e)
+        {
+            es.searchForShortcuts();
+        }
 
         public SettingsView()
         {
