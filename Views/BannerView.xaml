@@ -8,6 +8,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:vwp="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
+             xmlns:Helpers="clr-namespace:GameLauncher.Models"
              d:DataContext="{d:DesignInstance Type=ViewModels:BannerViewModel}"
              d:DesignHeight="300"
              d:DesignWidth="300"
@@ -70,6 +71,7 @@
                                          Opacity=".56" />
                 <!--  Search text  -->
                 <TextBox x:Name="GameSearchBar"
+                         Helpers:KeyboardFocusAttractor.IsAttracted="True"
                          MinWidth="150"
                          Margin="8,0,0,0"
                          VerticalAlignment="Center"

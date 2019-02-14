@@ -236,6 +236,7 @@ namespace GameLauncher
 
         public void PosterViewActive()
         {
+            posterViewModel = new PosterViewModel();
             posterViewModel.LoadGames();
             posterViewModel.LoadGenres();
             DataContext = posterViewModel;
@@ -251,6 +252,7 @@ namespace GameLauncher
 
         public void BannerViewActive()
         {
+            bannerViewModel = new BannerViewModel();
             bannerViewModel.LoadGames();
             bannerViewModel.LoadGenres();
             DataContext = bannerViewModel;
@@ -266,6 +268,7 @@ namespace GameLauncher
 
         public void ListViewActive()
         {
+            listViewModel = new ListViewModel();
             listViewModel.LoadGames();
             listViewModel.LoadGenres();
             DataContext = listViewModel;

@@ -122,6 +122,7 @@
       <DependentUpon>EditGames.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\ExeSearch.cs" />
+    <Compile Include="Models\KeyboardFocusAttractor.cs" />
     <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\GenreModel.cs" />
     <Compile Include="Models\GameModel.cs" />

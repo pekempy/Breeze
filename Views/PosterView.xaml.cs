@@ -9,6 +9,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Xml;
 
 namespace GameLauncher.Views
