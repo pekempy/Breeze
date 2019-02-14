@@ -34,16 +34,18 @@ namespace GameLauncher
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 0.75);
             LoadAllGames lag = new LoadAllGames();
             LoadSearch ls = new LoadSearch();
-            LoadSettings();
             MakeDirectories();
             MakeDefaultGenres();
             lag.LoadGenres();
             InitializeComponent();
+            bannerViewModel = new BannerViewModel();
             posterViewModel = new PosterViewModel();
+            listViewModel = new ListViewModel();
             posterViewModel.LoadGames();
             posterViewModel.LoadGenres();
             DataContext = posterViewModel;
             isDownloadOpen = false;
+            LoadSettings();
 
 
         }
@@ -234,10 +236,11 @@ namespace GameLauncher
 
         public void PosterViewActive()
         {
-            posterViewModel = new PosterViewModel();
             posterViewModel.LoadGames();
             posterViewModel.LoadGenres();
             DataContext = posterViewModel;
+            Properties.Settings.Default.viewtype = "Poster";
+            Properties.Settings.Default.Save();
         }
 
         //Banner button
@@ -248,10 +251,11 @@ namespace GameLauncher
 
         public void BannerViewActive()
         {
-            bannerViewModel = new BannerViewModel();
             bannerViewModel.LoadGames();
             bannerViewModel.LoadGenres();
             DataContext = bannerViewModel;
+            Properties.Settings.Default.viewtype = "Banner";
+            Properties.Settings.Default.Save();
         }
 
         //List button
@@ -262,10 +266,11 @@ namespace GameLauncher
 
         public void ListViewActive()
         {
-            listViewModel = new ListViewModel();
             listViewModel.LoadGames();
             listViewModel.LoadGenres();
             DataContext = listViewModel;
+            Properties.Settings.Default.viewtype = "List";
+            Properties.Settings.Default.Save();
         }
 
         //Settings button
@@ -293,22 +298,10 @@ namespace GameLauncher
 
         public void RefreshGames()
         {
-            if (DataContext == listViewModel)
-            {
-                ListViewActive();
-            }
-            else if (DataContext == posterViewModel)
-            {
-                PosterViewActive();
-            }
-            else if (DataContext == bannerViewModel)
-            {
-                BannerViewActive();
-            }
-            else if (DataContext == settingsViewModel)
-            {
-                SettingsViewActive();
-            }
+            if (DataContext == listViewModel) { ListViewActive(); }
+            else if (DataContext == posterViewModel) { PosterViewActive(); }
+            else if (DataContext == bannerViewModel) { BannerViewActive(); }
+            else if (DataContext == settingsViewModel) { SettingsViewActive(); }
         }
 
         private void MWSizeChanged(object sender, SizeChangedEventArgs e)
@@ -338,6 +331,18 @@ namespace GameLauncher
             if (Settings.Default.accent.ToString() != "")
             {
                 new PaletteHelper().ReplaceAccentColor(Settings.Default.accent.ToString());
+            }
+            if (Settings.Default.viewtype.ToString() == "Poster")
+            {
+                PosterViewActive();
+            }
+            if (Settings.Default.viewtype.ToString() == "Banner")
+            {
+                BannerViewActive();
+            }
+            if (Settings.Default.viewtype.ToString() == "List")
+            {
+                ListViewActive();
             }
         }
     }

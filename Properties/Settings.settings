@@ -3,12 +3,15 @@
   <Profiles />
   <Settings>
     <Setting Name="theme" Type="System.String" Scope="User">
-      <Value Profile="(Default)">dark</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="primary" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="accent" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="viewtype" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>
