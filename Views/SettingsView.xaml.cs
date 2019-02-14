@@ -25,7 +25,7 @@ namespace GameLauncher.Views
 
         public void SearchForGames(object sender, RoutedEventArgs e)
         {
-            es.searchForShortcuts();
+            es.SearchForShortcuts();
         }
 
         public SettingsView()
