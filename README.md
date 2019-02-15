@@ -13,8 +13,9 @@ This isn't designed to be a competitor to steam, or any other game launcher. I j
 - Built in browser to find images for each of the views and download them easier
 
 #### Planned updates:
-- Nothing! Could do with suggestions :)
-
+- Scan the computer for games and semi-automate adding them
+- Possibly a category view if it's feasible
+- Optimise loading times for switching views etc.
 
 
 
