@@ -50,7 +50,7 @@ namespace GameLauncher.Models
                 using (RegistryKey subKey = key32.OpenSubKey(k32subKey))
                 {
                     steam32path = subKey.GetValue("InstallPath").ToString();
-                    config32path = steam32path + "/config/config.vdf";
+                    config32path = steam32path + "/steamapps/libraryfolders.vdf";
                     if (File.Exists(config32path))
                     {
                         string[] configLines = File.ReadAllLines(config32path);
@@ -67,7 +67,7 @@ namespace GameLauncher.Models
                 using (RegistryKey subKey = key64.OpenSubKey(k64subKey))
                 {
                     steam64path = subKey.GetValue("InstallPath").ToString();
-                    config64path = steam64path + "/config/config.vdf";
+                    config64path = steam64path + "/steamapps/libraryfolders.vdf";
                     if (File.Exists(config64path))
                     {
                         string[] configLines = File.ReadAllLines(config64path);
