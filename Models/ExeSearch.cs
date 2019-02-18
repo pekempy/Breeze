@@ -12,9 +12,9 @@ namespace GameLauncher.Models
 {
     class ExeSearch
     {
-        //steamGameDirs will contain all directories which are set as steam libraries! :D
         public List<string> steamGameDirs = new List<string>();
         public ObservableCollection<GameExecutables> Exes { get; set; }
+        private ObservableCollection<GameExecutables> exes = new ObservableCollection<GameExecutables>();
 
         public void SearchForShortcuts()
         {
@@ -81,20 +81,26 @@ namespace GameLauncher.Models
 
             foreach(string item in steamGameDirs)
             {
-                string[] items = Directory.GetFiles(item, "*.exe", SearchOption.AllDirectories);
-                foreach (var exe in items)
+                string GameTitle;
+                string[] Executables = new string[0];
+                string[] steamGames = Directory.GetDirectories(item);
+                foreach (var dir in steamGames)
                 {
-                    string gametitle = exe.Substring(exe.IndexOf("\\common\\"));
-                    gametitle = gametitle.Substring(8);
-                    gametitle = gametitle.Substring(0, gametitle.IndexOf("\\"));
-                    Console.WriteLine(gametitle);
-                    //NEED TO:
-                    //Add gametitle once
-                    //For each exe under /gametitle/ folder
-                    //add as next link under that title (in obscol)
-                    Console.WriteLine(exe);
-
+                    string title = dir.Substring(dir.IndexOf("\\common\\"));
+                    string[] titlex = title.Split('\\');
+                    title = titlex[2].ToString();
+                    GameTitle = title;
+                    Console.WriteLine("Title: " + GameTitle);
+                    Console.WriteLine("Directory: " + dir);
+                    string[] executables = Directory.GetFiles(dir, "*.exe", SearchOption.AllDirectories);
+                    int num = 0;
+                    foreach (var ex in executables)
+                    {
+                        //add "ex" to Executables[] if poss? lol
+                        num++;
+                    }
                 }
+                    
             }
         }
         
