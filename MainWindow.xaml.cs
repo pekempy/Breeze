@@ -47,6 +47,8 @@ namespace GameLauncher
             isDownloadOpen = false;
             LoadSettings();
 
+            DataContext = settingsViewModel;
+
 
         }
         public void MakeDirectories()

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace GameLauncher.Models
     {
         //steamGameDirs will contain all directories which are set as steam libraries! :D
         public List<string> steamGameDirs = new List<string>();
+        public ObservableCollection<GameExecutables> Exes { get; set; }
 
         public void SearchForShortcuts()
         {
@@ -79,8 +81,20 @@ namespace GameLauncher.Models
 
             foreach(string item in steamGameDirs)
             {
-                //Need to store each exe found, and be able to sort them by folder name they were found in
-                //Not sure how to do this cos need to consider how it displays on the screen for user to select
+                string[] items = Directory.GetFiles(item, "*.exe", SearchOption.AllDirectories);
+                foreach (var exe in items)
+                {
+                    string gametitle = exe.Substring(exe.IndexOf("\\common\\"));
+                    gametitle = gametitle.Substring(8);
+                    gametitle = gametitle.Substring(0, gametitle.IndexOf("\\"));
+                    Console.WriteLine(gametitle);
+                    //NEED TO:
+                    //Add gametitle once
+                    //For each exe under /gametitle/ folder
+                    //add as next link under that title (in obscol)
+                    Console.WriteLine(exe);
+
+                }
             }
         }
         
