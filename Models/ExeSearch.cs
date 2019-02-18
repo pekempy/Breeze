@@ -4,38 +4,26 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace GameLauncher.Models
 {
     class ExeSearch
     {
+        //steamGameDirs will contain all directories which are set as steam libraries! :D
+        public List<string> steamGameDirs = new List<string>();
+
         public void SearchForShortcuts()
         {
-            bool test = false;
             SearchSteam();
-            if (test == true)
-            {
-                string programdata = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData).ToString();
-                string startMenu = programdata + "\\Microsoft\\Windows\\Start Menu\\";
-                startMenu = "C:\\Program Files";
-                string[] ext = { ".exe", ".lnk", ".url" };
-                foreach (string file in Directory.EnumerateFiles(startMenu, "*.*", SearchOption.AllDirectories).Where(s => ext.Any(ex => ex == Path.GetExtension(s))))
-                {
-                    Console.WriteLine(file);
-                    //somehow need to work out which are games? If possible
-                    //Otherwise, swap this method with something that can find purely games
-                    //Once we've only got games printing out, we then need to open AddGame 
-                    //Autofill in the path with whatever we've got, try and fill in title etc.
-
-                    //RE Steam - need to find steam directory, then read "Steam\Config\config.vdf" to find "BaseInstallFolder" for where user stores library
-                    //Then search the baseinstallfolders for the executables
-                }
-            }
+            SearchOrigin();
+            SearchUPlay();
         }
 
         public void SearchSteam()
         {
+            steamGameDirs.Clear();
             string steam32 = "SOFTWARE\\VALVE\\";
             string steam64 = "SOFTWARE\\Wow6432Node\\Valve\\";
             string steam32path;
@@ -68,16 +56,42 @@ namespace GameLauncher.Models
                 {
                     steam64path = subKey.GetValue("InstallPath").ToString();
                     config64path = steam64path + "/steamapps/libraryfolders.vdf";
+                    string driveRegex = @"[A-Z]:\\";
                     if (File.Exists(config64path))
                     {
                         string[] configLines = File.ReadAllLines(config64path);
                         foreach (var item in configLines)
                         {
                             Console.WriteLine("64:  " + item);
+                            Match match = Regex.Match(item, driveRegex);
+                            if(item != string.Empty && match.Success)
+                            {
+                                string matched = match.ToString();
+                                string item2 = item.Substring(item.IndexOf(matched));
+                                item2 = item2.Replace("\\\\", "\\");
+                                steamGameDirs.Add(item2);
+                            }
                         }
+                        steamGameDirs.Add(steam64path + "\\steamapps\\common\\");
                     }
                 }
             }
+
+            foreach(string item in steamGameDirs)
+            {
+                //Need to store each exe found, and be able to sort them by folder name they were found in
+                //Not sure how to do this cos need to consider how it displays on the screen for user to select
+            }
+        }
+        
+        public void SearchOrigin()
+        {
+
+        }
+
+        public void SearchUPlay()
+        {
+
         }
     }
 }
