@@ -71,6 +71,7 @@ namespace GameLauncher.Models
                                 string matched = match.ToString();
                                 string item2 = item.Substring(item.IndexOf(matched));
                                 item2 = item2.Replace("\\\\", "\\");
+                                item2 = item2.Replace("\"", "\\steamapps\\common\\");
                                 steamGameDirs.Add(item2);
                             }
                         }
@@ -92,11 +93,14 @@ namespace GameLauncher.Models
                     GameTitle = title;
                     Console.WriteLine("Title: " + GameTitle);
                     Console.WriteLine("Directory: " + dir);
-                    string[] executables = Directory.GetFiles(dir, "*.exe", SearchOption.AllDirectories);
+                    string[] executables = Directory.GetFiles(dir, "*.exe");
+                    //If we add , SearchOption.AllDirectories we then get all the crap compilers and such
+                    //If we don't add it, we then miss .exe's for some games
                     int num = 0;
                     foreach (var ex in executables)
                     {
                         //add "ex" to Executables[] if poss? lol
+                        Console.WriteLine(ex);
                         num++;
                     }
                 }
