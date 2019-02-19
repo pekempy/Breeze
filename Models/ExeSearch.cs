@@ -15,7 +15,7 @@ namespace GameLauncher.Models
     {
         private MainWindow mw = ((MainWindow)Application.Current.MainWindow);
         public List<string> steamGameDirs = new List<string>();
-        public ObservableCollection<GameExecutables> ExesOC { get; set; }
+        public ObservableCollection<GameExecutables> Exes { get; set; }
         private ObservableCollection<GameExecutables> exes = new ObservableCollection<GameExecutables>();
 
         public void SearchForShortcuts()
@@ -23,7 +23,6 @@ namespace GameLauncher.Models
             SearchSteam();
             SearchOrigin();
             SearchUPlay();
-            mw.OpenExeSearchDialog();
         }
         
 
@@ -143,7 +142,6 @@ namespace GameLauncher.Models
                             Exe6 = Exe6,
 
                         });
-                        ExesOC = exes;
                     }
                 }
                     

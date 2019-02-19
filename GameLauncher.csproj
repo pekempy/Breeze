@@ -133,6 +133,7 @@
     <Compile Include="Settings.cs" />
     <Compile Include="ViewModels\LoadSearch.cs" />
     <Compile Include="ViewModels\LoadAllGames.cs" />
+    <Compile Include="ViewModels\ExesViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\PosterViewModel.cs" />
     <Compile Include="ViewModels\BannerViewModel.cs" />

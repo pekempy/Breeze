@@ -13,16 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GameLauncher.Models;
+using GameLauncher.ViewModels;
 
 namespace GameLauncher
 {
     public partial class ExeSelection : Page
     {
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
-        private ExeSearch es = new Models.ExeSearch();
         public ExeSelection()
         {
-            this.DataContext = es;
             InitializeComponent();
         }
 

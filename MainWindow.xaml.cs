@@ -20,6 +20,7 @@ namespace GameLauncher
         private ListViewModel listViewModel;
         private PosterViewModel posterViewModel;
         private SettingsViewModel settingsViewModel;
+        private ExesViewModel exesViewModel;
         public Views.PosterView pv = new Views.PosterView();
         public Views.BannerView bv = new Views.BannerView();
         public Views.ListView lv = new Views.ListView();
@@ -42,14 +43,12 @@ namespace GameLauncher
             bannerViewModel = new BannerViewModel();
             posterViewModel = new PosterViewModel();
             listViewModel = new ListViewModel();
+            exesViewModel = new ExesViewModel();
             posterViewModel.LoadGames();
             posterViewModel.LoadGenres();
             DataContext = posterViewModel;
             isDownloadOpen = false;
             LoadSettings();
-
-            DataContext = settingsViewModel;
-
 
         }
         public void MakeDirectories()
@@ -100,6 +99,8 @@ namespace GameLauncher
 
         public void OpenExeSearchDialog()
         {
+            DataContext = exesViewModel;
+            exesViewModel.SearchExe();
             DialogFrame.Visibility = Visibility.Visible;
             DialogFrame.Content = DialogExeSelection;
             dialogOpen = "exeSelection";
@@ -108,6 +109,7 @@ namespace GameLauncher
 
         public void CloseExeSearchDialog()
         {
+            DataContext = settingsViewModel;
             DialogFrame.Visibility = Visibility.Hidden;
             DialogExeSelection.ExeSelectionDialog.IsOpen = false;
         }
