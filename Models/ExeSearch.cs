@@ -20,12 +20,14 @@ namespace GameLauncher.Models
 
         public void SearchForShortcuts()
         {
+            exes.Clear();
             SearchSteam();
             SearchOrigin();
             SearchUPlay();
+            Exes = exes;
         }
         
-
+        
         public void SearchSteam()
         {
             steamGameDirs.Clear();

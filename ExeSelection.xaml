@@ -31,7 +31,7 @@
         <materialDesign:DialogHost.DialogContent>
             <Grid x:Name="ExeGrid" Height="500" Width="500">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="100"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Choose which executable you would like per game"/>
