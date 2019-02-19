@@ -1,0 +1,99 @@
+﻿<Page x:Class="GameLauncher.ExeSelection"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Models="clr-namespace:GameLauncher.Models"
+      xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      d:DataContext="{d:DesignInstance Type=Models:ExeSearch}"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+      xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+      xmlns:local="clr-namespace:GameLauncher"
+      xmlns:vwp="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
+      mc:Ignorable="d" 
+      materialDesign:ThemeAssist.Theme="Inherit"
+      FontFamily="{StaticResource MaterialDesignFont}"
+      TextElement.FontSize="13"
+      TextElement.FontWeight="Regular"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextOptions.TextFormattingMode="Ideal"
+      TextOptions.TextRenderingMode="Auto"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ExeSelection">
+
+    <materialDesign:DialogHost x:Name="ExeSelectionDialog"
+                               materialDesign:ThemeAssist.Theme="Inherit"
+                               CloseOnClickAway="False"
+                               IsOpen="False"
+                               Visibility="Visible">
+        <materialDesign:DialogHost.DialogContent>
+            <Grid x:Name="ExeGrid" Height="500" Width="500">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Choose which executable you would like per game"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2">
+                <ItemsControl x:Name="ExeListings"
+                      ItemsSource="{Binding ExesOC}"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <vwp:VirtualizingWrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Card x:Name="ESCard"
+                                     Width="100"
+                                     Height="100"
+                                     Margin="5 5 5 5">
+                            <Grid>
+                                    <TextBlock Text="{Binding Title}"/>
+                            </Grid>
+                        </materialDesign:Card>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+                <materialDesign:ColorZone Grid.Row="0"
+                                          Height="65"
+                                          MaxHeight="100"
+                                          Padding="6"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                          DockPanel.Dock="Top"
+                                          Mode="PrimaryMid">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="windowTitle"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="3"
+                                   Margin="20,0,0,0"
+                                   VerticalAlignment="Center"
+                                   FontSize="24"
+                                   RenderOptions.EdgeMode="Aliased"
+                                   Text="Choose which .exe launches the game"
+                                   TextWrapping="Wrap" />
+                        <Button Grid.Column="3"
+                                Width="45"
+                                Height="45"
+                                Margin="0,0,0,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                HorizontalContentAlignment="Left"
+                                Click="CloseExeSelection"
+                                Style="{StaticResource MaterialDesignRaisedAccentButton}">
+                            <materialDesign:PackIcon Padding="0,0,0,0" Kind="Close" />
+                        </Button>
+                    </Grid>
+                </materialDesign:ColorZone>
+            </Grid>
+        </materialDesign:DialogHost.DialogContent>
+    </materialDesign:DialogHost>
+</Page>

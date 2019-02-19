@@ -15,6 +15,7 @@ namespace GameLauncher
     {
         public static AddGames DialogAddGames = new AddGames();
         public static EditGames DialogEditGames = new EditGames();
+        public static ExeSelection DialogExeSelection = new ExeSelection();
         private BannerViewModel bannerViewModel;
         private ListViewModel listViewModel;
         private PosterViewModel posterViewModel;
@@ -95,6 +96,20 @@ namespace GameLauncher
             DialogFrame.Content = DialogAddGames;
             dialogOpen = "add";
             DialogAddGames.AddGameDialog.IsOpen = true;
+        }
+
+        public void OpenExeSearchDialog()
+        {
+            DialogFrame.Visibility = Visibility.Visible;
+            DialogFrame.Content = DialogExeSelection;
+            dialogOpen = "exeSelection";
+            DialogExeSelection.ExeSelectionDialog.IsOpen = true;
+        }
+
+        public void CloseExeSearchDialog()
+        {
+            DialogFrame.Visibility = Visibility.Hidden;
+            DialogExeSelection.ExeSelectionDialog.IsOpen = false;
         }
 
         public void OpenEditGameDialog(string guid)

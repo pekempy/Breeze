@@ -7,13 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GameLauncher.Models
 {
     class ExeSearch
     {
+        private MainWindow mw = ((MainWindow)Application.Current.MainWindow);
         public List<string> steamGameDirs = new List<string>();
-        public ObservableCollection<GameExecutables> Exes { get; set; }
+        public ObservableCollection<GameExecutables> ExesOC { get; set; }
         private ObservableCollection<GameExecutables> exes = new ObservableCollection<GameExecutables>();
 
         public void SearchForShortcuts()
@@ -21,7 +23,9 @@ namespace GameLauncher.Models
             SearchSteam();
             SearchOrigin();
             SearchUPlay();
+            mw.OpenExeSearchDialog();
         }
+        
 
         public void SearchSteam()
         {
@@ -95,10 +99,17 @@ namespace GameLauncher.Models
             foreach(string item in steamGameDirs)
             {
                 string GameTitle;
+                string Exe1;
+                string Exe2;
+                string Exe3;
+                string Exe4;
+                string Exe5;
+                string Exe6;
                 string[] Executables = new string[0];
                 string[] steamGames = Directory.GetDirectories(item);
                 foreach (var dir in steamGames)
                 {
+                    GameTitle = null;  Exe1 = null; Exe2 = null; Exe3 = null; Exe4 = null; Exe5 = null; Exe6 = null;
                     string title = dir.Substring(dir.IndexOf("\\common\\"));
                     string[] titlex = title.Split('\\');
                     title = titlex[2].ToString();
@@ -106,12 +117,33 @@ namespace GameLauncher.Models
                     Console.WriteLine("Title: " + GameTitle);
                     Console.WriteLine("Directory: " + dir);
                     string[] executables = Directory.GetFiles(dir, "*.exe");
-                    int num = 0;
+                    int num = 1;
                     foreach (var ex in executables)
                     {
                         //add "ex" to Executables[] if poss? lol
-                        Console.WriteLine(ex);
+                        Console.WriteLine("Executable: " + ex);
+                        if (num == 1) { Exe1 = ex; }
+                        if (num == 2) { Exe2 = ex; }
+                        if (num == 3) { Exe3 = ex; }
+                        if (num == 4) { Exe4 = ex; }
+                        if (num == 5) { Exe5 = ex; }
+                        if (num == 6) { Exe6 = ex; }
                         num++;
+                    }
+                    if (GameTitle != "Steamworks Shared")
+                    {
+                        exes.Add(new GameExecutables
+                        {
+                            Title = GameTitle,
+                            Exe1 = Exe1,
+                            Exe2 = Exe2,
+                            Exe3 = Exe3,
+                            Exe4 = Exe4,
+                            Exe5 = Exe5,
+                            Exe6 = Exe6,
+
+                        });
+                        ExesOC = exes;
                     }
                 }
                     
