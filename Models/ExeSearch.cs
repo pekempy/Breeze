@@ -34,24 +34,36 @@ namespace GameLauncher.Models
             string config64path;
             RegistryKey key32 = Registry.LocalMachine.OpenSubKey(steam32);
             RegistryKey key64 = Registry.LocalMachine.OpenSubKey(steam64);
-
-            foreach(string k32subKey in key32.GetSubKeyNames())
+            if (key64.ToString() == null || key64.ToString() == "")
             {
-                using (RegistryKey subKey = key32.OpenSubKey(k32subKey))
+                foreach (string k32subKey in key32.GetSubKeyNames())
                 {
-                    steam32path = subKey.GetValue("InstallPath").ToString();
-                    config32path = steam32path + "/steamapps/libraryfolders.vdf";
-                    if (File.Exists(config32path))
+                    using (RegistryKey subKey = key32.OpenSubKey(k32subKey))
                     {
-                        string[] configLines = File.ReadAllLines(config32path);
-                        foreach(var item in configLines)
+                        steam32path = subKey.GetValue("InstallPath").ToString();
+                        config32path = steam32path + "/steamapps/libraryfolders.vdf";
+                        string driveRegex = @"[A-Z]:\\";
+                        if (File.Exists(config32path))
                         {
-                            Console.WriteLine("32:  " + item);
+                            string[] configLines = File.ReadAllLines(config32path);
+                            foreach (var item in configLines)
+                            {
+                                Console.WriteLine("32:  " + item);
+                                Match match = Regex.Match(item, driveRegex);
+                                if (item != string.Empty && match.Success)
+                                {
+                                    string matched = match.ToString();
+                                    string item2 = item.Substring(item.IndexOf(matched));
+                                    item2 = item2.Replace("\\\\", "\\");
+                                    item2 = item2.Replace("\"", "\\steamapps\\common\\");
+                                    steamGameDirs.Add(item2);
+                                }
+                            }
+                            steamGameDirs.Add(steam32path + "\\steamapps\\common\\");
                         }
                     }
                 }
             }
-
             foreach(string k64subKey in key64.GetSubKeyNames())
             {
                 using (RegistryKey subKey = key64.OpenSubKey(k64subKey))
@@ -94,8 +106,6 @@ namespace GameLauncher.Models
                     Console.WriteLine("Title: " + GameTitle);
                     Console.WriteLine("Directory: " + dir);
                     string[] executables = Directory.GetFiles(dir, "*.exe");
-                    //If we add , SearchOption.AllDirectories we then get all the crap compilers and such
-                    //If we don't add it, we then miss .exe's for some games
                     int num = 0;
                     foreach (var ex in executables)
                     {
