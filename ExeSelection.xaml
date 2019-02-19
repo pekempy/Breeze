@@ -31,11 +31,12 @@
         <materialDesign:DialogHost.DialogContent>
             <Grid x:Name="ExeGrid" Height="500" Width="500">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Choose which executable you would like per game"/>
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Height="500">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.RowSpan="2" Height="500"
+                              Margin="0,65,0,0">
                     <ItemsControl x:Name="ExeListings"
                       ItemsSource="{Binding Source={StaticResource ExesOCCVS}}"
                       ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -48,16 +49,36 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <!--  The card  -->
-                                    <materialDesign:Card Width="290"
-                                                 Height="100"
+                                    <materialDesign:Card Width="400" Height="Auto"
                                                  Margin="10,5,10,0">
                                         <Grid>
-                                            <TextBlock Width="Auto"
-                                               Height="Auto"
-                                               Margin="10,80,32,0"
-                                               VerticalAlignment="Center"
-                                               Foreground="White"
-                                               Text="{Binding Title}" />
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="25" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <!-- If Exe1 not bound, user needs to be able to select their own exe -->
+                                            <TextBlock Text="{Binding Title}" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" FontWeight="Bold" TextDecorations="Underline" Margin="5 5 5 5"/>
+                                            <RadioButton Grid.Row="1" Grid.Column="0"/> <!-- Hide if Exe1 not bound -->
+                                            <TextBlock Text="{Binding Exe1}" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap"/>
+                                            <RadioButton Grid.Row="2" Grid.Column="0"/> <!-- Hide if Exe2 not bound -->
+                                            <TextBlock Text="{Binding Exe2}" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap"/>
+                                            <RadioButton Grid.Row="3" Grid.Column="0"/> <!-- Hide if Exe3 not bound -->
+                                            <TextBlock Text="{Binding Exe3}" Grid.Row="3" Grid.Column="1" TextWrapping="Wrap"/>
+                                            <RadioButton Grid.Row="4" Grid.Column="0"/> <!-- Hide if Exe4 not bound -->
+                                            <TextBlock Text="{Binding Exe4}" Grid.Row="4" Grid.Column="1" TextWrapping="Wrap"/>
+                                            <RadioButton Grid.Row="5" Grid.Column="0"/> <!-- Hide if Exe5 not bound -->
+                                            <TextBlock Text="{Binding Exe5}" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap"/>
+                                            <RadioButton Grid.Row="6" Grid.Column="0"/> <!-- Hide if Exe6 not bound -->
+                                            <TextBlock Text="{Binding Exe6}" Grid.Row="6" Grid.Column="1" TextWrapping="Wrap"/>
                                         </Grid>
                                     </materialDesign:Card>
                                 </StackPanel>
