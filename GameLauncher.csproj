@@ -121,7 +121,7 @@
     <Compile Include="EditGames.xaml.cs">
       <DependentUpon>EditGames.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ExeSelection.xaml.cs">
+    <Compile Include="Views\ExeSelection.xaml.cs">
       <DependentUpon>ExeSelection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\ExeModel.cs" />
@@ -163,7 +163,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ExeSelection.xaml">
+    <Page Include="Views\ExeSelection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

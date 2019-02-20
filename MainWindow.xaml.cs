@@ -13,6 +13,8 @@ namespace GameLauncher
 {
     public partial class MainWindow : Window
     {
+        public bool isDownloadOpen = false;
+        public bool isExeSearchOpen = false;
         public static AddGames DialogAddGames = new AddGames();
         public static EditGames DialogEditGames = new EditGames();
         public static ExeSelection DialogExeSelection = new ExeSelection();
@@ -28,7 +30,6 @@ namespace GameLauncher
         public string dialogOpen;
         public string DLGameTitle;
         public string DLImgType;
-        public bool isDownloadOpen;
 
         public MainWindow()
         {
@@ -105,6 +106,7 @@ namespace GameLauncher
             DialogFrame.Content = DialogExeSelection;
             dialogOpen = "exeSelection";
             DialogExeSelection.ExeSelectionDialog.IsOpen = true;
+            isExeSearchOpen = true;
         }
 
         public void CloseExeSearchDialog()
@@ -112,6 +114,7 @@ namespace GameLauncher
             DataContext = settingsViewModel;
             DialogFrame.Visibility = Visibility.Hidden;
             DialogExeSelection.ExeSelectionDialog.IsOpen = false;
+            isExeSearchOpen = false;
         }
 
         public void OpenEditGameDialog(string guid)
@@ -328,12 +331,19 @@ namespace GameLauncher
 
         private void MWSizeChanged(object sender, SizeChangedEventArgs e)
         {
+            Resized();
+        }
+        public void Resized()
+        {
             if (isDownloadOpen == true)
             {
                 ImageDownload.ChangeWindowSize(this.ActualWidth * 0.8, this.ActualHeight * 0.8);
             }
+            if (isExeSearchOpen == true)
+            {
+                ExeSelection.ChangeWindowSize(this.ActualWidth * 0.9, this.ActualHeight * 0.9);
+            }
         }
-
         //Load settings
         public void LoadSettings()
         {
