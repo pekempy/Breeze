@@ -18,5 +18,9 @@ namespace GameLauncher.ViewModels
             es.SearchForShortcuts();
             ExesOC = es.Exes;
         }
+        public void UpdateObsCol(string title, string exe)
+        {
+            es.UpdateObsCol(title, exe);
+        }
     }
 }

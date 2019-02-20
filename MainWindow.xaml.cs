@@ -97,7 +97,10 @@ namespace GameLauncher
             dialogOpen = "add";
             DialogAddGames.AddGameDialog.IsOpen = true;
         }
-
+        public void UpdateObsCol(string title, string exe)
+        {
+            exesViewModel.UpdateObsCol(title, exe);
+        }
         public void OpenExeSearchDialog()
         {
             DataContext = exesViewModel;

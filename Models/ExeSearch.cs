@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace GameLauncher.Models
 {
-    class ExeSearch
+    public class ExeSearch
     {
         private MainWindow mw = ((MainWindow)Application.Current.MainWindow);
         public List<string> steamGameDirs = new List<string>();
@@ -27,6 +27,15 @@ namespace GameLauncher.Models
             Exes = exes;
         }
         
+        public void UpdateObsCol(string title, string exe)
+        {
+            var item = exes.FirstOrDefault(i => i.Title == title);
+            if (item != null)
+            {
+                item.Exe1 = exe;
+                Exes = exes;
+            }
+        }
         
         public void SearchSteam()
         {

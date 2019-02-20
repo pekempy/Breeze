@@ -22,6 +22,7 @@ namespace GameLauncher.Views
     public partial class ExeSelection : Page
     {
         public static ExeSelection es;
+        public static ExeSearch exs = new ExeSearch();
         public List<string> ExeList = new List<string>();
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
         private bool matchFound = false;
@@ -90,7 +91,15 @@ namespace GameLauncher.Views
                 {
                     ExeList.Add(newgame);
                 }
+                ((MainWindow)Application.Current.MainWindow).UpdateObsCol(title, exe);
+                //Need to automatically tick the radiobutton when it exists...
             }
+        }
+
+        private void UpdateObsCol(string title, string exe)
+        {
+            exs.UpdateObsCol(title, exe);
+            
         }
         private void AcceptExeSelection_OnClick(object sender, RoutedEventArgs e)
         {

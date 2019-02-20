@@ -79,7 +79,7 @@
                                                 
                                                 <RadioButton Grid.Row="1" Tag="{Binding Exe1}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe1}" Checked="RadioButton_Selected">
                                                 <RadioButton.Content>
-                                                    <TextBlock Text="{Binding Exe1}" TextWrapping="WrapWithOverflow" MinHeight="20"/>
+                                                    <TextBlock Text="{Binding Exe1, Mode=TwoWay}" TextWrapping="WrapWithOverflow" MinHeight="20"/>
                                                 </RadioButton.Content>
                                             </RadioButton>
                                                 <RadioButton Grid.Row="2" Tag="{Binding Exe2}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe2}" Checked="RadioButton_Selected">
