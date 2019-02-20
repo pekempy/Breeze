@@ -68,7 +68,10 @@ namespace GameLauncher.Views
         }
         private void AcceptExeSelection_OnClick(object sender, RoutedEventArgs e)
         {
-            //Save contents of ExeList and add to launcher
+            foreach (var item in ExeList)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
     public sealed class Null2Visibility : IValueConverter
