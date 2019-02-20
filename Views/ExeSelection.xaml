@@ -22,6 +22,7 @@
       Title="ExeSelection">
     <Page.Resources>
         <local:Null2Visibility x:Key="n2v"/>
+        <local:Null2VisibilityInvert x:Key="n2vi"/>
         <CollectionViewSource x:Key="ExesOCCVS"
                               CollectionViewType="{x:Type dat:ListCollectionView}"
                               Source="{Binding ExesOC}"/>
@@ -66,32 +67,35 @@
                                             </Grid.RowDefinitions>
                                             <!-- If Exe1 not bound, user needs to be able to select their own exe -->
                                             <TextBlock Text="{Binding Title}" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" FontWeight="Bold" TextDecorations="Underline" Margin="5 5 5 5"/>
-                                            <RadioButton Grid.Row="1" Visibility="Visible">
+                                                <TextBlock Grid.Row="1" Visibility="{Binding Converter={StaticResource n2vi}, Path=Exe1}">
+                                                    No Executable Found - Placeholder until I get other stuff done
+                                                </TextBlock>
+                                                <RadioButton Grid.Row="1" Tag="{Binding Exe1}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe1}" Checked="RadioButton_Selected">
                                                 <RadioButton.Content>
                                                     <TextBlock Text="{Binding Exe1}" TextWrapping="WrapWithOverflow" MinHeight="20"/>
                                                 </RadioButton.Content>
                                             </RadioButton>
-                                            <RadioButton Grid.Row="2" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe2}">
+                                                <RadioButton Grid.Row="2" Tag="{Binding Exe2}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe2}" Checked="RadioButton_Selected">
                                                 <RadioButton.Content>
                                                     <TextBlock Text="{Binding Exe2}" TextWrapping="WrapWithOverflow" MinHeight="20"/>
                                                 </RadioButton.Content>
                                             </RadioButton>
-                                            <RadioButton Grid.Row="3" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe3}">
+                                                <RadioButton Grid.Row="3" Tag="{Binding Exe3}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe3}" Checked="RadioButton_Selected">
                                                 <RadioButton.Content>
                                                     <TextBlock Text="{Binding Exe3}" TextWrapping="WrapWithOverflow" MinHeight="20"/>
                                                 </RadioButton.Content>
                                             </RadioButton>
-                                            <RadioButton Grid.Row="4" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe4}">
+                                                <RadioButton Grid.Row="4" Tag="{Binding Exe4}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe4}" Checked="RadioButton_Selected">
                                                 <RadioButton.Content>
                                                     <TextBlock Text="{Binding Exe4}" TextWrapping="WrapWithOverflow" MinHeight="20"/>
                                                 </RadioButton.Content>
                                             </RadioButton>
-                                            <RadioButton Grid.Row="5" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe5}">
+                                                <RadioButton Grid.Row="5" Tag="{Binding Exe5}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe5}" Checked="RadioButton_Selected">
                                                 <RadioButton.Content>
                                                     <TextBlock Text="{Binding Exe5}" TextWrapping="WrapWithOverflow" MinHeight="20"/>
                                                 </RadioButton.Content>
                                             </RadioButton>
-                                            <RadioButton Grid.Row="6" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe6}">
+                                                <RadioButton Grid.Row="6" Tag="{Binding Exe6}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe6}" Checked="RadioButton_Selected">
                                                 <RadioButton.Content>
                                                     <TextBlock Text="{Binding Exe6}" TextWrapping="WrapWithOverflow" MinHeight="20"/>
                                                 </RadioButton.Content>
@@ -102,7 +106,7 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                        <Button Grid.Row="500" MaxWidth="100" HorizontalAlignment="Right" Margin="10 10 20 20">ACCEPT</Button>
+                        <Button Grid.Row="500" MaxWidth="100" HorizontalAlignment="Right" Margin="10 10 20 20" Content="Accept" Click="AcceptExeSelection_OnClick"/>
                     </Grid>
                 </ScrollViewer>
                 <materialDesign:ColorZone Grid.Row="0"
