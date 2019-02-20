@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using GameLauncher.Models;
 using GameLauncher.ViewModels;
 using System.Globalization;
+using Microsoft.Win32;
 
 namespace GameLauncher.Views
 {
@@ -23,6 +24,7 @@ namespace GameLauncher.Views
         public static ExeSelection es;
         public List<string> ExeList = new List<string>();
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
+        private bool matchFound = false;
         public ExeSelection()
         {
             es = this;
@@ -48,22 +50,46 @@ namespace GameLauncher.Views
             string title = selectedExe.Substring(selectedExe.IndexOf("\\common\\"));
             string[] titlex = title.Split('\\');
             title = titlex[2].ToString();
-            bool matchFound = false;
-
-            Console.WriteLine("Title: " + title);
-            Console.WriteLine("Exe selected: " + selectedExe);
-            
             for (int i = 0; i < ExeList.Count; i++)
             {
                 if (ExeList[i].Contains(title + ";"))
                 {
                     matchFound = true;
                     ExeList[i] = title + ";" + selectedExe;
+                    matchFound = false;
                 }
             }
             if (matchFound == false)
             {
                 ExeList.Add(title + ";" + selectedExe);
+            }
+        }
+        private void ManualLauncher(object sender, RoutedEventArgs e)
+        {
+            string title = ((Button)sender).Tag.ToString();
+            string exe;
+            string newgame;
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Multiselect = false;
+            fileDialog.RestoreDirectory = true;
+            fileDialog.Filter = "Executable Files (*.exe) | *.exe;*.lnk;*.url";
+            var dialogResult = fileDialog.ShowDialog();
+            if (dialogResult == true)
+            {
+                exe = fileDialog.FileName;
+                newgame = title + ";" + exe;
+                for (int i = 0; i<ExeList.Count; i++)
+                {
+                    if (ExeList[i].Contains(title + ";")){
+                        matchFound = true;
+                        ExeList[i] = newgame;
+                        matchFound = false;
+                    }
+                }
+                if (matchFound == false)
+                {
+                    ExeList.Add(newgame);
+                }
             }
         }
         private void AcceptExeSelection_OnClick(object sender, RoutedEventArgs e)

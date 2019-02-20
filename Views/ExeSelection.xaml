@@ -70,6 +70,13 @@
                                                 <TextBlock Grid.Row="1" Visibility="{Binding Converter={StaticResource n2vi}, Path=Exe1}">
                                                     No Executable Found - Placeholder until I get other stuff done
                                                 </TextBlock>
+                                                <Button Visibility="{Binding Converter={StaticResource n2vi}, Path=Exe1}" Width="150" Click="ManualLauncher" Tag="{Binding Title}"
+                                Style="{DynamicResource MaterialDesignToolButton}">
+                                                    <materialDesign:PackIcon Kind="AttachFile"></materialDesign:PackIcon>
+                                                </Button>
+                                                
+                                                
+                                                
                                                 <RadioButton Grid.Row="1" Tag="{Binding Exe1}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe1}" Checked="RadioButton_Selected">
                                                 <RadioButton.Content>
                                                     <TextBlock Text="{Binding Exe1}" TextWrapping="WrapWithOverflow" MinHeight="20"/>
