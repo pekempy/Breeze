@@ -22,6 +22,7 @@ namespace GameLauncher.Views
 {
     public partial class ExeSelection : Page
     {
+        public AutoImage ai = new AutoImage();
         public static ExeSelection es;
         public static ExeSearch exs = new ExeSearch();
         public List<string> ExeList = new List<string>();
@@ -153,7 +154,11 @@ namespace GameLauncher.Views
                 string[] gameitems = item.Split(';');
                 string title = gameitems[0];
                 string exe = gameitems[1];
-                string game = title + "||" + exe + "|||||" + gameGuid;
+                string installPath = AppDomain.CurrentDomain.BaseDirectory;
+                string game = title + "||" + exe + "||" + installPath + "Resources/img/" + title + "-icon.png|" + installPath + "Resources/img/" + title + "-poster.png|" + installPath + "Resources/img/" + title + "-banner.png|" + gameGuid;
+                ai.AutoDownloadImages(title, "icon");
+                ai.AutoDownloadImages(title, "poster");
+                ai.AutoDownloadImages(title, "banner");
                 //Need to create shortcut properly - take code from other file
                 //potentially scan for images too?
                 tw.WriteLine(game);
