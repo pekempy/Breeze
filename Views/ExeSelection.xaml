@@ -68,7 +68,7 @@
                                             <!-- If Exe1 not bound, user needs to be able to select their own exe -->
                                                 <TextBlock x:Name="Title" Text="{Binding Title}" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" FontWeight="Bold" TextDecorations="Underline" Margin="5 5 5 5" Tag="{Binding Title}"/>
                                                 <TextBlock Grid.Row="1" Visibility="{Binding Converter={StaticResource n2vi}, Path=Exe1}">
-                                                    No Executable Found - Placeholder until I get other stuff done
+                                                    No Executable Found - Choose one with the attach button!
                                                 </TextBlock>
                                                 <Button Visibility="{Binding Converter={StaticResource n2vi}, Path=Exe1}" Width="150" Click="ManualLauncher" Tag="{Binding Title}"
                                 Style="{DynamicResource MaterialDesignToolButton}">
