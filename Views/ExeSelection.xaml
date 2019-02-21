@@ -3,13 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:ViewModels="clr-namespace:GameLauncher.ViewModels"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      d:DataContext="{d:DesignInstance Type=ViewModels:ExesViewModel}"
+      xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
+      xmlns:local="clr-namespace:GameLauncher.Views"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:dat="clr-namespace:System.Windows.Data;assembly=PresentationFramework"
       xmlns:vwp="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
-      xmlns:local="clr-namespace:GameLauncher.Views"
-      mc:Ignorable="d" 
+      Title="ExeSelection"
+      MinWidth="500"
+      MinHeight="800"
+      d:DataContext="{d:DesignInstance Type=ViewModels:ExesViewModel}"
       materialDesign:ThemeAssist.Theme="Inherit"
       FontFamily="{StaticResource MaterialDesignFont}"
       TextElement.FontSize="13"
@@ -17,15 +19,13 @@
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       TextOptions.TextFormattingMode="Ideal"
       TextOptions.TextRenderingMode="Auto"
-      MinHeight="800"
-      MinWidth="500"
-      Title="ExeSelection">
+      mc:Ignorable="d">
     <Page.Resources>
-        <local:Null2Visibility x:Key="n2v"/>
-        <local:Null2VisibilityInvert x:Key="n2vi"/>
+        <local:Null2Visibility x:Key="n2v" />
+        <local:Null2VisibilityInvert x:Key="n2vi" />
         <CollectionViewSource x:Key="ExesOCCVS"
                               CollectionViewType="{x:Type dat:ListCollectionView}"
-                              Source="{Binding ExesOC}"/>
+                              Source="{Binding ExesOC}" />
     </Page.Resources>
     <materialDesign:DialogHost x:Name="ExeSelectionDialog"
                                materialDesign:ThemeAssist.Theme="Inherit"
@@ -35,85 +35,138 @@
         <materialDesign:DialogHost.DialogContent>
             <Grid x:Name="ExeGrid">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="Choose which executable you would like per game"/>
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.RowSpan="3" Height="Auto"
-                              Margin="0,65,0,0">
+                <TextBlock Grid.Row="0" Text="Choose which executable you would like per game" />
+                <ScrollViewer Grid.RowSpan="3"
+                              Height="Auto"
+                              Margin="0,65,0,0"
+                              VerticalScrollBarVisibility="Auto">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <ItemsControl x:Name="ExeListings"
-                      ItemsSource="{Binding Source={StaticResource ExesOCCVS}}"
-                      ScrollViewer.VerticalScrollBarVisibility="Auto">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                    <StackPanel Orientation="Vertical" Grid.RowSpan="3">
-                                    <!--  The card  -->
-                                    <materialDesign:Card Margin="10,10,10,10" MinHeight="60" Loaded="UILoaded">
+                                      ItemsSource="{Binding Source={StaticResource ExesOCCVS}}"
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Grid.RowSpan="3" Orientation="Vertical">
+                                        <!--  The card  -->
+                                        <materialDesign:Card MinHeight="60"
+                                                             Margin="10,10,10,10"
+                                                             Loaded="UILoaded">
                                             <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*" />
-                                                <RowDefinition Height="*" />
-                                                <RowDefinition Height="*" />
-                                                <RowDefinition Height="*" />
-                                                <RowDefinition Height="*" />
-                                                <RowDefinition Height="*" />
-                                                <RowDefinition Height="*" />
-                                            </Grid.RowDefinitions>
-                                            <!-- If Exe1 not bound, user needs to be able to select their own exe -->
-                                                <TextBlock x:Name="Title" Text="{Binding Title}" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" FontWeight="Bold" TextDecorations="Underline" Margin="5 5 5 5" Tag="{Binding Title}"/>
-                                                <TextBlock Grid.Row="1" Visibility="{Binding Converter={StaticResource n2vi}, Path=Exe1}">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+                                                <!--  If Exe1 not bound, user needs to be able to select their own exe  -->
+                                                <TextBlock x:Name="Title"
+                                                           Grid.Row="0"
+                                                           Grid.ColumnSpan="2"
+                                                           Margin="5,5,5,5"
+                                                           FontWeight="Bold"
+                                                           Tag="{Binding Title}"
+                                                           Text="{Binding Title}"
+                                                           TextDecorations="Underline"
+                                                           TextWrapping="Wrap" />
+                                                <TextBlock Grid.Row="1"
+                                                           Margin="5,5,5,5"
+                                                           Visibility="{Binding Converter={StaticResource n2vi}, Path=Exe1}">
                                                     No Executable Found - Choose one with the attach button!
                                                 </TextBlock>
-                                                <Button Visibility="{Binding Converter={StaticResource n2vi}, Path=Exe1}" Width="150" Click="ManualLauncher" Tag="{Binding Title}"
-                                Style="{DynamicResource MaterialDesignToolButton}">
-                                                    <materialDesign:PackIcon Kind="AttachFile"></materialDesign:PackIcon>
+                                                <Button Width="150"
+                                                        Click="ManualLauncher"
+                                                        Style="{DynamicResource MaterialDesignToolButton}"
+                                                        Tag="{Binding Title}"
+                                                        Visibility="{Binding Converter={StaticResource n2vi}, Path=Exe1}">
+                                                    <materialDesign:PackIcon Kind="AttachFile" />
                                                 </Button>
-                                                
-                                                
-                                                
-                                                <RadioButton x:Name="R1" Grid.Row="1" Tag="{Binding Exe1}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe1}" Checked="RadioButton_Selected">
-                                                <RadioButton.Content>
-                                                        <TextBlock Text="{Binding Exe1, Mode=TwoWay}" Tag="{Binding Title}" TextWrapping="WrapWithOverflow" MinHeight="20" Loaded="CardLoaded"/>
-                                                </RadioButton.Content>
-                                            </RadioButton>
-                                                <RadioButton Grid.Row="2" Tag="{Binding Exe2}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe2}" Checked="RadioButton_Selected">
-                                                <RadioButton.Content>
-                                                    <TextBlock Text="{Binding Exe2}" TextWrapping="WrapWithOverflow" MinHeight="20"/>
-                                                </RadioButton.Content>
-                                            </RadioButton>
-                                                <RadioButton Grid.Row="3" Tag="{Binding Exe3}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe3}" Checked="RadioButton_Selected">
-                                                <RadioButton.Content>
-                                                    <TextBlock Text="{Binding Exe3}" TextWrapping="WrapWithOverflow" MinHeight="20"/>
-                                                </RadioButton.Content>
-                                            </RadioButton>
-                                                <RadioButton Grid.Row="4" Tag="{Binding Exe4}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe4}" Checked="RadioButton_Selected">
-                                                <RadioButton.Content>
-                                                    <TextBlock Text="{Binding Exe4}" TextWrapping="WrapWithOverflow" MinHeight="20"/>
-                                                </RadioButton.Content>
-                                            </RadioButton>
-                                                <RadioButton Grid.Row="5" Tag="{Binding Exe5}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe5}" Checked="RadioButton_Selected">
-                                                <RadioButton.Content>
-                                                    <TextBlock Text="{Binding Exe5}" TextWrapping="WrapWithOverflow" MinHeight="20"/>
-                                                </RadioButton.Content>
-                                            </RadioButton>
-                                                <RadioButton Grid.Row="6" Tag="{Binding Exe6}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe6}" Checked="RadioButton_Selected">
-                                                <RadioButton.Content>
-                                                    <TextBlock Text="{Binding Exe6}" TextWrapping="WrapWithOverflow" MinHeight="20"/>
-                                                </RadioButton.Content>
-                                            </RadioButton>
-                                        </Grid>
-                                    </materialDesign:Card>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                        <Button Grid.Row="500" MaxWidth="100" HorizontalAlignment="Right" Margin="10 10 20 20" Content="Accept" Click="AcceptExeSelection_OnClick"/>
+                                                <RadioButton x:Name="R1"
+                                                             Grid.Row="1"
+                                                             Margin="5,5,5,5"
+                                                             Checked="RadioButton_Selected"
+                                                             Tag="{Binding Exe1}"
+                                                             Visibility="{Binding Converter={StaticResource n2v}, Path=Exe1}">
+                                                    <RadioButton.Content>
+                                                        <TextBlock MinHeight="20"
+                                                                   Loaded="CardLoaded"
+                                                                   Tag="{Binding Title}"
+                                                                   Text="{Binding Exe1, Mode=TwoWay}"
+                                                                   TextWrapping="WrapWithOverflow" />
+                                                    </RadioButton.Content>
+                                                </RadioButton>
+                                                <RadioButton Grid.Row="2"
+                                                             Checked="RadioButton_Selected"
+                                                             Tag="{Binding Exe2}"
+                                                             Visibility="{Binding Converter={StaticResource n2v}, Path=Exe2}">
+                                                    <RadioButton.Content>
+                                                        <TextBlock MinHeight="20"
+                                                                   Text="{Binding Exe2}"
+                                                                   TextWrapping="WrapWithOverflow" />
+                                                    </RadioButton.Content>
+                                                </RadioButton>
+                                                <RadioButton Grid.Row="3"
+                                                             Checked="RadioButton_Selected"
+                                                             Tag="{Binding Exe3}"
+                                                             Visibility="{Binding Converter={StaticResource n2v}, Path=Exe3}">
+                                                    <RadioButton.Content>
+                                                        <TextBlock MinHeight="20"
+                                                                   Text="{Binding Exe3}"
+                                                                   TextWrapping="WrapWithOverflow" />
+                                                    </RadioButton.Content>
+                                                </RadioButton>
+                                                <RadioButton Grid.Row="4"
+                                                             Checked="RadioButton_Selected"
+                                                             Tag="{Binding Exe4}"
+                                                             Visibility="{Binding Converter={StaticResource n2v}, Path=Exe4}">
+                                                    <RadioButton.Content>
+                                                        <TextBlock MinHeight="20"
+                                                                   Text="{Binding Exe4}"
+                                                                   TextWrapping="WrapWithOverflow" />
+                                                    </RadioButton.Content>
+                                                </RadioButton>
+                                                <RadioButton Grid.Row="5"
+                                                             Checked="RadioButton_Selected"
+                                                             Tag="{Binding Exe5}"
+                                                             Visibility="{Binding Converter={StaticResource n2v}, Path=Exe5}">
+                                                    <RadioButton.Content>
+                                                        <TextBlock MinHeight="20"
+                                                                   Text="{Binding Exe5}"
+                                                                   TextWrapping="WrapWithOverflow" />
+                                                    </RadioButton.Content>
+                                                </RadioButton>
+                                                <RadioButton Grid.Row="6"
+                                                             Checked="RadioButton_Selected"
+                                                             Tag="{Binding Exe6}"
+                                                             Visibility="{Binding Converter={StaticResource n2v}, Path=Exe6}">
+                                                    <RadioButton.Content>
+                                                        <TextBlock MinHeight="20"
+                                                                   Text="{Binding Exe6}"
+                                                                   TextWrapping="WrapWithOverflow" />
+                                                    </RadioButton.Content>
+                                                </RadioButton>
+                                            </Grid>
+                                        </materialDesign:Card>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <Button Grid.Row="500"
+                                MaxWidth="100"
+                                Margin="10,10,20,20"
+                                HorizontalAlignment="Right"
+                                Click="AcceptExeSelection_OnClick"
+                                Content="Accept" />
                     </Grid>
                 </ScrollViewer>
                 <materialDesign:ColorZone Grid.Row="0"

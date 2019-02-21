@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-
+ 
 namespace GameLauncher.Models
 {
     public class ExeModel { }
