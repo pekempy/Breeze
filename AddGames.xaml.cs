@@ -74,6 +74,7 @@ namespace GameLauncher
                         ClearGenreBoxes();
                         clearFields();
                         ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
+                        ((MainWindow)Application.Current.MainWindow).isDialogOpen = false;
                         AddGameDialog.IsOpen = false;
                     }
                 }
@@ -114,6 +115,7 @@ namespace GameLauncher
         private void CancelAddGame_OnClick(object sender, RoutedEventArgs e)
         {
             ClearGenreBoxes();
+            ((MainWindow)Application.Current.MainWindow).isDialogOpen = false;
             AddGameDialog.IsOpen = false;
             clearFields();
         }

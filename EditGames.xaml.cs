@@ -79,6 +79,7 @@ namespace GameLauncher
                         OldTitle = null;
                         ModifyFile.RemoveGameFromFile(guid);
                         ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
+                        ((MainWindow)Application.Current.MainWindow).isDialogOpen = false;
                         EditGameDialog.IsOpen = false;
                     }
                     else
@@ -88,6 +89,7 @@ namespace GameLauncher
                 }
                 catch (Exception ex) { Console.WriteLine("Error message EditGames.xaml.cs: " + ex); }
             }
+
         }
         private void RenameFiles(string OldTitle, string NewTitle)
         {
@@ -138,6 +140,7 @@ namespace GameLauncher
         private void CancelEditGame_OnClick(object sender, RoutedEventArgs e)
         {
             EditGameDialog.IsOpen = false;
+            ((MainWindow)Application.Current.MainWindow).isDialogOpen = false;
             ClearGenreBoxes();
             clearFields();
         }

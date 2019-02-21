@@ -28,7 +28,7 @@ namespace GameLauncher.ViewModels
             lag.LoadGenres();
             GenreListOC = lag.Genres;
         }
-
+        
         public void LoadList()
         {
             for (int i = 0; i < PosterViewOC.Count; i++)

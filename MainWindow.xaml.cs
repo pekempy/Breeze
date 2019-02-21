@@ -27,6 +27,7 @@ namespace GameLauncher
         public Views.BannerView bv = new Views.BannerView();
         public Views.ListView lv = new Views.ListView();
         public CollectionViewSource cvs;
+        public bool isDialogOpen;
         public string dialogOpen;
         public string DLGameTitle;
         public string DLImgType;
@@ -95,6 +96,7 @@ namespace GameLauncher
             DialogFrame.Visibility = Visibility.Visible;
             DialogFrame.Content = DialogAddGames;
             dialogOpen = "add";
+            isDialogOpen = true;
             DialogAddGames.AddGameDialog.IsOpen = true;
         }
         public void UpdateObsCol(string title, string exe)
@@ -113,6 +115,7 @@ namespace GameLauncher
             exesViewModel.SearchExe();
             DialogFrame.Visibility = Visibility.Visible;
             DialogFrame.Content = DialogExeSelection;
+            isDialogOpen = true;
             dialogOpen = "exeSelection";
             DialogExeSelection.ExeSelectionDialog.IsOpen = true;
             isExeSearchOpen = true;
@@ -122,6 +125,7 @@ namespace GameLauncher
         {
             DataContext = settingsViewModel;
             DialogFrame.Visibility = Visibility.Hidden;
+            isDialogOpen = false;
             DialogExeSelection.ExeSelectionDialog.IsOpen = false;
             isExeSearchOpen = false;
         }
@@ -131,6 +135,7 @@ namespace GameLauncher
             DialogFrame.Visibility = Visibility.Visible;
             DialogFrame.Content = DialogEditGames;
             dialogOpen = "edit";
+            isDialogOpen = true;
             DialogEditGames.currentGuid(guid);
             DialogEditGames.EditGameDialog.IsOpen = true;
         }
@@ -208,12 +213,12 @@ namespace GameLauncher
                 if (dialogType == "edit")
                 {
                     DialogEditGames.EditIcon.Text = imgpath;
-                    OpenImageDL("closes", "the", "dialog");
+                    OpenImageDL("","","");
                 }
                 else if (dialogType == "add")
                 {
                     DialogAddGames.NewGameIcon.Text = imgpath;
-                    OpenImageDL("closes", "the", "dialog");
+                    OpenImageDL("","","");
                 }
             }
             else if (imagetype == "poster")
@@ -221,12 +226,12 @@ namespace GameLauncher
                 if (dialogType == "edit")
                 {
                     DialogEditGames.EditPoster.Text = imgpath;
-                    OpenImageDL("closes", "the", "dialog");
+                    OpenImageDL("","","");
                 }
                 else if (dialogType == "add")
                 {
                     DialogAddGames.NewGamePoster.Text = imgpath;
-                    OpenImageDL("closes", "the", "dialog");
+                    OpenImageDL("","","");
                 }
             }
             else if (imagetype == "banner")
@@ -234,12 +239,12 @@ namespace GameLauncher
                 if (dialogType == "edit")
                 {
                     DialogEditGames.EditBanner.Text = imgpath;
-                    OpenImageDL("closes", "the", "dialog");
+                    OpenImageDL("","","");
                 }
                 else if (dialogType == "add")
                 {
                     DialogAddGames.NewGameBanner.Text = imgpath;
-                    OpenImageDL("closes", "the", "dialog");
+                    OpenImageDL("","","");
                 }
             }
         }
@@ -274,7 +279,7 @@ namespace GameLauncher
             Properties.Settings.Default.viewtype = "Poster";
             Properties.Settings.Default.Save();
         }
-
+        
         //Banner button
         private void BannerButton_OnClick(object sender, RoutedEventArgs e)
         {

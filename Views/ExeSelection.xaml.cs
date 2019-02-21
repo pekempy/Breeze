@@ -16,6 +16,7 @@ using GameLauncher.Models;
 using GameLauncher.ViewModels;
 using System.Globalization;
 using Microsoft.Win32;
+using System.IO;
 
 namespace GameLauncher.Views
 {
@@ -26,6 +27,7 @@ namespace GameLauncher.Views
         public List<string> ExeList = new List<string>();
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
         private bool matchFound = false;
+        private bool matchExe = false;
         public ExeSelection()
         {
             es = this;
@@ -66,7 +68,23 @@ namespace GameLauncher.Views
             }
             if (matchFound == false)
             {
-                ExeList.Add(title + ";" + selectedExe);
+                for (int i = 0; i < ExeList.Count; i++)
+                {
+                    if (!ExeList[i].Contains(title + ";"))
+                        {
+                        if (!ExeList[i].Contains(";" + selectedExe))
+                        {
+                            matchExe = false;
+                        }
+                        else if (ExeList.Contains(";" + selectedExe)) { matchExe = true; }
+                    }
+                    else if (ExeList[i].Contains(title + ";")) { matchExe = true; }
+                    if (ExeList[i].Contains(";" + selectedExe)) { matchExe = true; }
+                }
+                if (ExeList.Count == 0 || matchExe == false)
+                {
+                    ExeList.Add(title + ";" + selectedExe);
+                }
             }
         }
         private void ManualLauncher(object sender, RoutedEventArgs e)
@@ -87,7 +105,11 @@ namespace GameLauncher.Views
                 {
                     if (ExeList[i].Contains(title + ";")){
                         matchFound = true;
-                        ExeList[i] = newgame;
+                        if (!ExeList[i].Contains(";" + exe))
+                        {
+                            ExeList[i] = newgame;
+                        }
+                        else { Console.WriteLine("A duplicate .exe was found"); }
                         matchFound = false;
                     }
                 }
@@ -123,9 +145,14 @@ namespace GameLauncher.Views
         }
         private void AcceptExeSelection_OnClick(object sender, RoutedEventArgs e)
         {
+            TextWriter tw = new StreamWriter(@"./Resources/GamesList.txt", true);
             foreach (var item in ExeList)
             {
                 Console.WriteLine(item);
+                string game = item.Replace(";", "|");
+                //game = game + 
+                //Auto-Add these games to GamesList.txt - potentially scan for images too?
+
             }
         }
     }
