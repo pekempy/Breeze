@@ -66,7 +66,7 @@
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
                                             <!-- If Exe1 not bound, user needs to be able to select their own exe -->
-                                            <TextBlock Text="{Binding Title}" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" FontWeight="Bold" TextDecorations="Underline" Margin="5 5 5 5"/>
+                                                <TextBlock x:Name="Title" Text="{Binding Title}" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" FontWeight="Bold" TextDecorations="Underline" Margin="5 5 5 5" Tag="{Binding Title}"/>
                                                 <TextBlock Grid.Row="1" Visibility="{Binding Converter={StaticResource n2vi}, Path=Exe1}">
                                                     No Executable Found - Placeholder until I get other stuff done
                                                 </TextBlock>
@@ -77,9 +77,9 @@
                                                 
                                                 
                                                 
-                                                <RadioButton Grid.Row="1" Tag="{Binding Exe1}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe1}" Checked="RadioButton_Selected">
+                                                <RadioButton x:Name="R1" Grid.Row="1" Tag="{Binding Exe1}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe1}" Checked="RadioButton_Selected">
                                                 <RadioButton.Content>
-                                                    <TextBlock Text="{Binding Exe1, Mode=TwoWay}" TextWrapping="WrapWithOverflow" MinHeight="20"/>
+                                                        <TextBlock Text="{Binding Exe1, Mode=TwoWay}" Tag="{Binding Title}" TextWrapping="WrapWithOverflow" MinHeight="20" Loaded="CardLoaded"/>
                                                 </RadioButton.Content>
                                             </RadioButton>
                                                 <RadioButton Grid.Row="2" Tag="{Binding Exe2}" Visibility="{Binding Converter={StaticResource n2v}, Path=Exe2}" Checked="RadioButton_Selected">

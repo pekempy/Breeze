@@ -36,6 +36,20 @@ namespace GameLauncher.Models
                 Exes = exes;
             }
         }
+
+        public bool CheckBinding(string title)
+        {
+            var item = exes.FirstOrDefault(i => i.Title == title);
+            if (item != null)
+            {
+                if (item.Exe1 != null && item.Exe2 == null)
+                {
+                    return true;
+                }
+                else { return false; }
+            }
+            else { return false; }
+        }
         
         public void SearchSteam()
         {

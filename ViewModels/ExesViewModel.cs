@@ -22,5 +22,11 @@ namespace GameLauncher.ViewModels
         {
             es.UpdateObsCol(title, exe);
         }
+        public bool CheckBinding(string title)
+        {
+            bool result = es.CheckBinding(title);
+            if (result == true) { return true; }
+            else { return false; }
+        }
     }
 }

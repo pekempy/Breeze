@@ -96,6 +96,23 @@ namespace GameLauncher.Views
             }
         }
 
+        private void CardLoaded(object sender, RoutedEventArgs e)
+        {
+            string title;
+            for (int i = 0; i < ExeListings.Items.Count; i++)
+            {
+                ContentPresenter c = (ContentPresenter)ExeListings.ItemContainerGenerator.ContainerFromItem(ExeListings.Items[i]);
+                TextBlock tb = c.ContentTemplate.FindName("Title", c) as TextBlock;
+                RadioButton rb = c.ContentTemplate.FindName("R1", c) as RadioButton;
+                title = tb.Text.ToString();
+                bool result = ((MainWindow)Application.Current.MainWindow).CheckBinding(title);
+                if (result == true)
+                {
+                    rb.IsChecked = true;
+                }
+            }
+        }
+
         private void UpdateObsCol(string title, string exe)
         {
             exs.UpdateObsCol(title, exe);

@@ -101,6 +101,12 @@ namespace GameLauncher
         {
             exesViewModel.UpdateObsCol(title, exe);
         }
+        public bool CheckBinding(string title)
+        {
+            bool result = exesViewModel.CheckBinding(title);
+            if (result == true) { return true; }
+            else { return false; }
+        }
         public void OpenExeSearchDialog()
         {
             DataContext = exesViewModel;

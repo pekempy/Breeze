@@ -121,8 +121,7 @@
                                                      Kind="DotsHorizontal" />
                             <Button.CommandParameter>
                                 <Grid Width="270"
-                                      Height="330"
-                                      Loaded="CheckGenreBoxes">
+                                      Height="330">
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
@@ -155,7 +154,7 @@
                                                                   Height="25"
                                                                   Margin="10,0,10,0"
                                                                   Content="{Binding Name}"
-                                                                  IsChecked="{Binding Checked, Mode=TwoWay}" />
+                                                                  Loaded="CheckGenreBoxes"/>
                                                     </StackPanel>
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>

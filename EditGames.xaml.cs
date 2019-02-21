@@ -178,7 +178,6 @@ namespace GameLauncher
             ClearGenreBoxes();
         }
 
-        //CheckGenreBoxes currently linked to a button - NEED THIS TO BE AUTO WHEN DIALOG OPENS
         private void CheckGenreBoxes(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < GenreAGList.Items.Count; i++)
