@@ -145,15 +145,21 @@ namespace GameLauncher.Views
         }
         private void AcceptExeSelection_OnClick(object sender, RoutedEventArgs e)
         {
-            TextWriter tw = new StreamWriter(@"./Resources/GamesList.txt", true);
             foreach (var item in ExeList)
             {
+                TextWriter tw = new StreamWriter(@"./Resources/GamesList.txt", true);
+                Guid gameGuid = Guid.NewGuid();
                 Console.WriteLine(item);
-                string game = item.Replace(";", "|");
-                //game = game + 
-                //Auto-Add these games to GamesList.txt - potentially scan for images too?
-
+                string[] gameitems = item.Split(';');
+                string title = gameitems[0];
+                string exe = gameitems[1];
+                string game = title + "||" + exe + "|||||" + gameGuid;
+                //Need to create shortcut properly - take code from other file
+                //potentially scan for images too?
+                tw.WriteLine(game);
+                tw.Close();
             }
+            ((MainWindow)Application.Current.MainWindow).CloseExeSearchDialog();
         }
     }
     public sealed class Null2Visibility : IValueConverter
