@@ -47,16 +47,20 @@ namespace GameLauncher.Views
         }
         private void RadioButton_Selected(object sender, RoutedEventArgs e)
         {
-            string selectedExe = ((RadioButton)sender).Tag.ToString();
-            string title = selectedExe.Substring(selectedExe.IndexOf("\\common\\"));
-            string[] titlex = title.Split('\\');
-            title = titlex[2].ToString();
+                string selectedExe = ((RadioButton)sender).Tag.ToString();
+                string title = selectedExe.Substring(selectedExe.IndexOf("\\common\\"));
+                string[] titlex = title.Split('\\');
+                title = titlex[2].ToString();
             for (int i = 0; i < ExeList.Count; i++)
             {
                 if (ExeList[i].Contains(title + ";"))
                 {
                     matchFound = true;
-                    ExeList[i] = title + ";" + selectedExe;
+                    if (!ExeList[i].Contains(";" + selectedExe))
+                    {
+                        ExeList[i] = title + ";" + selectedExe;
+                    }
+                    else { Console.WriteLine("Duplicate .exe found"); }
                     matchFound = false;
                 }
             }
@@ -92,7 +96,6 @@ namespace GameLauncher.Views
                     ExeList.Add(newgame);
                 }
                 ((MainWindow)Application.Current.MainWindow).UpdateObsCol(title, exe);
-                //Need to automatically tick the radiobutton when it exists...
             }
         }
 
