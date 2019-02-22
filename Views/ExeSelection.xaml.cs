@@ -18,6 +18,8 @@ using System.Globalization;
 using Microsoft.Win32;
 using System.IO;
 using IWshRuntimeLibrary;
+using GameLauncher.Properties;
+using MaterialDesignThemes.Wpf;
 
 namespace GameLauncher.Views
 {
@@ -34,6 +36,14 @@ namespace GameLauncher.Views
         {
             es = this;
             InitializeComponent();
+            if (Settings.Default.theme.ToString() == "Dark")
+            {
+                ThemeAssist.SetTheme(this, BaseTheme.Dark);
+            }
+            else if (Settings.Default.theme.ToString() == "Light")
+            {
+                ThemeAssist.SetTheme(this, BaseTheme.Light);
+            }
         }
 
         public void CloseExeSelection(object sender, RoutedEventArgs e)

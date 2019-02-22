@@ -5,6 +5,8 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using IWshRuntimeLibrary;
+using GameLauncher.Properties;
+using MaterialDesignThemes.Wpf;
 
 namespace GameLauncher
 {
@@ -23,6 +25,14 @@ namespace GameLauncher
         public EditGames()
         {
             InitializeComponent();
+            if (Settings.Default.theme.ToString() == "Dark")
+            {
+                ThemeAssist.SetTheme(this, BaseTheme.Dark);
+            }
+            else if (Settings.Default.theme.ToString() == "Light")
+            {
+                ThemeAssist.SetTheme(this, BaseTheme.Light);
+            }
             installPath = installPath.Replace("\\", "/");
         }
 

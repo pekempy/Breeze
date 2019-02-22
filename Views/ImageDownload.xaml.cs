@@ -1,4 +1,5 @@
-﻿using GameLauncher.ViewModels;
+﻿using GameLauncher.Properties;
+using GameLauncher.ViewModels;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Globalization;
@@ -30,6 +31,14 @@ namespace GameLauncher.Views
             bvm.LoadSearch(gametitle, imagetype, searchstring, offset);
             lvm.LoadSearch(gametitle, imagetype, searchstring, offset);
             InitializeComponent();
+            if (Settings.Default.theme.ToString() == "Dark")
+            {
+                ThemeAssist.SetTheme(this, BaseTheme.Dark);
+            }
+            else if (Settings.Default.theme.ToString() == "Light")
+            {
+                ThemeAssist.SetTheme(this, BaseTheme.Light);
+            }
             DownloadGrid.Height = ((MainWindow)Application.Current.MainWindow).ActualHeight * 0.8;
             DownloadGrid.Width = ((MainWindow)Application.Current.MainWindow).ActualWidth * 0.8;
             windowTitle.Text = searchstring.ToUpperInvariant();

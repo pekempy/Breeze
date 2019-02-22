@@ -5,6 +5,8 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using IWshRuntimeLibrary;
+using MaterialDesignThemes.Wpf;
+using GameLauncher.Properties;
 
 namespace GameLauncher
 {
@@ -16,6 +18,14 @@ namespace GameLauncher
         public AddGames()
         {
             InitializeComponent();
+            if (Settings.Default.theme.ToString() == "Dark")
+            {
+                ThemeAssist.SetTheme(this, BaseTheme.Dark);
+            }
+            else if (Settings.Default.theme.ToString() == "Light")
+            {
+                ThemeAssist.SetTheme(this, BaseTheme.Light);
+            }
         }
 
         private void AddGame_OnClick(object sender, RoutedEventArgs e)
