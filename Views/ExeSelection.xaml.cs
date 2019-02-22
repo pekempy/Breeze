@@ -17,6 +17,7 @@ using GameLauncher.ViewModels;
 using System.Globalization;
 using Microsoft.Win32;
 using System.IO;
+using IWshRuntimeLibrary;
 
 namespace GameLauncher.Views
 {
@@ -155,18 +156,41 @@ namespace GameLauncher.Views
                 string title = gameitems[0];
                 string exe = gameitems[1];
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
-                string game = title + "||" + exe + "||" + installPath + "Resources/img/" + title + "-icon.png|" + installPath + "Resources/img/" + title + "-poster.png|" + installPath + "Resources/img/" + title + "-banner.png|" + gameGuid;
-                ai.AutoDownloadImages(title, "icon");
-                ai.AutoDownloadImages(title, "poster");
-                ai.AutoDownloadImages(title, "banner");
+                string fileNameIcon = ai.AutoDownloadImages(title, "icon");
+                string fileNamePoster = ai.AutoDownloadImages(title, "poster");
+                string fileNameBanner = ai.AutoDownloadImages(title, "banner");
                 //Need to create shortcut properly - take code from other file
-                //potentially scan for images too?
+                string icon = fileNameIcon;
+                string poster = fileNamePoster;
+                string banner = fileNameBanner;
+                string shortcut = createShortcut(title, exe);
+                string game = title + "||" + shortcut + "||" + icon + "|" + poster + "|" + banner + "|" + gameGuid;
                 tw.WriteLine(game);
                 tw.Close();
             }
             ((MainWindow)Application.Current.MainWindow).CloseExeSearchDialog();
         }
+        private string createShortcut(string title, string exe)
+        {
+            string installPath = AppDomain.CurrentDomain.BaseDirectory;
+            if (!Directory.Exists(installPath + "\\Resources\\shortcuts"))
+            {
+                System.IO.Directory.CreateDirectory(installPath + "\\Resources\\shortcuts");
+            }
+            WshShell wsh = new WshShell();
+            IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(
+            installPath + "\\Resources\\shortcuts" + "\\" + title + ".lnk") as IWshRuntimeLibrary.IWshShortcut;
+            shortcut.Arguments = "";
+            shortcut.TargetPath = exe;
+            shortcut.WindowStyle = 1;
+            shortcut.Description = "Shortcut to " + title;
+            shortcut.WorkingDirectory = "C:\\App";
+            shortcut.IconLocation = exe;
+            shortcut.Save();
+            return installPath;
+        }
     }
+    
     public sealed class Null2Visibility : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

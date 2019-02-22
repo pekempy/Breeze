@@ -12,14 +12,14 @@ namespace GameLauncher.Models
         public List<string> posterList = new List<string>();
         public List<string> bannerList = new List<string>();
         public string installPath = AppDomain.CurrentDomain.BaseDirectory;
+        public string fileName;
 
-        public void AutoDownloadImages(string title, string type)
+        public string AutoDownloadImages(string title, string type)
         {
-            string url = "https://www.qwant.com/?q=" + title.Replace(" ", "%20") + "%20game%20" + type.Replace(" ", "%20") + "&t=images";
-            try
-            {
-                HtmlWeb hw = new HtmlWeb();
-                HtmlDocument doc = hw.Load(url);
+            string url = "https://www.qwant.com/?q=" + title.Replace(" ", "%20") + "%20" + type.Replace(" ", "%20") + "&t=images";
+            HtmlWeb hw = new HtmlWeb();
+            HtmlDocument doc = hw.Load(url);
+            try {
                 foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//img"))
                 {
                     string imgValue = link.GetAttributeValue("src", string.Empty);
@@ -47,11 +47,11 @@ namespace GameLauncher.Models
                 iconList.Clear();
                 posterList.Clear();
                 bannerList.Clear();
-            }
-            catch (Exception e) { Console.WriteLine("Error autodl: " + e); }
+                fileName = installPath + fileName;
+                return fileName;
+            } catch (Exception) { return null; }
         }
-
-        public void DownloadImage(string title, string type)
+        public string DownloadImage(string title, string type)
         {
             using (WebClient client = new WebClient())
             {
@@ -59,25 +59,62 @@ namespace GameLauncher.Models
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 client.UseDefaultCredentials = true;
                 client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                bool downloadSuccess = false;
                 if (type == "icon")
                 {
-                    string iconURL = iconList[0];
-                    string fileName = @"Resources\img\" + title + "-" + type + ".png";
-                    client.DownloadFile(new Uri(iconURL), fileName);
+                    while (downloadSuccess == false)
+                    {
+                        for (int i = 0; i < iconList.Count; i++)
+                        {
+                            string iconURL = iconList[i];
+                            fileName = @"Resources\img\" + title + "-" + type + ".png";
+                            try
+                            {
+                                client.DownloadFile(new Uri(iconURL), fileName);
+                            }
+                            catch (WebException) { }
+                            if (File.Exists(installPath + fileName)) { downloadSuccess = true; return fileName; }
+                        }
+                    }
                 }
                 if (type == "poster")
                 {
-                    string posterURL = posterList[0];
-                    string fileName = @"Resources\img\" + title + "-" + type + ".png";
-                    client.DownloadFile(new Uri(posterURL), fileName);
+                    while (downloadSuccess == false)
+                    {
+                        for (int i = 0; i < posterList.Count; i++)
+                        {
+                            string posterURL = posterList[i];
+                            fileName = @"Resources\img\" + title + "-" + type + ".png";
+                            try
+                            {
+                                client.DownloadFile(new Uri(posterURL), fileName);
+                            }
+                            catch (WebException) { }
+                            if (File.Exists(installPath + fileName)) { downloadSuccess = true; return fileName; }
+                        }
+                    }
                 }
                 if (type == "banner")
                 {
-                    string bannerURL = bannerList[0];
-                    string fileName = @"Resources\img\" + title + "-" + type + ".png";
-                    client.DownloadFile(new Uri(bannerURL), fileName);
+                    while (downloadSuccess == false)
+                    {
+                        for (int i = 0; i < bannerList.Count; i++)
+                        {
+                            string bannerURL = bannerList[i];
+                            fileName = @"Resources\img\" + title + "-" + type + ".png";
+                            try
+                            {
+                                client.DownloadFile(new Uri(bannerURL), fileName);
+                            }
+                            catch (WebException) { }
+                            if (File.Exists(installPath + fileName)) { downloadSuccess = true; return fileName; }
+                        }
+                    }
                 }
+                else { return null; }
             }
+            if (fileName != null || fileName != "") { return fileName; }
+            else { return null; }
         }
     }
 }
