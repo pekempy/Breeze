@@ -73,19 +73,20 @@
                                                 <TextBlock x:Name="Title"
                                                            Grid.Row="0"
                                                            Grid.ColumnSpan="2"
-                                                           Margin="5,5,5,5"
+                                                           Margin="10,5,5,5"
                                                            FontWeight="Bold"
                                                            Tag="{Binding Title}"
                                                            Text="{Binding Title}"
                                                            TextDecorations="Underline"
                                                            TextWrapping="Wrap" />
                                                 <TextBlock Grid.Row="1"
-                                                           Margin="5,5,5,5"
+                                                           Margin="10,5,5,5"
                                                            Visibility="{Binding Converter={StaticResource n2vi}, Path=Exe1}">
                                                     No Executable Found - Choose one with the attach button!
                                                 </TextBlock>
                                                 <Button Width="150"
                                                         Click="ManualLauncher"
+                                                        HorizontalAlignment="Right"
                                                         Style="{DynamicResource MaterialDesignToolButton}"
                                                         Tag="{Binding Title}"
                                                         Visibility="{Binding Converter={StaticResource n2vi}, Path=Exe1}">
@@ -106,6 +107,7 @@
                                                     </RadioButton.Content>
                                                 </RadioButton>
                                                 <RadioButton Grid.Row="2"
+                                                             Margin="5,5,5,5"
                                                              Checked="RadioButton_Selected"
                                                              Tag="{Binding Exe2}"
                                                              Visibility="{Binding Converter={StaticResource n2v}, Path=Exe2}">
@@ -116,6 +118,7 @@
                                                     </RadioButton.Content>
                                                 </RadioButton>
                                                 <RadioButton Grid.Row="3"
+                                                             Margin="5,5,5,5"
                                                              Checked="RadioButton_Selected"
                                                              Tag="{Binding Exe3}"
                                                              Visibility="{Binding Converter={StaticResource n2v}, Path=Exe3}">
@@ -126,6 +129,7 @@
                                                     </RadioButton.Content>
                                                 </RadioButton>
                                                 <RadioButton Grid.Row="4"
+                                                             Margin="5,5,5,5"
                                                              Checked="RadioButton_Selected"
                                                              Tag="{Binding Exe4}"
                                                              Visibility="{Binding Converter={StaticResource n2v}, Path=Exe4}">
@@ -136,6 +140,7 @@
                                                     </RadioButton.Content>
                                                 </RadioButton>
                                                 <RadioButton Grid.Row="5"
+                                                             Margin="5,5,5,5"
                                                              Checked="RadioButton_Selected"
                                                              Tag="{Binding Exe5}"
                                                              Visibility="{Binding Converter={StaticResource n2v}, Path=Exe5}">
@@ -146,6 +151,7 @@
                                                     </RadioButton.Content>
                                                 </RadioButton>
                                                 <RadioButton Grid.Row="6"
+                                                             Margin="5,5,5,5"
                                                              Checked="RadioButton_Selected"
                                                              Tag="{Binding Exe6}"
                                                              Visibility="{Binding Converter={StaticResource n2v}, Path=Exe6}">
