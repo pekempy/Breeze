@@ -11,12 +11,12 @@ This isn't designed to be a competitor to steam, or any other game launcher. I j
 - Switch the theme to a dark theme
 - Changing primary/accent colour from settings menu
 - Built in browser to find images for each of the views and download them easier
+- Scan the computer for games and semi-automate adding them
 
 #### Planned updates:
-- Scan the computer for games and semi-automate adding them
 - Possibly a category view if it's feasible
 - Optimise loading times for switching views etc.
 
-
+[Changelog](https://github.com/pekempy/Breeze/blob/master/Changelog.md)
 
 © 2018 [Peter Kemp](https://github.com/Pekempy) & [John Campbell](https://github.com/JohnSandshrew) 
