@@ -159,7 +159,6 @@ namespace GameLauncher.Views
                 string fileNameIcon = ai.AutoDownloadImages(title, "icon");
                 string fileNamePoster = ai.AutoDownloadImages(title, "poster");
                 string fileNameBanner = ai.AutoDownloadImages(title, "banner");
-                //Need to create shortcut properly - take code from other file
                 string icon = fileNameIcon;
                 string poster = fileNamePoster;
                 string banner = fileNameBanner;

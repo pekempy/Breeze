@@ -28,7 +28,7 @@
                               Source="{Binding ExesOC}" />
     </Page.Resources>
     <materialDesign:DialogHost x:Name="ExeSelectionDialog"
-                               materialDesign:ThemeAssist.Theme="Inherit"
+                               DialogTheme="Inherit"
                                CloseOnClickAway="False"
                                IsOpen="False"
                                Visibility="Visible">

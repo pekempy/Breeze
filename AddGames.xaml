@@ -11,13 +11,13 @@
       d:DataContext="{d:DesignInstance Type=ViewModels:SettingsViewModel}"
       d:DesignHeight="450"
       d:DesignWidth="800"
-      materialDesign:ThemeAssist.Theme="Inherit"
       FontFamily="{StaticResource MaterialDesignFont}"
       TextElement.FontSize="13"
       TextElement.FontWeight="Regular"
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       TextOptions.TextFormattingMode="Ideal"
       TextOptions.TextRenderingMode="Auto"
+      materialDesign:ThemeAssist.Theme="Inherit"
       mc:Ignorable="d">
     <Page.Resources>
         <ResourceDictionary>
@@ -36,14 +36,14 @@
         </ResourceDictionary>
     </Page.Resources>
     <materialDesign:DialogHost x:Name="AddGameDialog"
-                               materialDesign:ThemeAssist.Theme="Inherit"
+                               DialogTheme="Inherit"
                                CloseOnClickAway="False"
                                IsOpen="False"
                                Visibility="Visible">
         <materialDesign:DialogHost.DialogContent>
             <!--  Dialog for adding games  -->
             <Border Background="{DynamicResource MaterialDesignPaper}" CornerRadius="5 5 5 5">
-                <materialDesign:DialogHost materialDesign:ThemeAssist.Theme="Inherit" Identifier="RootDialog">
+                <materialDesign:DialogHost DialogTheme="Inherit" Identifier="RootDialog">
                     <Grid Width="500" Margin="0,0,-3,4">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="60" />

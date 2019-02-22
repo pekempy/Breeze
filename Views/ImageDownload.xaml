@@ -19,7 +19,7 @@
                         Executed="QwantBrowse" />
     </Page.CommandBindings>
     <materialDesign:DialogHost x:Name="DownloadDialog"
-                               materialDesign:ThemeAssist.Theme="Inherit"
+                               DialogTheme="Inherit"
                                CloseOnClickAway="False"
                                IsOpen="False"
                                Visibility="Visible">
