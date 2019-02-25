@@ -28,6 +28,22 @@ namespace GameLauncher.Views
             MainWindow.OpenExeSearchDialog();
         }
 
+        public void CleanLibrary(object sender, RoutedEventArgs e)
+        {
+            bool dialogResult = false;
+            //Show dialog to confirm the user wants to delete all games
+
+            if (dialogResult == true)
+            {
+                Directory.Delete(@"Resources/img/", true);
+                File.Delete(@"Resources/GamesList.txt");
+            }
+            else
+            {
+                //Close dialog
+            }
+        }
+
         public SettingsView()
         {
             InitializeComponent();
@@ -222,10 +238,6 @@ namespace GameLauncher.Views
         {
             Properties.Settings.Default.Save();
         }
-
-        internal static void Show()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

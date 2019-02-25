@@ -11,6 +11,13 @@
              d:DataContext="{d:DesignInstance Type=ViewModels:SettingsViewModel}"
              d:DesignHeight="300"
              d:DesignWidth="300"
+             materialDesign:ThemeAssist.Theme="Inherit"
+             FontFamily="{StaticResource MaterialDesignFont}"
+             TextElement.FontSize="13"
+             TextElement.FontWeight="Regular"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
              mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="b2v" />
@@ -52,12 +59,17 @@
                              HorizontalAlignment="Center"
                              VerticalAlignment="Center"
                              Content="THEMES"
-                             IsChecked="True"
+                             IsChecked="False"
                              Style="{StaticResource MaterialDesignTabRadioButton}" />
                 <RadioButton Name="GenreBtn"
                              Margin="4"
                              Content="GENRES"
                              IsChecked="False"
+                             Style="{StaticResource MaterialDesignTabRadioButton}" />
+                <RadioButton Name="LibraryBtn"
+                             Margin="4"
+                             Content="LIBRARY"
+                             IsChecked="True"
                              Style="{StaticResource MaterialDesignTabRadioButton}" />
             </StackPanel>
         </materialDesign:ColorZone>
@@ -414,16 +426,6 @@
                                           Unchecked="FabColour_Unchecked" />
                         </StackPanel>
                     </Grid>
-                    <StackPanel>
-                        <Button 
-                                Width="150"
-                                Margin="0,10,0,10"
-                                HorizontalAlignment="Left"
-                                Click="SearchForGames"
-                                ToolTip="Returns all shortcuts in start menu to console">
-                            Search Games
-                        </Button>
-                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </Grid>
@@ -509,6 +511,66 @@
                     </ItemsControl>
                 </StackPanel>
             </ScrollViewer>
+        </Grid>
+        <Grid Name="LibraryBlock"
+              Grid.RowSpan="6"
+              Grid.ColumnSpan="4"
+              MaxHeight="1080"
+              Margin="10,60,10,10"
+              ScrollViewer.CanContentScroll="True"
+              Visibility="{Binding Path=IsChecked, ElementName=LibraryBtn, Converter={StaticResource b2v}}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.RowSpan="5">
+                <Button Grid.Row="1"
+                        Width="150"
+                        Margin="0,10,0,10"
+                        HorizontalAlignment="Left"
+                        Click="SearchForGames"
+                        ToolTip="Returns all shortcuts in start menu to console">
+                    Search Games
+                </Button>
+                <Button Grid.Row="2"
+                        Width="150"
+                        Margin="0,10,0,10"
+                        HorizontalAlignment="Left"
+                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                        Content="Clean Library">
+                    <Button.CommandParameter>
+                        <Grid Width="500" Height="300">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="3*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock FontSize="20" Text="Are you sure?" />
+                                <TextBlock FontSize="14" Text="Are you sure you want to delete all games?" />
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Grid.Row="2"
+                                            Grid.Column="1"
+                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                            Content="No" />
+                                    <Button Grid.Row="2"
+                                            Grid.Column="3"
+                                            Click="CleanLibrary"
+                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                            Content="Yes" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Button.CommandParameter>
+                </Button>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>
