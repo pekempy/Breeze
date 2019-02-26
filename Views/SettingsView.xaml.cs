@@ -30,8 +30,9 @@ namespace GameLauncher.Views
 
         public void CleanLibrary(object sender, RoutedEventArgs e)
         {
-                Directory.Delete(@"Resources/img/", true);
-                File.Delete(@"Resources/GamesList.txt");
+            Directory.Delete(@"Resources/img/", true);
+            File.Delete(@"Resources/GamesList.txt");
+            Directory.CreateDirectory(@"/Resources/img/");
         }
 
         public SettingsView()
