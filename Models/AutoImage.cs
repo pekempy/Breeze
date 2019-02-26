@@ -18,8 +18,9 @@ namespace GameLauncher.Models
         {
             string url = "https://www.qwant.com/?q=" + title.Replace(" ", "%20") + "%20" + type.Replace(" ", "%20") + "&t=images";
             HtmlWeb hw = new HtmlWeb();
-            HtmlDocument doc = hw.Load(url);
-            try {
+            try
+            {
+                HtmlDocument doc = hw.Load(url);
                 foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//img"))
                 {
                     string imgValue = link.GetAttributeValue("src", string.Empty);
