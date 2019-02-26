@@ -16,6 +16,7 @@ namespace GameLauncher.Models
         private MainWindow mw = ((MainWindow)Application.Current.MainWindow);
         public List<string> steamGameDirs = new List<string>();
         public List<string> originGameDirs = new List<string>();
+        public List<string> uplayGamedirs = new List<string>();
         public ObservableCollection<GameExecutables> Exes { get; set; }
         private ObservableCollection<GameExecutables> exes = new ObservableCollection<GameExecutables>();
         public string title;
@@ -29,6 +30,7 @@ namespace GameLauncher.Models
             SearchSteam();
             SearchOrigin();
             SearchUPlay();
+            SearchEpic();
             Exes = exes;
         }
         
@@ -278,6 +280,68 @@ namespace GameLauncher.Models
         }
 
         public void SearchUPlay()
+        {
+            uplayGamedirs.Clear();
+            string regkey = "SOFTWARE\\WOW6432Node\\Ubisoft\\Launcher\\Installs";
+            RegistryKey key = Registry.LocalMachine.OpenSubKey(regkey);
+            foreach (string ksubKey in key.GetSubKeyNames())
+            {
+                using (RegistryKey subKey = key.OpenSubKey(ksubKey))
+                {
+                    installLocation = subKey.GetValue("InstallDir").ToString();
+                    string[] splitTitle = installLocation.Split('/');
+                    int largest = splitTitle.Length;
+                    largest = largest - 2;
+                    title = splitTitle[largest];
+                    uplayGamedirs.Add(installLocation);
+                }
+            }
+            foreach(string item in uplayGamedirs)
+            {
+                string GameTitle;
+                string Exe1;
+                string Exe2;
+                string Exe3;
+                string Exe4;
+                string Exe5;
+                string Exe6;
+                string[] Executables = new string[0];
+                GameTitle = null; Exe1 = null; Exe2 = null; Exe3 = null; Exe4 = null; Exe5 = null; Exe6 = null;
+                string[] splitTitle = item.Split('/');
+                int largest = splitTitle.Length;
+                largest = largest - 2;
+                title = splitTitle[largest];
+                GameTitle = title;
+                Console.WriteLine("Title: " + GameTitle);
+                Console.WriteLine("Directory: " + item);
+                string[] executables = Directory.GetFiles(item, "*.exe");
+                int num = 1;
+                foreach (var ex in executables)
+                {
+                    Console.WriteLine("Executable: " + ex);
+                    if (num == 1) { Exe1 = ex; }
+                    if (num == 2) { Exe2 = ex; }
+                    if (num == 3) { Exe3 = ex; }
+                    if (num == 4) { Exe4 = ex; }
+                    if (num == 5) { Exe5 = ex; }
+                    if (num == 6) { Exe6 = ex; }
+                    num++;
+                }
+                exes.Add(new GameExecutables
+                {
+                    Title = GameTitle,
+                    Exe1 = Exe1,
+                    Exe2 = Exe2,
+                    Exe3 = Exe3,
+                    Exe4 = Exe4,
+                    Exe5 = Exe5,
+                    Exe6 = Exe6,
+
+                });
+            }
+        }
+
+        public void SearchEpic()
         {
 
         }
