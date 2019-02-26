@@ -2,7 +2,7 @@
 
 **Breeze v1.7**
 * Can now search for games in your steam directory, and auto-download images(not accurate)
-* Also the above works for Origin
+* Also the above works for Origin & uPlay
 * Multiple dialogs now obey dark theme if selected
 * Bug fixes 🐛
 
