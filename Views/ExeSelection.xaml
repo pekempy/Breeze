@@ -97,6 +97,7 @@
                                                              Margin="5,5,5,5"
                                                              Checked="RadioButton_Selected"
                                                              Tag="{Binding Exe1}"
+                                                             CommandParameter="{Binding Title}"
                                                              Visibility="{Binding Converter={StaticResource n2v}, Path=Exe1}">
                                                     <RadioButton.Content>
                                                         <TextBlock MinHeight="20"
@@ -110,6 +111,7 @@
                                                              Margin="5,5,5,5"
                                                              Checked="RadioButton_Selected"
                                                              Tag="{Binding Exe2}"
+                                                             CommandParameter="{Binding Title}"
                                                              Visibility="{Binding Converter={StaticResource n2v}, Path=Exe2}">
                                                     <RadioButton.Content>
                                                         <TextBlock MinHeight="20"
@@ -121,6 +123,7 @@
                                                              Margin="5,5,5,5"
                                                              Checked="RadioButton_Selected"
                                                              Tag="{Binding Exe3}"
+                                                             CommandParameter="{Binding Title}"
                                                              Visibility="{Binding Converter={StaticResource n2v}, Path=Exe3}">
                                                     <RadioButton.Content>
                                                         <TextBlock MinHeight="20"
@@ -132,6 +135,7 @@
                                                              Margin="5,5,5,5"
                                                              Checked="RadioButton_Selected"
                                                              Tag="{Binding Exe4}"
+                                                             CommandParameter="{Binding Title}"
                                                              Visibility="{Binding Converter={StaticResource n2v}, Path=Exe4}">
                                                     <RadioButton.Content>
                                                         <TextBlock MinHeight="20"
@@ -143,6 +147,7 @@
                                                              Margin="5,5,5,5"
                                                              Checked="RadioButton_Selected"
                                                              Tag="{Binding Exe5}"
+                                                             CommandParameter="{Binding Title}"
                                                              Visibility="{Binding Converter={StaticResource n2v}, Path=Exe5}">
                                                     <RadioButton.Content>
                                                         <TextBlock MinHeight="20"
@@ -154,6 +159,7 @@
                                                              Margin="5,5,5,5"
                                                              Checked="RadioButton_Selected"
                                                              Tag="{Binding Exe6}"
+                                                             CommandParameter="{Binding Title}"
                                                              Visibility="{Binding Converter={StaticResource n2v}, Path=Exe6}">
                                                     <RadioButton.Content>
                                                         <TextBlock MinHeight="20"

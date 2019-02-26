@@ -15,13 +15,18 @@ namespace GameLauncher.Models
     {
         private MainWindow mw = ((MainWindow)Application.Current.MainWindow);
         public List<string> steamGameDirs = new List<string>();
+        public List<string> originGameDirs = new List<string>();
         public ObservableCollection<GameExecutables> Exes { get; set; }
         private ObservableCollection<GameExecutables> exes = new ObservableCollection<GameExecutables>();
+        public string title;
+        public string publisher;
+        public string installLocation;
+        public bool duplicate = false;
 
         public void SearchForShortcuts()
         {
             exes.Clear();
-            SearchSteam();
+            //SearchSteam();
             SearchOrigin();
             SearchUPlay();
             Exes = exes;
@@ -175,7 +180,101 @@ namespace GameLauncher.Models
         
         public void SearchOrigin()
         {
+            originGameDirs.Clear();
+            string regkey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
+            RegistryKey key = Registry.LocalMachine.OpenSubKey(regkey);
+            bool PublisherFound = false;
+            foreach (string ksubKey in key.GetSubKeyNames())
+            {
+                using (RegistryKey subKey = key.OpenSubKey(ksubKey))
+                {
+                    foreach (string subkeyname in subKey.GetValueNames())
+                    {
+                        PublisherFound = false;
+                        if (subkeyname.ToString() == "Publisher")
+                        {
+                            publisher = subKey.GetValue("Publisher").ToString();
+                            title = subKey.GetValue("DisplayName").ToString();
+                            PublisherFound = true;
+                        }
+                        if (subkeyname.ToString() == "InstallLocation")
+                        {
+                            installLocation = subKey.GetValue("InstallLocation").ToString();
+                        }
+                        if (PublisherFound == true)
+                        {
+                            if (publisher.Contains("Electronic Arts") && !title.Contains("Origin"))
+                            {
+                                if (originGameDirs.Count > 0)
+                                {
+                                    foreach (var item in originGameDirs)
+                                    {
+                                        if (item.Contains(title)) { duplicate = true; }
+                                        else
+                                        {
+                                            duplicate = false;
+                                        }
+                                    }
+                                }
+                                if (duplicate == false) {
+                                    Console.WriteLine(title + " : " + publisher + " | " + installLocation);
+                                    originGameDirs.Add(installLocation);
+                                }
+                                else if (duplicate == true)
+                                {
+                                    Console.WriteLine("Duplicate");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            foreach (string item in originGameDirs)
+            {
+                string GameTitle;
+                string Exe1;
+                string Exe2;
+                string Exe3;
+                string Exe4;
+                string Exe5;
+                string Exe6;
+                string[] Executables = new string[0];
+                    GameTitle = null; Exe1 = null; Exe2 = null; Exe3 = null; Exe4 = null; Exe5 = null; Exe6 = null;
+                    string[] splitTitle = item.Split('\\');
+                    int largest = splitTitle.Length;
+                    largest = largest - 2;
+                    title = splitTitle[largest];
+                    GameTitle = title;
+                    Console.WriteLine("Title: " + GameTitle);
+                    Console.WriteLine("Directory: " + item);
+                    string[] executables = Directory.GetFiles(item, "*.exe");
+                    int num = 1;
+                    foreach (var ex in executables)
+                    {
+                        //add "ex" to Executables[] if poss? lol
+                        Console.WriteLine("Executable: " + ex);
+                        if (num == 1) { Exe1 = ex; }
+                        if (num == 2) { Exe2 = ex; }
+                        if (num == 3) { Exe3 = ex; }
+                        if (num == 4) { Exe4 = ex; }
+                        if (num == 5) { Exe5 = ex; }
+                        if (num == 6) { Exe6 = ex; }
+                        num++;
+                    }
+                        exes.Add(new GameExecutables
+                        {
+                            Title = GameTitle,
+                            Exe1 = Exe1,
+                            Exe2 = Exe2,
+                            Exe3 = Exe3,
+                            Exe4 = Exe4,
+                            Exe5 = Exe5,
+                            Exe6 = Exe6,
 
+                        });
+                }
+
+            
         }
 
         public void SearchUPlay()

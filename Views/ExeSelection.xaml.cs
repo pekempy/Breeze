@@ -32,6 +32,9 @@ namespace GameLauncher.Views
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
         private bool matchFound = false;
         private bool matchExe = false;
+        public string title;
+        public string selectedExe;
+
         public ExeSelection()
         {
             es = this;
@@ -61,10 +64,15 @@ namespace GameLauncher.Views
         }
         private void RadioButton_Selected(object sender, RoutedEventArgs e)
         {
-                string selectedExe = ((RadioButton)sender).Tag.ToString();
-                string title = selectedExe.Substring(selectedExe.IndexOf("\\common\\"));
-                string[] titlex = title.Split('\\');
-                title = titlex[2].ToString();
+            try
+            {
+                selectedExe = ((RadioButton)sender).Tag.ToString();
+                title = ((RadioButton)sender).CommandParameter.ToString();
+            }
+            catch {
+                Console.WriteLine("Failed");
+            }
+
             for (int i = 0; i < ExeList.Count; i++)
             {
                 if (ExeList[i].Contains(title + ";"))
@@ -196,7 +204,7 @@ namespace GameLauncher.Views
             shortcut.WorkingDirectory = "C:\\App";
             shortcut.IconLocation = exe;
             shortcut.Save();
-            return installPath;
+            return installPath + "\\Resources\\shortcuts" + "\\" + title + ".lnk";
         }
     }
     
