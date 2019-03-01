@@ -80,7 +80,7 @@ namespace GameLauncher
                         }
                         catch (Exception ex)
                         {
-                            Trace.WriteLine("AddGameOnClick: " + ex.Message);
+                            Trace.WriteLine(DateTime.Now + ": AddGameOnClick: " + ex.Message);
                         }
                         ClearGenreBoxes();
                         clearFields();
@@ -108,7 +108,7 @@ namespace GameLauncher
                     }
                     catch (Exception ex)
                     {
-                        Trace.WriteLine("AddGameOnClick2: " + ex.Message);
+                        Trace.WriteLine(DateTime.Now + ": AddGameOnClick2: " + ex.Message);
                     }
                     ClearGenreBoxes();
                     clearFields();
@@ -165,7 +165,7 @@ namespace GameLauncher
                         genrePlaceHolder += cb.Content.ToString() + ";";
                     }
                 }
-                catch (Exception ex) { Trace.WriteLine("AddGenre: " + ex); }
+                catch (Exception ex) { Trace.WriteLine(DateTime.Now + ": AddGenre: " + ex); }
             }
             NewGameGenre.Text = genrePlaceHolder;
             return;
@@ -191,7 +191,7 @@ namespace GameLauncher
                             cb.IsChecked = false;
                         }
                     }
-                    catch (Exception e) { Trace.WriteLine("ClearGenre: " + e); }
+                    catch (Exception e) { Trace.WriteLine(DateTime.Now + ": ClearGenre: " + e); }
                 }
             }
         }

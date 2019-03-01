@@ -12,7 +12,7 @@ namespace GameLauncher
     {
         public void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs args)
         {
-            Trace.WriteLine("Fatal Unhandled Exception:  " + args.Exception);
+            Trace.WriteLine(DateTime.Now + ": Fatal Unhandled Exception:  " + args.Exception);
             args.Handled = true;
             Environment.Exit(0);
         }

@@ -78,7 +78,7 @@ namespace GameLauncher.Views
                             button.Height = 100;
                         }
                     }
-                    catch (Exception ex) { Trace.WriteLine("ImageDownloadLoaded: " + ex); }
+                    catch (Exception ex) { Trace.WriteLine(DateTime.Now + ": ImageDownloadLoaded: " + ex); }
                 }
             }
         }

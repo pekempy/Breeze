@@ -71,7 +71,7 @@ namespace GameLauncher.Views
                 title = ((RadioButton)sender).CommandParameter.ToString();
             }
             catch {
-                Trace.WriteLine("Couldn't Select?");
+                Trace.WriteLine(DateTime.Now + ": Couldn't Select?");
             }
 
             for (int i = 0; i < ExeList.Count; i++)
@@ -83,7 +83,7 @@ namespace GameLauncher.Views
                     {
                         ExeList[i] = title + ";" + selectedExe;
                     }
-                    else { Trace.WriteLine("RadioButtonSelected-Dupe"); }
+                    else { Trace.WriteLine(DateTime.Now + ": RadioButtonSelected-Dupe"); }
                     matchFound = false;
                 }
             }
@@ -130,7 +130,7 @@ namespace GameLauncher.Views
                         {
                             ExeList[i] = newgame;
                         }
-                        else { Trace.WriteLine("ManualLauncher - Duplicate"); }
+                        else { Trace.WriteLine(DateTime.Now + ": ManualLauncher - Duplicate"); }
                         matchFound = false;
                     }
                 }

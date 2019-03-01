@@ -222,7 +222,7 @@ namespace GameLauncher.Models
                                 }
                                 else if (duplicate == true)
                                 {
-                                    Trace.WriteLine("ExeSearch Duplicate");
+                                    Trace.WriteLine(DateTime.Now + ": ExeSearch Duplicate");
                                 }
                             }
                         }

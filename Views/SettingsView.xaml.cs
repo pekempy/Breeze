@@ -162,7 +162,7 @@ namespace GameLauncher.Views
             }
             catch (Exception ex)
             {
-                Trace.WriteLine("AddNewGenre: " + ex.Message);
+                Trace.WriteLine(DateTime.Now + ": AddNewGenre: " + ex.Message);
             }
             lag.LoadGenres();
             MainWindow.RefreshGames();
@@ -185,7 +185,7 @@ namespace GameLauncher.Views
                     }
                     catch (Exception ex)
                     {
-                        Trace.WriteLine("DeleteGenre: " + ex.ToString());
+                        Trace.WriteLine(DateTime.Now + ": DeleteGenre: " + ex.ToString());
                     }
                 }
             }
@@ -213,7 +213,7 @@ namespace GameLauncher.Views
                         }
                         catch (Exception ex2)
                         {
-                            Trace.WriteLine("DeleteGenre2: "+ex2.ToString());
+                            Trace.WriteLine(DateTime.Now + ": DeleteGenre2: "+ex2.ToString());
                         }
                     }
                 }

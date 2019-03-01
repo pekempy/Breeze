@@ -46,7 +46,7 @@ namespace GameLauncher.ViewModels
                     }
                     catch (Exception e)
                     {
-                        Trace.WriteLine("RemoveGameFromFile: "+ e.ToString());
+                        Trace.WriteLine(DateTime.Now + ": RemoveGameFromFile: "+ e.ToString());
                     }
                 }
             }
@@ -75,7 +75,7 @@ namespace GameLauncher.ViewModels
                     }
                     catch (Exception e)
                     {
-                        Trace.WriteLine("EditGameInfile:" + e.ToString());
+                        Trace.WriteLine(DateTime.Now + ": EditGameInfile:" + e.ToString());
                     }
                 }
             }
@@ -108,7 +108,7 @@ namespace GameLauncher.ViewModels
                     }
                     catch (Exception e)
                     {
-                        Trace.WriteLine("RemoveGenreFromFile: " + e.ToString());
+                        Trace.WriteLine(DateTime.Now + ": RemoveGenreFromFile: " + e.ToString());
                     }
                 }
             }

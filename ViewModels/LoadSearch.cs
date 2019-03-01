@@ -49,7 +49,7 @@ namespace GameLauncher.ViewModels
                 }
                 SearchList = searchlist;
             }
-            catch (Exception e) { Trace.WriteLine("SearchLinks: " + e); }
+            catch (Exception e) { Trace.WriteLine(DateTime.Now + ": SearchLinks: " + e); }
         }
     }
 }

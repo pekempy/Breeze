@@ -55,7 +55,7 @@ namespace GameLauncher
             DataContext = posterViewModel;
             isDownloadOpen = false;
             LoadSettings();
-            Trace.WriteLine("New Session started");
+            Trace.WriteLine(DateTime.Now + ": New Session started");
 
         }
         public void MakeDirectories()
@@ -191,7 +191,7 @@ namespace GameLauncher
                     DialogImageDL.DownloadDialog.IsOpen = false;
                     isDownloadOpen = false;
                 }
-                else { Trace.WriteLine("-System unsure which dialog currently open"); }
+                else { Trace.WriteLine(DateTime.Now + ": -System unsure which dialog currently open"); }
             }
         }
 
@@ -208,7 +208,7 @@ namespace GameLauncher
                         client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
                         client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
                         SetPath(DLGameTitle, DLImgType, dialogOpen);
-                    }catch(Exception e) { Trace.WriteLine("DownloadImage:" + e); MessageBox.Show("Sorry! That's failed, Try again or try another image"); }
+                    }catch(Exception e) { Trace.WriteLine(DateTime.Now + ": DownloadImage:" + e); MessageBox.Show("Sorry! That's failed, Try again or try another image"); }
                 } }
             else if (File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png")){
                 File.Delete(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png");
@@ -223,7 +223,7 @@ namespace GameLauncher
                         client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
                         SetPath(DLGameTitle, DLImgType, dialogOpen);
                     }
-                    catch (Exception e) { Trace.WriteLine("DownloadImage2: " + e); }
+                    catch (Exception e) { Trace.WriteLine(DateTime.Now + ": DownloadImage2: " + e); }
                 }
             }
         }
@@ -290,6 +290,7 @@ namespace GameLauncher
         //Poster button
         private void PosterButton_OnClick(object sender, RoutedEventArgs e)
         {
+            Trace.WriteLine(DateTime.Now + ": Poster View Active");
             PosterViewActive();
         }
 
@@ -306,6 +307,7 @@ namespace GameLauncher
         //Banner button
         private void BannerButton_OnClick(object sender, RoutedEventArgs e)
         {
+            Trace.WriteLine(DateTime.Now + ": Banner View Active");
             BannerViewActive();
         }
 
@@ -322,6 +324,7 @@ namespace GameLauncher
         //List button
         private void ListButton_OnClick(object sender, RoutedEventArgs e)
         {
+            Trace.WriteLine(DateTime.Now + ": List View Active");
             ListViewActive();
         }
 
@@ -338,6 +341,7 @@ namespace GameLauncher
         //Settings button
         private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
         {
+            Trace.WriteLine(DateTime.Now + ": Settings View Active");
             SettingsViewActive();
         }
 
