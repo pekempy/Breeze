@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
+using System.Security.Principal;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using System.DirectoryServices.AccountManagement;
 using System.Windows;
- 
+using System.Collections;
+
 namespace GameLauncher.Models
 {
     public class ExeSearch
@@ -22,6 +23,7 @@ namespace GameLauncher.Models
         public string title;
         public string publisher;
         public string installLocation;
+        public string exe;
         public bool duplicate = false;
 
         public void SearchForShortcuts()
@@ -31,9 +33,10 @@ namespace GameLauncher.Models
             SearchOrigin();
             SearchUPlay();
             SearchEpic();
+            SearchBattle();
             Exes = exes;
         }
-        
+
         public void UpdateObsCol(string title, string exe)
         {
             var item = exes.FirstOrDefault(i => i.Title == title);
@@ -57,7 +60,7 @@ namespace GameLauncher.Models
             }
             else { return false; }
         }
-        
+
         public void SearchSteam()
         {
             steamGameDirs.Clear();
@@ -99,7 +102,7 @@ namespace GameLauncher.Models
                     }
                 }
             }
-            foreach(string k64subKey in key64.GetSubKeyNames())
+            foreach (string k64subKey in key64.GetSubKeyNames())
             {
                 using (RegistryKey subKey = key64.OpenSubKey(k64subKey))
                 {
@@ -113,7 +116,7 @@ namespace GameLauncher.Models
                         {
                             Console.WriteLine("64:  " + item);
                             Match match = Regex.Match(item, driveRegex);
-                            if(item != string.Empty && match.Success)
+                            if (item != string.Empty && match.Success)
                             {
                                 string matched = match.ToString();
                                 string item2 = item.Substring(item.IndexOf(matched));
@@ -127,7 +130,7 @@ namespace GameLauncher.Models
                 }
             }
 
-            foreach(string item in steamGameDirs)
+            foreach (string item in steamGameDirs)
             {
                 string GameTitle;
                 string Exe1;
@@ -140,7 +143,7 @@ namespace GameLauncher.Models
                 string[] steamGames = Directory.GetDirectories(item);
                 foreach (var dir in steamGames)
                 {
-                    GameTitle = null;  Exe1 = null; Exe2 = null; Exe3 = null; Exe4 = null; Exe5 = null; Exe6 = null;
+                    GameTitle = null; Exe1 = null; Exe2 = null; Exe3 = null; Exe4 = null; Exe5 = null; Exe6 = null;
                     string title = dir.Substring(dir.IndexOf("\\common\\"));
                     string[] titlex = title.Split('\\');
                     title = titlex[2].ToString();
@@ -171,15 +174,15 @@ namespace GameLauncher.Models
                             Exe3 = Exe3,
                             Exe4 = Exe4,
                             Exe5 = Exe5,
-                            Exe6 = Exe6,
+                            Exe6 = Exe6
 
                         });
                     }
                 }
-                    
+
             }
         }
-        
+
         public void SearchOrigin()
         {
             originGameDirs.Clear();
@@ -218,7 +221,8 @@ namespace GameLauncher.Models
                                         }
                                     }
                                 }
-                                if (duplicate == false) {
+                                if (duplicate == false)
+                                {
                                     Console.WriteLine(title + " : " + publisher + " | " + installLocation);
                                     originGameDirs.Add(installLocation);
                                 }
@@ -241,42 +245,42 @@ namespace GameLauncher.Models
                 string Exe5;
                 string Exe6;
                 string[] Executables = new string[0];
-                    GameTitle = null; Exe1 = null; Exe2 = null; Exe3 = null; Exe4 = null; Exe5 = null; Exe6 = null;
-                    string[] splitTitle = item.Split('\\');
-                    int largest = splitTitle.Length;
-                    largest = largest - 2;
-                    title = splitTitle[largest];
-                    GameTitle = title;
-                    Console.WriteLine("Title: " + GameTitle);
-                    Console.WriteLine("Directory: " + item);
-                    string[] executables = Directory.GetFiles(item, "*.exe");
-                    int num = 1;
-                    foreach (var ex in executables)
-                    {
-                        //add "ex" to Executables[] if poss? lol
-                        Console.WriteLine("Executable: " + ex);
-                        if (num == 1) { Exe1 = ex; }
-                        if (num == 2) { Exe2 = ex; }
-                        if (num == 3) { Exe3 = ex; }
-                        if (num == 4) { Exe4 = ex; }
-                        if (num == 5) { Exe5 = ex; }
-                        if (num == 6) { Exe6 = ex; }
-                        num++;
-                    }
-                        exes.Add(new GameExecutables
-                        {
-                            Title = GameTitle,
-                            Exe1 = Exe1,
-                            Exe2 = Exe2,
-                            Exe3 = Exe3,
-                            Exe4 = Exe4,
-                            Exe5 = Exe5,
-                            Exe6 = Exe6,
-
-                        });
+                GameTitle = null; Exe1 = null; Exe2 = null; Exe3 = null; Exe4 = null; Exe5 = null; Exe6 = null;
+                string[] splitTitle = item.Split('\\');
+                int largest = splitTitle.Length;
+                largest = largest - 2;
+                title = splitTitle[largest];
+                GameTitle = title;
+                Console.WriteLine("Title: " + GameTitle);
+                Console.WriteLine("Directory: " + item);
+                string[] executables = Directory.GetFiles(item, "*.exe");
+                int num = 1;
+                foreach (var ex in executables)
+                {
+                    //add "ex" to Executables[] if poss? lol
+                    Console.WriteLine("Executable: " + ex);
+                    if (num == 1) { Exe1 = ex; }
+                    if (num == 2) { Exe2 = ex; }
+                    if (num == 3) { Exe3 = ex; }
+                    if (num == 4) { Exe4 = ex; }
+                    if (num == 5) { Exe5 = ex; }
+                    if (num == 6) { Exe6 = ex; }
+                    num++;
                 }
+                exes.Add(new GameExecutables
+                {
+                    Title = GameTitle,
+                    Exe1 = Exe1,
+                    Exe2 = Exe2,
+                    Exe3 = Exe3,
+                    Exe4 = Exe4,
+                    Exe5 = Exe5,
+                    Exe6 = Exe6
 
-            
+                });
+            }
+
+
         }
 
         public void SearchUPlay()
@@ -296,7 +300,7 @@ namespace GameLauncher.Models
                     uplayGamedirs.Add(installLocation);
                 }
             }
-            foreach(string item in uplayGamedirs)
+            foreach (string item in uplayGamedirs)
             {
                 string GameTitle;
                 string Exe1;
@@ -335,15 +339,77 @@ namespace GameLauncher.Models
                     Exe3 = Exe3,
                     Exe4 = Exe4,
                     Exe5 = Exe5,
-                    Exe6 = Exe6,
-
+                    Exe6 = Exe6
                 });
             }
         }
 
         public void SearchEpic()
         {
+            string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            DirectoryInfo dir = new DirectoryInfo(desktop);
+            string epicGamesDir = null;
+            string epicRegistry = "SOFTWARE\\WOW6432Node\\EpicGames\\Unreal Engine";
+            RegistryKey key = Registry.LocalMachine.OpenSubKey(epicRegistry);
 
+            foreach (string ksubkey in key.GetSubKeyNames())
+            {
+                using (RegistryKey subkey = key.OpenSubKey(ksubkey))
+                {
+                    epicGamesDir = subkey.GetValue("InstalledDirectory").ToString();
+                    epicGamesDir = epicGamesDir.Substring(0, epicGamesDir.Length - 4);
+                }
+            }
+            foreach (var file in dir.GetFiles("*.url"))
+            {
+                string url = desktop + "\\" + file.ToString();
+                string[] l = File.ReadAllLines(url);
+                foreach (var item in l)
+                {
+                    if (item.Contains("URL=com.epicgames.launcher://apps/"))
+                    {
+                        string gameName = file.ToString().Substring(0, file.ToString().Length - 4);
+                        string shortcut = url;
+                        string newshortcut = epicGamesDir + gameName + ".url";
+                        File.Copy(url, newshortcut, true);
+                        exes.Add(new GameExecutables
+                        {
+                            Title = gameName,
+                            Exe1 = newshortcut
+                        });
+                    }
+                }
+            }
+        }
+
+        public void SearchBattle()
+        {
+            string usersid = UserPrincipal.Current.Sid.ToString();
+            string reg = usersid + "\\Software\\Microsoft\\Windows\\CurrentVersion\\UFH";
+            RegistryKey key = Registry.Users.OpenSubKey(reg);
+            foreach (string ksubkey in key.GetSubKeyNames())
+            {
+                using (RegistryKey subkey = key.OpenSubKey(ksubkey))
+                {
+                    foreach (var value in subkey.GetValueNames())
+                    {
+                        var data = subkey.GetValue(value);
+                        string[] output = ((IEnumerable)data).Cast<object>().Select(x => x.ToString()).ToArray();
+                        if (!output[1].Contains("Battle.net Launcher.exe"))
+                        {
+                            exe = output[1];
+                            title = output[1].Substring(0, output[1].LastIndexOf("\\"));
+                            title = title.Substring(title.LastIndexOf("\\"));
+                            title = title.Substring(1);
+                            exes.Add(new GameExecutables
+                            {
+                                Title = title,
+                                Exe1 = exe
+                            });
+                        }
+                    }
+                }
+            }
         }
     }
 }
