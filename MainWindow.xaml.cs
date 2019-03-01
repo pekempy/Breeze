@@ -99,7 +99,7 @@ namespace GameLauncher
                 File.Delete(appdir + "\\log\\event.log");
                 File.Create(appdir + "\\log\\event.log"); }
             else { File.Create(appdir + "\\log\\event.log"); }
-            TextWriterTraceListener twtl = new TextWriterTraceListener("C:\\Windows\\Temp\\Breeze\\log.log");
+            TextWriterTraceListener twtl = new TextWriterTraceListener(appdir + "\\log\\event.log");
             twtl.TraceOutputOptions = TraceOptions.ThreadId | TraceOptions.DateTime;
             ConsoleTraceListener ctl = new ConsoleTraceListener(false);
             ctl.TraceOutputOptions = TraceOptions.DateTime;

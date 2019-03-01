@@ -30,11 +30,16 @@ namespace GameLauncher.Models
         public void SearchForShortcuts()
         {
             exes.Clear();
-            SearchSteam();
-            SearchOrigin();
-            SearchUPlay();
-            SearchEpic();
-            SearchBattle();
+            try { SearchSteam(); }
+            catch (Exception e) { Trace.WriteLine("SearchSteam Failed: " + e); }
+            try { SearchOrigin(); }
+            catch (Exception e) { Trace.WriteLine("SearchOrigin Failed: " + e); }
+            try { SearchUPlay(); }
+            catch (Exception e) { Trace.WriteLine("SearchUPlay Failed: " + e); }
+            try { SearchEpic(); }
+            catch (Exception e) { Trace.WriteLine("SearchEpic Failed: " + e); }
+            try { SearchBattle(); }
+            catch (Exception e) { Trace.WriteLine("SearchBattleNet Failed: " + e); }
             Exes = exes;
         }
 
