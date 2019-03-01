@@ -2,6 +2,7 @@ using GameLauncher.Models;
 using HtmlAgilityPack;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace GameLauncher.ViewModels
 {
@@ -48,7 +49,7 @@ namespace GameLauncher.ViewModels
                 }
                 SearchList = searchlist;
             }
-            catch (Exception e) { Console.WriteLine("Error: " + e); }
+            catch (Exception e) { Trace.WriteLine("SearchLinks: " + e); }
         }
     }
 }

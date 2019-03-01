@@ -29,12 +29,5 @@ namespace GameLauncher.ViewModels
             GenreListOC = lag.Genres;
         }
         
-        public void LoadList()
-        {
-            for (int i = 0; i < PosterViewOC.Count; i++)
-            {
-                Console.WriteLine(string.Concat(PosterViewOC[i].Title, " | ", PosterViewOC[i].Genre, "|", PosterViewOC[i].Path));
-            }
-        }
     }
 }

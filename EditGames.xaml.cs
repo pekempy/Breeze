@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using IWshRuntimeLibrary;
 using GameLauncher.Properties;
 using MaterialDesignThemes.Wpf;
+using System.Diagnostics;
 
 namespace GameLauncher
 {
@@ -81,7 +82,7 @@ namespace GameLauncher
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine("Exception: " + ex.Message);
+                            Trace.WriteLine("EditGame: " + ex.Message);
                         }
                         clearFields();
                         ClearGenreBoxes();
@@ -97,7 +98,7 @@ namespace GameLauncher
                         MessageBox.Show("That game already exists!");
                     }
                 }
-                catch (Exception ex) { Console.WriteLine("Error message EditGames.xaml.cs: " + ex); }
+                catch (Exception ex) { Trace.WriteLine("EditGame2: " + ex); }
             }
 
         }
@@ -180,7 +181,7 @@ namespace GameLauncher
                         genrePlaceHolder += cb.Content.ToString() + ";";
                     }
                 }
-                catch(Exception exc) { Console.WriteLine("Error: " + exc); }
+                catch(Exception exc) { Trace.WriteLine("EditGenre: " + exc); }
             }
             EditGenre.Text = genrePlaceHolder;
             return;
@@ -210,7 +211,7 @@ namespace GameLauncher
                             cb.IsChecked = false;
                         }
                     }
-                    catch (Exception exce) { Console.WriteLine("Error: " + exce); }
+                    catch (Exception exce) { Trace.WriteLine("CheckGenreBox: " + exce); }
                 }
             }
         }
@@ -234,7 +235,7 @@ namespace GameLauncher
                             }
                         }
                     }
-                    catch(Exception e) { Console.WriteLine("Error: " + e); }
+                    catch(Exception e) { Trace.WriteLine("ClearGenreBox: " + e); }
                 }
             }
         }

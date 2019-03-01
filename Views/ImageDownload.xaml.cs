@@ -2,6 +2,7 @@
 using GameLauncher.ViewModels;
 using MaterialDesignThemes.Wpf;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Net;
 using System.Windows;
@@ -77,7 +78,7 @@ namespace GameLauncher.Views
                             button.Height = 100;
                         }
                     }
-                    catch (Exception ex) { Console.WriteLine("Error: " + ex); }
+                    catch (Exception ex) { Trace.WriteLine("ImageDownloadLoaded: " + ex); }
                 }
             }
         }

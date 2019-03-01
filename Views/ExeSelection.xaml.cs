@@ -20,6 +20,7 @@ using System.IO;
 using IWshRuntimeLibrary;
 using GameLauncher.Properties;
 using MaterialDesignThemes.Wpf;
+using System.Diagnostics;
 
 namespace GameLauncher.Views
 {
@@ -70,7 +71,7 @@ namespace GameLauncher.Views
                 title = ((RadioButton)sender).CommandParameter.ToString();
             }
             catch {
-                Console.WriteLine("Failed");
+                Trace.WriteLine("Couldn't Select?");
             }
 
             for (int i = 0; i < ExeList.Count; i++)
@@ -82,7 +83,7 @@ namespace GameLauncher.Views
                     {
                         ExeList[i] = title + ";" + selectedExe;
                     }
-                    else { Console.WriteLine("Duplicate .exe found"); }
+                    else { Trace.WriteLine("RadioButtonSelected-Dupe"); }
                     matchFound = false;
                 }
             }
@@ -129,7 +130,7 @@ namespace GameLauncher.Views
                         {
                             ExeList[i] = newgame;
                         }
-                        else { Console.WriteLine("A duplicate .exe was found"); }
+                        else { Trace.WriteLine("ManualLauncher - Duplicate"); }
                         matchFound = false;
                     }
                 }
@@ -169,7 +170,6 @@ namespace GameLauncher.Views
             {
                 TextWriter tw = new StreamWriter(@"./Resources/GamesList.txt", true);
                 Guid gameGuid = Guid.NewGuid();
-                Console.WriteLine(item);
                 string[] gameitems = item.Split(';');
                 string title = gameitems[0];
                 string exe = gameitems[1];

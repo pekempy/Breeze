@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using IWshRuntimeLibrary;
 using MaterialDesignThemes.Wpf;
 using GameLauncher.Properties;
+using System.Diagnostics;
 
 namespace GameLauncher
 {
@@ -79,7 +80,7 @@ namespace GameLauncher
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine("Exception: " + ex.Message);
+                            Trace.WriteLine("AddGameOnClick: " + ex.Message);
                         }
                         ClearGenreBoxes();
                         clearFields();
@@ -107,7 +108,7 @@ namespace GameLauncher
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Exception: " + ex.Message);
+                        Trace.WriteLine("AddGameOnClick2: " + ex.Message);
                     }
                     ClearGenreBoxes();
                     clearFields();
@@ -164,7 +165,7 @@ namespace GameLauncher
                         genrePlaceHolder += cb.Content.ToString() + ";";
                     }
                 }
-                catch (Exception ex) { Console.WriteLine("Error: " + ex); }
+                catch (Exception ex) { Trace.WriteLine("AddGenre: " + ex); }
             }
             NewGameGenre.Text = genrePlaceHolder;
             return;
@@ -190,7 +191,7 @@ namespace GameLauncher
                             cb.IsChecked = false;
                         }
                     }
-                    catch (Exception e) { Console.WriteLine("Error: " + e); }
+                    catch (Exception e) { Trace.WriteLine("ClearGenre: " + e); }
                 }
             }
         }

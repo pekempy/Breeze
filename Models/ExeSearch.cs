@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.DirectoryServices.AccountManagement;
 using System.Windows;
 using System.Collections;
+using System.Diagnostics;
 
 namespace GameLauncher.Models
 {
@@ -86,7 +87,6 @@ namespace GameLauncher.Models
                             string[] configLines = File.ReadAllLines(config32path);
                             foreach (var item in configLines)
                             {
-                                Console.WriteLine("32:  " + item);
                                 Match match = Regex.Match(item, driveRegex);
                                 if (item != string.Empty && match.Success)
                                 {
@@ -114,7 +114,6 @@ namespace GameLauncher.Models
                         string[] configLines = File.ReadAllLines(config64path);
                         foreach (var item in configLines)
                         {
-                            Console.WriteLine("64:  " + item);
                             Match match = Regex.Match(item, driveRegex);
                             if (item != string.Empty && match.Success)
                             {
@@ -148,14 +147,10 @@ namespace GameLauncher.Models
                     string[] titlex = title.Split('\\');
                     title = titlex[2].ToString();
                     GameTitle = title;
-                    Console.WriteLine("Title: " + GameTitle);
-                    Console.WriteLine("Directory: " + dir);
                     string[] executables = Directory.GetFiles(dir, "*.exe");
                     int num = 1;
                     foreach (var ex in executables)
                     {
-                        //add "ex" to Executables[] if poss? lol
-                        Console.WriteLine("Executable: " + ex);
                         if (num == 1) { Exe1 = ex; }
                         if (num == 2) { Exe2 = ex; }
                         if (num == 3) { Exe3 = ex; }
@@ -223,12 +218,11 @@ namespace GameLauncher.Models
                                 }
                                 if (duplicate == false)
                                 {
-                                    Console.WriteLine(title + " : " + publisher + " | " + installLocation);
                                     originGameDirs.Add(installLocation);
                                 }
                                 else if (duplicate == true)
                                 {
-                                    Console.WriteLine("Duplicate");
+                                    Trace.WriteLine("ExeSearch Duplicate");
                                 }
                             }
                         }
@@ -251,14 +245,10 @@ namespace GameLauncher.Models
                 largest = largest - 2;
                 title = splitTitle[largest];
                 GameTitle = title;
-                Console.WriteLine("Title: " + GameTitle);
-                Console.WriteLine("Directory: " + item);
                 string[] executables = Directory.GetFiles(item, "*.exe");
                 int num = 1;
                 foreach (var ex in executables)
                 {
-                    //add "ex" to Executables[] if poss? lol
-                    Console.WriteLine("Executable: " + ex);
                     if (num == 1) { Exe1 = ex; }
                     if (num == 2) { Exe2 = ex; }
                     if (num == 3) { Exe3 = ex; }
@@ -316,13 +306,10 @@ namespace GameLauncher.Models
                 largest = largest - 2;
                 title = splitTitle[largest];
                 GameTitle = title;
-                Console.WriteLine("Title: " + GameTitle);
-                Console.WriteLine("Directory: " + item);
                 string[] executables = Directory.GetFiles(item, "*.exe");
                 int num = 1;
                 foreach (var ex in executables)
                 {
-                    Console.WriteLine("Executable: " + ex);
                     if (num == 1) { Exe1 = ex; }
                     if (num == 2) { Exe2 = ex; }
                     if (num == 3) { Exe3 = ex; }

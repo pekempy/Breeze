@@ -13,6 +13,7 @@ using System.Windows.Data;
 using GameLauncher.Models;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Diagnostics;
 
 namespace GameLauncher.Views
 {
@@ -56,7 +57,6 @@ namespace GameLauncher.Views
         }
         private void ChangePrimary_OnClick(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(((Button)sender).Tag.ToString());
             string newPrimaryColour = ((Button)sender).Tag.ToString();
             new PaletteHelper().ReplacePrimaryColor(newPrimaryColour);
             Properties.Settings.Default.primary = newPrimaryColour;
@@ -65,7 +65,6 @@ namespace GameLauncher.Views
         }
         private void ChangeAccent_OnClick(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(((Button)sender).Tag.ToString());
             string newAccentColour = ((Button)sender).Tag.ToString();
             new PaletteHelper().ReplaceAccentColor(newAccentColour);
             Properties.Settings.Default.accent = newAccentColour;
@@ -163,7 +162,7 @@ namespace GameLauncher.Views
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: " + ex.Message);
+                Trace.WriteLine("AddNewGenre: " + ex.Message);
             }
             lag.LoadGenres();
             MainWindow.RefreshGames();
@@ -181,13 +180,12 @@ namespace GameLauncher.Views
                 {
                     try
                     {
-                        Console.WriteLine(genretext[i]);
                         string[] column = genretext[i].Split('|');
                         DeletedGenre = column[0];
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.ToString());
+                        Trace.WriteLine("DeleteGenre: " + ex.ToString());
                     }
                 }
             }
@@ -202,14 +200,12 @@ namespace GameLauncher.Views
                     {
                         try
                         {
-                            Console.WriteLine(gametext[i2]);
                             string[] column = gametext[i2].Split('|');
                             string genretoedit = column[1];
                             genretoedit = genretoedit.Replace(DeletedGenre + ";", "");
                             string gametoeditguid = column[7];
                             string newGenre = genretoedit.Trim();
                             string NewGameInfo = column[0] + "|" + newGenre + "|" + column[2] + "|" + column[3] + "|" + column[4] + "|" + column[5] + "|" + column[6] + "|" + Guid.NewGuid();
-                            Console.WriteLine(NewGameInfo);
                             ModifyFile.RemoveGameFromFile(gametoeditguid);
                             TextWriter tw = new StreamWriter(@"./Resources/GamesList.txt", true);
                             tw.WriteLine(NewGameInfo);
@@ -217,7 +213,7 @@ namespace GameLauncher.Views
                         }
                         catch (Exception ex2)
                         {
-                            Console.WriteLine(ex2.ToString());
+                            Trace.WriteLine("DeleteGenre2: "+ex2.ToString());
                         }
                     }
                 }

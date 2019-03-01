@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -45,7 +46,7 @@ namespace GameLauncher.ViewModels
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.ToString());
+                        Trace.WriteLine("RemoveGameFromFile: "+ e.ToString());
                     }
                 }
             }
@@ -61,7 +62,6 @@ namespace GameLauncher.ViewModels
                 {
                     try
                     {
-                        Console.WriteLine(text[i]); //Write entire game line to output window
                         string[] column = text[i].Split('|');
                         MainWindow.DialogEditGames.EditTitle.Text = column[0];
                         MainWindow.DialogEditGames.EditGenre.Text = column[1];
@@ -75,7 +75,7 @@ namespace GameLauncher.ViewModels
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.ToString());
+                        Trace.WriteLine("EditGameInfile:" + e.ToString());
                     }
                 }
             }
@@ -108,7 +108,7 @@ namespace GameLauncher.ViewModels
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.ToString());
+                        Trace.WriteLine("RemoveGenreFromFile: " + e.ToString());
                     }
                 }
             }

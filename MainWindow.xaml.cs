@@ -8,6 +8,8 @@ using GameLauncher.Properties;
 using MaterialDesignThemes.Wpf;
 using System.Windows.Data;
 using System.Net;
+using System.Diagnostics;
+using System.Windows.Threading;
 
 namespace GameLauncher
 {
@@ -34,6 +36,8 @@ namespace GameLauncher
 
         public MainWindow()
         {
+            Trace.Listeners.Clear();
+            InitTraceListen();
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 0.75);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 0.75);
             LoadAllGames lag = new LoadAllGames();
@@ -51,6 +55,7 @@ namespace GameLauncher
             DataContext = posterViewModel;
             isDownloadOpen = false;
             LoadSettings();
+            Trace.WriteLine("New Session started");
 
         }
         public void MakeDirectories()
@@ -85,6 +90,24 @@ namespace GameLauncher
                 tsw.Close();
             }
         }
+
+        public void InitTraceListen()
+        {
+            if (!Directory.Exists("C:\\windows\\temp\\breeze"))
+                Directory.CreateDirectory("C:\\windows\\temp\\breeze");
+            if (!File.Exists("C:\\windows\\temp\\breeze\\log.log"))
+                File.Create("C:\\windows\\temp\\breeze\\log.log");
+            TextWriterTraceListener twtl = new TextWriterTraceListener("C:\\Windows\\Temp\\Breeze\\log.log");
+            twtl.TraceOutputOptions = TraceOptions.ThreadId | TraceOptions.DateTime;
+            ConsoleTraceListener ctl = new ConsoleTraceListener(false);
+            ctl.TraceOutputOptions = TraceOptions.DateTime;
+
+            Trace.Listeners.Add(twtl);
+            Trace.Listeners.Add(ctl);
+            Trace.AutoFlush = true;
+        }
+
+
         private void OpenAddGameWindow_OnClick(object sender, RoutedEventArgs e)
         {
             OpenAddGameDialog();
@@ -168,7 +191,7 @@ namespace GameLauncher
                     DialogImageDL.DownloadDialog.IsOpen = false;
                     isDownloadOpen = false;
                 }
-                else { Console.WriteLine("Not sure which dialog is open, whoops!"); }
+                else { Trace.WriteLine("-System unsure which dialog currently open"); }
             }
         }
 
@@ -185,7 +208,7 @@ namespace GameLauncher
                         client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
                         client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
                         SetPath(DLGameTitle, DLImgType, dialogOpen);
-                    }catch(Exception e) { Console.WriteLine("Error:" + e); MessageBox.Show("Sorry! That's failed, Try again or try another image"); }
+                    }catch(Exception e) { Trace.WriteLine("DownloadImage:" + e); MessageBox.Show("Sorry! That's failed, Try again or try another image"); }
                 } }
             else if (File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png")){
                 File.Delete(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png");
@@ -200,7 +223,7 @@ namespace GameLauncher
                         client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
                         SetPath(DLGameTitle, DLImgType, dialogOpen);
                     }
-                    catch (Exception e) { Console.WriteLine("Error: " + e); }
+                    catch (Exception e) { Trace.WriteLine("DownloadImage2: " + e); }
                 }
             }
         }
@@ -328,10 +351,6 @@ namespace GameLauncher
         //Refresh button
         private void RefreshGames_OnClick(object sender, RoutedEventArgs e)
         {
-            //RefreshGames();
-            if (DataContext == posterViewModel) { posterViewModel.LoadList(); }
-            if (DataContext == bannerViewModel) { bannerViewModel.LoadList(); }
-            if (DataContext == listViewModel) { listViewModel.LoadList(); }
             RefreshGames();
         }
 
