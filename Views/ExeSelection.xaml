@@ -178,7 +178,8 @@
                                 Margin="10,10,20,20"
                                 HorizontalAlignment="Right"
                                 Click="AcceptExeSelection_OnClick"
-                                Content="Accept" />
+                                Content="Accept"
+                                IsDefault="True"/>
                     </Grid>
                 </ScrollViewer>
                 <materialDesign:ColorZone Grid.Row="0"

@@ -98,8 +98,12 @@ namespace GameLauncher.Models
                                     string matched = match.ToString();
                                     string item2 = item.Substring(item.IndexOf(matched));
                                     item2 = item2.Replace("\\\\", "\\");
-                                    item2 = item2.Replace("\"", "\\steamapps\\common\\");
-                                    steamGameDirs.Add(item2);
+                                    item2 = item2.Replace("\"", "\\");
+                                    if (Directory.Exists(item2 + "\\steamapps\\common"))
+                                    {
+                                        item2 = item2 + "steamapps\\common\\";
+                                        steamGameDirs.Add(item2);
+                                    }
                                 }
                             }
                             steamGameDirs.Add(steam32path + "\\steamapps\\common\\");
@@ -125,8 +129,12 @@ namespace GameLauncher.Models
                                 string matched = match.ToString();
                                 string item2 = item.Substring(item.IndexOf(matched));
                                 item2 = item2.Replace("\\\\", "\\");
-                                item2 = item2.Replace("\"", "\\steamapps\\common\\");
-                                steamGameDirs.Add(item2);
+                                item2 = item2.Replace("\"", "\\");
+                                if (Directory.Exists(item2 + "steamapps\\common"))
+                                {
+                                    item2 = item2 + "steamapps\\common\\";
+                                    steamGameDirs.Add(item2);
+                                }
                             }
                         }
                         steamGameDirs.Add(steam64path + "\\steamapps\\common\\");
