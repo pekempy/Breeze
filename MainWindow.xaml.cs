@@ -93,10 +93,12 @@ namespace GameLauncher
 
         public void InitTraceListen()
         {
-            if (!Directory.Exists("C:\\windows\\temp\\breeze"))
-                Directory.CreateDirectory("C:\\windows\\temp\\breeze");
-            if (!File.Exists("C:\\windows\\temp\\breeze\\log.log"))
-                File.Create("C:\\windows\\temp\\breeze\\log.log");
+            string appdir = AppDomain.CurrentDomain.BaseDirectory;
+            if (!Directory.Exists(appdir + "\\log")) { Directory.CreateDirectory(appdir + "\\log"); }
+            if (File.Exists(appdir + "\\log\\event.log")) {
+                File.Delete(appdir + "\\log\\event.log");
+                File.Create(appdir + "\\log\\event.log"); }
+            else { File.Create(appdir + "\\log\\event.log"); }
             TextWriterTraceListener twtl = new TextWriterTraceListener("C:\\Windows\\Temp\\Breeze\\log.log");
             twtl.TraceOutputOptions = TraceOptions.ThreadId | TraceOptions.DateTime;
             ConsoleTraceListener ctl = new ConsoleTraceListener(false);
