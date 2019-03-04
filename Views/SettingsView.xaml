@@ -59,7 +59,7 @@
                              HorizontalAlignment="Center"
                              VerticalAlignment="Center"
                              Content="THEMES"
-                             IsChecked="False"
+                             IsChecked="True"
                              Style="{StaticResource MaterialDesignTabRadioButton}" />
                 <RadioButton Name="GenreBtn"
                              Margin="4"
@@ -69,7 +69,7 @@
                 <RadioButton Name="LibraryBtn"
                              Margin="4"
                              Content="LIBRARY"
-                             IsChecked="True"
+                             IsChecked="False"
                              Style="{StaticResource MaterialDesignTabRadioButton}" />
             </StackPanel>
         </materialDesign:ColorZone>
