@@ -18,7 +18,9 @@ namespace GameLauncher.Models
         private MainWindow mw = ((MainWindow)Application.Current.MainWindow);
         public List<string> steamGameDirs = new List<string>();
         public List<string> originGameDirs = new List<string>();
+        public List<string> battleGameDirs = new List<string>();
         public List<string> uplayGamedirs = new List<string>();
+        public List<string> listOfBattleNetGames = new List<string>();
         public ObservableCollection<GameExecutables> Exes { get; set; }
         private ObservableCollection<GameExecutables> exes = new ObservableCollection<GameExecutables>();
         public string title;
@@ -384,32 +386,108 @@ namespace GameLauncher.Models
 
         public void SearchBattle()
         {
-            string usersid = UserPrincipal.Current.Sid.ToString();
-            string reg = usersid + "\\Software\\Microsoft\\Windows\\CurrentVersion\\UFH";
-            RegistryKey key = Registry.Users.OpenSubKey(reg);
-            foreach (string ksubkey in key.GetSubKeyNames())
+            addBattleNetGames();
+            battleGameDirs.Clear();
+            string regkey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
+            RegistryKey key = Registry.LocalMachine.OpenSubKey(regkey);
+            foreach (string ksubKey in key.GetSubKeyNames())
             {
-                using (RegistryKey subkey = key.OpenSubKey(ksubkey))
+                using (RegistryKey subKey = key.OpenSubKey(ksubKey))
                 {
-                    foreach (var value in subkey.GetValueNames())
+                    foreach (string subkeyname in subKey.GetValueNames())
                     {
-                        var data = subkey.GetValue(value);
-                        string[] output = ((IEnumerable)data).Cast<object>().Select(x => x.ToString()).ToArray();
-                        if (!output[1].Contains("Battle.net Launcher.exe"))
+                        foreach (var game in listOfBattleNetGames)
                         {
-                            exe = output[1];
-                            title = output[1].Substring(0, output[1].LastIndexOf("\\"));
-                            title = title.Substring(title.LastIndexOf("\\"));
-                            title = title.Substring(1);
-                            exes.Add(new GameExecutables
+                            string temptitle = null;
+                            if (subkeyname.ToString() == "DisplayName")
                             {
-                                Title = title,
-                                Exe1 = exe
-                            });
+                                temptitle = subKey.GetValue("DisplayName").ToString();
+                                title = temptitle;
+                            }
+                            if (game.Contains(title))
+                            {
+                                Console.WriteLine(title);
+                                if (battleGameDirs.Count == 0)
+                                {
+                                    installLocation = subKey.GetValue("InstallLocation").ToString();
+                                    battleGameDirs.Add(installLocation);
+                                }
+                                else if (battleGameDirs.Count > 0)
+                                {
+                                    foreach (var item in battleGameDirs)
+                                    {
+                                        if (item.Contains(title)) { duplicate = true; }
+                                        else { duplicate = false; }
+                                    }
+                                    if (duplicate == false)
+                                    {
+                                        installLocation = subKey.GetValue("InstallLocation").ToString();
+                                        battleGameDirs.Add(installLocation);
+                                    }
+                                    else if (duplicate == true)
+                                    {
+                                        Trace.WriteLine(DateTime.Now + ": ExeSearch Duplicate");
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
+            foreach (string item in battleGameDirs)
+            {
+                string GameTitle;
+                string Exe1;
+                string Exe2;
+                string Exe3;
+                string Exe4;
+                string Exe5;
+                string Exe6;
+                string[] Executables = new string[0];
+                GameTitle = null; Exe1 = null; Exe2 = null; Exe3 = null; Exe4 = null; Exe5 = null; Exe6 = null;
+                string[] splitTitle = item.Split('\\');
+                int largest = splitTitle.Length;
+                largest = largest - 1;
+                title = splitTitle[largest];
+                GameTitle = title;
+                string[] executables = Directory.GetFiles(item, "*.exe");
+                int num = 1;
+                foreach (var ex in executables)
+                {
+                    if (num == 1) { Exe1 = ex; }
+                    if (num == 2) { Exe2 = ex; }
+                    if (num == 3) { Exe3 = ex; }
+                    if (num == 4) { Exe4 = ex; }
+                    if (num == 5) { Exe5 = ex; }
+                    if (num == 6) { Exe6 = ex; }
+                    num++;
+                }
+                exes.Add(new GameExecutables
+                {
+                    Title = GameTitle,
+                    Exe1 = Exe1,
+                    Exe2 = Exe2,
+                    Exe3 = Exe3,
+                    Exe4 = Exe4,
+                    Exe5 = Exe5,
+                    Exe6 = Exe6
+
+                });
+            }
+        }
+        public void addBattleNetGames()
+        {
+            listOfBattleNetGames.Clear();
+            listOfBattleNetGames.Add("Hearthstone");
+            listOfBattleNetGames.Add("World of Warcraft");
+            listOfBattleNetGames.Add("Diablo III");
+            listOfBattleNetGames.Add("Starcraft II");
+            listOfBattleNetGames.Add("Heroes of the Storm");
+            listOfBattleNetGames.Add("Overwatch");
+            listOfBattleNetGames.Add("StarCraft");
+            listOfBattleNetGames.Add("Warcraft III");
+            listOfBattleNetGames.Add("Destiny 2");
+            listOfBattleNetGames.Add("Call of Duty: Black Ops 4");
         }
     }
 }

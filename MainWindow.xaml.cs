@@ -185,6 +185,7 @@ namespace GameLauncher
                     DialogEditGames.EditGameDialog.IsOpen = true;
                     DialogImageDL.DownloadDialog.IsOpen = false;
                     isDownloadOpen = false;
+                    GC.Collect();
                 }
                 else if (dialogOpen == "add")
                 {
@@ -192,6 +193,7 @@ namespace GameLauncher
                     DialogAddGames.AddGameDialog.IsOpen = true;
                     DialogImageDL.DownloadDialog.IsOpen = false;
                     isDownloadOpen = false;
+                    GC.Collect();
                 }
                 else { Trace.WriteLine(DateTime.Now + ": -System unsure which dialog currently open"); }
             }
