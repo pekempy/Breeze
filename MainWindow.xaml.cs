@@ -10,6 +10,8 @@ using System.Windows.Data;
 using System.Net;
 using System.Diagnostics;
 using System.Windows.Threading;
+using GameLauncher.Models;
+using System.Collections.ObjectModel;
 
 namespace GameLauncher
 {
@@ -20,6 +22,8 @@ namespace GameLauncher
         public static AddGames DialogAddGames = new AddGames();
         public static EditGames DialogEditGames = new EditGames();
         public static ExeSelection DialogExeSelection = new ExeSelection();
+        public static ObservableCollection<GameList> GameListMW { get; set; }
+        public static ObservableCollection<GenreList> GenreListMW { get; set; }
         private BannerViewModel bannerViewModel;
         private ListViewModel listViewModel;
         private PosterViewModel posterViewModel;
@@ -33,6 +37,7 @@ namespace GameLauncher
         public string dialogOpen;
         public string DLGameTitle;
         public string DLImgType;
+        public string view;
 
         public MainWindow()
         {
@@ -46,17 +51,11 @@ namespace GameLauncher
             MakeDefaultGenres();
             lag.LoadGenres();
             InitializeComponent();
-            bannerViewModel = new BannerViewModel();
-            posterViewModel = new PosterViewModel();
-            listViewModel = new ListViewModel();
-            exesViewModel = new ExesViewModel();
-            posterViewModel.LoadGames();
-            posterViewModel.LoadGenres();
+            LoadAllViews();
             DataContext = posterViewModel;
             isDownloadOpen = false;
             LoadSettings();
             Trace.WriteLine(DateTime.Now + ": New Session started");
-
         }
         public void MakeDirectories()
         {
@@ -64,7 +63,21 @@ namespace GameLauncher
             if (!Directory.Exists("./Resources/img/")) { Directory.CreateDirectory("./Resources/img/"); }
             if (!Directory.Exists("./Resources/shortcuts/")) { Directory.CreateDirectory("./Resources/shortcuts/"); }
         }
-
+        public void LoadAllViews()
+        {
+            LoadAllGames lag = new LoadAllGames();
+            bannerViewModel = new BannerViewModel();
+            posterViewModel = new PosterViewModel();
+            listViewModel = new ListViewModel();
+            exesViewModel = new ExesViewModel();
+            lag.LoadGenres();
+            lag.LoadGames();
+            GameListMW = lag.Games;
+            GenreListMW = lag.Genres;
+            posterViewModel.LoadGames();
+            bannerViewModel.LoadGames();
+            listViewModel.LoadGames();
+        }
         public void MakeDefaultGenres()
         {
             if (!File.Exists("./Resources/GenreList.txt"))
@@ -113,7 +126,6 @@ namespace GameLauncher
         private void OpenAddGameWindow_OnClick(object sender, RoutedEventArgs e)
         {
             OpenAddGameDialog();
-            RefreshGames();
         }
 
         public void OpenAddGameDialog()
@@ -300,9 +312,10 @@ namespace GameLauncher
 
         public void PosterViewActive()
         {
-            posterViewModel = new PosterViewModel();
-            posterViewModel.LoadGames();
-            posterViewModel.LoadGenres();
+            view = "poster";
+            //posterViewModel = new PosterViewModel();
+            //posterViewModel.LoadGames();
+            //posterViewModel.LoadGenres();
             DataContext = posterViewModel;
             Properties.Settings.Default.viewtype = "Poster";
             Properties.Settings.Default.Save();
@@ -317,9 +330,10 @@ namespace GameLauncher
 
         public void BannerViewActive()
         {
-            bannerViewModel = new BannerViewModel();
-            bannerViewModel.LoadGames();
-            bannerViewModel.LoadGenres();
+            view = "banner";
+            //bannerViewModel = new BannerViewModel();
+            //bannerViewModel.LoadGames();
+            //bannerViewModel.LoadGenres();
             DataContext = bannerViewModel;
             Properties.Settings.Default.viewtype = "Banner";
             Properties.Settings.Default.Save();
@@ -334,9 +348,10 @@ namespace GameLauncher
 
         public void ListViewActive()
         {
-            listViewModel = new ListViewModel();
-            listViewModel.LoadGames();
-            listViewModel.LoadGenres();
+            view = "list";
+            //listViewModel = new ListViewModel();
+            //listViewModel.LoadGames();
+            //listViewModel.LoadGenres();
             DataContext = listViewModel;
             Properties.Settings.Default.viewtype = "List";
             Properties.Settings.Default.Save();
@@ -351,6 +366,7 @@ namespace GameLauncher
 
         private void SettingsViewActive()
         {
+            view = "settings";
             settingsViewModel = new SettingsViewModel();
             settingsViewModel.LoadGenres();
             DataContext = settingsViewModel;
@@ -364,10 +380,11 @@ namespace GameLauncher
 
         public void RefreshGames()
         {
-            if (DataContext == listViewModel) { ListViewActive(); }
-            else if (DataContext == posterViewModel) { PosterViewActive(); }
-            else if (DataContext == bannerViewModel) { BannerViewActive(); }
-            else if (DataContext == settingsViewModel) { SettingsViewActive(); }
+            LoadAllViews();
+            if (view == "list") { ListViewActive(); }
+            else if (view == "poster") { PosterViewActive(); }
+            else if (view == "banner") { BannerViewActive(); }
+            else if (view == "settings") { SettingsViewActive(); }
         }
 
         private void MWSizeChanged(object sender, SizeChangedEventArgs e)

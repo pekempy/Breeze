@@ -87,7 +87,9 @@
                           MaxHeight="10000"
                           Margin="10,10,0,10"
                           ItemsSource="{Binding Source={StaticResource GameListCVS}}"
-                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          VirtualizingStackPanel.IsVirtualizing ="True"
+                          ScrollViewer.CanContentScroll="True">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <vwp:VirtualizingWrapPanel />

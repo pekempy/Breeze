@@ -6,7 +6,6 @@ namespace GameLauncher.ViewModels
 {
     internal class PosterViewModel
     {
-        private LoadAllGames lag = new LoadAllGames();
         public static ObservableCollection<GameList> PosterViewOC { get; set; }
         public static ObservableCollection<GenreList> GenreListOC { get; set; }
         private LoadSearch ls = new LoadSearch();
@@ -19,14 +18,8 @@ namespace GameLauncher.ViewModels
         }
         public void LoadGames()
         {
-            lag.LoadGames();
-            PosterViewOC = lag.Games;
-        }
-
-        public void LoadGenres()
-        {
-            lag.LoadGenres();
-            GenreListOC = lag.Genres;
+            PosterViewOC = MainWindow.GameListMW;
+            GenreListOC = MainWindow.GenreListMW;
         }
         
     }

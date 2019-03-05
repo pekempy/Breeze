@@ -8,7 +8,6 @@ namespace GameLauncher.ViewModels
     {
         public ObservableCollection<GameList> ListViewOC { get; set; }
         public static ObservableCollection<GenreList> GenreListOC { get; set; }
-        private LoadAllGames lag = new LoadAllGames();
         private LoadSearch ls = new LoadSearch();
         public static ObservableCollection<SearchResults> SearchList { get; set; }
 
@@ -19,15 +18,10 @@ namespace GameLauncher.ViewModels
         }
         public void LoadGames()
         {
-            lag.LoadGames();
-            ListViewOC = lag.Games;
-        }
-
-        public void LoadGenres()
-        {
-            lag.LoadGenres();
-            GenreListOC = lag.Genres;
+            ListViewOC = MainWindow.GameListMW;
+            GenreListOC = MainWindow.GenreListMW;
         }
         
+
     }
 }

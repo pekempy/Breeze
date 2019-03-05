@@ -51,7 +51,11 @@ namespace GameLauncher.Views
         private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.RemoveGameFromFile(((Button)sender).Tag);
-            ModifyFile.DeleteGameImages(((Button)sender).CommandParameter.ToString());
+            try
+            {
+                ModifyFile.DeleteGameImages(((Button)sender).CommandParameter.ToString());
+            }
+            catch (Exception exc) { Trace.WriteLine("Failed to delete images for game: " + exc); }
             MainWindow.RefreshGames();
         }
 
