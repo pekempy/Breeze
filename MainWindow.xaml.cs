@@ -12,6 +12,8 @@ using System.Diagnostics;
 using System.Windows.Threading;
 using GameLauncher.Models;
 using System.Collections.ObjectModel;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace GameLauncher
 {
@@ -24,11 +26,12 @@ namespace GameLauncher
         public static ExeSelection DialogExeSelection = new ExeSelection();
         public static ObservableCollection<GameList> GameListMW { get; set; }
         public static ObservableCollection<GenreList> GenreListMW { get; set; }
-        private BannerViewModel bannerViewModel;
-        private ListViewModel listViewModel;
-        private PosterViewModel posterViewModel;
-        private SettingsViewModel settingsViewModel;
-        private ExesViewModel exesViewModel;
+        public LoadAllGames lag = new LoadAllGames();
+        private BannerViewModel bannerViewModel = new BannerViewModel();
+        private ListViewModel listViewModel = new ListViewModel();
+        private PosterViewModel posterViewModel = new PosterViewModel();
+        private SettingsViewModel settingsViewModel = new SettingsViewModel();
+        private ExesViewModel exesViewModel = new ExesViewModel();
         public Views.PosterView pv = new Views.PosterView();
         public Views.BannerView bv = new Views.BannerView();
         public Views.ListView lv = new Views.ListView();
@@ -65,11 +68,6 @@ namespace GameLauncher
         }
         public void LoadAllViews()
         {
-            LoadAllGames lag = new LoadAllGames();
-            bannerViewModel = new BannerViewModel();
-            posterViewModel = new PosterViewModel();
-            listViewModel = new ListViewModel();
-            exesViewModel = new ExesViewModel();
             lag.LoadGenres();
             lag.LoadGames();
             GameListMW = lag.Games;
@@ -121,7 +119,6 @@ namespace GameLauncher
             Trace.Listeners.Add(ctl);
             Trace.AutoFlush = true;
         }
-
 
         private void OpenAddGameWindow_OnClick(object sender, RoutedEventArgs e)
         {
@@ -313,9 +310,6 @@ namespace GameLauncher
         public void PosterViewActive()
         {
             view = "poster";
-            //posterViewModel = new PosterViewModel();
-            //posterViewModel.LoadGames();
-            //posterViewModel.LoadGenres();
             DataContext = posterViewModel;
             Properties.Settings.Default.viewtype = "Poster";
             Properties.Settings.Default.Save();
@@ -331,9 +325,6 @@ namespace GameLauncher
         public void BannerViewActive()
         {
             view = "banner";
-            //bannerViewModel = new BannerViewModel();
-            //bannerViewModel.LoadGames();
-            //bannerViewModel.LoadGenres();
             DataContext = bannerViewModel;
             Properties.Settings.Default.viewtype = "Banner";
             Properties.Settings.Default.Save();
@@ -349,9 +340,6 @@ namespace GameLauncher
         public void ListViewActive()
         {
             view = "list";
-            //listViewModel = new ListViewModel();
-            //listViewModel.LoadGames();
-            //listViewModel.LoadGenres();
             DataContext = listViewModel;
             Properties.Settings.Default.viewtype = "List";
             Properties.Settings.Default.Save();

@@ -21,6 +21,8 @@ namespace GameLauncher.ViewModels
         public BitmapImage banner;
         public void LoadGames()
         {
+            try { games.Clear(); } catch { }
+            try { Games.Clear(); } catch { }
             ReadFile();
             Games = games;
         }
