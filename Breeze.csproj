@@ -139,6 +139,9 @@
     <Compile Include="Views\ImageDownload.xaml.cs">
       <DependentUpon>ImageDownload.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Loading.xaml.cs">
+      <DependentUpon>Loading.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PosterView.xaml.cs">
       <DependentUpon>PosterView.xaml</DependentUpon>
     </Compile>
@@ -176,6 +179,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\ImageDownload.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Loading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

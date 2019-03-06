@@ -14,6 +14,8 @@ using GameLauncher.Models;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using MahApps.Metro.Controls;
 
 namespace GameLauncher
 {
@@ -32,11 +34,13 @@ namespace GameLauncher
         private PosterViewModel posterViewModel = new PosterViewModel();
         private SettingsViewModel settingsViewModel = new SettingsViewModel();
         private ExesViewModel exesViewModel = new ExesViewModel();
+        private Loading loadingdialog = new Loading();
         public Views.PosterView pv = new Views.PosterView();
         public Views.BannerView bv = new Views.BannerView();
         public Views.ListView lv = new Views.ListView();
         public CollectionViewSource cvs;
         public bool isDialogOpen;
+        public bool isLoading;
         public string dialogOpen;
         public string DLGameTitle;
         public string DLImgType;
@@ -59,6 +63,7 @@ namespace GameLauncher
             isDownloadOpen = false;
             LoadSettings();
             Trace.WriteLine(DateTime.Now + ": New Session started");
+
         }
         public void MakeDirectories()
         {
@@ -101,7 +106,6 @@ namespace GameLauncher
                 tsw.Close();
             }
         }
-
         public void InitTraceListen()
         {
             string appdir = AppDomain.CurrentDomain.BaseDirectory;
@@ -119,12 +123,10 @@ namespace GameLauncher
             Trace.Listeners.Add(ctl);
             Trace.AutoFlush = true;
         }
-
-        private void OpenAddGameWindow_OnClick(object sender, RoutedEventArgs e)
+        public void OpenAddGameWindow_OnClick(object sender, RoutedEventArgs e)
         {
             OpenAddGameDialog();
         }
-
         public void OpenAddGameDialog()
         {
             DialogFrame.Visibility = Visibility.Visible;
@@ -154,7 +156,6 @@ namespace GameLauncher
             DialogExeSelection.ExeSelectionDialog.IsOpen = true;
             isExeSearchOpen = true;
         }
-
         public void CloseExeSearchDialog()
         {
             DataContext = settingsViewModel;
@@ -163,7 +164,6 @@ namespace GameLauncher
             DialogExeSelection.ExeSelectionDialog.IsOpen = false;
             isExeSearchOpen = false;
         }
-
         public void OpenEditGameDialog(string guid)
         {
             DialogFrame.Visibility = Visibility.Visible;
@@ -207,7 +207,6 @@ namespace GameLauncher
                 else { Trace.WriteLine(DateTime.Now + ": -System unsure which dialog currently open"); }
             }
         }
-
         public void DownloadImage(string url)
         {
             if (!File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png")){
@@ -240,7 +239,6 @@ namespace GameLauncher
                 }
             }
         }
-
         public void SetPath(string title, string imagetype, string dialogType)
         {
             string imgpath = AppDomain.CurrentDomain.BaseDirectory + "Resources\\img\\" + DLGameTitle + "-" + DLImgType + ".png";
@@ -284,9 +282,7 @@ namespace GameLauncher
                 }
             }
         }
-
-        //Apply the selected genre filter
-        private void ApplyGenreFilter_OnClick(object sender, RoutedEventArgs e)
+        public void ApplyGenreFilter_OnClick(object sender, RoutedEventArgs e)
         {
             if (DataContext == settingsViewModel)
                 DataContext = posterViewModel;
@@ -298,83 +294,79 @@ namespace GameLauncher
             lv.GenreToFilter(genreToFilter);
             lv.RefreshList2(cvs);
             MenuToggleButton.IsChecked = false; //hide hamburger
-        }
-
-        //Poster button
-        private void PosterButton_OnClick(object sender, RoutedEventArgs e)
+        }       
+        public void LoadingState(string state)
         {
-            Trace.WriteLine(DateTime.Now + ": Poster View Active");
-            PosterViewActive();
+            Loading loadingdialog = new Loading();
+            if (state == "open")
+            {
+                //open loading dialog
+            }
+            else if (state == "closed")
+            {
+                //close loading dialog
+            }
         }
-
         public void PosterViewActive()
         {
             view = "poster";
-            DataContext = posterViewModel;
+            Dispatcher.BeginInvoke( new ThreadStart(() => DataContext = posterViewModel));
             Properties.Settings.Default.viewtype = "Poster";
             Properties.Settings.Default.Save();
         }
-        
-        //Banner button
-        private void BannerButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            Trace.WriteLine(DateTime.Now + ": Banner View Active");
-            BannerViewActive();
-        }
-
         public void BannerViewActive()
         {
             view = "banner";
-            DataContext = bannerViewModel;
+            Dispatcher.BeginInvoke(new ThreadStart(() => DataContext = DataContext = bannerViewModel));
             Properties.Settings.Default.viewtype = "Banner";
             Properties.Settings.Default.Save();
         }
-
-        //List button
-        private void ListButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            Trace.WriteLine(DateTime.Now + ": List View Active");
-            ListViewActive();
-        }
-
         public void ListViewActive()
         {
             view = "list";
-            DataContext = listViewModel;
+            Dispatcher.BeginInvoke(new ThreadStart(() => DataContext = DataContext = listViewModel));
             Properties.Settings.Default.viewtype = "List";
             Properties.Settings.Default.Save();
         }
-
-        //Settings button
-        private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            Trace.WriteLine(DateTime.Now + ": Settings View Active");
-            SettingsViewActive();
-        }
-
-        private void SettingsViewActive()
+        public void SettingsViewActive()
         {
             view = "settings";
             settingsViewModel = new SettingsViewModel();
             settingsViewModel.LoadGenres();
-            DataContext = settingsViewModel;
+            Dispatcher.BeginInvoke(new ThreadStart(() => DataContext = DataContext = settingsViewModel));
         }
-
-        //Refresh button
-        private void RefreshGames_OnClick(object sender, RoutedEventArgs e)
-        {
-            RefreshGames();
-        }
-
         public void RefreshGames()
         {
-            LoadAllViews();
+            Dispatcher.BeginInvoke(new ThreadStart(() => LoadAllViews()));
             if (view == "list") { ListViewActive(); }
             else if (view == "poster") { PosterViewActive(); }
             else if (view == "banner") { BannerViewActive(); }
             else if (view == "settings") { SettingsViewActive(); }
         }
-
+        private void PosterButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Trace.WriteLine(DateTime.Now + ": Poster View Active");
+            PosterViewActive();
+        }
+        private void BannerButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Trace.WriteLine(DateTime.Now + ": Banner View Active");
+            BannerViewActive();
+        }
+        private void ListButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Trace.WriteLine(DateTime.Now + ": List View Active");
+            ListViewActive();
+        }
+        private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Trace.WriteLine(DateTime.Now + ": Settings View Active");
+            SettingsViewActive();
+        }
+        private void RefreshGames_OnClick(object sender, RoutedEventArgs e)
+        {
+            RefreshGames();
+        }
         private void MWSizeChanged(object sender, SizeChangedEventArgs e)
         {
             Resized();
@@ -390,7 +382,6 @@ namespace GameLauncher
                 ExeSelection.ChangeWindowSize(this.ActualWidth * 0.9, this.ActualHeight * 0.9);
             }
         }
-        //Load settings
         public void LoadSettings()
         {
             //Theme Light or Dark

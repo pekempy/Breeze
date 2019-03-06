@@ -103,7 +103,7 @@
                                     </StackPanel>
                                 </Button>
                                 <!--  Refresh Button  -->
-                                <Button Click="RefreshGames_OnClick">
+                                <Button Click="RefreshGames_OnClick" x:Name="rgbtn">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Margin="0,0,10,0"
                                                                  VerticalAlignment="Center"
