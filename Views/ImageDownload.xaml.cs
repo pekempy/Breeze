@@ -26,11 +26,7 @@ namespace GameLauncher.Views
             int offset = 0;
             ImageType = imagetype;
             PosterViewModel pvm = new PosterViewModel();
-            BannerViewModel bvm = new BannerViewModel();
-            ListViewModel lvm = new ListViewModel();
-            pvm.LoadSearch(gametitle, imagetype,searchstring, offset);
-            bvm.LoadSearch(gametitle, imagetype, searchstring, offset);
-            lvm.LoadSearch(gametitle, imagetype, searchstring, offset);
+            pvm.LoadSearch(gametitle, imagetype, searchstring, offset);
             InitializeComponent();
             if (Settings.Default.theme.ToString() == "Dark")
             {
@@ -43,7 +39,6 @@ namespace GameLauncher.Views
             DownloadGrid.Height = ((MainWindow)Application.Current.MainWindow).ActualHeight * 0.8;
             DownloadGrid.Width = ((MainWindow)Application.Current.MainWindow).ActualWidth * 0.8;
             windowTitle.Text = searchstring.ToUpperInvariant();
-
         }
         protected void ImageDownload_Loaded(object sender, RoutedEventArgs e)
         {
@@ -78,7 +73,7 @@ namespace GameLauncher.Views
                             button.Height = 100;
                         }
                     }
-                    catch (Exception ex) { Trace.WriteLine(DateTime.Now + ": ImageDownloadLoaded: " + ex); }
+                    catch (Exception ex) { Console.WriteLine("Error: " + ex); }
                 }
             }
         }
@@ -86,7 +81,8 @@ namespace GameLauncher.Views
         {
             System.Diagnostics.Process.Start("https://www.qwant.com/?q=test");
         }
-        private void QwantCanExecute(object sender, CanExecuteRoutedEventArgs e) {
+        private void QwantCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
             e.CanExecute = true;
         }
         private void closeImageDLButton(object sender, RoutedEventArgs e)
@@ -104,7 +100,7 @@ namespace GameLauncher.Views
             id.DownloadGrid.Width = ((MainWindow)Application.Current.MainWindow).ActualWidth * 0.8;
         }
     }
-    
+
 
     public class StringToImage : IValueConverter
     {

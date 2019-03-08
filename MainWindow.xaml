@@ -136,7 +136,7 @@
                     <ToggleButton Margin="16"
                                   HorizontalAlignment="Right"
                                   DockPanel.Dock="Top"
-                                  IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay, FallbackValue='Missing element'}"
+                                  IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
                                   Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <StackPanel Orientation="Vertical">
@@ -144,7 +144,8 @@
                                     Content="All Genres"
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     Tag="" />
-                            <ItemsControl x:Name="GenreSidebar" ItemsSource="{Binding Source={StaticResource GenreListCVS}}">
+                            <ItemsControl x:Name="GenreSidebar" ItemsSource="{Binding Source={StaticResource GenreListCVS}, IsAsync=True}"
+                                  ScrollViewer.CanContentScroll="True">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>

@@ -90,10 +90,11 @@
             <!--  ItemsControl is bound to OC to know how many cards to make  -->
             <ItemsControl x:Name="gameListView"
                           Margin="10,10,0,10"
-                          ItemsSource="{Binding Source={StaticResource GameListCVS}}"
+                          ItemsSource="{Binding Source={StaticResource GameListCVS}, IsAsync=True}"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           VirtualizingStackPanel.IsVirtualizing="True"
-                          VirtualizingStackPanel.VirtualizationMode="Recycling">
+                          VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                  ScrollViewer.CanContentScroll="True">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <vwp:VirtualizingWrapPanel />

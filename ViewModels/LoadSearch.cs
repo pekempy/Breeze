@@ -2,7 +2,6 @@ using GameLauncher.Models;
 using HtmlAgilityPack;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 namespace GameLauncher.ViewModels
 {
@@ -14,19 +13,13 @@ namespace GameLauncher.ViewModels
         public void Search(string gametitle, string imagetype, string searchstring, int offset)
         {
             SearchLinks(gametitle, imagetype, searchstring, 0);
-            searchstring = gametitle + imagetype;
-            SearchLinks(gametitle, imagetype, searchstring, 0);
-            searchstring = imagetype + " for " + gametitle;
-            SearchLinks(gametitle, imagetype, searchstring, 0);
-            searchstring = gametitle + imagetype + " png";
-            SearchLinks(gametitle, imagetype, searchstring, 0);
             SearchList = searchlist;
         }
 
         public void SearchLinks(string gametitle, string imagetype, string searchstring, int offset)
         {
             searchstring = searchstring.Replace(" ", "%20");
-            var url = "https://www.qwant.com/?q=" + searchstring +"&t=images&count=" + offset;
+            var url = "https://www.qwant.com/?q=" + searchstring + "&t=images&count=" + offset;
             try
             {
                 HtmlWeb hw = new HtmlWeb();
@@ -49,7 +42,7 @@ namespace GameLauncher.ViewModels
                 }
                 SearchList = searchlist;
             }
-            catch (Exception e) { Trace.WriteLine(DateTime.Now + ": SearchLinks: " + e); }
+            catch (Exception e) { Console.WriteLine("Error: " + e); }
         }
     }
 }

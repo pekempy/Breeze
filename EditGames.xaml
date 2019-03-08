@@ -140,7 +140,8 @@
                                     <ScrollViewer Grid.ColumnSpan="3"
                                                   Margin="0,40,0,30"
                                                   VerticalScrollBarVisibility="auto">
-                                        <ItemsControl x:Name="GenreAGList" ItemsSource="{Binding Source={StaticResource GenreListCVS}}">
+                                        <ItemsControl x:Name="GenreAGList" ItemsSource="{Binding Source={StaticResource GenreListCVS}, IsAsync=True}"
+                                  ScrollViewer.CanContentScroll="True">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
                                                     <WrapPanel />

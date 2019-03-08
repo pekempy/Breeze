@@ -10,7 +10,7 @@ namespace GameLauncher.Models
         private string image;
 
         public string Thumbnail { get { return thumbnail; } set { thumbnail = value; OnPropertyChanged("Thumbnail"); } }
-        
+
         public string Image { get { return image; } set { image = value; OnPropertyChanged("Image"); } }
 
         public event PropertyChangedEventHandler PropertyChanged;

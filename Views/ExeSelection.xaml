@@ -50,8 +50,9 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <ItemsControl x:Name="ExeListings"
-                                      ItemsSource="{Binding Source={StaticResource ExesOCCVS}}"
-                                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                      ItemsSource="{Binding Source={StaticResource ExesOCCVS}, IsAsync=True}"
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                  ScrollViewer.CanContentScroll="True">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Grid.RowSpan="3" Orientation="Vertical">

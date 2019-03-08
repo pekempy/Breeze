@@ -31,6 +31,8 @@ namespace GameLauncher.ViewModels
 
         public void LoadGenres()
         {
+            try { Genres.Clear(); } catch { }
+            try { genres.Clear(); } catch { }
             if (File.Exists("./Resources/GenreList.txt"))
             {
                 string genreFile = "./Resources/GenreList.txt";

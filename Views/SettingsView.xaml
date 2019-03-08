@@ -479,8 +479,9 @@
                     <!--  Need to get the list of current genres to fill this  -->
                     <ItemsControl x:Name="genreListView"
                                   Margin="0,0,0,10"
-                                  ItemsSource="{Binding Source={StaticResource GenreListCVS}}"
-                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                  ItemsSource="{Binding Source={StaticResource GenreListCVS}, IsAsync=True}"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                  ScrollViewer.CanContentScroll="True">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel />

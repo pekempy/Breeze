@@ -86,7 +86,7 @@
             <ItemsControl x:Name="gameListView"
                           MaxHeight="10000"
                           Margin="10,10,0,10"
-                          ItemsSource="{Binding Source={StaticResource GameListCVS}}"
+                          ItemsSource="{Binding Source={StaticResource GameListCVS}, IsAsync=True}"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           VirtualizingStackPanel.IsVirtualizing ="True"
                           ScrollViewer.CanContentScroll="True">
