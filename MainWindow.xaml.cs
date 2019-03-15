@@ -35,6 +35,7 @@ namespace GameLauncher
         private SettingsViewModel settingsViewModel = new SettingsViewModel();
         private ExesViewModel exesViewModel = new ExesViewModel();
         private Loading loadingdialog = new Loading();
+        private Loading loadingprogressdialog = new Loading();
         public Views.PosterView pv = new Views.PosterView();
         public Views.BannerView bv = new Views.BannerView();
         public Views.ListView lv = new Views.ListView();
@@ -109,6 +110,16 @@ namespace GameLauncher
                 lagbw.RunWorkerAsync();
             }
             catch { }
+        }
+        public void OpenLoadingProgressDialog()
+        {
+            DialogFrame.Visibility = Visibility.Visible;
+            DialogFrame.Content = loadingprogressdialog;
+        }
+        public void CloseLoadingProgressDialog()
+        {
+            DialogFrame.Visibility = Visibility.Hidden;
+            DialogFrame.Content = null;
         }
         public void RefreshDataContext()
         {

@@ -21,6 +21,7 @@ using IWshRuntimeLibrary;
 using GameLauncher.Properties;
 using MaterialDesignThemes.Wpf;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace GameLauncher.Views
 {
@@ -35,9 +36,18 @@ namespace GameLauncher.Views
         private bool matchExe = false;
         public string title;
         public string selectedExe;
+        public LoadingProgress ldProgress;
+        public BackgroundWorker exebw;
+        public double imagesDownloaded;
+        public double maximumImages;
 
         public ExeSelection()
         {
+            exebw = new BackgroundWorker();
+            exebw.WorkerReportsProgress = true;
+            exebw.ProgressChanged += ExeBWProgressChanged;
+            exebw.DoWork += ExeBWDoWork;
+            exebw.RunWorkerCompleted += ExeBWRunWorkerCompleted;
             es = this;
             InitializeComponent();
             if (Settings.Default.theme.ToString() == "Dark")
@@ -49,7 +59,54 @@ namespace GameLauncher.Views
                 ThemeAssist.SetTheme(this, BaseTheme.Light);
             }
         }
-
+        public void ExeBWDoWork(object sender, DoWorkEventArgs e)
+        {
+            imagesDownloaded = 0;
+            maximumImages = ExeList.Count * 3;
+            //Show loading dialog here
+            //Count how many exes haven't been searched based on ExeList (*3 cos images are 3 per game)
+            //Each AutoImage ++ the count in here
+            //Report progress and use a normal material progress bar
+            foreach (var item in ExeList)
+            {
+                TextWriter tw = new StreamWriter(@"./Resources/GamesList.txt", true);
+                Guid gameGuid = Guid.NewGuid();
+                string[] gameitems = item.Split(';');
+                string title = gameitems[0];
+                string exe = gameitems[1];
+                string installPath = AppDomain.CurrentDomain.BaseDirectory;
+                //Here we download image automatically
+                string fileNameIcon = ai.AutoDownloadImages(title, "icon");
+                string fileNamePoster = ai.AutoDownloadImages(title, "poster");
+                string fileNameBanner = ai.AutoDownloadImages(title, "banner");
+                string icon = fileNameIcon;
+                string poster = fileNamePoster;
+                string banner = fileNameBanner;
+                string shortcut = createShortcut(title, exe);
+                string game = title + "||" + shortcut + "||" + icon + "|" + poster + "|" + banner + "|" + gameGuid;
+                tw.WriteLine(game);
+                tw.Close();
+                double progress = imagesDownloaded / maximumImages;
+                int percent = Convert.ToInt32(progress);
+                exebw.ReportProgress(percent);
+            }
+        }
+        public void ExeBWProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //If progress changes are reported.. use here to update UI
+            //ldProgress not initialized
+            ((MainWindow)Application.Current.MainWindow).OpenLoadingProgressDialog();
+            ldProgress.ProgressBar.Value = e.ProgressPercentage;
+            double remainingImages = maximumImages - imagesDownloaded;
+            ldProgress.NumberLeft.Text = remainingImages.ToString();
+        }
+        public void ExeBWRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            App.Current.Dispatcher.Invoke(new Action(() =>
+            ((MainWindow)Application.Current.MainWindow).CloseLoadingProgressDialog()));
+            App.Current.Dispatcher.Invoke(new Action(() =>
+            ((MainWindow)Application.Current.MainWindow).CloseExeSearchDialog()));
+        }
         public void CloseExeSelection(object sender, RoutedEventArgs e)
         {
             ((MainWindow)Application.Current.MainWindow)?.CloseExeSearchDialog();
@@ -141,7 +198,6 @@ namespace GameLauncher.Views
                 ((MainWindow)Application.Current.MainWindow).UpdateObsCol(title, exe);
             }
         }
-
         private void CardLoaded(object sender, RoutedEventArgs e)
         {
             string title;
@@ -158,7 +214,6 @@ namespace GameLauncher.Views
                 }
             }
         }
-
         private void UpdateObsCol(string title, string exe)
         {
             exs.UpdateObsCol(title, exe);
@@ -166,26 +221,8 @@ namespace GameLauncher.Views
         }
         private void AcceptExeSelection_OnClick(object sender, RoutedEventArgs e)
         {
-            foreach (var item in ExeList)
-            {
-                TextWriter tw = new StreamWriter(@"./Resources/GamesList.txt", true);
-                Guid gameGuid = Guid.NewGuid();
-                string[] gameitems = item.Split(';');
-                string title = gameitems[0];
-                string exe = gameitems[1];
-                string installPath = AppDomain.CurrentDomain.BaseDirectory;
-                string fileNameIcon = ai.AutoDownloadImages(title, "icon");
-                string fileNamePoster = ai.AutoDownloadImages(title, "poster");
-                string fileNameBanner = ai.AutoDownloadImages(title, "banner");
-                string icon = fileNameIcon;
-                string poster = fileNamePoster;
-                string banner = fileNameBanner;
-                string shortcut = createShortcut(title, exe);
-                string game = title + "||" + shortcut + "||" + icon + "|" + poster + "|" + banner + "|" + gameGuid;
-                tw.WriteLine(game);
-                tw.Close();
-            }
-            ((MainWindow)Application.Current.MainWindow).CloseExeSearchDialog();
+            //Performs ExeBWDoWork();
+            exebw.RunWorkerAsync();
         }
         private string createShortcut(string title, string exe)
         {
@@ -207,7 +244,6 @@ namespace GameLauncher.Views
             return installPath + "\\Resources\\shortcuts" + "\\" + title + ".lnk";
         }
     }
-    
     public sealed class Null2Visibility : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

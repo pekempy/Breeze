@@ -117,7 +117,6 @@
       <DependentUpon>EditGames.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\AutoImage.cs" />
-    <Compile Include="ViewModels\LoadingViewModel.cs" />
     <Compile Include="Views\ExeSelection.xaml.cs">
       <DependentUpon>ExeSelection.xaml</DependentUpon>
     </Compile>
@@ -139,6 +138,9 @@
     <Compile Include="ViewModels\ModifyFile.cs" />
     <Compile Include="Views\ImageDownload.xaml.cs">
       <DependentUpon>ImageDownload.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoadingProgress.xaml.cs">
+      <DependentUpon>LoadingProgress.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
@@ -182,6 +184,10 @@
     <Page Include="Views\ImageDownload.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoadingProgress.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Loading.xaml">
       <SubType>Designer</SubType>

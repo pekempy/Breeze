@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using GameLauncher.Views;
 
 namespace GameLauncher.Models
 {
@@ -13,6 +14,7 @@ namespace GameLauncher.Models
         public List<string> bannerList = new List<string>();
         public string installPath = AppDomain.CurrentDomain.BaseDirectory;
         public string fileName;
+        public ExeSelection exs;
 
         public string AutoDownloadImages(string title, string type)
         {
@@ -45,6 +47,7 @@ namespace GameLauncher.Models
                     }
                 }
                 DownloadImage(title, type);
+                exs.imagesDownloaded++;
                 iconList.Clear();
                 posterList.Clear();
                 bannerList.Clear();

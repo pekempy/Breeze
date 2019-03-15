@@ -2,6 +2,7 @@ using GameLauncher.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -79,6 +80,8 @@ namespace GameLauncher.ViewModels
                     columns = item.Split('|');
                         if (columns[4] != "")
                         {
+                        try
+                        {
                             icon = new BitmapImage();
                             icon.BeginInit();
                             icon.UriSource = new Uri(columns[4]);
@@ -86,9 +89,13 @@ namespace GameLauncher.ViewModels
                             icon.CacheOption = BitmapCacheOption.OnLoad;
                             icon.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                             icon.EndInit();
-                        icon.Freeze();
+                            icon.Freeze();
                         }
+                        catch (Exception e) { Trace.WriteLine("Error saving image (Icon): " + e); }
+                }
                         if (columns[5] != "")
+                        {
+                        try
                         {
                             poster = new BitmapImage();
                             poster.BeginInit();
@@ -97,9 +104,13 @@ namespace GameLauncher.ViewModels
                             poster.CacheOption = BitmapCacheOption.OnLoad;
                             poster.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                             poster.EndInit();
-                        poster.Freeze();
-                    }
+                            poster.Freeze();
+                        }
+                        catch (Exception e) { Trace.WriteLine("Error saving image (Poster): " + e); }
+                }
                         if (columns[6] != "")
+                        {
+                        try
                         {
                             banner = new BitmapImage();
                             banner.BeginInit();
@@ -108,7 +119,9 @@ namespace GameLauncher.ViewModels
                             banner.CacheOption = BitmapCacheOption.OnLoad;
                             banner.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                             banner.EndInit();
-                        banner.Freeze();
+                            banner.Freeze();
+                        }
+                        catch (Exception e) { Trace.WriteLine("Error saving image (Banner): " + e); }
                     }
                     itemcount++;
                     title = columns[0];
