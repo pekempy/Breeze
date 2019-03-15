@@ -18,7 +18,7 @@ namespace GameLauncher.Views
     /// <summary>
     /// Interaction logic for Loading.xaml
     /// </summary>
-    public partial class Loading : Page
+    public partial class Loading : UserControl
     {
         public static Loading ld;
         public bool isLoading;
@@ -27,8 +27,8 @@ namespace GameLauncher.Views
             InitializeComponent();
             try
             {
-                this.ProgressGrid.Height = (Application.Current.MainWindow).ActualHeight * 0.5;
-                this.ProgressGrid.Width = (Application.Current.MainWindow).ActualWidth * 0.5;
+                ld.ProgressGrid.Height = (Application.Current.MainWindow).ActualHeight * 0.5;
+                ld.ProgressGrid.Width = (Application.Current.MainWindow).ActualWidth * 0.5;
             }
             catch { }
         }

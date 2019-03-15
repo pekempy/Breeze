@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,12 +22,23 @@ namespace GameLauncher.ViewModels
         public BitmapImage icon;
         public BitmapImage poster;
         public BitmapImage banner;
+        public string title;
+        public string path;
+        public string genre;
+        public string link;
+        public string guid;
+        public string genreName;
+        public string genreGuid;
+        public int percentage;
+
         public void LoadGames()
         {
             try { games.Clear(); } catch { }
             try { Games.Clear(); } catch { }
             ReadFile();
             Games = games;
+            App.Current.Dispatcher.Invoke(new Action(() =>
+            ((MainWindow)Application.Current.MainWindow).RefreshDataContext()));
         }
 
         public void LoadGenres()
@@ -42,11 +54,12 @@ namespace GameLauncher.ViewModels
                 foreach (var item in genresArr)
                 {
                     columns = genresArr[numberOfGenres].Split('|');
-                    genres.Add(new GenreList
-                    {
-                        Name = columns[0],
-                        Guid = columns[1]
-                    });
+                    genreName = columns[0];
+                    genreGuid = columns[1];
+                    App.Current.Dispatcher.Invoke(new Action(() =>
+                    AddGenresToOC()));
+                    genreName = null;
+                    genreGuid = null;
                     numberOfGenres++;
                 }
             }
@@ -59,10 +72,11 @@ namespace GameLauncher.ViewModels
             {
                 string gameFile = "./Resources/GamesList.txt";
                 string[] columns = new string[0];
-                foreach (var item in File.ReadLines(gameFile))
+                int itemcount = 0;
+                int GameCount = File.ReadLines(gameFile).Count();
+                foreach (var item in File.ReadAllLines(gameFile))
                 {
                     columns = item.Split('|');
-                    //these lines convert the strings to bitmapimages
                         if (columns[4] != "")
                         {
                             icon = new BitmapImage();
@@ -72,6 +86,7 @@ namespace GameLauncher.ViewModels
                             icon.CacheOption = BitmapCacheOption.OnLoad;
                             icon.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                             icon.EndInit();
+                        icon.Freeze();
                         }
                         if (columns[5] != "")
                         {
@@ -82,7 +97,8 @@ namespace GameLauncher.ViewModels
                             poster.CacheOption = BitmapCacheOption.OnLoad;
                             poster.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                             poster.EndInit();
-                        }
+                        poster.Freeze();
+                    }
                         if (columns[6] != "")
                         {
                             banner = new BitmapImage();
@@ -92,23 +108,46 @@ namespace GameLauncher.ViewModels
                             banner.CacheOption = BitmapCacheOption.OnLoad;
                             banner.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                             banner.EndInit();
-                        }
-                    games.Add(new GameList
-                    {
-                        Title = columns[0],
-                        Genre = columns[1],
-                        Path = columns[2],
-                        Link = columns[3],
-                        Icon = icon,
-                        Poster = poster,
-                        Banner = banner,
-                        Guid = columns[7]
-                    });
+                        banner.Freeze();
+                    }
+                    itemcount++;
+                    title = columns[0];
+                    genre = columns[1];
+                    path = columns[2];
+                    link = columns[3];
+                    guid = columns[7];
+                    double percent = itemcount / GameCount;
+                    percentage = Convert.ToInt32(percent);
+                    App.Current.Dispatcher.Invoke(new Action(() =>
+                    AddGameToOC()));
                     icon = null;
                     poster = null;
                     banner = null;
                 }
             }
+        }
+        public void AddGameToOC()
+        {
+            string threadState = Thread.CurrentThread.IsBackground.ToString();
+            games.Add(new GameList
+            {
+                Title = title,
+                Genre = genre,
+                Path = path,
+                Link = link,
+                Icon = icon,
+                Poster = poster,
+                Banner = banner,
+                Guid = guid
+            });
+        }
+        public void AddGenresToOC()
+        {
+            genres.Add(new GenreList
+            {
+                Name = genreName,
+                Guid = genreGuid
+            });
         }
     }
 }

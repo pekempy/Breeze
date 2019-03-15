@@ -117,6 +117,7 @@
       <DependentUpon>EditGames.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\AutoImage.cs" />
+    <Compile Include="ViewModels\LoadingViewModel.cs" />
     <Compile Include="Views\ExeSelection.xaml.cs">
       <DependentUpon>ExeSelection.xaml</DependentUpon>
     </Compile>

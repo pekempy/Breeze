@@ -33,6 +33,7 @@ namespace GameLauncher
         private ListViewModel listViewModel = new ListViewModel();
         private PosterViewModel posterViewModel = new PosterViewModel();
         private SettingsViewModel settingsViewModel = new SettingsViewModel();
+        private LoadingViewModel loadingViewModel = new LoadingViewModel();
         private ExesViewModel exesViewModel = new ExesViewModel();
         private Loading loadingdialog = new Loading();
         public Views.PosterView pv = new Views.PosterView();
@@ -45,9 +46,15 @@ namespace GameLauncher
         public string DLGameTitle;
         public string DLImgType;
         public string view;
+        public BackgroundWorker lagbw;
 
         public MainWindow()
         {
+            lagbw = new BackgroundWorker();
+            lagbw.WorkerReportsProgress = true;
+            lagbw.ProgressChanged += LagBWProgressChanged;
+            lagbw.DoWork += LagBWDoWork;
+            lagbw.RunWorkerCompleted += LagBWRunWorkerCompleted;
             Trace.Listeners.Clear();
             InitTraceListen();
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 0.75);
@@ -59,11 +66,31 @@ namespace GameLauncher
             lag.LoadGenres();
             InitializeComponent();
             LoadAllViews();
-            DataContext = posterViewModel;
+            DataContext = loadingViewModel;
             isDownloadOpen = false;
             LoadSettings();
             Trace.WriteLine(DateTime.Now + ": New Session started");
 
+        }
+        public void LagBWDoWork(object sender, DoWorkEventArgs e)
+        {
+            lag.LoadGenres();
+            lag.LoadGames();
+        }
+        public void LagBWProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Console.WriteLine(e);
+        }
+        public void LagBWRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            GameListMW = lag.Games;
+            GenreListMW = lag.Genres;
+            posterViewModel.LoadGames();
+            listViewModel.LoadGames();
+            bannerViewModel.LoadGames();
+            if (Settings.Default.viewtype.ToString() == "Poster") { PosterViewActive();}
+            if (Settings.Default.viewtype.ToString() == "Banner") { BannerViewActive(); }
+            if (Settings.Default.viewtype.ToString() == "List") { ListViewActive(); }
         }
         public void MakeDirectories()
         {
@@ -73,13 +100,32 @@ namespace GameLauncher
         }
         public void LoadAllViews()
         {
-            lag.LoadGenres();
-            lag.LoadGames();
-            GameListMW = lag.Games;
-            GenreListMW = lag.Genres;
-            posterViewModel.LoadGames();
-            bannerViewModel.LoadGames();
-            listViewModel.LoadGames();
+            try
+            {
+                try { GenreListMW.Clear(); } catch { }
+                try { GameListMW.Clear(); } catch { }
+                lagbw.RunWorkerAsync();
+            }
+            catch { }
+        }
+        public void RefreshDataContext()
+        {
+            if (view == "poster")
+            {
+                DataContext = posterViewModel;
+            }
+            else if (view == "list")
+            {
+                DataContext = listViewModel;
+            }
+            else if (view == "banner")
+            {
+                DataContext = bannerViewModel;
+            }
+            if (view == "settings")
+            {
+                DataContext = settingsViewModel;
+            }
         }
         public void MakeDefaultGenres()
         {
@@ -310,21 +356,21 @@ namespace GameLauncher
         public void PosterViewActive()
         {
             view = "poster";
-            Dispatcher.BeginInvoke( new ThreadStart(() => DataContext = posterViewModel));
+            DataContext = posterViewModel;
             Properties.Settings.Default.viewtype = "Poster";
             Properties.Settings.Default.Save();
         }
         public void BannerViewActive()
         {
             view = "banner";
-            Dispatcher.BeginInvoke(new ThreadStart(() => DataContext = DataContext = bannerViewModel));
+            DataContext = bannerViewModel;
             Properties.Settings.Default.viewtype = "Banner";
             Properties.Settings.Default.Save();
         }
         public void ListViewActive()
         {
             view = "list";
-            Dispatcher.BeginInvoke(new ThreadStart(() => DataContext = DataContext = listViewModel));
+            DataContext = listViewModel;
             Properties.Settings.Default.viewtype = "List";
             Properties.Settings.Default.Save();
         }
@@ -333,7 +379,7 @@ namespace GameLauncher
             view = "settings";
             settingsViewModel = new SettingsViewModel();
             settingsViewModel.LoadGenres();
-            Dispatcher.BeginInvoke(new ThreadStart(() => DataContext = DataContext = settingsViewModel));
+            DataContext = settingsViewModel;
         }
         public void RefreshGames()
         {
@@ -400,18 +446,6 @@ namespace GameLauncher
             if (Settings.Default.accent.ToString() != "")
             {
                 new PaletteHelper().ReplaceAccentColor(Settings.Default.accent.ToString());
-            }
-            if (Settings.Default.viewtype.ToString() == "Poster")
-            {
-                PosterViewActive();
-            }
-            if (Settings.Default.viewtype.ToString() == "Banner")
-            {
-                BannerViewActive();
-            }
-            if (Settings.Default.viewtype.ToString() == "List")
-            {
-                ListViewActive();
             }
         }
     }
