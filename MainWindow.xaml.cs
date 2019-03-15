@@ -33,7 +33,6 @@ namespace GameLauncher
         private ListViewModel listViewModel = new ListViewModel();
         private PosterViewModel posterViewModel = new PosterViewModel();
         private SettingsViewModel settingsViewModel = new SettingsViewModel();
-        private LoadingViewModel loadingViewModel = new LoadingViewModel();
         private ExesViewModel exesViewModel = new ExesViewModel();
         private Loading loadingdialog = new Loading();
         public Views.PosterView pv = new Views.PosterView();
@@ -66,7 +65,7 @@ namespace GameLauncher
             lag.LoadGenres();
             InitializeComponent();
             LoadAllViews();
-            DataContext = loadingViewModel;
+            DataContext = null;
             isDownloadOpen = false;
             LoadSettings();
             Trace.WriteLine(DateTime.Now + ": New Session started");
@@ -91,6 +90,7 @@ namespace GameLauncher
             if (Settings.Default.viewtype.ToString() == "Poster") { PosterViewActive();}
             if (Settings.Default.viewtype.ToString() == "Banner") { BannerViewActive(); }
             if (Settings.Default.viewtype.ToString() == "List") { ListViewActive(); }
+            DialogFrame.Visibility = Visibility.Hidden;
         }
         public void MakeDirectories()
         {
@@ -100,6 +100,8 @@ namespace GameLauncher
         }
         public void LoadAllViews()
         {
+            DialogFrame.Visibility = Visibility.Visible;
+            DialogFrame.Content = loadingdialog;
             try
             {
                 try { GenreListMW.Clear(); } catch { }
@@ -339,7 +341,7 @@ namespace GameLauncher
             bv.RefreshList2(cvs);
             lv.GenreToFilter(genreToFilter);
             lv.RefreshList2(cvs);
-            MenuToggleButton.IsChecked = false; //hide hamburger
+            MenuToggleButton.IsChecked = false;
         }       
         public void LoadingState(string state)
         {
@@ -383,7 +385,7 @@ namespace GameLauncher
         }
         public void RefreshGames()
         {
-            Dispatcher.BeginInvoke(new ThreadStart(() => LoadAllViews()));
+            LoadAllViews();
             if (view == "list") { ListViewActive(); }
             else if (view == "poster") { PosterViewActive(); }
             else if (view == "banner") { BannerViewActive(); }

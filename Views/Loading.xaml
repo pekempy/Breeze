@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GameLauncher.Views.Loading"
+﻿<Page x:Class="GameLauncher.Views.Loading"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:Helpers="clr-namespace:GameLauncher.Models"
@@ -13,15 +13,22 @@
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
-    <Grid x:Name="ProgressGrid" MaxWidth="200" MaxHeight="200"
-          VerticalAlignment="Center" HorizontalAlignment="Center">
+    <Grid x:Name="ProgressGrid"
+          VerticalAlignment="Center" 
+          HorizontalAlignment="Center"
+          MinWidth="200" 
+          MinHeight="200">
         <materialDesign:Card
-  UniformCornerRadius="14"
-  Padding="4">
+            UniformCornerRadius="100"
+            Padding="10" 
+            MinWidth="200" 
+            MinHeight="200">
             <ProgressBar
-    Style="{StaticResource MaterialDesignCircularProgressBar}"
-    Value="50"
-    IsIndeterminate="True" />
+                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                x:Name="LoadingSpinner"
+                IsIndeterminate="True" 
+                Height="Auto"
+                Width="Auto"/>
         </materialDesign:Card>
     </Grid>
-</UserControl>
+</Page>

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using GameLauncher.Properties;
+using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,24 +21,36 @@ namespace GameLauncher.Views
     /// <summary>
     /// Interaction logic for Loading.xaml
     /// </summary>
-    public partial class Loading : UserControl
+    public partial class Loading : Page
     {
         public static Loading ld;
         public bool isLoading;
         public Loading()
         {
             InitializeComponent();
+            if (Settings.Default.theme.ToString() == "Dark")
+            {
+                ThemeAssist.SetTheme(this, BaseTheme.Dark);
+            }
+            else if (Settings.Default.theme.ToString() == "Light")
+            {
+                ThemeAssist.SetTheme(this, BaseTheme.Light);
+            }
             try
             {
-                ld.ProgressGrid.Height = (Application.Current.MainWindow).ActualHeight * 0.5;
-                ld.ProgressGrid.Width = (Application.Current.MainWindow).ActualWidth * 0.5;
+                ld.ProgressGrid.Height = (Application.Current.MainWindow).ActualHeight * 0.9;
+                ld.ProgressGrid.Width = (Application.Current.MainWindow).ActualWidth * 0.9;
+                ld.LoadingSpinner.Height = (Application.Current.MainWindow).ActualHeight * 0.6;
+                ld.LoadingSpinner.Width = (Application.Current.MainWindow).ActualWidth * 0.6;
             }
             catch { }
         }
         public static void ChangeWindowSize(double height, double width)
         {
-            ld.ProgressGrid.Height = ((MainWindow)Application.Current.MainWindow).ActualHeight * 0.8;
-            ld.ProgressGrid.Width = ((MainWindow)Application.Current.MainWindow).ActualWidth * 0.8;
+            ld.ProgressGrid.Height = (Application.Current.MainWindow).ActualHeight * 0.9;
+            ld.ProgressGrid.Width = (Application.Current.MainWindow).ActualWidth * 0.9;
+            ld.LoadingSpinner.Height = (Application.Current.MainWindow).ActualHeight * 0.6;
+            ld.LoadingSpinner.Width = (Application.Current.MainWindow).ActualWidth * 0.6;
         }
     }
 }
