@@ -10,6 +10,7 @@ using System.DirectoryServices.AccountManagement;
 using System.Windows;
 using System.Collections;
 using System.Diagnostics;
+using System.Text;
 
 namespace GameLauncher.Models
 {
@@ -23,6 +24,7 @@ namespace GameLauncher.Models
         public List<string> listOfBattleNetGames = new List<string>();
         public ObservableCollection<GameExecutables> Exes { get; set; }
         private ObservableCollection<GameExecutables> exes = new ObservableCollection<GameExecutables>();
+        private ObservableCollection<GameExecutables> exes2 = new ObservableCollection<GameExecutables>();
         public string title;
         public string publisher;
         public string installLocation;
@@ -42,7 +44,22 @@ namespace GameLauncher.Models
             catch (Exception e) { Trace.WriteLine("SearchEpic Failed: " + e); }
             try { SearchBattle(); }
             catch (Exception e) { Trace.WriteLine("SearchBattleNet Failed: " + e); }
-            Exes = exes;
+
+            var text = File.ReadAllLines("./Resources/GamesList.txt", Encoding.UTF8);
+            foreach (var exeItem in exes.ToList())
+            {
+                for (int i = 0; i < text.Length; i++)
+                {
+                    string[] columns = text[i].Split('|');
+                    if (columns[0] == exeItem.Title)
+                    {
+                        Trace.WriteLine(DateTime.Now + ": Matched exe found, skipping - " + exeItem.Title);
+                        exes.Remove(exeItem);
+                    }
+                }
+            }
+            exes2 = exes;
+            Exes = exes2;
         }
 
         public void UpdateObsCol(string title, string exe)

@@ -45,7 +45,6 @@ namespace GameLauncher.Views
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.EditGameInfile(((Button)sender).Tag);
-            MainWindow.RefreshGames();
         }
 
         private void DeleteGame_OnClick(object sender, RoutedEventArgs e)

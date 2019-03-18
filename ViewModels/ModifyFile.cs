@@ -34,7 +34,7 @@ namespace GameLauncher.ViewModels
                             if (columns2[0] == title)
                                 titlecount++;
                         }
-                        if (titlecount == 1) //only delete if title occurs once
+                        if (titlecount == 1) 
                             DeleteGameImages(title); 
                         text[i] = "";
                         text = text.Where(x => !string.IsNullOrEmpty(x)).ToArray();

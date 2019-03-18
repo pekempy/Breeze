@@ -20,6 +20,9 @@ namespace GameLauncher.Models
 
         public string AutoDownloadImages(string title, string type)
         {
+            //Somehow, a check in here to see if the anti-robot comes up would be useful
+            //Maybe a popup with iFrame of the website so user can pass the bot check in-app
+            //then continue processing?
             string url = "https://www.qwant.com/?q=" + title.Replace(" ", "%20") + "%20" + type.Replace(" ", "%20") + "&t=images";
             HtmlWeb hw = new HtmlWeb();
             try
