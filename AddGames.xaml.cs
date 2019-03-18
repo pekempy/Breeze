@@ -82,6 +82,7 @@ namespace GameLauncher
                         {
                             Trace.WriteLine(DateTime.Now + ": AddGameOnClick: " + ex.Message);
                         }
+                        Trace.WriteLine(DateTime.Now + ": Added Game manually: " + NewGameTitle.Text);
                         ClearGenreBoxes();
                         clearFields();
                         ((MainWindow)Application.Current.MainWindow)?.RefreshGames();

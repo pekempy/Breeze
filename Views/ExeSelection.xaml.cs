@@ -55,12 +55,15 @@ namespace GameLauncher.Views
         public void IncreaseImages()
         {
             imagesDownloaded++;
+            double progress = imagesDownloaded / maximumImages;
+            progress = progress * 100;
+            int percent = Convert.ToInt32(progress);
+            exebw.ReportProgress(percent);
         }
         public void ExeBWDoWork(object sender, DoWorkEventArgs e)
         {
             imagesDownloaded = 0;
             maximumImages = ExeList.Count * 3;
-            //Loading dialog not showing on top
             foreach (var item in ExeList)
             {
                 TextWriter tw = new StreamWriter(@"./Resources/GamesList.txt", true);
@@ -79,10 +82,7 @@ namespace GameLauncher.Views
                 string game = title + "||" + shortcut + "||" + icon + "|" + poster + "|" + banner + "|" + gameGuid;
                 tw.WriteLine(game);
                 tw.Close();
-                double progress = imagesDownloaded / maximumImages;
-                progress = progress * 100;
-                int percent = Convert.ToInt32(progress);
-                exebw.ReportProgress(percent);
+                Trace.WriteLine(DateTime.Now + ": Added game to file with ExeSearch: " + title);
             }
         }
         public void ExeBWProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -110,7 +110,6 @@ namespace GameLauncher.Views
                 if (exeItem.Title == gametitle)
                 {
                     ExesViewModel.ExesOC.Remove(exeItem);
-                    //So it's removed from UI, but not removed from list of icons to download
                 }
             }
             foreach (var exelistItem in ExeList.ToList())

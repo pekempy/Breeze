@@ -168,12 +168,20 @@ namespace GameLauncher
         public void InitTraceListen()
         {
             string appdir = AppDomain.CurrentDomain.BaseDirectory;
-            if (!Directory.Exists(appdir + "\\log")) { Directory.CreateDirectory(appdir + "\\log"); }
-            if (File.Exists(appdir + "\\log\\event.log")) {
-                File.Delete(appdir + "\\log\\event.log");
-                File.Create(appdir + "\\log\\event.log"); }
-            else { File.Create(appdir + "\\log\\event.log"); }
-            TextWriterTraceListener twtl = new TextWriterTraceListener(appdir + "\\log\\event.log");
+            string logfile = appdir + "\\log\\logfile.log";
+            if (!Directory.Exists(appdir + "\\log"))
+            {
+                Directory.CreateDirectory(appdir + "\\log");
+            }
+            if (File.Exists(logfile))
+            {
+                Directory.Delete(appdir + "\\log", true);
+                Directory.CreateDirectory(appdir + "\\log");
+                var log = File.Create(logfile);
+                log.Close();
+            }
+            else { var log = File.Create(logfile); }
+            TextWriterTraceListener twtl = new TextWriterTraceListener(logfile);
             twtl.TraceOutputOptions = TraceOptions.ThreadId | TraceOptions.DateTime;
             ConsoleTraceListener ctl = new ConsoleTraceListener(false);
             ctl.TraceOutputOptions = TraceOptions.DateTime;
@@ -343,9 +351,12 @@ namespace GameLauncher
         }
         public void ApplyGenreFilter_OnClick(object sender, RoutedEventArgs e)
         {
-            if (DataContext == settingsViewModel)
-                DataContext = posterViewModel;
             string genreToFilter = ((Button)sender).Tag.ToString();
+            if (DataContext == settingsViewModel)
+            {
+                //Check saved context + apply :)
+                DataContext = posterViewModel;
+            }
             pv.GenreToFilter(genreToFilter);
             pv.RefreshList2(cvs);
             bv.GenreToFilter(genreToFilter);
