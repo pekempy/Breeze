@@ -226,10 +226,13 @@ namespace GameLauncher.Views
         }
         public void BackupLibrary(object sender, RoutedEventArgs e)
         {
+            Trace.WriteLine(DateTime.Now + ": Created backup file");
+            File.Delete(@"backup.zip");
             ZipFile.CreateFromDirectory(@"Resources/", installPath + "backup.zip");
         }
         public void RestoreLibrary(object sender, RoutedEventArgs e)
         {
+            Trace.WriteLine(DateTime.Now + ": Restored backup file");
             Directory.Delete(@"Resources", true);
             ZipFile.ExtractToDirectory(installPath + "backup.zip", @"Resources/");
             ((MainWindow)Application.Current.MainWindow).RefreshGames();

@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using GameLauncher.Views;
 using System.Windows;
+using System.Diagnostics;
 
 namespace GameLauncher.Models
 {
@@ -58,6 +59,7 @@ namespace GameLauncher.Models
         }
         public string DownloadImage(string title, string type)
         {
+            Trace.WriteLine(DateTime.Now + ": Downloading " + title + " " + type);
             App.Current.Dispatcher.Invoke(new Action(() =>
                ((MainWindow)Application.Current.MainWindow).IncreaseExeSearch()));
             using (WebClient client = new WebClient())
