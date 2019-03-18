@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using GameLauncher.Views;
+using System.Windows;
 
 namespace GameLauncher.Models
 {
@@ -47,16 +48,18 @@ namespace GameLauncher.Models
                     }
                 }
                 DownloadImage(title, type);
-                exs.imagesDownloaded++;
                 iconList.Clear();
                 posterList.Clear();
                 bannerList.Clear();
+                
                 fileName = installPath + fileName;
                 return fileName;
             } catch (Exception) { return null; }
         }
         public string DownloadImage(string title, string type)
         {
+            App.Current.Dispatcher.Invoke(new Action(() =>
+               ((MainWindow)Application.Current.MainWindow).IncreaseExeSearch()));
             using (WebClient client = new WebClient())
             {
                 ServicePointManager.Expect100Continue = true;

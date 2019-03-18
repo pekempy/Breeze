@@ -36,7 +36,7 @@ namespace GameLauncher.Views
         private bool matchExe = false;
         public string title;
         public string selectedExe;
-        public LoadingProgress ldProgress;
+        public LoadingProgress ldProgress = new LoadingProgress();
         public BackgroundWorker exebw;
         public double imagesDownloaded;
         public double maximumImages;
@@ -59,14 +59,15 @@ namespace GameLauncher.Views
                 ThemeAssist.SetTheme(this, BaseTheme.Light);
             }
         }
+        public void IncreaseImages()
+        {
+            imagesDownloaded++;
+        }
         public void ExeBWDoWork(object sender, DoWorkEventArgs e)
         {
             imagesDownloaded = 0;
             maximumImages = ExeList.Count * 3;
-            //Show loading dialog here
-            //Count how many exes haven't been searched based on ExeList (*3 cos images are 3 per game)
-            //Each AutoImage ++ the count in here
-            //Report progress and use a normal material progress bar
+            //Loading dialog not showing on top
             foreach (var item in ExeList)
             {
                 TextWriter tw = new StreamWriter(@"./Resources/GamesList.txt", true);
@@ -75,7 +76,6 @@ namespace GameLauncher.Views
                 string title = gameitems[0];
                 string exe = gameitems[1];
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
-                //Here we download image automatically
                 string fileNameIcon = ai.AutoDownloadImages(title, "icon");
                 string fileNamePoster = ai.AutoDownloadImages(title, "poster");
                 string fileNameBanner = ai.AutoDownloadImages(title, "banner");
@@ -87,25 +87,23 @@ namespace GameLauncher.Views
                 tw.WriteLine(game);
                 tw.Close();
                 double progress = imagesDownloaded / maximumImages;
+                progress = progress * 100;
                 int percent = Convert.ToInt32(progress);
                 exebw.ReportProgress(percent);
             }
         }
         public void ExeBWProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //If progress changes are reported.. use here to update UI
-            //ldProgress not initialized
-            ((MainWindow)Application.Current.MainWindow).OpenLoadingProgressDialog();
             ldProgress.ProgressBar.Value = e.ProgressPercentage;
             double remainingImages = maximumImages - imagesDownloaded;
             ldProgress.NumberLeft.Text = remainingImages.ToString();
         }
         public void ExeBWRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            App.Current.Dispatcher.Invoke(new Action(() =>
-            ((MainWindow)Application.Current.MainWindow).CloseLoadingProgressDialog()));
-            App.Current.Dispatcher.Invoke(new Action(() =>
-            ((MainWindow)Application.Current.MainWindow).CloseExeSearchDialog()));
+            ExeList.Clear();
+            ((MainWindow)Application.Current.MainWindow).CloseLoadingProgressDialog();
+            ((MainWindow)Application.Current.MainWindow).CloseExeSearchDialog();
+            ((MainWindow)Application.Current.MainWindow).RefreshGames();
         }
         public void CloseExeSelection(object sender, RoutedEventArgs e)
         {
@@ -222,6 +220,8 @@ namespace GameLauncher.Views
         private void AcceptExeSelection_OnClick(object sender, RoutedEventArgs e)
         {
             //Performs ExeBWDoWork();
+            ((MainWindow)Application.Current.MainWindow).DialogFrame.Visibility = Visibility.Visible;
+            ((MainWindow)Application.Current.MainWindow).DialogFrame.Content = ldProgress;
             exebw.RunWorkerAsync();
         }
         private string createShortcut(string title, string exe)

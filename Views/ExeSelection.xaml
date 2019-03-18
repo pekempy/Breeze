@@ -27,6 +27,12 @@
                               CollectionViewType="{x:Type dat:ListCollectionView}"
                               Source="{Binding ExesOC}" />
     </Page.Resources>
+    <Grid>
+    <Border>
+        <Frame x:Name="DialogFrame"
+                   NavigationUIVisibility="Hidden"
+                   Visibility="Hidden" />
+    </Border>
     <materialDesign:DialogHost x:Name="ExeSelectionDialog"
                                DialogTheme="Inherit"
                                CloseOnClickAway="False"
@@ -221,5 +227,6 @@
                 </materialDesign:ColorZone>
             </Grid>
         </materialDesign:DialogHost.DialogContent>
-    </materialDesign:DialogHost>
+        </materialDesign:DialogHost>
+    </Grid>
 </Page>

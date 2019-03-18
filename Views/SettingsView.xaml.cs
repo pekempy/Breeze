@@ -14,11 +14,13 @@ using GameLauncher.Models;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Diagnostics;
+using System.IO.Compression;
 
 namespace GameLauncher.Views
 {
     public partial class SettingsView : UserControl
     {
+        string installPath = AppDomain.CurrentDomain.BaseDirectory;
         private ExeSearch es = new ExeSearch();
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
         private LoadAllGames lag = new LoadAllGames();
@@ -34,6 +36,8 @@ namespace GameLauncher.Views
             Directory.Delete(@"Resources/img/", true);
             File.Delete(@"Resources/GamesList.txt");
             Directory.CreateDirectory(@"/Resources/img/");
+            ((MainWindow)Application.Current.MainWindow).RefreshGames();
+            ((MainWindow)Application.Current.MainWindow).SettingsViewActive();
         }
 
         public SettingsView()
@@ -171,7 +175,7 @@ namespace GameLauncher.Views
                 GenreListCVS.View.Refresh();
         }
         private void DeleteGenre_OnClick(object sender, RoutedEventArgs e)
-        {  //Check Genre file for the name of the genre to remove
+        {  
             string genreGuid = ((Button)sender).Tag.ToString();
             var genretext = File.ReadAllLines("./Resources/GenreList.txt", Encoding.UTF8);
             for (int i = 0; i < genretext.Length; i++)
@@ -189,7 +193,6 @@ namespace GameLauncher.Views
                     }
                 }
             }
-            //Check gameslist, and remove that genre from any listings
             if (!File.Exists("./Resources/GamesList.txt")) { }
             else
             {
@@ -220,6 +223,16 @@ namespace GameLauncher.Views
             }
             ModifyFile.RemoveGenreFromFile(((Button)sender).Tag.ToString());
             MainWindow.RefreshGames();
+        }
+        public void BackupLibrary(object sender, RoutedEventArgs e)
+        {
+            ZipFile.CreateFromDirectory(@"Resources/", installPath + "backup.zip");
+        }
+        public void RestoreLibrary(object sender, RoutedEventArgs e)
+        {
+            Directory.Delete(@"Resources", true);
+            ZipFile.ExtractToDirectory(installPath + "backup.zip", @"Resources/");
+            ((MainWindow)Application.Current.MainWindow).RefreshGames();
         }
         public void SaveSettings()
         {

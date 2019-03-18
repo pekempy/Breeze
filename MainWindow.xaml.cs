@@ -35,7 +35,7 @@ namespace GameLauncher
         private SettingsViewModel settingsViewModel = new SettingsViewModel();
         private ExesViewModel exesViewModel = new ExesViewModel();
         private Loading loadingdialog = new Loading();
-        private Loading loadingprogressdialog = new Loading();
+        public Loading loadingprogressdialog = new Loading();
         public Views.PosterView pv = new Views.PosterView();
         public Views.BannerView bv = new Views.BannerView();
         public Views.ListView lv = new Views.ListView();
@@ -354,18 +354,6 @@ namespace GameLauncher
             lv.RefreshList2(cvs);
             MenuToggleButton.IsChecked = false;
         }       
-        public void LoadingState(string state)
-        {
-            Loading loadingdialog = new Loading();
-            if (state == "open")
-            {
-                //open loading dialog
-            }
-            else if (state == "closed")
-            {
-                //close loading dialog
-            }
-        }
         public void PosterViewActive()
         {
             view = "poster";
@@ -393,6 +381,10 @@ namespace GameLauncher
             settingsViewModel = new SettingsViewModel();
             settingsViewModel.LoadGenres();
             DataContext = settingsViewModel;
+        }
+        public void IncreaseExeSearch()
+        {
+            DialogExeSelection.IncreaseImages();
         }
         public void RefreshGames()
         {

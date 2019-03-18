@@ -27,14 +27,19 @@ namespace GameLauncher.Views
         public bool isLoading;
         public LoadingProgress()
         {
+            var converter = new System.Windows.Media.BrushConverter();
+            var white = (Brush)converter.ConvertFromString("#FFFFFF");
+            var black = (Brush)converter.ConvertFromString("#000000");
             InitializeComponent();
             if (Settings.Default.theme.ToString() == "Dark")
             {
                 ThemeAssist.SetTheme(this, BaseTheme.Dark);
+                NumberLeft.Foreground = white;
             }
             else if (Settings.Default.theme.ToString() == "Light")
             {
                 ThemeAssist.SetTheme(this, BaseTheme.Light);
+                NumberLeft.Foreground = black;
             }
             try
             {
