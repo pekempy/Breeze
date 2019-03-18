@@ -7,7 +7,6 @@
       xmlns:local="clr-namespace:GameLauncher.Views"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:vwp="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
       Title="ExeSelection"
       MinWidth="380"
       MinHeight="580"
@@ -91,15 +90,20 @@
                                                            Visibility="{Binding Converter={StaticResource n2vi}, Path=Exe1}">
                                                     No Executable Found - Choose one with the attach button!
                                                 </TextBlock>
-                                                <Button Width="150"
-                                                        Click="ManualLauncher"
-                                                        HorizontalAlignment="Right"
-                                                        Style="{DynamicResource MaterialDesignToolButton}"
+                                                <Button Click="ManualLauncher"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        MaxWidth="50"
+                                                        MaxHeight="50"
+                                                        Grid.Row="2"
+                                                        Grid.RowSpan="5"
+                                                        Margin="10 10 10 10"
+                                                        Style="{DynamicResource MaterialDesignFloatingActionMiniAccentButton}"
                                                         Tag="{Binding Title}"
                                                         Visibility="{Binding Converter={StaticResource n2vi}, Path=Exe1}">
                                                     <materialDesign:PackIcon Kind="AttachFile" />
-                                                </Button>
-                                                <RadioButton x:Name="R1"
+                                                    </Button>
+                                                    <RadioButton x:Name="R1"
                                                              Grid.Row="1"
                                                              Margin="5,5,5,5"
                                                              Checked="RadioButton_Selected"
@@ -173,8 +177,20 @@
                                                                    Text="{Binding Exe6}"
                                                                    TextWrapping="WrapWithOverflow" />
                                                     </RadioButton.Content>
-                                                </RadioButton>
-                                            </Grid>
+                                                    </RadioButton>
+                                                    <Button Click="RemoveExe"
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Center"
+                                                        Grid.RowSpan="5"
+                                                        Margin="10 10 10 10"
+                                                            Foreground="Red"
+                                                        Style="{DynamicResource MaterialDesignToolButton}"
+                                                        Tag="{Binding Title}">
+                                                        <materialDesign:PackIcon Kind="Delete"
+                                                            Width="30"
+                                                            Height="30" />
+                                                    </Button>
+                                                </Grid>
                                         </materialDesign:Card>
                                     </StackPanel>
                                 </DataTemplate>

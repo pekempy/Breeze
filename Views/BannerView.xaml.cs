@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -55,7 +56,15 @@ namespace GameLauncher.Views
                 ModifyFile.DeleteGameImages(((Button)sender).CommandParameter.ToString());
             }
             catch (Exception exc) { Trace.WriteLine("Failed to delete images for game: " + exc); }
-            MainWindow.RefreshGames();
+            string removeguid = ((Button)sender).Tag.ToString();
+            foreach (var item in BannerViewModel.BannerViewOC.ToList())
+            {
+                if (removeguid == item.Guid)
+                {
+                    Trace.WriteLine(DateTime.Now + ": Removed Game: " + item.Title);
+                    BannerViewModel.BannerViewOC.Remove(item);
+                }
+            }
         }
 
         //When text is changed in searchbar, apply filter

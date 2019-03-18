@@ -27,7 +27,20 @@ namespace GameLauncher.Views
         private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.RemoveGameFromFile(((Button)sender).Tag);
-            MainWindow.RefreshGames();
+            try
+            {
+                ModifyFile.DeleteGameImages(((Button)sender).CommandParameter.ToString());
+            }
+            catch (Exception exc) { Trace.WriteLine("Failed to delete images for game: " + exc); }
+            string removeguid = ((Button)sender).Tag.ToString();
+            foreach (var item in PosterViewModel.PosterViewOC.ToList())
+            {
+                if (removeguid == item.Guid)
+                {
+                    Trace.WriteLine(DateTime.Now + ": Removed Game: " + item.Title);
+                    PosterViewModel.PosterViewOC.Remove(item);
+                }
+            }
         }
 
         private void EditGame_OnClick(object sender, RoutedEventArgs e)

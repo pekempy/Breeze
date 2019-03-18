@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using GameLauncher.Models;
-using GameLauncher.ViewModels;
 using System.Globalization;
 using Microsoft.Win32;
 using System.IO;
@@ -21,6 +12,7 @@ using IWshRuntimeLibrary;
 using GameLauncher.Properties;
 using MaterialDesignThemes.Wpf;
 using System.Diagnostics;
+using GameLauncher.ViewModels;
 using System.ComponentModel;
 
 namespace GameLauncher.Views
@@ -32,6 +24,7 @@ namespace GameLauncher.Views
         public static ExeSearch exs = new ExeSearch();
         public List<string> ExeList = new List<string>();
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
+        public ExesViewModel exevm;
         private bool matchFound = false;
         private bool matchExe = false;
         public string title;
@@ -108,6 +101,26 @@ namespace GameLauncher.Views
         public void CloseExeSelection(object sender, RoutedEventArgs e)
         {
             ((MainWindow)Application.Current.MainWindow)?.CloseExeSearchDialog();
+        }
+        public void RemoveExe(object sender, RoutedEventArgs e)
+        {         
+            string gametitle = ((Button)sender).Tag.ToString();
+            foreach (var exeItem in ExesViewModel.ExesOC.ToList())
+            {
+                if (exeItem.Title == gametitle)
+                {
+                    ExesViewModel.ExesOC.Remove(exeItem);
+                    //So it's removed from UI, but not removed from list of icons to download
+                }
+            }
+            foreach (var exelistItem in ExeList.ToList())
+            {
+                string[] item = exelistItem.Split(';');
+                if (item[0] == gametitle)
+                {
+                    ExeList.Remove(exelistItem);
+                }
+            }
         }
         public static void ChangeWindowSize(double height, double width)
         {
@@ -219,7 +232,6 @@ namespace GameLauncher.Views
         }
         private void AcceptExeSelection_OnClick(object sender, RoutedEventArgs e)
         {
-            //Performs ExeBWDoWork();
             ((MainWindow)Application.Current.MainWindow).DialogFrame.Visibility = Visibility.Visible;
             ((MainWindow)Application.Current.MainWindow).DialogFrame.Content = ldProgress;
             exebw.RunWorkerAsync();

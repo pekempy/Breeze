@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Input;
 using GameLauncher.Models;
 using GameLauncher.ViewModels;
 
@@ -49,7 +49,20 @@ namespace GameLauncher.Views
         private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.RemoveGameFromFile(((Button)sender).Tag);
-            MainWindow.RefreshGames();
+            try
+            {
+                ModifyFile.DeleteGameImages(((Button)sender).CommandParameter.ToString());
+            }
+            catch (Exception exc) { Trace.WriteLine("Failed to delete images for game: " + exc); }
+            string removeguid = ((Button)sender).Tag.ToString();
+            foreach (var item in ListViewModel.ListViewOC.ToList())
+            {
+                if (removeguid == item.Guid)
+                {
+                    Trace.WriteLine(DateTime.Now + ": Removed Game: " + item.Title);
+                    ListViewModel.ListViewOC.Remove(item);
+                }
+            }
         }
 
         //When text is changed in searchbar, apply filter
