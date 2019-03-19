@@ -8,6 +8,7 @@ using IWshRuntimeLibrary;
 using MaterialDesignThemes.Wpf;
 using GameLauncher.Properties;
 using System.Diagnostics;
+using GameLauncher.Models;
 
 namespace GameLauncher
 {
@@ -235,7 +236,7 @@ namespace GameLauncher
                 string ngIconFile = fileDialog.FileName;
                 newgametitle = NewGameTitle.Text.Replace(":", " -");
                 System.IO.File.Copy(ngIconFile, @"./Resources/img/" + newgametitle + "-icon.png", true);
-                NewGameIcon.Text = installPath + "Resources/img/" + newgametitle + "-icon.png";
+                NewGameIcon.Text = newgametitle + "-icon.png";
             }
             else if (dialogResult == true && newgametitle == "")
             {
@@ -257,7 +258,7 @@ namespace GameLauncher
                 string ngPosterFile = fileDialog.FileName;
                 newgametitle = NewGameTitle.Text.Replace(":", " -"); //this line needs to be used to block any chars that cant be used
                 System.IO.File.Copy(ngPosterFile, @"./Resources/img/" + newgametitle + "-poster.png", true);
-                NewGamePoster.Text = installPath + "Resources/img/" + newgametitle + "-poster.png";
+                NewGamePoster.Text = newgametitle + "-poster.png";
             }
             else if (dialogResult == true && NewGameTitle.Text == "")
             {
@@ -278,7 +279,7 @@ namespace GameLauncher
                 installPath = installPath.Replace("\\", "/");
                 string ngBannerFile = fileDialog.FileName;
                     System.IO.File.Copy(ngBannerFile, @"./Resources/img/" + newgametitle + "-banner.png", true);
-                    NewGameBanner.Text = installPath + "Resources/img/" + newgametitle + "-banner.png";
+                    NewGameBanner.Text = newgametitle + "-banner.png";
             }
             else if (dialogResult == true && NewGameTitle.Text == "")
             {

@@ -114,37 +114,37 @@ namespace GameLauncher
                 string newbanner;
                 string oldshortcut;
                 string newshortcut;
-                oldicon = installPath + "Resources/img/" + OldTitle + "-icon.png";
-                newicon = installPath + "Resources/img/" + EditTitle.Text + "-icon.png";
-                if (System.IO.File.Exists(oldicon))
+                oldicon = OldTitle + "-icon.png";
+                newicon = EditTitle.Text + "-icon.png";
+                if (System.IO.File.Exists(installPath + "Resources/img/" + oldicon))
                 {
                     EditIcon.Text = EditIcon.Text.Replace(OldTitle, NewTitle);
-                    System.IO.File.Copy(oldicon, newicon, true);
-                    System.IO.File.Delete(oldicon);
+                    System.IO.File.Copy(installPath + "Resources/img/" + oldicon, installPath + "Resources/img/" + newicon, true);
+                    System.IO.File.Delete(installPath + "Resources/img/" + oldicon);
                 }
-                oldposter = installPath + "Resources/img/" + OldTitle + "-poster.png";
-                newposter = installPath + "Resources/img/" + EditTitle.Text + "-poster.png";
-                if (System.IO.File.Exists(oldposter))
+                oldposter = OldTitle + "-poster.png";
+                newposter = EditTitle.Text + "-poster.png";
+                if (System.IO.File.Exists(installPath + "Resources/img/" + oldposter))
                 {
                     EditPoster.Text = EditPoster.Text.Replace(OldTitle, NewTitle);
-                    System.IO.File.Copy(oldposter, newposter, true);
-                    System.IO.File.Delete(oldposter);
+                    System.IO.File.Copy(installPath + "Resources/img/" + oldposter, installPath + "Resources/img/" + newposter, true);
+                    System.IO.File.Delete(installPath + "Resources/img/" + oldposter);
                 }
-                oldbanner = installPath + "Resources/img/" + OldTitle + "-banner.png";
-                newbanner = installPath + "Resources/img/" + EditTitle.Text + "-banner.png";
-                if (System.IO.File.Exists(oldbanner))
+                oldbanner = OldTitle + "-banner.png";
+                newbanner = EditTitle.Text + "-banner.png";
+                if (System.IO.File.Exists(installPath + "Resources/img/" + oldbanner))
                 {
                     EditBanner.Text = EditBanner.Text.Replace(OldTitle, NewTitle);
-                    System.IO.File.Copy(oldbanner, newbanner, true);
-                    System.IO.File.Delete(oldbanner);
+                    System.IO.File.Copy(installPath + "Resources/img/" + oldbanner, installPath + "Resources/img/" + newbanner, true);
+                    System.IO.File.Delete(installPath + "Resources/img/" + oldbanner);
                 }
-                oldshortcut = installPath + "Resources/shortcuts/" + OldTitle + ".lnk";
-                newshortcut = installPath + "Resources/shortcuts/" + EditTitle.Text + ".lnk";
-                if (System.IO.File.Exists(oldshortcut))
+                oldshortcut = OldTitle + ".lnk";
+                newshortcut = EditTitle.Text + ".lnk";
+                if (System.IO.File.Exists(installPath + "Resources/img/" + oldshortcut))
                 {
                     EditPath.Text = EditPath.Text.Replace(OldTitle, NewTitle);
-                    System.IO.File.Copy(oldshortcut, newshortcut, true);
-                    System.IO.File.Delete(oldshortcut);
+                    System.IO.File.Copy(installPath + "Resources/img/" + oldshortcut, installPath + "Resources/img/" + newshortcut, true);
+                    System.IO.File.Delete(installPath + "Resources/img/" + oldshortcut);
                 }
             }
         }
@@ -275,7 +275,7 @@ namespace GameLauncher
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 string filedialogoutput = fileDialog.FileName;
                 UpdateFile(EditTitle.Text, filedialogoutput, "icon");
-                EditIcon.Text = installPath + "Resources/img/" + edittitle + "-icon.png";
+                EditIcon.Text = edittitle + "-icon.png";
             }
             else if (dialogResult == true && EditTitle.Text == "")
             {
@@ -298,7 +298,7 @@ namespace GameLauncher
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 string filedialogoutput = fileDialog.FileName;
                 UpdateFile(EditTitle.Text, filedialogoutput, "poster");
-                EditPoster.Text = installPath + "Resources/img/" + edittitle + "-poster.png";
+                EditPoster.Text = edittitle + "-poster.png";
             }
             else if (dialogResult == true && EditTitle.Text == "")
             {
@@ -321,7 +321,7 @@ namespace GameLauncher
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 string filedialogoutput = fileDialog.FileName;
                 UpdateFile(EditTitle.Text, filedialogoutput, "banner");
-                EditBanner.Text = installPath + "Resources/img/" + edittitle + "-banner.png";
+                EditBanner.Text = edittitle + "-banner.png";
             }
             else if (dialogResult == true && EditTitle.Text == "")
             {
@@ -336,13 +336,13 @@ namespace GameLauncher
 
         private void CreateShortcut(string linkname)
         {
-            if (!Directory.Exists(installPath + "\\Resources\\shortcuts"))
+            if (!Directory.Exists(installPath + "Resources\\shortcuts"))
             {
-                System.IO.Directory.CreateDirectory(installPath + "\\Resources\\shortcuts");
+                System.IO.Directory.CreateDirectory(installPath + "Resources\\shortcuts");
             }
             WshShell wsh = new WshShell();
             IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(
-                installPath + "\\Resources\\shortcuts" + "\\" + EditTitle.Text + ".lnk") as IWshRuntimeLibrary.IWshShortcut;
+                installPath + "Resources\\shortcuts" + "\\" + EditTitle.Text + ".lnk") as IWshRuntimeLibrary.IWshShortcut;
             shortcut.Arguments = "";
             shortcut.TargetPath = linkname;
             shortcut.WindowStyle = 1;
@@ -368,18 +368,21 @@ namespace GameLauncher
             {
                 if (type == "icon")
                 {
-                    gametitle = installPath + "Resources/img/" + gametitle + "-icon.png";
-                    System.IO.File.Copy(sourcefile, gametitle, true);
+                    gametitle = gametitle + "-icon.png";
+                    string iconpath = installPath + "Resources/img/" + gametitle;
+                    System.IO.File.Copy(sourcefile, iconpath, true);
                 }
                 else if (type == "poster")
                 {
-                    gametitle = installPath + "Resources/img/" + gametitle + "-poster.png";
-                    System.IO.File.Copy(sourcefile, gametitle, true);
+                    gametitle = gametitle + "-poster.png";
+                    string posterpath = installPath + "Resources/img/" + gametitle;
+                    System.IO.File.Copy(sourcefile, posterpath, true);
                 }
                 else if (type == "banner")
                 {
-                    gametitle = installPath + "Resources/img/" + gametitle + "-banner.png";
-                    System.IO.File.Copy(sourcefile, gametitle, true);
+                    gametitle = gametitle + "-banner.png";
+                    string bannerpath = installPath + "Resources/img/" + gametitle;
+                    System.IO.File.Copy(sourcefile, bannerpath, true);
                 }
                 else if (type == "shortcut")
                 {
@@ -391,26 +394,29 @@ namespace GameLauncher
             {
                 if (type == "icon")
                 {
-                    oldtitle = installPath + "Resources/img/" + OldTitle + "-icon.png";
-                    gametitle = installPath + "Resources/img/" + gametitle + "-icon.png";
-                    System.IO.File.Copy(oldtitle, gametitle, true);
+                    oldtitle = OldTitle + "-icon.png";
+                    gametitle = gametitle + "-icon.png";
+                    string iconpath = installPath + "Resources/img/" + gametitle;
+                    System.IO.File.Copy(installPath + "Resources/img/" + oldtitle, iconpath, true);
                 }
                 else if (type == "poster")
                 {
-                    oldtitle = installPath + "Resources/img/" + OldTitle + "-poster.png";
-                    gametitle = installPath + "Resources/img/" + gametitle + "-poster.png";
-                    System.IO.File.Copy(oldtitle, gametitle, true);
+                    oldtitle = OldTitle + "-poster.png";
+                    gametitle = gametitle + "-poster.png";
+                    string posterpath = installPath + "Resources/img/" + gametitle;
+                    System.IO.File.Copy(installPath + "Resources/img/" + oldtitle, posterpath, true);
                 }
                 else if (type == "banner")
                 {
-                    oldtitle = installPath + "Resources/img/" + OldTitle + "-banner.png";
-                    gametitle = installPath + "Resources/img/" + gametitle + "-banner.png";
-                    System.IO.File.Copy(oldtitle, gametitle, true);
+                    oldtitle = OldTitle + "-banner.png";
+                    gametitle = gametitle + "-banner.png";
+                    string bannerpath = installPath + "Resources/img/" + gametitle;
+                    System.IO.File.Copy(installPath + "Resources/img/" + oldtitle, bannerpath, true);
                 }
                 else if (type == "shortcut")
                 {
-                    oldtitle = installPath + "Resources/img/" + OldTitle + ".lnk";
-                    gametitle = installPath + "Resources/img/" + gametitle + ".lnk";
+                    oldtitle = OldTitle + ".lnk";
+                    gametitle = gametitle + ".lnk";
                     System.IO.File.Copy(oldtitle, gametitle, true);
                 }
             }

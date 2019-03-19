@@ -56,7 +56,6 @@ namespace GameLauncher.Models
                 posterList.Clear();
                 bannerList.Clear();
                 
-                fileName = installPath + fileName;
                 return fileName;
             } catch (Exception) { return null; }
         }
@@ -79,13 +78,14 @@ namespace GameLauncher.Models
                         for (int i = 0; i < iconList.Count; i++)
                         {
                             string iconURL = iconList[i];
-                            fileName = @"Resources\img\" + title + "-" + type + ".png";
+                            fileName = title + "-" + type + ".png";
+                            string path = "Resources/img/" + fileName;
                             try
                             {
-                                client.DownloadFile(new Uri(iconURL), fileName);
+                                client.DownloadFile(new Uri(iconURL), path);
                             }
                             catch (WebException) { }
-                            if (File.Exists(installPath + fileName)) { downloadSuccess = true; return fileName; }
+                            if (File.Exists(installPath + "Resources\\img\\" + fileName)) { downloadSuccess = true; return fileName; }
                         }
                     }
                 }
@@ -96,13 +96,14 @@ namespace GameLauncher.Models
                         for (int i = 0; i < posterList.Count; i++)
                         {
                             string posterURL = posterList[i];
-                            fileName = @"Resources\img\" + title + "-" + type + ".png";
+                            fileName = title + "-" + type + ".png";
+                            string path = "Resources/img/" + fileName;
                             try
                             {
-                                client.DownloadFile(new Uri(posterURL), fileName);
+                                client.DownloadFile(new Uri(posterURL), path);
                             }
                             catch (WebException) { }
-                            if (File.Exists(installPath + fileName)) { downloadSuccess = true; return fileName; }
+                            if (File.Exists(installPath + "Resources\\img\\" + fileName)) { downloadSuccess = true; return fileName; }
                         }
                     }
                 }
@@ -113,13 +114,14 @@ namespace GameLauncher.Models
                         for (int i = 0; i < bannerList.Count; i++)
                         {
                             string bannerURL = bannerList[i];
-                            fileName = @"Resources\img\" + title + "-" + type + ".png";
+                            fileName = title + "-" + type + ".png";
+                            string path = "Resources/img/" + fileName;
                             try
                             {
-                                client.DownloadFile(new Uri(bannerURL), fileName);
+                                client.DownloadFile(new Uri(bannerURL), path);
                             }
                             catch (WebException) { }
-                            if (File.Exists(installPath + fileName)) { downloadSuccess = true; return fileName; }
+                            if (File.Exists(installPath + "Resources\\img\\" + fileName)) { downloadSuccess = true; return fileName; }
                         }
                     }
                 }

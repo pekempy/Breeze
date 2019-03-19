@@ -82,9 +82,11 @@ namespace GameLauncher.ViewModels
                         {
                         try
                         {
+                            string installDir = AppDomain.CurrentDomain.BaseDirectory;
+                            string iconpath = installDir + "Resources/img/" + columns[4];
                             icon = new BitmapImage();
                             icon.BeginInit();
-                            icon.UriSource = new Uri(columns[4]);
+                            icon.UriSource = new Uri(iconpath);
                             icon.DecodePixelWidth = 80;
                             icon.CacheOption = BitmapCacheOption.OnLoad;
                             icon.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
@@ -97,9 +99,11 @@ namespace GameLauncher.ViewModels
                         {
                         try
                         {
+                            string installDir = AppDomain.CurrentDomain.BaseDirectory;
+                            string posterpath = installDir + "Resources/img/" + columns[5];
                             poster = new BitmapImage();
                             poster.BeginInit();
-                            poster.UriSource = new Uri(columns[5]);
+                            poster.UriSource = new Uri(posterpath);
                             poster.DecodePixelWidth = 200;
                             poster.CacheOption = BitmapCacheOption.OnLoad;
                             poster.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
@@ -112,9 +116,11 @@ namespace GameLauncher.ViewModels
                         {
                         try
                         {
+                            string installDir = AppDomain.CurrentDomain.BaseDirectory;
+                            string columnpath = installDir + "Resources/img/" + columns[6];
                             banner = new BitmapImage();
                             banner.BeginInit();
-                            banner.UriSource = new Uri(columns[6]);
+                            banner.UriSource = new Uri(columnpath);
                             banner.DecodePixelWidth = 300;
                             banner.CacheOption = BitmapCacheOption.OnLoad;
                             banner.CreateOptions = BitmapCreateOptions.IgnoreImageCache;

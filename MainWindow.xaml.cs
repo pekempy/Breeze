@@ -46,6 +46,7 @@ namespace GameLauncher
         public string DLGameTitle;
         public string DLImgType;
         public string view;
+        public string newText;
         public BackgroundWorker lagbw;
 
         public MainWindow()
@@ -56,6 +57,7 @@ namespace GameLauncher
             lagbw.DoWork += LagBWDoWork;
             lagbw.RunWorkerCompleted += LagBWRunWorkerCompleted;
             Trace.Listeners.Clear();
+            FixFilePaths();
             InitTraceListen();
             this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 0.75);
             this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 0.75);
@@ -70,8 +72,35 @@ namespace GameLauncher
             isDownloadOpen = false;
             LoadSettings();
             Trace.WriteLine(DateTime.Now + ": New Session started");
-
         }
+        public void FixFilePaths()
+        {
+            string installPath = AppDomain.CurrentDomain.BaseDirectory;
+            if (File.Exists("./Resources/GamesList.txt"))
+            {
+                string text = File.ReadAllText("./Resources/GamesList.txt");
+                
+                if (text.Contains(installPath + "Resources/img/"))
+                {
+                    newText = text.Replace(installPath + "Resources/img/","");
+                }
+                if (text.Contains(installPath + "Resources\\img\\"))
+                {
+                    newText = text.Replace(installPath + "Resources\\img\\", "");
+                }
+                //if (item.Contains(installPath + "Resources/shortcuts/"))
+                //{
+                //    item.Replace(installPath + "Resources/shortcuts/", "");
+                //}
+                //else if (item.Contains(installPath + "Resources\\shortcuts\\"))
+                //{
+                //    item.Replace(installPath + "Resources\\shortcuts\\", "");
+                //}
+                File.WriteAllText("./Resources/GamesList2.txt", newText);
+                File.Delete("./Resources/GamesList.txt");
+                File.Move("./Resources/GamesList2.txt", "./Resources/GamesList.txt");
+                }
+            }
         public void LagBWDoWork(object sender, DoWorkEventArgs e)
         {
             lag.LoadGenres();
@@ -313,12 +342,12 @@ namespace GameLauncher
             {
                 if (dialogType == "edit")
                 {
-                    DialogEditGames.EditIcon.Text = imgpath;
+                    DialogEditGames.EditIcon.Text = title + "-" + DLImgType + ".png";
                     OpenImageDL("","","");
                 }
                 else if (dialogType == "add")
                 {
-                    DialogAddGames.NewGameIcon.Text = imgpath;
+                    DialogAddGames.NewGameIcon.Text = title + "-" + DLImgType + ".png";
                     OpenImageDL("","","");
                 }
             }
@@ -326,12 +355,12 @@ namespace GameLauncher
             {
                 if (dialogType == "edit")
                 {
-                    DialogEditGames.EditPoster.Text = imgpath;
+                    DialogEditGames.EditPoster.Text = title + "-" + DLImgType + ".png";
                     OpenImageDL("","","");
                 }
                 else if (dialogType == "add")
                 {
-                    DialogAddGames.NewGamePoster.Text = imgpath;
+                    DialogAddGames.NewGamePoster.Text = title + "-" + DLImgType + ".png";
                     OpenImageDL("","","");
                 }
             }
@@ -339,12 +368,12 @@ namespace GameLauncher
             {
                 if (dialogType == "edit")
                 {
-                    DialogEditGames.EditBanner.Text = imgpath;
+                    DialogEditGames.EditBanner.Text = title + "-" + DLImgType + ".png";
                     OpenImageDL("","","");
                 }
                 else if (dialogType == "add")
                 {
-                    DialogAddGames.NewGameBanner.Text = imgpath;
+                    DialogAddGames.NewGameBanner.Text = title + "-" + DLImgType + ".png";
                     OpenImageDL("","","");
                 }
             }
@@ -354,8 +383,9 @@ namespace GameLauncher
             string genreToFilter = ((Button)sender).Tag.ToString();
             if (DataContext == settingsViewModel)
             {
-                //Check saved context + apply :)
-                DataContext = posterViewModel;
+                if (Settings.Default.viewtype == "Poster") { DataContext = posterViewModel; }
+                if (Settings.Default.viewtype == "Banner") { DataContext = bannerViewModel; }
+                if (Settings.Default.viewtype == "List") { DataContext = listViewModel; }
             }
             pv.GenreToFilter(genreToFilter);
             pv.RefreshList2(cvs);
@@ -399,7 +429,15 @@ namespace GameLauncher
         }
         public void RefreshGames()
         {
-            LoadAllViews();
+            DialogFrame.Visibility = Visibility.Visible;
+            DialogFrame.Content = loadingdialog;
+            try
+            {
+                try { GenreListMW.Clear(); } catch { }
+                try { GameListMW.Clear(); } catch { }
+                lagbw.RunWorkerAsync();
+            }
+            catch { }
             if (view == "list") { ListViewActive(); }
             else if (view == "poster") { PosterViewActive(); }
             else if (view == "banner") { BannerViewActive(); }
@@ -446,7 +484,6 @@ namespace GameLauncher
         }
         public void LoadSettings()
         {
-            //Theme Light or Dark
             if (Settings.Default.theme.ToString() == "Dark")
             {
                 ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark);
