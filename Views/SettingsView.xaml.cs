@@ -1,20 +1,16 @@
-﻿using GameLauncher.Properties;
+﻿using GameLauncher.Models;
+using GameLauncher.Properties;
 using GameLauncher.ViewModels;
-using MaterialDesignColors;
 using MaterialDesignThemes.Wpf;
 using System;
-using System.Configuration;
+using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using GameLauncher.Models;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Diagnostics;
-using System.IO.Compression;
 
 namespace GameLauncher.Views
 {
@@ -154,7 +150,7 @@ namespace GameLauncher.Views
         {
             MainWindow.AddGameButton.Style = Application.Current.Resources["MaterialDesignFloatingActionAccentButton"] as Style;
         }
-        
+
         private void AddNewGenre_OnClick(object sender, RoutedEventArgs e)
         {
             try
@@ -175,7 +171,7 @@ namespace GameLauncher.Views
                 GenreListCVS.View.Refresh();
         }
         private void DeleteGenre_OnClick(object sender, RoutedEventArgs e)
-        {  
+        {
             string genreGuid = ((Button)sender).Tag.ToString();
             var genretext = File.ReadAllLines("./Resources/GenreList.txt", Encoding.UTF8);
             for (int i = 0; i < genretext.Length; i++)
@@ -216,7 +212,7 @@ namespace GameLauncher.Views
                         }
                         catch (Exception ex2)
                         {
-                            Trace.WriteLine(DateTime.Now + ": DeleteGenre2: "+ex2.ToString());
+                            Trace.WriteLine(DateTime.Now + ": DeleteGenre2: " + ex2.ToString());
                         }
                     }
                 }
@@ -241,7 +237,7 @@ namespace GameLauncher.Views
         {
             Settings.Default.Save();
         }
-        
+
     }
-    
+
 }

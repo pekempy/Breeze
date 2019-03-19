@@ -1,13 +1,13 @@
-﻿using GameLauncher.ViewModels;
+﻿using GameLauncher.Properties;
+using GameLauncher.ViewModels;
+using IWshRuntimeLibrary;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using IWshRuntimeLibrary;
-using GameLauncher.Properties;
-using MaterialDesignThemes.Wpf;
-using System.Diagnostics;
 
 namespace GameLauncher
 {
@@ -38,14 +38,16 @@ namespace GameLauncher
         }
 
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
-        { 
+        {
             //Need to change shortcut name in this bit
             string ngl = EditLink.Text;
             if (!ngl.Contains("http") && (ngl != ""))
             {
-                UriBuilder uriBuilder = new UriBuilder();
-                uriBuilder.Scheme = "http";
-                uriBuilder.Host = EditLink.Text;
+                UriBuilder uriBuilder = new UriBuilder
+                {
+                    Scheme = "http",
+                    Host = EditLink.Text
+                };
                 Uri uri = uriBuilder.Uri;
                 EditLink.Text = uri.ToString();
             }
@@ -182,7 +184,7 @@ namespace GameLauncher
                         genrePlaceHolder += cb.Content.ToString() + ";";
                     }
                 }
-                catch(Exception exc) { Trace.WriteLine(DateTime.Now + ": EditGenre: " + exc); }
+                catch (Exception exc) { Trace.WriteLine(DateTime.Now + ": EditGenre: " + exc); }
             }
             EditGenre.Text = genrePlaceHolder;
             return;
@@ -236,17 +238,19 @@ namespace GameLauncher
                             }
                         }
                     }
-                    catch(Exception e) { Trace.WriteLine(DateTime.Now + ": ClearGenreBox: " + e); }
+                    catch (Exception e) { Trace.WriteLine(DateTime.Now + ": ClearGenreBox: " + e); }
                 }
             }
         }
 
         private void AttachLauncher_OnClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Multiselect = false;
-            fileDialog.RestoreDirectory = true;
-            fileDialog.Filter = "Executable Files (*.exe) | *.exe;*.lnk;*.url";
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                RestoreDirectory = true,
+                Filter = "Executable Files (*.exe) | *.exe;*.lnk;*.url"
+            };
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && EditTitle.Text != "")
             {
@@ -263,10 +267,12 @@ namespace GameLauncher
 
         private void AttachIcon_OnClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Multiselect = false;
-            fileDialog.RestoreDirectory = true;
-            fileDialog.Filter = "Images (*.jpg;*.png;*.bmp | *.jpg;*.png;*.bmp";
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                RestoreDirectory = true,
+                Filter = "Images (*.jpg;*.png;*.bmp | *.jpg;*.png;*.bmp"
+            };
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && EditTitle.Text != "")
             {
@@ -286,10 +292,12 @@ namespace GameLauncher
 
         private void AttachPoster_OnClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Multiselect = false;
-            fileDialog.RestoreDirectory = true;
-            fileDialog.Filter = "Images (*.jpg;*.png;*.bmp | *.jpg;*.png;*.bmp";
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                RestoreDirectory = true,
+                Filter = "Images (*.jpg;*.png;*.bmp | *.jpg;*.png;*.bmp"
+            };
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && EditTitle.Text != "")
             {
@@ -309,10 +317,12 @@ namespace GameLauncher
 
         private void AttachBanner_OnClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Multiselect = false;
-            fileDialog.RestoreDirectory = true;
-            fileDialog.Filter = "Images (*.jpg;*.png;*.bmp | *.jpg;*.png;*.bmp";
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                RestoreDirectory = true,
+                Filter = "Images (*.jpg;*.png;*.bmp | *.jpg;*.png;*.bmp"
+            };
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && EditTitle.Text != "")
             {

@@ -2,15 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Security.Principal;
-using System.Text.RegularExpressions;
-using System.DirectoryServices.AccountManagement;
-using System.Windows;
-using System.Collections;
-using System.Diagnostics;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace GameLauncher.Models
 {

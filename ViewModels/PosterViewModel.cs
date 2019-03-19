@@ -1,5 +1,4 @@
 ﻿using GameLauncher.Models;
-using System;
 using System.Collections.ObjectModel;
 
 namespace GameLauncher.ViewModels
@@ -21,6 +20,6 @@ namespace GameLauncher.ViewModels
             PosterViewOC = MainWindow.GameListMW;
             GenreListOC = MainWindow.GenreListMW;
         }
-        
+
     }
 }

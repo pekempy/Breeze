@@ -1,11 +1,11 @@
-﻿using HtmlAgilityPack;
+﻿using GameLauncher.Views;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
-using GameLauncher.Views;
 using System.Windows;
-using System.Diagnostics;
 
 namespace GameLauncher.Models
 {
@@ -55,9 +55,10 @@ namespace GameLauncher.Models
                 iconList.Clear();
                 posterList.Clear();
                 bannerList.Clear();
-                
+
                 return fileName;
-            } catch (Exception) { return null; }
+            }
+            catch (Exception) { return null; }
         }
         public string DownloadImage(string title, string type)
         {

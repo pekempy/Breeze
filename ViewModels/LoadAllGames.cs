@@ -1,15 +1,12 @@
 using GameLauncher.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 
 namespace GameLauncher.ViewModels
 {
@@ -78,8 +75,8 @@ namespace GameLauncher.ViewModels
                 foreach (var item in File.ReadAllLines(gameFile))
                 {
                     columns = item.Split('|');
-                        if (columns[4] != "")
-                        {
+                    if (columns[4] != "")
+                    {
                         try
                         {
                             string installDir = AppDomain.CurrentDomain.BaseDirectory;
@@ -94,9 +91,9 @@ namespace GameLauncher.ViewModels
                             icon.Freeze();
                         }
                         catch (Exception e) { Trace.WriteLine("Error saving image (Icon): " + e); }
-                }
-                        if (columns[5] != "")
-                        {
+                    }
+                    if (columns[5] != "")
+                    {
                         try
                         {
                             string installDir = AppDomain.CurrentDomain.BaseDirectory;
@@ -111,9 +108,9 @@ namespace GameLauncher.ViewModels
                             poster.Freeze();
                         }
                         catch (Exception e) { Trace.WriteLine("Error saving image (Poster): " + e); }
-                }
-                        if (columns[6] != "")
-                        {
+                    }
+                    if (columns[6] != "")
+                    {
                         try
                         {
                             string installDir = AppDomain.CurrentDomain.BaseDirectory;

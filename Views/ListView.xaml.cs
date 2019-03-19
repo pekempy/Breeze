@@ -1,11 +1,11 @@
-﻿using System;
+﻿using GameLauncher.Models;
+using GameLauncher.ViewModels;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using GameLauncher.Models;
-using GameLauncher.ViewModels;
 
 namespace GameLauncher.Views
 {
@@ -20,7 +20,7 @@ namespace GameLauncher.Views
         {
             InitializeComponent();
         }
-        
+
         private void GameLink_OnClick(object sender, RoutedEventArgs e)
         {
             object link = ((Button)sender).Tag;

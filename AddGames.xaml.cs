@@ -1,14 +1,13 @@
+using GameLauncher.Properties;
 using GameLauncher.ViewModels;
+using IWshRuntimeLibrary;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using IWshRuntimeLibrary;
-using MaterialDesignThemes.Wpf;
-using GameLauncher.Properties;
-using System.Diagnostics;
-using GameLauncher.Models;
 
 namespace GameLauncher
 {
@@ -38,9 +37,11 @@ namespace GameLauncher
                 string ngl = NewGameLink.Text;
                 if (!ngl.Contains("http") && (ngl != ""))
                 {
-                    UriBuilder uriBuilder = new UriBuilder();
-                    uriBuilder.Scheme = "http";
-                    uriBuilder.Host = NewGameLink.Text;
+                    UriBuilder uriBuilder = new UriBuilder
+                    {
+                        Scheme = "http",
+                        Host = NewGameLink.Text
+                    };
                     Uri uri = uriBuilder.Uri;
                     NewGameLink.Text = uri.ToString();
                 }
@@ -146,7 +147,7 @@ namespace GameLauncher
 
         private void TitleTextChanged(object sender, EventArgs e)
         {
-            if ( NewGameTitle.Text.IndexOfAny(Path.GetInvalidFileNameChars()) > -1)
+            if (NewGameTitle.Text.IndexOfAny(Path.GetInvalidFileNameChars()) > -1)
             {
                 MessageBox.Show("Unfortunately your title must be valid to save files. This means it cannot contain characters like : ? \\ / etc.");
             }
@@ -199,10 +200,12 @@ namespace GameLauncher
 
         private void AttachLauncher_OnClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Multiselect = false;
-            fileDialog.RestoreDirectory = true;
-            fileDialog.Filter = "Executable Files (*.exe) | *.exe;*.lnk;*.url";
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                RestoreDirectory = true,
+                Filter = "Executable Files (*.exe) | *.exe;*.lnk;*.url"
+            };
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && NewGameTitle.Text != "")
             {
@@ -223,10 +226,12 @@ namespace GameLauncher
 
         private void AttachIcon_OnClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Multiselect = false;
-            fileDialog.RestoreDirectory = true;
-            fileDialog.Filter = "Images (*.jpg;*.png;*.bmp) | *.jpg;*.png;*.bmp";
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                RestoreDirectory = true,
+                Filter = "Images (*.jpg;*.png;*.bmp) | *.jpg;*.png;*.bmp"
+            };
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && NewGameTitle.Text != "")
             {
@@ -245,10 +250,12 @@ namespace GameLauncher
 
         private void AttachPoster_OnClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Multiselect = false;
-            fileDialog.RestoreDirectory = true;
-            fileDialog.Filter = "Images (*.jpg;*.png;*.bmp) | *.jpg;*.png;*.bmp";
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                RestoreDirectory = true,
+                Filter = "Images (*.jpg;*.png;*.bmp) | *.jpg;*.png;*.bmp"
+            };
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && NewGameTitle.Text != "")
             {
@@ -267,18 +274,20 @@ namespace GameLauncher
 
         private void AttachBanner_OnClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.RestoreDirectory = true;
-            fileDialog.Multiselect = false;
-            fileDialog.Filter = "Images (*.jpg;*.png;*.bmp) | *.jpg;*.png;*.bmp";
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                RestoreDirectory = true,
+                Multiselect = false,
+                Filter = "Images (*.jpg;*.png;*.bmp) | *.jpg;*.png;*.bmp"
+            };
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true && NewGameTitle.Text != "")
             {
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
                 string ngBannerFile = fileDialog.FileName;
-                    System.IO.File.Copy(ngBannerFile, @"./Resources/img/" + newgametitle + "-banner.png", true);
-                    NewGameBanner.Text = newgametitle + "-banner.png";
+                System.IO.File.Copy(ngBannerFile, @"./Resources/img/" + newgametitle + "-banner.png", true);
+                NewGameBanner.Text = newgametitle + "-banner.png";
             }
             else if (dialogResult == true && NewGameTitle.Text == "")
             {

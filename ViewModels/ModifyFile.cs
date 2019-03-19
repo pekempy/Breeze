@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace GameLauncher.ViewModels
@@ -28,14 +26,14 @@ namespace GameLauncher.ViewModels
                         columns = text[i].Split('|');
                         string title = columns[0];
                         int titlecount = 0;
-                        for (int j = 0; j<text.Length; j++)
+                        for (int j = 0; j < text.Length; j++)
                         {
                             columns2 = text[j].Split('|');
                             if (columns2[0] == title)
                                 titlecount++;
                         }
-                        if (titlecount == 1) 
-                            DeleteGameImages(title); 
+                        if (titlecount == 1)
+                            DeleteGameImages(title);
                         text[i] = "";
                         text = text.Where(x => !string.IsNullOrEmpty(x)).ToArray();
                         File.WriteAllLines("./Resources/GamesList.txt", text);
@@ -46,7 +44,7 @@ namespace GameLauncher.ViewModels
                     }
                     catch (Exception e)
                     {
-                        Trace.WriteLine(DateTime.Now + ": RemoveGameFromFile: "+ e.ToString());
+                        Trace.WriteLine(DateTime.Now + ": RemoveGameFromFile: " + e.ToString());
                     }
                 }
             }

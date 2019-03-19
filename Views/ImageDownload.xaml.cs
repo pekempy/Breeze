@@ -4,7 +4,6 @@ using MaterialDesignThemes.Wpf;
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;

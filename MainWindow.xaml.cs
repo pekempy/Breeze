@@ -1,17 +1,17 @@
-﻿using GameLauncher.ViewModels;
-using GameLauncher.Views;
-using System;
-using System.IO;
-using System.Windows;
-using System.Windows.Controls;
+﻿using GameLauncher.Models;
 using GameLauncher.Properties;
+using GameLauncher.ViewModels;
+using GameLauncher.Views;
 using MaterialDesignThemes.Wpf;
-using System.Windows.Data;
-using System.Net;
-using System.Diagnostics;
-using GameLauncher.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace GameLauncher
 {
@@ -47,8 +47,10 @@ namespace GameLauncher
 
         public MainWindow()
         {
-            lagbw = new BackgroundWorker();
-            lagbw.WorkerReportsProgress = true;
+            lagbw = new BackgroundWorker
+            {
+                WorkerReportsProgress = true
+            };
             lagbw.ProgressChanged += LagBWProgressChanged;
             lagbw.DoWork += LagBWDoWork;
             lagbw.RunWorkerCompleted += LagBWRunWorkerCompleted;
@@ -85,7 +87,7 @@ namespace GameLauncher
             posterViewModel.LoadGames();
             listViewModel.LoadGames();
             bannerViewModel.LoadGames();
-            if (Settings.Default.viewtype.ToString() == "Poster") { PosterViewActive();}
+            if (Settings.Default.viewtype.ToString() == "Poster") { PosterViewActive(); }
             if (Settings.Default.viewtype.ToString() == "Banner") { BannerViewActive(); }
             if (Settings.Default.viewtype.ToString() == "List") { ListViewActive(); }
             DialogFrame.Visibility = Visibility.Hidden;
@@ -178,10 +180,14 @@ namespace GameLauncher
                 log.Close();
             }
             else { var log = File.Create(logfile); }
-            TextWriterTraceListener twtl = new TextWriterTraceListener(logfile);
-            twtl.TraceOutputOptions = TraceOptions.ThreadId | TraceOptions.DateTime;
-            ConsoleTraceListener ctl = new ConsoleTraceListener(false);
-            ctl.TraceOutputOptions = TraceOptions.DateTime;
+            TextWriterTraceListener twtl = new TextWriterTraceListener(logfile)
+            {
+                TraceOutputOptions = TraceOptions.ThreadId | TraceOptions.DateTime
+            };
+            ConsoleTraceListener ctl = new ConsoleTraceListener(false)
+            {
+                TraceOutputOptions = TraceOptions.DateTime
+            };
 
             Trace.Listeners.Add(twtl);
             Trace.Listeners.Add(ctl);
@@ -242,13 +248,14 @@ namespace GameLauncher
             ImageDownload DialogImageDL = new ImageDownload(gametitle, searchstring, imagetype);
             DLGameTitle = gametitle;
             DLImgType = imagetype;
-            if (DialogFrame.Content.ToString() == "GameLauncher.EditGames" || DialogFrame.Content.ToString() == "GameLauncher.AddGames") {
-            DialogFrame.Visibility = Visibility.Visible;
-            DialogFrame.Content = DialogImageDL;
-            DialogAddGames.AddGameDialog.IsOpen = false;
-            DialogEditGames.EditGameDialog.IsOpen = false;
-            DialogImageDL.DownloadDialog.IsOpen = true;
-            isDownloadOpen = true;
+            if (DialogFrame.Content.ToString() == "GameLauncher.EditGames" || DialogFrame.Content.ToString() == "GameLauncher.AddGames")
+            {
+                DialogFrame.Visibility = Visibility.Visible;
+                DialogFrame.Content = DialogImageDL;
+                DialogAddGames.AddGameDialog.IsOpen = false;
+                DialogEditGames.EditGameDialog.IsOpen = false;
+                DialogImageDL.DownloadDialog.IsOpen = true;
+                isDownloadOpen = true;
             }
             else if (DialogFrame.Content.ToString() == "GameLauncher.Views.ImageDownload")
             {
@@ -273,7 +280,8 @@ namespace GameLauncher
         }
         public void DownloadImage(string url)
         {
-            if (!File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png")){
+            if (!File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png"))
+            {
                 using (WebClient client = new WebClient())
                 {
                     try
@@ -284,9 +292,12 @@ namespace GameLauncher
                         client.Proxy.Credentials = CredentialCache.DefaultCredentials;
                         client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
                         SetPath(DLGameTitle, DLImgType, dialogOpen);
-                    }catch(Exception e) { Trace.WriteLine(DateTime.Now + ": DownloadImage:" + e); MessageBox.Show("Sorry! That's failed, Try again or try another image"); }
-                } }
-            else if (File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png")){
+                    }
+                    catch (Exception e) { Trace.WriteLine(DateTime.Now + ": DownloadImage:" + e); MessageBox.Show("Sorry! That's failed, Try again or try another image"); }
+                }
+            }
+            else if (File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png"))
+            {
                 File.Delete(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png");
                 using (WebClient client = new WebClient())
                 {
@@ -311,12 +322,12 @@ namespace GameLauncher
                 if (dialogType == "edit")
                 {
                     DialogEditGames.EditIcon.Text = title + "-" + DLImgType + ".png";
-                    OpenImageDL("","","");
+                    OpenImageDL("", "", "");
                 }
                 else if (dialogType == "add")
                 {
                     DialogAddGames.NewGameIcon.Text = title + "-" + DLImgType + ".png";
-                    OpenImageDL("","","");
+                    OpenImageDL("", "", "");
                 }
             }
             else if (imagetype == "poster")
@@ -324,12 +335,12 @@ namespace GameLauncher
                 if (dialogType == "edit")
                 {
                     DialogEditGames.EditPoster.Text = title + "-" + DLImgType + ".png";
-                    OpenImageDL("","","");
+                    OpenImageDL("", "", "");
                 }
                 else if (dialogType == "add")
                 {
                     DialogAddGames.NewGamePoster.Text = title + "-" + DLImgType + ".png";
-                    OpenImageDL("","","");
+                    OpenImageDL("", "", "");
                 }
             }
             else if (imagetype == "banner")
@@ -337,12 +348,12 @@ namespace GameLauncher
                 if (dialogType == "edit")
                 {
                     DialogEditGames.EditBanner.Text = title + "-" + DLImgType + ".png";
-                    OpenImageDL("","","");
+                    OpenImageDL("", "", "");
                 }
                 else if (dialogType == "add")
                 {
                     DialogAddGames.NewGameBanner.Text = title + "-" + DLImgType + ".png";
-                    OpenImageDL("","","");
+                    OpenImageDL("", "", "");
                 }
             }
         }
@@ -362,7 +373,7 @@ namespace GameLauncher
             lv.GenreToFilter(genreToFilter);
             lv.RefreshList2(cvs);
             MenuToggleButton.IsChecked = false;
-        }       
+        }
         public void PosterViewActive()
         {
             view = "poster";
@@ -398,6 +409,13 @@ namespace GameLauncher
 
         public void FixFilePaths()
         {
+            string file = "./Resources/GamesList.txt";
+            string fileout = "./Resources/GamesList2.txt";
+            var contents = File.ReadAllLines(file);
+            Array.Sort(contents);
+            File.WriteAllLines(fileout, contents);
+            File.Delete("./Resources/GamesList.txt");
+            File.Move("./Resources/GamesList2.txt", "./Resources/GamesList.txt");
             bool textModified = false;
             string installPath = AppDomain.CurrentDomain.BaseDirectory;
             if (File.Exists("./Resources/GamesList.txt"))
