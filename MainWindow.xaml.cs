@@ -9,13 +9,9 @@ using MaterialDesignThemes.Wpf;
 using System.Windows.Data;
 using System.Net;
 using System.Diagnostics;
-using System.Windows.Threading;
 using GameLauncher.Models;
 using System.Collections.ObjectModel;
-using System.Threading;
-using System.Threading.Tasks;
 using System.ComponentModel;
-using MahApps.Metro.Controls;
 
 namespace GameLauncher
 {
@@ -36,8 +32,8 @@ namespace GameLauncher
         private ExesViewModel exesViewModel = new ExesViewModel();
         private Loading loadingdialog = new Loading();
         public Loading loadingprogressdialog = new Loading();
-        public Views.PosterView pv = new Views.PosterView();
-        public Views.BannerView bv = new Views.BannerView();
+        public PosterView pv = new PosterView();
+        public BannerView bv = new BannerView();
         public Views.ListView lv = new Views.ListView();
         public CollectionViewSource cvs;
         public bool isDialogOpen;
@@ -59,8 +55,8 @@ namespace GameLauncher
             Trace.Listeners.Clear();
             FixFilePaths();
             InitTraceListen();
-            this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 0.75);
-            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 0.75);
+            this.Height = (SystemParameters.PrimaryScreenHeight * 0.75);
+            this.Width = (SystemParameters.PrimaryScreenWidth * 0.75);
             LoadAllGames lag = new LoadAllGames();
             LoadSearch ls = new LoadSearch();
             MakeDirectories();
@@ -73,34 +69,6 @@ namespace GameLauncher
             LoadSettings();
             Trace.WriteLine(DateTime.Now + ": New Session started");
         }
-        public void FixFilePaths()
-        {
-            string installPath = AppDomain.CurrentDomain.BaseDirectory;
-            if (File.Exists("./Resources/GamesList.txt"))
-            {
-                string text = File.ReadAllText("./Resources/GamesList.txt");
-                
-                if (text.Contains(installPath + "Resources/img/"))
-                {
-                    newText = text.Replace(installPath + "Resources/img/","");
-                }
-                if (text.Contains(installPath + "Resources\\img\\"))
-                {
-                    newText = text.Replace(installPath + "Resources\\img\\", "");
-                }
-                //if (item.Contains(installPath + "Resources/shortcuts/"))
-                //{
-                //    item.Replace(installPath + "Resources/shortcuts/", "");
-                //}
-                //else if (item.Contains(installPath + "Resources\\shortcuts\\"))
-                //{
-                //    item.Replace(installPath + "Resources\\shortcuts\\", "");
-                //}
-                File.WriteAllText("./Resources/GamesList2.txt", newText);
-                File.Delete("./Resources/GamesList.txt");
-                File.Move("./Resources/GamesList2.txt", "./Resources/GamesList.txt");
-                }
-            }
         public void LagBWDoWork(object sender, DoWorkEventArgs e)
         {
             lag.LoadGenres();
@@ -313,7 +281,7 @@ namespace GameLauncher
                         ServicePointManager.Expect100Continue = true;
                         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                         client.UseDefaultCredentials = true;
-                        client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                        client.Proxy.Credentials = CredentialCache.DefaultCredentials;
                         client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
                         SetPath(DLGameTitle, DLImgType, dialogOpen);
                     }catch(Exception e) { Trace.WriteLine(DateTime.Now + ": DownloadImage:" + e); MessageBox.Show("Sorry! That's failed, Try again or try another image"); }
@@ -327,7 +295,7 @@ namespace GameLauncher
                         ServicePointManager.Expect100Continue = true;
                         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                         client.UseDefaultCredentials = true;
-                        client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                        client.Proxy.Credentials = CredentialCache.DefaultCredentials;
                         client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
                         SetPath(DLGameTitle, DLImgType, dialogOpen);
                     }
@@ -399,22 +367,22 @@ namespace GameLauncher
         {
             view = "poster";
             DataContext = posterViewModel;
-            Properties.Settings.Default.viewtype = "Poster";
-            Properties.Settings.Default.Save();
+            Settings.Default.viewtype = "Poster";
+            Settings.Default.Save();
         }
         public void BannerViewActive()
         {
             view = "banner";
             DataContext = bannerViewModel;
-            Properties.Settings.Default.viewtype = "Banner";
-            Properties.Settings.Default.Save();
+            Settings.Default.viewtype = "Banner";
+            Settings.Default.Save();
         }
         public void ListViewActive()
         {
             view = "list";
             DataContext = listViewModel;
-            Properties.Settings.Default.viewtype = "List";
-            Properties.Settings.Default.Save();
+            Settings.Default.viewtype = "List";
+            Settings.Default.Save();
         }
         public void SettingsViewActive()
         {
@@ -426,6 +394,63 @@ namespace GameLauncher
         public void IncreaseExeSearch()
         {
             DialogExeSelection.IncreaseImages();
+        }
+
+        public void FixFilePaths()
+        {
+            bool textModified = false;
+            string installPath = AppDomain.CurrentDomain.BaseDirectory;
+            if (File.Exists("./Resources/GamesList.txt"))
+            {
+                string text = File.ReadAllText("./Resources/GamesList.txt");
+
+                if (text.Contains(installPath + "Resources/img/"))
+                {
+                    newText = text.Replace(installPath + "Resources/img/", "");
+                    textModified = true;
+                }
+                if (text.Contains(installPath + "Resources\\img\\"))
+                {
+                    if (textModified)
+                    {
+                        newText = newText.Replace(installPath + "Resources\\img\\", "");
+                    }
+                    else
+                    {
+                        newText = text.Replace(installPath + "Resources\\img\\", "");
+                        textModified = true;
+                    }
+                }
+                if (text.Contains(installPath + "Resources/shortcuts/"))
+                {
+                    if (textModified)
+                    {
+                        newText = newText.Replace(installPath + "Resources/shortcuts/", "");
+                    }
+                    else
+                    {
+                        newText = text.Replace(installPath + "Resources/shortcuts/", "");
+                        textModified = true;
+                    }
+                }
+                else if (text.Contains(installPath + "Resources\\shortcuts\\"))
+                {
+                    if (textModified)
+                    {
+                        newText = newText.Replace(installPath + "Resources\\shortcuts\\", "");
+                    }
+                    else
+                    {
+                        newText = text.Replace(installPath + "Resources\\shortcuts\\", "");
+                    }
+                }
+                if (newText != null)
+                {
+                    File.WriteAllText("./Resources/GamesList2.txt", newText);
+                    File.Delete("./Resources/GamesList.txt");
+                    File.Move("./Resources/GamesList2.txt", "./Resources/GamesList.txt");
+                }
+            }
         }
         public void RefreshGames()
         {

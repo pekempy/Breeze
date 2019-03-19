@@ -79,7 +79,7 @@ namespace GameLauncher.Views
         }
         private void QwantBrowse(object sender, ExecutedRoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.qwant.com/?q=test");
+            Process.Start("https://www.qwant.com/?q=test");
         }
         private void QwantCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {

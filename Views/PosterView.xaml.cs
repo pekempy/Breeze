@@ -17,6 +17,7 @@ namespace GameLauncher.Views
     public partial class PosterView : UserControl
     {
         public static string FilterGenreName;
+        public string installPath = AppDomain.CurrentDomain.BaseDirectory;
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
         public CollectionViewSource GameListCVS;
 
@@ -65,7 +66,7 @@ namespace GameLauncher.Views
             string linkString = link.ToString().Trim();
             if (linkString != string.Empty)
             {
-                Process.Start(new ProcessStartInfo(linkString));
+                Process.Start(new ProcessStartInfo(installPath + "Resources/shortcuts/" + linkString));
             }
         }
         

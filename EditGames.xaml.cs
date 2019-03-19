@@ -39,6 +39,7 @@ namespace GameLauncher
 
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
         { 
+            //Need to change shortcut name in this bit
             string ngl = EditLink.Text;
             if (!ngl.Contains("http") && (ngl != ""))
             {
@@ -252,7 +253,7 @@ namespace GameLauncher
                 CreateShortcut(fileDialog.FileName);
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 string ngNewShortcut = installPath + "Resources/shortcuts/" + EditTitle.Text + ".lnk";
-                EditPath.Text = ngNewShortcut;
+                EditPath.Text = EditTitle.Text + ".lnk";
             }
             else if (dialogResult == true && EditTitle.Text == "")
             {
@@ -338,11 +339,11 @@ namespace GameLauncher
         {
             if (!Directory.Exists(installPath + "Resources\\shortcuts"))
             {
-                System.IO.Directory.CreateDirectory(installPath + "Resources\\shortcuts");
+                Directory.CreateDirectory(installPath + "Resources\\shortcuts");
             }
             WshShell wsh = new WshShell();
-            IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(
-                installPath + "Resources\\shortcuts" + "\\" + EditTitle.Text + ".lnk") as IWshRuntimeLibrary.IWshShortcut;
+            IWshShortcut shortcut = wsh.CreateShortcut(
+                installPath + "Resources\\shortcuts" + "\\" + EditTitle.Text + ".lnk") as IWshShortcut;
             shortcut.Arguments = "";
             shortcut.TargetPath = linkname;
             shortcut.WindowStyle = 1;

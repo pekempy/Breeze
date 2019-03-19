@@ -38,7 +38,7 @@ namespace GameLauncher.ViewModels
             try { Games.Clear(); } catch { }
             ReadFile();
             Games = games;
-            App.Current.Dispatcher.Invoke(new Action(() =>
+            Application.Current.Dispatcher.Invoke(new Action(() =>
             ((MainWindow)Application.Current.MainWindow).RefreshDataContext()));
         }
 
@@ -57,7 +57,7 @@ namespace GameLauncher.ViewModels
                     columns = genresArr[numberOfGenres].Split('|');
                     genreName = columns[0];
                     genreGuid = columns[1];
-                    App.Current.Dispatcher.Invoke(new Action(() =>
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
                     AddGenresToOC()));
                     genreName = null;
                     genreGuid = null;
@@ -137,7 +137,7 @@ namespace GameLauncher.ViewModels
                     guid = columns[7];
                     double percent = itemcount / GameCount;
                     percentage = Convert.ToInt32(percent);
-                    App.Current.Dispatcher.Invoke(new Action(() =>
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
                     AddGameToOC()));
                     icon = null;
                     poster = null;

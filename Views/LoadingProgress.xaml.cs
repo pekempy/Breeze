@@ -27,7 +27,7 @@ namespace GameLauncher.Views
         public bool isLoading;
         public LoadingProgress()
         {
-            var converter = new System.Windows.Media.BrushConverter();
+            var converter = new BrushConverter();
             var white = (Brush)converter.ConvertFromString("#FFFFFF");
             var black = (Brush)converter.ConvertFromString("#000000");
             InitializeComponent();

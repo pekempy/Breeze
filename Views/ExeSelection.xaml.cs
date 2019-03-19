@@ -78,7 +78,7 @@ namespace GameLauncher.Views
                 string icon = fileNameIcon;
                 string poster = fileNamePoster;
                 string banner = fileNameBanner;
-                string shortcut = createShortcut(title, exe);
+                string shortcut = CreateShortcut(title, exe);
                 string game = title + "||" + shortcut + "||" + icon + "|" + poster + "|" + banner + "|" + gameGuid;
                 tw.WriteLine(game);
                 tw.Close();
@@ -235,16 +235,16 @@ namespace GameLauncher.Views
             ((MainWindow)Application.Current.MainWindow).DialogFrame.Content = ldProgress;
             exebw.RunWorkerAsync();
         }
-        private string createShortcut(string title, string exe)
+        private string CreateShortcut(string title, string exe)
         {
             string installPath = AppDomain.CurrentDomain.BaseDirectory;
             if (!Directory.Exists(installPath + "\\Resources\\shortcuts"))
             {
-                System.IO.Directory.CreateDirectory(installPath + "\\Resources\\shortcuts");
+                Directory.CreateDirectory(installPath + "\\Resources\\shortcuts");
             }
             WshShell wsh = new WshShell();
-            IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(
-            installPath + "\\Resources\\shortcuts" + "\\" + title + ".lnk") as IWshRuntimeLibrary.IWshShortcut;
+            IWshShortcut shortcut = wsh.CreateShortcut(
+            installPath + "\\Resources\\shortcuts" + "\\" + title + ".lnk") as IWshShortcut;
             shortcut.Arguments = "";
             shortcut.TargetPath = exe;
             shortcut.WindowStyle = 1;
@@ -252,7 +252,7 @@ namespace GameLauncher.Views
             shortcut.WorkingDirectory = "C:\\App";
             shortcut.IconLocation = exe;
             shortcut.Save();
-            return installPath + "\\Resources\\shortcuts" + "\\" + title + ".lnk";
+            return title + ".lnk";
         }
     }
     public sealed class Null2Visibility : IValueConverter

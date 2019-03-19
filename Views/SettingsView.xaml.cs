@@ -43,27 +43,27 @@ namespace GameLauncher.Views
         public SettingsView()
         {
             InitializeComponent();
-            var converter = new System.Windows.Media.BrushConverter();
+            var converter = new BrushConverter();
             if (Settings.Default.theme == "Dark") { themeToggle.IsChecked = true; }
             SelectedThemeColour();
         }
         private void DarkModeToggle_Checked(object sender, RoutedEventArgs e)
         {
             ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark);
-            Properties.Settings.Default.theme = "Dark";
+            Settings.Default.theme = "Dark";
             SaveSettings();
         }
         private void DarkModeToggle_Unchecked(object sender, RoutedEventArgs e)
         {
             ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Light);
-            Properties.Settings.Default.theme = "Light";
+            Settings.Default.theme = "Light";
             SaveSettings();
         }
         private void ChangePrimary_OnClick(object sender, RoutedEventArgs e)
         {
             string newPrimaryColour = ((Button)sender).Tag.ToString();
             new PaletteHelper().ReplacePrimaryColor(newPrimaryColour);
-            Properties.Settings.Default.primary = newPrimaryColour;
+            Settings.Default.primary = newPrimaryColour;
             SaveSettings();
             SelectedThemeColour();
         }
@@ -71,7 +71,7 @@ namespace GameLauncher.Views
         {
             string newAccentColour = ((Button)sender).Tag.ToString();
             new PaletteHelper().ReplaceAccentColor(newAccentColour);
-            Properties.Settings.Default.accent = newAccentColour;
+            Settings.Default.accent = newAccentColour;
             SaveSettings();
             SelectedThemeColour();
         }
@@ -239,7 +239,7 @@ namespace GameLauncher.Views
         }
         public void SaveSettings()
         {
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
         }
         
     }

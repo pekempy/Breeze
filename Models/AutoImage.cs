@@ -62,14 +62,14 @@ namespace GameLauncher.Models
         public string DownloadImage(string title, string type)
         {
             Trace.WriteLine(DateTime.Now + ": Downloading " + title + " " + type);
-            App.Current.Dispatcher.Invoke(new Action(() =>
+            Application.Current.Dispatcher.Invoke(new Action(() =>
                ((MainWindow)Application.Current.MainWindow).IncreaseExeSearch()));
             using (WebClient client = new WebClient())
             {
                 ServicePointManager.Expect100Continue = true;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 client.UseDefaultCredentials = true;
-                client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                client.Proxy.Credentials = CredentialCache.DefaultCredentials;
                 bool downloadSuccess = false;
                 if (type == "icon")
                 {

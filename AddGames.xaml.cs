@@ -155,7 +155,6 @@ namespace GameLauncher
         private void AddGenre_OnClick(object sender, RoutedEventArgs e)
         {
             string genrePlaceHolder = null;
-            //Check the itemscontrol and for each checked item, add it to the list
             for (int i = 0; i < GenreAGList.Items.Count; i++)
             {
                 ContentPresenter c = (ContentPresenter)GenreAGList.ItemContainerGenerator.ContainerFromItem(GenreAGList.Items[i]);
@@ -212,7 +211,7 @@ namespace GameLauncher
                 string installPath = AppDomain.CurrentDomain.BaseDirectory;
                 installPath = installPath.Replace("\\", "/");
                 string ngNewShortcut = installPath + "Resources/shortcuts/" + newgametitle + ".lnk";
-                NewGamePath.Text = ngNewShortcut;
+                NewGamePath.Text = newgametitle + ".lnk";
             }
             else if (dialogResult == true && NewGameTitle.Text == "")
             {
@@ -293,12 +292,12 @@ namespace GameLauncher
             string installPath = AppDomain.CurrentDomain.BaseDirectory;
             if (!Directory.Exists(installPath + "\\Resources\\shortcuts"))
             {
-                System.IO.Directory.CreateDirectory(installPath + "\\Resources\\shortcuts");
+                Directory.CreateDirectory(installPath + "\\Resources\\shortcuts");
             }
             //create shortcut from linkname, place shortut in dir
             WshShell wsh = new WshShell();
-            IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(
-                installPath + "\\Resources\\shortcuts" + "\\" + newgametitle + ".lnk") as IWshRuntimeLibrary.IWshShortcut;
+            IWshShortcut shortcut = wsh.CreateShortcut(
+                installPath + "\\Resources\\shortcuts" + "\\" + newgametitle + ".lnk") as IWshShortcut;
             shortcut.Arguments = "";
             shortcut.TargetPath = linkname;
             shortcut.WindowStyle = 1;
