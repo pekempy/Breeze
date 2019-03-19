@@ -1,5 +1,17 @@
 **CHANGELOG**
 
+**Breeze v1.8**
+- Increased speed of changing between views
+- Loading screen shows during most long operations
+- Loading shows how many images left to download during automatic scraping
+- Optimisations for deleting games
+- Checks for duplicates when scanning for games
+- Images and shortcuts are now relative paths instead of absolute
+        The program should automatically fix the paths in your GamesList.txt
+- Tidied code/usings
+- Bug fixes 🐛
+
+
 **Breeze v1.7**
 * Can now search for games in your steam directory, and auto-download images(not accurate)
 * Also the above works for Origin & uPlay
