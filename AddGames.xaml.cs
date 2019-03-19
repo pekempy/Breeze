@@ -8,6 +8,7 @@ using IWshRuntimeLibrary;
 using MaterialDesignThemes.Wpf;
 using GameLauncher.Properties;
 using System.Diagnostics;
+using GameLauncher.Models;
 
 namespace GameLauncher
 {

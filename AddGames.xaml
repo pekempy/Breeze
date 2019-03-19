@@ -75,6 +75,8 @@
                                  Grid.Row="1"
                                  Grid.ColumnSpan="3"
                                  Margin="40,0,40,0"
+                                 Width="380"
+                                 HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="Title"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  TextChanged="TitleTextChanged" />
@@ -83,6 +85,8 @@
                                  Grid.Row="2"
                                  Grid.ColumnSpan="3"
                                  Margin="40,0,40,0"
+                                 Width="380"
+                                 HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="Path to file"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         <Button Grid.Row="2"
@@ -104,6 +108,8 @@
                                  Grid.Row="3"
                                  Grid.ColumnSpan="3"
                                  Margin="40,0,40,0"
+                                 Width="380"
+                                 HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="Genre(s)"
                                  IsReadOnly="True"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
@@ -193,6 +199,8 @@
                                  Grid.Row="4"
                                  Grid.ColumnSpan="3"
                                  Margin="40,0,40,0"
+                                 Width="380"
+                                 HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="Web link"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         <!--  NewGameIcon  -->
@@ -200,6 +208,8 @@
                                  Grid.Row="5"
                                  Grid.ColumnSpan="3"
                                  Margin="40,0,40,0"
+                                 Width="380"
+                                 HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="Icon"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         <Button Grid.Row="5"
@@ -235,6 +245,8 @@
                                  Grid.Row="6"
                                  Grid.ColumnSpan="3"
                                  Margin="40,0,40,0"
+                                 Width="380"
+                                 HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="Poster"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         <Button Grid.Row="6"
@@ -270,6 +282,8 @@
                                  Grid.Row="7"
                                  Grid.ColumnSpan="3"
                                  Margin="40,0,40,0"
+                                 Width="380"
+                                 HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="Banner"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         <Button Grid.Row="7"

@@ -354,8 +354,9 @@ namespace GameLauncher
             string genreToFilter = ((Button)sender).Tag.ToString();
             if (DataContext == settingsViewModel)
             {
-                //Check saved context + apply :)
-                DataContext = posterViewModel;
+                if (Settings.Default.viewtype == "Poster") { DataContext = posterViewModel; }
+                if (Settings.Default.viewtype == "Banner") { DataContext = bannerViewModel; }
+                if (Settings.Default.viewtype == "List") { DataContext = listViewModel; }
             }
             pv.GenreToFilter(genreToFilter);
             pv.RefreshList2(cvs);
@@ -399,7 +400,15 @@ namespace GameLauncher
         }
         public void RefreshGames()
         {
-            LoadAllViews();
+            DialogFrame.Visibility = Visibility.Visible;
+            DialogFrame.Content = loadingdialog;
+            try
+            {
+                try { GenreListMW.Clear(); } catch { }
+                try { GameListMW.Clear(); } catch { }
+                lagbw.RunWorkerAsync();
+            }
+            catch { }
             if (view == "list") { ListViewActive(); }
             else if (view == "poster") { PosterViewActive(); }
             else if (view == "banner") { BannerViewActive(); }
