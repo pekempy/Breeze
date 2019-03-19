@@ -1,20 +1,8 @@
 ﻿using GameLauncher.Properties;
 using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GameLauncher.Views
 {
@@ -27,7 +15,7 @@ namespace GameLauncher.Views
         public bool isLoading;
         public LoadingProgress()
         {
-            var converter = new System.Windows.Media.BrushConverter();
+            var converter = new BrushConverter();
             var white = (Brush)converter.ConvertFromString("#FFFFFF");
             var black = (Brush)converter.ConvertFromString("#000000");
             InitializeComponent();

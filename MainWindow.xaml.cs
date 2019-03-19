@@ -1,21 +1,17 @@
-﻿using GameLauncher.ViewModels;
+﻿using GameLauncher.Models;
+using GameLauncher.Properties;
+using GameLauncher.ViewModels;
 using GameLauncher.Views;
+using MaterialDesignThemes.Wpf;
 using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using GameLauncher.Properties;
-using MaterialDesignThemes.Wpf;
 using System.Windows.Data;
-using System.Net;
-using System.Diagnostics;
-using System.Windows.Threading;
-using GameLauncher.Models;
-using System.Collections.ObjectModel;
-using System.Threading;
-using System.Threading.Tasks;
-using System.ComponentModel;
-using MahApps.Metro.Controls;
 
 namespace GameLauncher
 {
@@ -36,8 +32,8 @@ namespace GameLauncher
         private ExesViewModel exesViewModel = new ExesViewModel();
         private Loading loadingdialog = new Loading();
         public Loading loadingprogressdialog = new Loading();
-        public Views.PosterView pv = new Views.PosterView();
-        public Views.BannerView bv = new Views.BannerView();
+        public PosterView pv = new PosterView();
+        public BannerView bv = new BannerView();
         public Views.ListView lv = new Views.ListView();
         public CollectionViewSource cvs;
         public bool isDialogOpen;
@@ -46,19 +42,23 @@ namespace GameLauncher
         public string DLGameTitle;
         public string DLImgType;
         public string view;
+        public string newText;
         public BackgroundWorker lagbw;
 
         public MainWindow()
         {
-            lagbw = new BackgroundWorker();
-            lagbw.WorkerReportsProgress = true;
+            lagbw = new BackgroundWorker
+            {
+                WorkerReportsProgress = true
+            };
             lagbw.ProgressChanged += LagBWProgressChanged;
             lagbw.DoWork += LagBWDoWork;
             lagbw.RunWorkerCompleted += LagBWRunWorkerCompleted;
             Trace.Listeners.Clear();
+            FixFilePaths();
             InitTraceListen();
-            this.Height = (System.Windows.SystemParameters.PrimaryScreenHeight * 0.75);
-            this.Width = (System.Windows.SystemParameters.PrimaryScreenWidth * 0.75);
+            this.Height = (SystemParameters.PrimaryScreenHeight * 0.75);
+            this.Width = (SystemParameters.PrimaryScreenWidth * 0.75);
             LoadAllGames lag = new LoadAllGames();
             LoadSearch ls = new LoadSearch();
             MakeDirectories();
@@ -70,7 +70,6 @@ namespace GameLauncher
             isDownloadOpen = false;
             LoadSettings();
             Trace.WriteLine(DateTime.Now + ": New Session started");
-
         }
         public void LagBWDoWork(object sender, DoWorkEventArgs e)
         {
@@ -88,7 +87,7 @@ namespace GameLauncher
             posterViewModel.LoadGames();
             listViewModel.LoadGames();
             bannerViewModel.LoadGames();
-            if (Settings.Default.viewtype.ToString() == "Poster") { PosterViewActive();}
+            if (Settings.Default.viewtype.ToString() == "Poster") { PosterViewActive(); }
             if (Settings.Default.viewtype.ToString() == "Banner") { BannerViewActive(); }
             if (Settings.Default.viewtype.ToString() == "List") { ListViewActive(); }
             DialogFrame.Visibility = Visibility.Hidden;
@@ -181,10 +180,14 @@ namespace GameLauncher
                 log.Close();
             }
             else { var log = File.Create(logfile); }
-            TextWriterTraceListener twtl = new TextWriterTraceListener(logfile);
-            twtl.TraceOutputOptions = TraceOptions.ThreadId | TraceOptions.DateTime;
-            ConsoleTraceListener ctl = new ConsoleTraceListener(false);
-            ctl.TraceOutputOptions = TraceOptions.DateTime;
+            TextWriterTraceListener twtl = new TextWriterTraceListener(logfile)
+            {
+                TraceOutputOptions = TraceOptions.ThreadId | TraceOptions.DateTime
+            };
+            ConsoleTraceListener ctl = new ConsoleTraceListener(false)
+            {
+                TraceOutputOptions = TraceOptions.DateTime
+            };
 
             Trace.Listeners.Add(twtl);
             Trace.Listeners.Add(ctl);
@@ -245,13 +248,14 @@ namespace GameLauncher
             ImageDownload DialogImageDL = new ImageDownload(gametitle, searchstring, imagetype);
             DLGameTitle = gametitle;
             DLImgType = imagetype;
-            if (DialogFrame.Content.ToString() == "GameLauncher.EditGames" || DialogFrame.Content.ToString() == "GameLauncher.AddGames") {
-            DialogFrame.Visibility = Visibility.Visible;
-            DialogFrame.Content = DialogImageDL;
-            DialogAddGames.AddGameDialog.IsOpen = false;
-            DialogEditGames.EditGameDialog.IsOpen = false;
-            DialogImageDL.DownloadDialog.IsOpen = true;
-            isDownloadOpen = true;
+            if (DialogFrame.Content.ToString() == "GameLauncher.EditGames" || DialogFrame.Content.ToString() == "GameLauncher.AddGames")
+            {
+                DialogFrame.Visibility = Visibility.Visible;
+                DialogFrame.Content = DialogImageDL;
+                DialogAddGames.AddGameDialog.IsOpen = false;
+                DialogEditGames.EditGameDialog.IsOpen = false;
+                DialogImageDL.DownloadDialog.IsOpen = true;
+                isDownloadOpen = true;
             }
             else if (DialogFrame.Content.ToString() == "GameLauncher.Views.ImageDownload")
             {
@@ -276,7 +280,8 @@ namespace GameLauncher
         }
         public void DownloadImage(string url)
         {
-            if (!File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png")){
+            if (!File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png"))
+            {
                 using (WebClient client = new WebClient())
                 {
                     try
@@ -284,12 +289,15 @@ namespace GameLauncher
                         ServicePointManager.Expect100Continue = true;
                         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                         client.UseDefaultCredentials = true;
-                        client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                        client.Proxy.Credentials = CredentialCache.DefaultCredentials;
                         client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
                         SetPath(DLGameTitle, DLImgType, dialogOpen);
-                    }catch(Exception e) { Trace.WriteLine(DateTime.Now + ": DownloadImage:" + e); MessageBox.Show("Sorry! That's failed, Try again or try another image"); }
-                } }
-            else if (File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png")){
+                    }
+                    catch (Exception e) { Trace.WriteLine(DateTime.Now + ": DownloadImage:" + e); MessageBox.Show("Sorry! That's failed, Try again or try another image"); }
+                }
+            }
+            else if (File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png"))
+            {
                 File.Delete(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png");
                 using (WebClient client = new WebClient())
                 {
@@ -298,7 +306,7 @@ namespace GameLauncher
                         ServicePointManager.Expect100Continue = true;
                         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                         client.UseDefaultCredentials = true;
-                        client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                        client.Proxy.Credentials = CredentialCache.DefaultCredentials;
                         client.DownloadFile(new Uri(url), @"Resources\img\" + DLGameTitle + "-" + DLImgType + ".png");
                         SetPath(DLGameTitle, DLImgType, dialogOpen);
                     }
@@ -313,39 +321,39 @@ namespace GameLauncher
             {
                 if (dialogType == "edit")
                 {
-                    DialogEditGames.EditIcon.Text = imgpath;
-                    OpenImageDL("","","");
+                    DialogEditGames.EditIcon.Text = title + "-" + DLImgType + ".png";
+                    OpenImageDL("", "", "");
                 }
                 else if (dialogType == "add")
                 {
-                    DialogAddGames.NewGameIcon.Text = imgpath;
-                    OpenImageDL("","","");
+                    DialogAddGames.NewGameIcon.Text = title + "-" + DLImgType + ".png";
+                    OpenImageDL("", "", "");
                 }
             }
             else if (imagetype == "poster")
             {
                 if (dialogType == "edit")
                 {
-                    DialogEditGames.EditPoster.Text = imgpath;
-                    OpenImageDL("","","");
+                    DialogEditGames.EditPoster.Text = title + "-" + DLImgType + ".png";
+                    OpenImageDL("", "", "");
                 }
                 else if (dialogType == "add")
                 {
-                    DialogAddGames.NewGamePoster.Text = imgpath;
-                    OpenImageDL("","","");
+                    DialogAddGames.NewGamePoster.Text = title + "-" + DLImgType + ".png";
+                    OpenImageDL("", "", "");
                 }
             }
             else if (imagetype == "banner")
             {
                 if (dialogType == "edit")
                 {
-                    DialogEditGames.EditBanner.Text = imgpath;
-                    OpenImageDL("","","");
+                    DialogEditGames.EditBanner.Text = title + "-" + DLImgType + ".png";
+                    OpenImageDL("", "", "");
                 }
                 else if (dialogType == "add")
                 {
-                    DialogAddGames.NewGameBanner.Text = imgpath;
-                    OpenImageDL("","","");
+                    DialogAddGames.NewGameBanner.Text = title + "-" + DLImgType + ".png";
+                    OpenImageDL("", "", "");
                 }
             }
         }
@@ -365,27 +373,27 @@ namespace GameLauncher
             lv.GenreToFilter(genreToFilter);
             lv.RefreshList2(cvs);
             MenuToggleButton.IsChecked = false;
-        }       
+        }
         public void PosterViewActive()
         {
             view = "poster";
             DataContext = posterViewModel;
-            Properties.Settings.Default.viewtype = "Poster";
-            Properties.Settings.Default.Save();
+            Settings.Default.viewtype = "Poster";
+            Settings.Default.Save();
         }
         public void BannerViewActive()
         {
             view = "banner";
             DataContext = bannerViewModel;
-            Properties.Settings.Default.viewtype = "Banner";
-            Properties.Settings.Default.Save();
+            Settings.Default.viewtype = "Banner";
+            Settings.Default.Save();
         }
         public void ListViewActive()
         {
             view = "list";
             DataContext = listViewModel;
-            Properties.Settings.Default.viewtype = "List";
-            Properties.Settings.Default.Save();
+            Settings.Default.viewtype = "List";
+            Settings.Default.Save();
         }
         public void SettingsViewActive()
         {
@@ -397,6 +405,70 @@ namespace GameLauncher
         public void IncreaseExeSearch()
         {
             DialogExeSelection.IncreaseImages();
+        }
+
+        public void FixFilePaths()
+        {
+            string file = "./Resources/GamesList.txt";
+            string fileout = "./Resources/GamesList2.txt";
+            var contents = File.ReadAllLines(file);
+            Array.Sort(contents);
+            File.WriteAllLines(fileout, contents);
+            File.Delete("./Resources/GamesList.txt");
+            File.Move("./Resources/GamesList2.txt", "./Resources/GamesList.txt");
+            bool textModified = false;
+            string installPath = AppDomain.CurrentDomain.BaseDirectory;
+            if (File.Exists("./Resources/GamesList.txt"))
+            {
+                string text = File.ReadAllText("./Resources/GamesList.txt");
+
+                if (text.Contains(installPath + "Resources/img/"))
+                {
+                    newText = text.Replace(installPath + "Resources/img/", "");
+                    textModified = true;
+                }
+                if (text.Contains(installPath + "Resources\\img\\"))
+                {
+                    if (textModified)
+                    {
+                        newText = newText.Replace(installPath + "Resources\\img\\", "");
+                    }
+                    else
+                    {
+                        newText = text.Replace(installPath + "Resources\\img\\", "");
+                        textModified = true;
+                    }
+                }
+                if (text.Contains(installPath + "Resources/shortcuts/"))
+                {
+                    if (textModified)
+                    {
+                        newText = newText.Replace(installPath + "Resources/shortcuts/", "");
+                    }
+                    else
+                    {
+                        newText = text.Replace(installPath + "Resources/shortcuts/", "");
+                        textModified = true;
+                    }
+                }
+                else if (text.Contains(installPath + "Resources\\shortcuts\\"))
+                {
+                    if (textModified)
+                    {
+                        newText = newText.Replace(installPath + "Resources\\shortcuts\\", "");
+                    }
+                    else
+                    {
+                        newText = text.Replace(installPath + "Resources\\shortcuts\\", "");
+                    }
+                }
+                if (newText != null)
+                {
+                    File.WriteAllText("./Resources/GamesList2.txt", newText);
+                    File.Delete("./Resources/GamesList.txt");
+                    File.Move("./Resources/GamesList2.txt", "./Resources/GamesList.txt");
+                }
+            }
         }
         public void RefreshGames()
         {
@@ -455,7 +527,6 @@ namespace GameLauncher
         }
         public void LoadSettings()
         {
-            //Theme Light or Dark
             if (Settings.Default.theme.ToString() == "Dark")
             {
                 ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark);

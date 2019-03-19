@@ -1,15 +1,12 @@
 using GameLauncher.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 
 namespace GameLauncher.ViewModels
 {
@@ -38,7 +35,7 @@ namespace GameLauncher.ViewModels
             try { Games.Clear(); } catch { }
             ReadFile();
             Games = games;
-            App.Current.Dispatcher.Invoke(new Action(() =>
+            Application.Current.Dispatcher.Invoke(new Action(() =>
             ((MainWindow)Application.Current.MainWindow).RefreshDataContext()));
         }
 
@@ -57,7 +54,7 @@ namespace GameLauncher.ViewModels
                     columns = genresArr[numberOfGenres].Split('|');
                     genreName = columns[0];
                     genreGuid = columns[1];
-                    App.Current.Dispatcher.Invoke(new Action(() =>
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
                     AddGenresToOC()));
                     genreName = null;
                     genreGuid = null;
@@ -78,13 +75,15 @@ namespace GameLauncher.ViewModels
                 foreach (var item in File.ReadAllLines(gameFile))
                 {
                     columns = item.Split('|');
-                        if (columns[4] != "")
-                        {
+                    if (columns[4] != "")
+                    {
                         try
                         {
+                            string installDir = AppDomain.CurrentDomain.BaseDirectory;
+                            string iconpath = installDir + "Resources/img/" + columns[4];
                             icon = new BitmapImage();
                             icon.BeginInit();
-                            icon.UriSource = new Uri(columns[4]);
+                            icon.UriSource = new Uri(iconpath);
                             icon.DecodePixelWidth = 80;
                             icon.CacheOption = BitmapCacheOption.OnLoad;
                             icon.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
@@ -92,14 +91,16 @@ namespace GameLauncher.ViewModels
                             icon.Freeze();
                         }
                         catch (Exception e) { Trace.WriteLine("Error saving image (Icon): " + e); }
-                }
-                        if (columns[5] != "")
-                        {
+                    }
+                    if (columns[5] != "")
+                    {
                         try
                         {
+                            string installDir = AppDomain.CurrentDomain.BaseDirectory;
+                            string posterpath = installDir + "Resources/img/" + columns[5];
                             poster = new BitmapImage();
                             poster.BeginInit();
-                            poster.UriSource = new Uri(columns[5]);
+                            poster.UriSource = new Uri(posterpath);
                             poster.DecodePixelWidth = 200;
                             poster.CacheOption = BitmapCacheOption.OnLoad;
                             poster.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
@@ -107,14 +108,16 @@ namespace GameLauncher.ViewModels
                             poster.Freeze();
                         }
                         catch (Exception e) { Trace.WriteLine("Error saving image (Poster): " + e); }
-                }
-                        if (columns[6] != "")
-                        {
+                    }
+                    if (columns[6] != "")
+                    {
                         try
                         {
+                            string installDir = AppDomain.CurrentDomain.BaseDirectory;
+                            string columnpath = installDir + "Resources/img/" + columns[6];
                             banner = new BitmapImage();
                             banner.BeginInit();
-                            banner.UriSource = new Uri(columns[6]);
+                            banner.UriSource = new Uri(columnpath);
                             banner.DecodePixelWidth = 300;
                             banner.CacheOption = BitmapCacheOption.OnLoad;
                             banner.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
@@ -131,7 +134,7 @@ namespace GameLauncher.ViewModels
                     guid = columns[7];
                     double percent = itemcount / GameCount;
                     percentage = Convert.ToInt32(percent);
-                    App.Current.Dispatcher.Invoke(new Action(() =>
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
                     AddGameToOC()));
                     icon = null;
                     poster = null;

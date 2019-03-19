@@ -1,17 +1,18 @@
-﻿using System;
+﻿using GameLauncher.Models;
+using GameLauncher.ViewModels;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using GameLauncher.Models;
-using GameLauncher.ViewModels;
 
 namespace GameLauncher.Views
 {
     public partial class ListView : UserControl
     {
         public static string FilterGenreName;
+        public string installPath = AppDomain.CurrentDomain.BaseDirectory;
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
         public CollectionViewSource GameListCVS;
 
@@ -19,7 +20,7 @@ namespace GameLauncher.Views
         {
             InitializeComponent();
         }
-        
+
         private void GameLink_OnClick(object sender, RoutedEventArgs e)
         {
             object link = ((Button)sender).Tag;
@@ -37,7 +38,7 @@ namespace GameLauncher.Views
             string linkString = link.ToString().Trim();
             if (linkString != "")
             {
-                Process.Start(new ProcessStartInfo(linkString));
+                Process.Start(new ProcessStartInfo(installPath + "Resources/shortcuts/" + linkString));
             }
         }
 

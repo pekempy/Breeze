@@ -30,7 +30,7 @@
         </CollectionViewSource>
     </UserControl.Resources>
     <Grid>
-            <Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
@@ -51,7 +51,7 @@
                                   materialDesign:ShadowAssist.ShadowEdges="Bottom"
                                   Mode="PrimaryMid">
             <!--  Tab Control  -->
-                <StackPanel Margin="4"
+            <StackPanel Margin="4"
                         VerticalAlignment="Top"
                         Orientation="Horizontal">
                 <RadioButton Name="ThemeBtn"
@@ -530,23 +530,23 @@
             </Grid.RowDefinitions>
             <!-- Content of Library button -->
             <materialDesign:DialogHost Grid.RowSpan="5">
-            <StackPanel Grid.RowSpan="5">
-                <Button Grid.Row="1"
+                <StackPanel Grid.RowSpan="5">
+                    <Button Grid.Row="1"
                         Width="150"
                         Margin="10,10,0,10"
                         HorizontalAlignment="Left"
                         Click="SearchForGames"
                         ToolTip="Returns all shortcuts in start menu to console">
-                    Search Games
-                </Button>
-                <Button Grid.Row="2"
+                        Search Games
+                    </Button>
+                    <Button Grid.Row="2"
                         Width="150"
                         Margin="10,10,0,10"
                         HorizontalAlignment="Left"
                         Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                         Content="Clean Library" >
-                    <Button.CommandParameter>
-                        <Grid Width="300"
+                        <Button.CommandParameter>
+                            <Grid Width="300"
                               MinHeight="150">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
@@ -554,12 +554,12 @@
                                     <RowDefinition />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0"
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0"
                                                Grid.ColumnSpan="3"
                                                Margin="10,10,10,10"
                                                HorizontalAlignment="Center"
@@ -588,7 +588,7 @@
                                             Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
                                             Content="Yes" />
                             </Grid>
-                    </Button.CommandParameter>
+                        </Button.CommandParameter>
                     </Button>
                     <Button Grid.Row="1"
                         Width="150"

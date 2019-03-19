@@ -1,10 +1,5 @@
 ﻿using GameLauncher.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Windows.Data;
-using System.Windows.Media.Imaging;
 
 namespace GameLauncher.ViewModels
 {
@@ -15,7 +10,7 @@ namespace GameLauncher.ViewModels
 
         public void SearchExe()
         {
-            es.SearchForShortcuts(); 
+            es.SearchForShortcuts();
             ExesOC = es.Exes;
         }
         public void UpdateObsCol(string title, string exe)

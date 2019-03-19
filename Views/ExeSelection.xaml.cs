@@ -1,19 +1,19 @@
-﻿using System;
+﻿using GameLauncher.Models;
+using GameLauncher.Properties;
+using GameLauncher.ViewModels;
+using IWshRuntimeLibrary;
+using MaterialDesignThemes.Wpf;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using GameLauncher.Models;
-using System.Globalization;
-using Microsoft.Win32;
-using System.IO;
-using IWshRuntimeLibrary;
-using GameLauncher.Properties;
-using MaterialDesignThemes.Wpf;
-using System.Diagnostics;
-using GameLauncher.ViewModels;
-using System.ComponentModel;
 
 namespace GameLauncher.Views
 {
@@ -36,8 +36,10 @@ namespace GameLauncher.Views
 
         public ExeSelection()
         {
-            exebw = new BackgroundWorker();
-            exebw.WorkerReportsProgress = true;
+            exebw = new BackgroundWorker
+            {
+                WorkerReportsProgress = true
+            };
             exebw.ProgressChanged += ExeBWProgressChanged;
             exebw.DoWork += ExeBWDoWork;
             exebw.RunWorkerCompleted += ExeBWRunWorkerCompleted;
@@ -78,7 +80,7 @@ namespace GameLauncher.Views
                 string icon = fileNameIcon;
                 string poster = fileNamePoster;
                 string banner = fileNameBanner;
-                string shortcut = createShortcut(title, exe);
+                string shortcut = CreateShortcut(title, exe);
                 string game = title + "||" + shortcut + "||" + icon + "|" + poster + "|" + banner + "|" + gameGuid;
                 tw.WriteLine(game);
                 tw.Close();
@@ -103,7 +105,7 @@ namespace GameLauncher.Views
             ((MainWindow)Application.Current.MainWindow)?.CloseExeSearchDialog();
         }
         public void RemoveExe(object sender, RoutedEventArgs e)
-        {         
+        {
             string gametitle = ((Button)sender).Tag.ToString();
             foreach (var exeItem in ExesViewModel.ExesOC.ToList())
             {
@@ -137,7 +139,8 @@ namespace GameLauncher.Views
                 selectedExe = ((RadioButton)sender).Tag.ToString();
                 title = ((RadioButton)sender).CommandParameter.ToString();
             }
-            catch {
+            catch
+            {
                 Trace.WriteLine(DateTime.Now + ": Couldn't Select?");
             }
 
@@ -159,7 +162,7 @@ namespace GameLauncher.Views
                 for (int i = 0; i < ExeList.Count; i++)
                 {
                     if (!ExeList[i].Contains(title + ";"))
-                        {
+                    {
                         if (!ExeList[i].Contains(";" + selectedExe))
                         {
                             matchExe = false;
@@ -180,18 +183,21 @@ namespace GameLauncher.Views
             string title = ((Button)sender).Tag.ToString();
             string exe;
             string newgame;
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Multiselect = false;
-            fileDialog.RestoreDirectory = true;
-            fileDialog.Filter = "Executable Files (*.exe) | *.exe;*.lnk;*.url";
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                RestoreDirectory = true,
+                Filter = "Executable Files (*.exe) | *.exe;*.lnk;*.url"
+            };
             var dialogResult = fileDialog.ShowDialog();
             if (dialogResult == true)
             {
                 exe = fileDialog.FileName;
                 newgame = title + ";" + exe;
-                for (int i = 0; i<ExeList.Count; i++)
+                for (int i = 0; i < ExeList.Count; i++)
                 {
-                    if (ExeList[i].Contains(title + ";")){
+                    if (ExeList[i].Contains(title + ";"))
+                    {
                         matchFound = true;
                         if (!ExeList[i].Contains(";" + exe))
                         {
@@ -227,7 +233,7 @@ namespace GameLauncher.Views
         private void UpdateObsCol(string title, string exe)
         {
             exs.UpdateObsCol(title, exe);
-            
+
         }
         private void AcceptExeSelection_OnClick(object sender, RoutedEventArgs e)
         {
@@ -235,16 +241,16 @@ namespace GameLauncher.Views
             ((MainWindow)Application.Current.MainWindow).DialogFrame.Content = ldProgress;
             exebw.RunWorkerAsync();
         }
-        private string createShortcut(string title, string exe)
+        private string CreateShortcut(string title, string exe)
         {
             string installPath = AppDomain.CurrentDomain.BaseDirectory;
             if (!Directory.Exists(installPath + "\\Resources\\shortcuts"))
             {
-                System.IO.Directory.CreateDirectory(installPath + "\\Resources\\shortcuts");
+                Directory.CreateDirectory(installPath + "\\Resources\\shortcuts");
             }
             WshShell wsh = new WshShell();
-            IWshRuntimeLibrary.IWshShortcut shortcut = wsh.CreateShortcut(
-            installPath + "\\Resources\\shortcuts" + "\\" + title + ".lnk") as IWshRuntimeLibrary.IWshShortcut;
+            IWshShortcut shortcut = wsh.CreateShortcut(
+            installPath + "\\Resources\\shortcuts" + "\\" + title + ".lnk") as IWshShortcut;
             shortcut.Arguments = "";
             shortcut.TargetPath = exe;
             shortcut.WindowStyle = 1;
@@ -252,7 +258,7 @@ namespace GameLauncher.Views
             shortcut.WorkingDirectory = "C:\\App";
             shortcut.IconLocation = exe;
             shortcut.Save();
-            return installPath + "\\Resources\\shortcuts" + "\\" + title + ".lnk";
+            return title + ".lnk";
         }
     }
     public sealed class Null2Visibility : IValueConverter

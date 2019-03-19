@@ -1,22 +1,18 @@
 ﻿using GameLauncher.Models;
 using GameLauncher.ViewModels;
-using HtmlAgilityPack;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Input;
-using System.Xml;
 
 namespace GameLauncher.Views
 {
     public partial class PosterView : UserControl
     {
         public static string FilterGenreName;
+        public string installPath = AppDomain.CurrentDomain.BaseDirectory;
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
         public CollectionViewSource GameListCVS;
 
@@ -65,39 +61,39 @@ namespace GameLauncher.Views
             string linkString = link.ToString().Trim();
             if (linkString != string.Empty)
             {
-                Process.Start(new ProcessStartInfo(linkString));
+                Process.Start(new ProcessStartInfo(installPath + "Resources/shortcuts/" + linkString));
             }
         }
-        
+
         private void SearchString_TextChanged(object sender, TextChangedEventArgs e)
         {
             RefreshList();
         }
-        
+
         private void EnableFilteringCheat(object sender, RoutedEventArgs e)
         {
             GameListCVS = ((CollectionViewSource)(FindResource("GameListCVS")));
             MainWindow.cvs = GameListCVS;
             MainWindow.MenuToggleButton.IsChecked = true;
         }
-        
+
         private void GameSearch(object sender, FilterEventArgs e)
         {
             GameList gl = e.Item as GameList;
             e.Accepted &= gl.Title.ToUpper().Contains(GameSearchBar.Text.ToUpper());
         }
-    
+
         public void GenreFilter(object sender, FilterEventArgs e)
         {
             GameList gl = e.Item as GameList;
             e.Accepted &= gl.Genre.ToUpper().Contains(FilterGenreName.ToUpper());
         }
-        
+
         public void GenreToFilter(string filtergenrename)
         {
             FilterGenreName = filtergenrename;
         }
-        
+
         public void RefreshList()
         {
             GameListCVS = ((CollectionViewSource)(FindResource("GameListCVS")));
@@ -107,7 +103,7 @@ namespace GameLauncher.Views
             if (GameListCVS.View != null)
                 GameListCVS.View.Refresh();
         }
-        
+
         public void RefreshList2(CollectionViewSource cvscvs)
         {
             if (cvscvs != null)

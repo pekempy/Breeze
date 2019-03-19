@@ -1,11 +1,11 @@
-﻿using HtmlAgilityPack;
+﻿using GameLauncher.Views;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
-using GameLauncher.Views;
 using System.Windows;
-using System.Diagnostics;
 
 namespace GameLauncher.Models
 {
@@ -55,22 +55,22 @@ namespace GameLauncher.Models
                 iconList.Clear();
                 posterList.Clear();
                 bannerList.Clear();
-                
-                fileName = installPath + fileName;
+
                 return fileName;
-            } catch (Exception) { return null; }
+            }
+            catch (Exception) { return null; }
         }
         public string DownloadImage(string title, string type)
         {
             Trace.WriteLine(DateTime.Now + ": Downloading " + title + " " + type);
-            App.Current.Dispatcher.Invoke(new Action(() =>
+            Application.Current.Dispatcher.Invoke(new Action(() =>
                ((MainWindow)Application.Current.MainWindow).IncreaseExeSearch()));
             using (WebClient client = new WebClient())
             {
                 ServicePointManager.Expect100Continue = true;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 client.UseDefaultCredentials = true;
-                client.Proxy.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                client.Proxy.Credentials = CredentialCache.DefaultCredentials;
                 bool downloadSuccess = false;
                 if (type == "icon")
                 {
@@ -79,13 +79,14 @@ namespace GameLauncher.Models
                         for (int i = 0; i < iconList.Count; i++)
                         {
                             string iconURL = iconList[i];
-                            fileName = @"Resources\img\" + title + "-" + type + ".png";
+                            fileName = title + "-" + type + ".png";
+                            string path = "Resources/img/" + fileName;
                             try
                             {
-                                client.DownloadFile(new Uri(iconURL), fileName);
+                                client.DownloadFile(new Uri(iconURL), path);
                             }
                             catch (WebException) { }
-                            if (File.Exists(installPath + fileName)) { downloadSuccess = true; return fileName; }
+                            if (File.Exists(installPath + "Resources\\img\\" + fileName)) { downloadSuccess = true; return fileName; }
                         }
                     }
                 }
@@ -96,13 +97,14 @@ namespace GameLauncher.Models
                         for (int i = 0; i < posterList.Count; i++)
                         {
                             string posterURL = posterList[i];
-                            fileName = @"Resources\img\" + title + "-" + type + ".png";
+                            fileName = title + "-" + type + ".png";
+                            string path = "Resources/img/" + fileName;
                             try
                             {
-                                client.DownloadFile(new Uri(posterURL), fileName);
+                                client.DownloadFile(new Uri(posterURL), path);
                             }
                             catch (WebException) { }
-                            if (File.Exists(installPath + fileName)) { downloadSuccess = true; return fileName; }
+                            if (File.Exists(installPath + "Resources\\img\\" + fileName)) { downloadSuccess = true; return fileName; }
                         }
                     }
                 }
@@ -113,13 +115,14 @@ namespace GameLauncher.Models
                         for (int i = 0; i < bannerList.Count; i++)
                         {
                             string bannerURL = bannerList[i];
-                            fileName = @"Resources\img\" + title + "-" + type + ".png";
+                            fileName = title + "-" + type + ".png";
+                            string path = "Resources/img/" + fileName;
                             try
                             {
-                                client.DownloadFile(new Uri(bannerURL), fileName);
+                                client.DownloadFile(new Uri(bannerURL), path);
                             }
                             catch (WebException) { }
-                            if (File.Exists(installPath + fileName)) { downloadSuccess = true; return fileName; }
+                            if (File.Exists(installPath + "Resources\\img\\" + fileName)) { downloadSuccess = true; return fileName; }
                         }
                     }
                 }

@@ -74,8 +74,8 @@
                         <TextBox Name="NewGameTitle"
                                  Grid.Row="1"
                                  Grid.ColumnSpan="3"
-                                 Margin="40,0,40,0"
                                  Width="380"
+                                 Margin="40,0,40,0"
                                  HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="Title"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -84,8 +84,8 @@
                         <TextBox Name="NewGamePath"
                                  Grid.Row="2"
                                  Grid.ColumnSpan="3"
-                                 Margin="40,0,40,0"
                                  Width="380"
+                                 Margin="40,0,40,0"
                                  HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="Path to file"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
@@ -107,8 +107,8 @@
                         <TextBox Name="NewGameGenre"
                                  Grid.Row="3"
                                  Grid.ColumnSpan="3"
-                                 Margin="40,0,40,0"
                                  Width="380"
+                                 Margin="40,0,40,0"
                                  HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="Genre(s)"
                                  IsReadOnly="True"
@@ -147,8 +147,9 @@
                                     <ScrollViewer Grid.ColumnSpan="3"
                                                   Margin="0,40,0,30"
                                                   VerticalScrollBarVisibility="auto">
-                                        <ItemsControl x:Name="GenreAGList" ItemsSource="{Binding Source={StaticResource GenreListCVS}, IsAsync=True}"
-                                  ScrollViewer.CanContentScroll="True">
+                                        <ItemsControl x:Name="GenreAGList"
+                                                      ItemsSource="{Binding Source={StaticResource GenreListCVS}, IsAsync=True}"
+                                                      ScrollViewer.CanContentScroll="True">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
                                                     <WrapPanel />
@@ -198,8 +199,8 @@
                         <TextBox Name="NewGameLink"
                                  Grid.Row="4"
                                  Grid.ColumnSpan="3"
-                                 Margin="40,0,40,0"
                                  Width="380"
+                                 Margin="40,0,40,0"
                                  HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="Web link"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
@@ -207,8 +208,8 @@
                         <TextBox Name="NewGameIcon"
                                  Grid.Row="5"
                                  Grid.ColumnSpan="3"
-                                 Margin="40,0,40,0"
                                  Width="380"
+                                 Margin="40,0,40,0"
                                  HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="Icon"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
@@ -244,8 +245,8 @@
                         <TextBox Name="NewGamePoster"
                                  Grid.Row="6"
                                  Grid.ColumnSpan="3"
-                                 Margin="40,0,40,0"
                                  Width="380"
+                                 Margin="40,0,40,0"
                                  HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="Poster"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
@@ -281,8 +282,8 @@
                         <TextBox Name="NewGameBanner"
                                  Grid.Row="7"
                                  Grid.ColumnSpan="3"
-                                 Margin="40,0,40,0"
                                  Width="380"
+                                 Margin="40,0,40,0"
                                  HorizontalAlignment="Left"
                                  materialDesign:HintAssist.Hint="Banner"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />

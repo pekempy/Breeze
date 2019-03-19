@@ -4,7 +4,6 @@ using MaterialDesignThemes.Wpf;
 using System;
 using System.Diagnostics;
 using System.Globalization;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -79,7 +78,7 @@ namespace GameLauncher.Views
         }
         private void QwantBrowse(object sender, ExecutedRoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.qwant.com/?q=test");
+            Process.Start("https://www.qwant.com/?q=test");
         }
         private void QwantCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {

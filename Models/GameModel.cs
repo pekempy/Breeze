@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace GameLauncher.Models
@@ -41,9 +40,9 @@ namespace GameLauncher.Models
             if (PropertyChanged != null)
             {
 
-                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
     }
 }
