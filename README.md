@@ -15,7 +15,6 @@ This isn't designed to be a competitor to steam, or any other game launcher. I j
 
 #### Planned updates:
 - Possibly a category view if it's feasible
-- Optimise loading times for switching views etc.
 
 [Changelog](https://github.com/pekempy/Breeze/blob/master/Changelog.md)
 
