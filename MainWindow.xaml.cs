@@ -525,8 +525,49 @@ namespace GameLauncher
                 ExeSelection.ChangeWindowSize(this.ActualWidth * 0.9, this.ActualHeight * 0.9);
             }
         }
+        public void StoreSize()
+        {
+            Top = Settings.Default.Top;
+            Left = Settings.Default.Left;
+            Height = Settings.Default.Height;
+            Width = Settings.Default.Width;
+            if (Settings.Default.Maximized)
+            {
+                WindowState = WindowState.Maximized;
+            }
+        }
+        public void Window_Closed(object sender, CancelEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                Settings.Default.Top = RestoreBounds.Top;
+                Settings.Default.Left = RestoreBounds.Left;
+                Settings.Default.Height = RestoreBounds.Height;
+                Settings.Default.Location = RestoreBounds.Location.ToString();
+                Settings.Default.Maximized = true;
+            }
+            else
+            {
+                Settings.Default.Top = Top;
+                Settings.Default.Left = Left;
+                Settings.Default.Height = Height;
+                Settings.Default.Width = Width;
+                Settings.Default.Location = RestoreBounds.Location.ToString();
+                Settings.Default.Maximized = false;
+            }
+            
+            Settings.Default.Save();
+        }
         public void LoadSettings()
         {
+            Top = Settings.Default.Top;
+            Left = Settings.Default.Left;
+            Height = Settings.Default.Height;
+            Width = Settings.Default.Width;
+            if (Settings.Default.Maximized)
+            {
+                WindowState = WindowState.Maximized;
+            }
             if (Settings.Default.theme.ToString() == "Dark")
             {
                 ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark);
