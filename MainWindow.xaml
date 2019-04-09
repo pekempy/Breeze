@@ -134,33 +134,67 @@
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <DockPanel MinWidth="212">
                     <!--  Button to open hamburger  -->
-                    <ToggleButton Margin="16"
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*"/>
+                            <RowDefinition Height="90*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <ToggleButton Margin="10"
                                   HorizontalAlignment="Right"
                                   DockPanel.Dock="Top"
+                                      Grid.Row="0"
+                                      Grid.Column="1"
                                   IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
                                   Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel Orientation="Vertical">
-                            <Button Click="ApplyGenreFilter_OnClick"
+
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="0"
+                                      Grid.Column="0" Margin="15 0 0 0">
+                            <!-- Icons for Launchers -->
+                            <materialDesign:PackIcon VerticalAlignment="Center" 
+                                                     Kind="Steam" 
+                                                     Margin="5 5 5 5" Height="20" Width="20"/>
+                            <materialDesign:PackIcon VerticalAlignment="Center" 
+                                                     Kind="Origin"
+                                                     Margin="5 5 5 5" 
+                                                     FontSize="20" Height="20" Width="20" />
+                            <materialDesign:PackIcon VerticalAlignment="Center" 
+                                                     Kind="Uplay" 
+                                                     Margin="5 5 5 5" 
+                                                     FontSize="20" Height="20" Width="20" />
+                            <materialDesign:PackIcon VerticalAlignment="Center" 
+                                                     Kind="Battlenet" 
+                                                     Margin="5 5 5 5" 
+                                                     FontSize="20" Height="20" Width="20" />
+                            <!-- Need to add epic games icon -->
+
+                        </StackPanel>
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.ColumnSpan="2">
+                            <StackPanel Orientation="Vertical">
+                                <Button Click="ApplyGenreFilter_OnClick"
                                     Content="All Genres"
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     Tag="" />
-                            <ItemsControl x:Name="GenreSidebar" ItemsSource="{Binding Source={StaticResource GenreListCVS}, IsAsync=True}"
+                                <ItemsControl x:Name="GenreSidebar" ItemsSource="{Binding Source={StaticResource GenreListCVS}, IsAsync=True}"
                                   ScrollViewer.CanContentScroll="True">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <Button Name="GenreButton"
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <Button Name="GenreButton"
                                                     Click="ApplyGenreFilter_OnClick"
                                                     Content="{Binding Name}"
                                                     Style="{StaticResource MaterialDesignFlatButton}"
                                                     Tag="{Binding Name}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
-                    </ScrollViewer>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
         </materialDesign:DrawerHost>

@@ -76,6 +76,7 @@ namespace GameLauncher
             MakeDefaultGenres();
             lag.LoadGenres();
             CheckLaunchersExist();
+            ManageLauncherIconVisibility();
             InitializeComponent();
             LoadAllViews();
             DataContext = null;
@@ -124,22 +125,87 @@ namespace GameLauncher
             }
             catch (Exception e) { Trace.WriteLine("Steam Check Failed: " + e); }
             //Epic Games Checker
-            string epicRegistry = "SOFTWARE\\WOW6432Node\\EpicGames\\Unreal Engine";
-            string epicGamesDir;
-            RegistryKey key = Registry.LocalMachine.OpenSubKey(epicRegistry);
-            foreach (string ksubkey in key.GetSubKeyNames())
+            try
             {
-                using (RegistryKey subkey = key.OpenSubKey(ksubkey))
+                string epicRegistry = "SOFTWARE\\WOW6432Node\\EpicGames\\Unreal Engine";
+                string epicGamesDir;
+                RegistryKey epickey = Registry.LocalMachine.OpenSubKey(epicRegistry);
+                foreach (string ksubkey in epickey.GetSubKeyNames())
                 {
-                    epicGamesDir = subkey.GetValue("InstalledDirectory").ToString();
-                    epicGamesDir = epicGamesDir.Substring(0, epicGamesDir.Length - 4);
-                    LauncherEpic = true;
+                    using (RegistryKey subkey = epickey.OpenSubKey(ksubkey))
+                    {
+                        epicGamesDir = subkey.GetValue("InstalledDirectory").ToString();
+                        epicGamesDir = epicGamesDir.Substring(0, epicGamesDir.Length - 4);
+                        EpicExePath = epicGamesDir + "Launcher\\Portal\\Binaries\\Win32\\EpicGamesLauncher.exe";
+                        LauncherEpic = true;
+                    }
                 }
+            }
+            catch (Exception e) { Trace.WriteLine("Epic Check Failed: " + e); }
             //Origin Checker
-
+            try
+            {
+                string regkey = "SOFTWARE\\WOW6432Node\\Origin";
+                RegistryKey originkey = Registry.LocalMachine.OpenSubKey(regkey);
+                    using (RegistryKey subkey = originkey.OpenSubKey(regkey))
+                    {
+                        OriginExePath = originkey.GetValue("ClientPath").ToString();
+                        LauncherOrigin = true;
+                    }
+            }
+            catch (Exception e) { Trace.WriteLine("Origin Check Failed: " + e); }
             //BattleNet Checker
-
+            try
+            {
+                string regkey = "SOFTWARE\\WOW6432Node\\Blizzard Entertainment\\Battle.net\\Capabilities";
+                RegistryKey battlenetKey = Registry.LocalMachine.OpenSubKey(regkey);
+                using (RegistryKey subkey = battlenetKey.OpenSubKey(regkey))
+                {
+                    string battlenetExe = battlenetKey.GetValue("ApplicationIcon").ToString();
+                    battlenetExe = battlenetExe.Replace("\"", "");
+                    BattleNetExePath = battlenetExe.Replace(",0", "");
+                    LauncherBattleNet = true;
+                }
+            }
+            catch (Exception e) { Trace.WriteLine("BattleNet Check Failed: " + e); }
             //UPlay Checker
+
+            try
+            {
+                string regkey = "SOFTWARE\\WOW6432Node\\Ubisoft\\Launcher";
+                RegistryKey uplay = Registry.LocalMachine.OpenSubKey(regkey);
+                using (RegistryKey subkey = uplay.OpenSubKey(regkey))
+                {
+                    UPlayExePath = uplay.GetValue("InstallDir").ToString();
+                    UPlayExePath = UPlayExePath + "Uplay.exe";
+                    LauncherUPlay = true;
+                }
+            }
+            catch (Exception e) { Trace.WriteLine("Uplay Check Failed: " + e); }
+        }
+
+        public void ManageLauncherIconVisibility()
+        {
+            if (LauncherSteam == true)
+            {
+                Console.WriteLine("Steam: " + SteamExePath);
+            }
+            if (LauncherEpic == true)
+            {
+                Console.WriteLine("Epic: " + EpicExePath);
+            }
+            if (LauncherOrigin == true)
+            {
+                Console.WriteLine("Origin: " + OriginExePath);
+            }
+            if (LauncherBattleNet == true)
+            {
+                Console.WriteLine("BattleNet: " + BattleNetExePath);
+            }
+            if (LauncherUPlay == true)
+            {
+                Console.WriteLine("UPlay: " + UPlayExePath);
+            }
         }
 
         public void LagBWDoWork(object sender, DoWorkEventArgs e)
