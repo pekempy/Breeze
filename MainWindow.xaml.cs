@@ -47,12 +47,12 @@ namespace GameLauncher
         public BackgroundWorker lagbw;
         public bool LauncherSteam;
         public bool LauncherEpic;
-        public bool LauncherUPlay;
+        public bool LauncherUplay;
         public bool LauncherOrigin;
         public bool LauncherBattleNet;
         public string SteamExePath;
         public string EpicExePath;
-        public string UPlayExePath;
+        public string UplayExePath;
         public string OriginExePath;
         public string BattleNetExePath;
 
@@ -67,7 +67,6 @@ namespace GameLauncher
             lagbw.RunWorkerCompleted += LagBWRunWorkerCompleted;
             Trace.Listeners.Clear();
             CheckLaunchersExist();
-            ManageLauncherIconVisibility();
             FixFilePaths();
             InitTraceListen();
             this.Height = (SystemParameters.PrimaryScreenHeight * 0.75);
@@ -78,6 +77,7 @@ namespace GameLauncher
             MakeDefaultGenres();
             lag.LoadGenres();
             InitializeComponent();
+            ManageLauncherIconVisibility();
             LoadAllViews();
             DataContext = null;
             isDownloadOpen = false;
@@ -168,7 +168,7 @@ namespace GameLauncher
                 }
             }
             catch (Exception e) { Trace.WriteLine("BattleNet Check Failed: " + e); }
-            //UPlay Checker
+            //Uplay Checker
 
             try
             {
@@ -176,9 +176,9 @@ namespace GameLauncher
                 RegistryKey uplay = Registry.LocalMachine.OpenSubKey(regkey);
                 using (RegistryKey subkey = uplay.OpenSubKey(regkey))
                 {
-                    UPlayExePath = uplay.GetValue("InstallDir").ToString();
-                    UPlayExePath = UPlayExePath + "Uplay.exe";
-                    LauncherUPlay = true;
+                    UplayExePath = uplay.GetValue("InstallDir").ToString();
+                    UplayExePath = UplayExePath + "Uplay.exe";
+                    LauncherUplay = true;
                 }
             }
             catch (Exception e) { Trace.WriteLine("Uplay Check Failed: " + e); }
@@ -202,12 +202,36 @@ namespace GameLauncher
             {
                 BattleNetLaunchBtn.Visibility = Visibility.Collapsed;
             }
-            if (LauncherUPlay == false)
+            if (LauncherUplay == false)
             {
                 UplayLaunchBtn.Visibility = Visibility.Collapsed;
             }
         }
 
+        public void OpenLauncher(object sender, RoutedEventArgs e)
+        {
+            string tag = ((Button)sender).Tag.ToString();
+            if (tag == "Steam")
+            {
+                Process.Start(SteamExePath);
+            }
+            if (tag == "Origin")
+            {
+                Process.Start(OriginExePath);
+            }
+            if (tag == "Uplay")
+            {
+                Process.Start(UplayExePath);
+            }
+            if (tag == "Epic")
+            {
+                Process.Start(EpicExePath);
+            }
+            if (tag == "Battle")
+            {
+                Process.Start(BattleNetExePath);
+            }
+        }
         public void LagBWDoWork(object sender, DoWorkEventArgs e)
         {
             lag.LoadGenres();

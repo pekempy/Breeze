@@ -35,8 +35,8 @@ namespace GameLauncher.Models
             catch (Exception e) { Trace.WriteLine("SearchSteam Failed: " + e); }
             try { SearchOrigin(); }
             catch (Exception e) { Trace.WriteLine("SearchOrigin Failed: " + e); }
-            try { SearchUPlay(); }
-            catch (Exception e) { Trace.WriteLine("SearchUPlay Failed: " + e); }
+            try { SearchUplay(); }
+            catch (Exception e) { Trace.WriteLine("SearchUplay Failed: " + e); }
             try { SearchEpic(); }
             catch (Exception e) { Trace.WriteLine("SearchEpic Failed: " + e); }
             try { SearchBattle(); }
@@ -302,7 +302,7 @@ namespace GameLauncher.Models
 
         }
 
-        public void SearchUPlay()
+        public void SearchUplay()
         {
             uplayGamedirs.Clear();
             string regkey = "SOFTWARE\\WOW6432Node\\Ubisoft\\Launcher\\Installs";

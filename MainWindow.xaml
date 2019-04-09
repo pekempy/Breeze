@@ -10,6 +10,7 @@
         MinWidth="400"
         MinHeight="600"
         Background="{DynamicResource MaterialDesignPaper}"
+        Closing="Window_Closed"
         FontFamily="{StaticResource MaterialDesignFont}"
         Icon="breeze.ico"
         SizeChanged="MWSizeChanged"
@@ -18,7 +19,6 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Closing="Window_Closed"
         WindowStartupLocation="CenterScreen">
     <!--  Required to make different views work  -->
     <Window.Resources>
@@ -42,7 +42,7 @@
                 <scm:SortDescription PropertyName="Name" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
-        
+
     </Window.Resources>
     <Grid>
         <!--  DrawerHost is the main "host" to have the hamburger  -->
@@ -106,7 +106,7 @@
                                     </StackPanel>
                                 </Button>
                                 <!--  Refresh Button  -->
-                                <Button Click="RefreshGames_OnClick" x:Name="rgbtn">
+                                <Button x:Name="rgbtn" Click="RefreshGames_OnClick">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Margin="0,0,10,0"
                                                                  VerticalAlignment="Center"
@@ -138,81 +138,122 @@
                     <!--  Button to open hamburger  -->
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="15*"/>
-                            <RowDefinition Height="85*"/>
+                            <RowDefinition Height="15*" />
+                            <RowDefinition Height="85*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <ToggleButton Margin="10"
-                                  HorizontalAlignment="Right"
-                                  DockPanel.Dock="Top"
-                                      Grid.Row="0"
+                        <ToggleButton Grid.Row="0"
                                       Grid.Column="1"
-                                  IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
-                                  Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+                                      Margin="10"
+                                      HorizontalAlignment="Right"
+                                      DockPanel.Dock="Top"
+                                      IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
+                                      Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
 
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="0"
-                                      Grid.Column="0" Margin="15 0 0 0">
-                            <!-- Icons for Launchers -->
-                            <Button x:Name="SteamLaunchBtn" Style="{StaticResource MaterialDesignFlatButton}"
-                                                     Width="30" Height="30" Padding="0 0 0 0"
+                        <StackPanel Grid.Row="0"
+                                    Grid.Column="0"
+                                    Margin="15,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <!--  Icons for Launchers  -->
+                            <Button x:Name="SteamLaunchBtn"
+                                    Width="30"
+                                    Height="30"
+                                    Padding="0,0,0,0"
+                                    Click="OpenLauncher"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Tag="Steam"
                                     ToolTip="Steam">
-                            <materialDesign:PackIcon VerticalAlignment="Center" 
-                                                     Kind="Steam" 
-                                                     Margin="5 5 5 5" Height="20" Width="20"/>
+                                <materialDesign:PackIcon Width="20"
+                                                         Height="20"
+                                                         Margin="5,5,5,5"
+                                                         VerticalAlignment="Center"
+                                                         Kind="Steam" />
                             </Button>
-                            <Button x:Name="OriginLaunchBtn" Style="{StaticResource MaterialDesignFlatButton}"
-                                                     Width="30" Height="30" Padding="0 0 0 0"
+                            <Button x:Name="OriginLaunchBtn"
+                                    Width="30"
+                                    Height="30"
+                                    Padding="0,0,0,0"
+                                    Click="OpenLauncher"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Tag="Origin"
                                     ToolTip="Origin">
-                                <materialDesign:PackIcon VerticalAlignment="Center" 
-                                                     Kind="Origin"
-                                                     Margin="5 5 5 5" 
-                                                     FontSize="20" Height="20" Width="20" />
+                                <materialDesign:PackIcon Width="20"
+                                                         Height="20"
+                                                         Margin="5,5,5,5"
+                                                         VerticalAlignment="Center"
+                                                         FontSize="20"
+                                                         Kind="Origin" />
                             </Button>
-                            <Button x:Name="UplayLaunchBtn" Style="{StaticResource MaterialDesignFlatButton}"
-                                                     Width="35" Height="35" Padding="0 0 0 0"
+                            <Button x:Name="UplayLaunchBtn"
+                                    Width="35"
+                                    Height="35"
+                                    Padding="0,0,0,0"
+                                    Click="OpenLauncher"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Tag="Uplay"
                                     ToolTip="Uplay">
-                            <materialDesign:PackIcon VerticalAlignment="Center" 
-                                                     Kind="Uplay" 
-                                                     Margin="5 5 5 5" 
-                                                     FontSize="20" Height="20" Width="20" />
+                                <materialDesign:PackIcon Width="20"
+                                                         Height="20"
+                                                         Margin="5,5,5,5"
+                                                         VerticalAlignment="Center"
+                                                         FontSize="20"
+                                                         Kind="Uplay" />
                             </Button>
-                            <Button x:Name="BattleNetLaunchBtn" Style="{StaticResource MaterialDesignFlatButton}"
-                                                     Width="35" Height="35" Padding="0 0 0 0"
+                            <Button x:Name="BattleNetLaunchBtn"
+                                    Width="35"
+                                    Height="35"
+                                    Padding="0,0,0,0"
+                                    Click="OpenLauncher"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Tag="Battle"
                                     ToolTip="Battle.Net">
-                                <materialDesign:PackIcon VerticalAlignment="Center" 
-                                                     Kind="Battlenet" 
-                                                     Margin="5 5 5 5" 
-                                                     FontSize="20" Height="20" Width="20" />
+                                <materialDesign:PackIcon Width="20"
+                                                         Height="20"
+                                                         Margin="5,5,5,5"
+                                                         VerticalAlignment="Center"
+                                                         FontSize="20"
+                                                         Kind="Battlenet" />
                             </Button>
-                            <Button x:Name="EpicLaunchBtn" Style="{StaticResource MaterialDesignFlatButton}"
-                                                     Width="35" Height="35" Padding="0 0 0 0"
+                            <Button x:Name="EpicLaunchBtn"
+                                    Width="35"
+                                    Height="35"
+                                    Padding="0,0,0,0"
+                                    Click="OpenLauncher"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Tag="Epic"
                                     ToolTip="Epic Games">
-                                <materialDesign:PackIcon VerticalAlignment="Center" 
-                                                     Kind="Shield" 
-                                                     Margin="5 5 5 5" 
-                                                     FontSize="20" Height="20" Width="20" />
+                                <materialDesign:PackIcon Width="20"
+                                                         Height="20"
+                                                         Margin="5,5,5,5"
+                                                         VerticalAlignment="Center"
+                                                         FontSize="20"
+                                                         Kind="Shield" />
 
                             </Button>
                         </StackPanel>
-                        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.ColumnSpan="2">
+                        <ScrollViewer Grid.Row="2"
+                                      Grid.ColumnSpan="2"
+                                      VerticalScrollBarVisibility="Auto">
                             <StackPanel Orientation="Vertical">
                                 <Button Click="ApplyGenreFilter_OnClick"
-                                    Content="All Genres"
-                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                    Tag="" />
-                                <ItemsControl x:Name="GenreSidebar" ItemsSource="{Binding Source={StaticResource GenreListCVS}, IsAsync=True}"
-                                  ScrollViewer.CanContentScroll="True">
+                                        Content="All Genres"
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                        Tag="" />
+                                <ItemsControl x:Name="GenreSidebar"
+                                              ItemsSource="{Binding Source={StaticResource GenreListCVS}, IsAsync=True}"
+                                              ScrollViewer.CanContentScroll="True">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel>
                                                 <Button Name="GenreButton"
-                                                    Click="ApplyGenreFilter_OnClick"
-                                                    Content="{Binding Name}"
-                                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                                    Tag="{Binding Name}" />
+                                                        Click="ApplyGenreFilter_OnClick"
+                                                        Content="{Binding Name}"
+                                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                                        Tag="{Binding Name}" />
                                             </StackPanel>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
