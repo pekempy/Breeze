@@ -8,6 +8,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Windows.Media;
 using System.IO;
 using System.Net;
 using System.Windows;
@@ -455,7 +456,7 @@ namespace GameLauncher
                 else { Trace.WriteLine(DateTime.Now + ": -System unsure which dialog currently open"); }
             }
         }
-        public void UpdateGenreColours()
+        public void UpdateGenreColours(Brush colour)
         {
             if (GenreSidebar.Items.Count != 0)
             {
@@ -465,16 +466,8 @@ namespace GameLauncher
                     try
                     {
                         Button tb = c.ContentTemplate.FindName("GenreButton", c) as Button;
-                        if (Settings.Default.genrecolour == "primary")
-                        {
-                            tb.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
-                            AllGenreBtn.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
-                        }
-                        if (Settings.Default.genrecolour == "accent")
-                        {
-                            tb.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
-                            AllGenreBtn.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
-                        }
+                        tb.Foreground = colour;
+                        AllGenreBtn.Foreground = colour;
                     }
                     catch (Exception br) { Trace.WriteLine("Break: " + br); }
                 }
@@ -498,10 +491,6 @@ namespace GameLauncher
                 EpicLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
                 BattleNetLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
             }
-        }
-        public void UpdateGenreColour(object sender, RoutedEventArgs e)
-        {
-            UpdateGenreColours();
         }
         public void DownloadImage(string url)
         {

@@ -4,12 +4,15 @@ using GameLauncher.ViewModels;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace GameLauncher.Views
@@ -43,7 +46,6 @@ namespace GameLauncher.Views
             if (Settings.Default.theme == "Dark") { themeToggle.IsChecked = true; }
             if (Settings.Default.gametitles == "primary") { GameTitlesToggle.IsChecked = true; }
             if (Settings.Default.fabcolour == "primary") { FABToggle.IsChecked = true; }
-            if (Settings.Default.genrecolour == "primary") { GenreColourToggle.IsChecked = true; }
             if (Settings.Default.launchercolour == "primary") { LauncherColourToggle.IsChecked = true; }
             SelectedThemeColour();
         }
@@ -168,17 +170,29 @@ namespace GameLauncher.Views
             Settings.Default.gametitles = "accent";
             Settings.Default.Save();
         }
-        private void GenreColour_Checked(object sender, RoutedEventArgs e)
+        private void GenreColour_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Settings.Default.genrecolour = "primary";
-            Settings.Default.Save();
-            MainWindow.UpdateGenreColours();
+            int hexNumber;
+            e.Handled = !int.TryParse(e.Text, NumberStyles.HexNumber, CultureInfo.CurrentCulture, out hexNumber);
         }
-        private void GenreColour_Unchecked(object sender, RoutedEventArgs e)
+        private void GenreColour_Enter(object sender, KeyEventArgs e)
         {
-            Settings.Default.genrecolour = "accent";
-            Settings.Default.Save();
-            MainWindow.UpdateGenreColours();
+            if (e.Key == Key.Return)
+            {
+                var regexColourCode = new Regex("^#[a-fA-F0-9]{6}$");
+                if (regexColourCode.IsMatch("#" + GenreColour_Text.Text.Trim()))
+                {
+                    var converter = new BrushConverter();
+                    var brush = (Brush)converter.ConvertFromString("#" + GenreColour_Text.Text);
+                    GenreColour_Display.Fill = brush;
+                    Settings.Default.genrecolour = GenreColour_Text.Text;
+                    Settings.Default.Save();
+                    MainWindow.UpdateGenreColours(brush);
+                }
+            }
+        }
+        private void GenreColour(object sender, TextChangedEventArgs e)
+        {
         }
         private void LauncherColour_Checked(object sender, RoutedEventArgs e)
         {

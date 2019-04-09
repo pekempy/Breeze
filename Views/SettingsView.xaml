@@ -439,12 +439,13 @@
                                 </StackPanel>
                                 <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
                                     <TextBlock>Genre Sidebar uses Primary</TextBlock>
-                                    <ToggleButton x:Name="GenreColourToggle"
-                                          Margin="60,0,0,0"
-                                          HorizontalAlignment="Right"
-                                          Checked="GenreColour_Checked"
-                                          Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
-                                          Unchecked="GenreColour_Unchecked" />
+                                    <TextBox x:Name="GenreColour_Text"
+                                             MinWidth="100"
+                                             KeyDown="GenreColour_Enter"
+                                             PreviewTextInput="GenreColour_PreviewTextInput"/>
+                                    <Rectangle x:Name="GenreColour_Display"
+                                               Width="50"
+                                               Height="50" />
                                 </StackPanel>
                                 <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
                                     <TextBlock>Launcher Buttons uses Primary</TextBlock>
