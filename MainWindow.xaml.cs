@@ -761,6 +761,14 @@ namespace GameLauncher
             {
                 new PaletteHelper().ReplaceAccentColor(Settings.Default.accent.ToString());
             }
+            if(Settings.Default.fabcolour == "primary")
+            {
+                AddGameButton.Style = Application.Current.Resources["MaterialDesignFloatingActionButton"] as Style;
+            }
+            if (Settings.Default.fabcolour == "accent")
+            {
+                AddGameButton.Style = Application.Current.Resources["MaterialDesignFloatingActionAccentButton"] as Style;
+            }
         }
     }
 }

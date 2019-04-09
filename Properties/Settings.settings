@@ -32,5 +32,11 @@
     <Setting Name="Location" Type="System.String" Scope="User">
       <Value Profile="(Default)">0, 0</Value>
     </Setting>
+    <Setting Name="gametitles" Type="System.String" Scope="User">
+      <Value Profile="(Default)">primary</Value>
+    </Setting>
+    <Setting Name="fabcolour" Type="System.String" Scope="User">
+      <Value Profile="(Default)">primary</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

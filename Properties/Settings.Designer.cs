@@ -142,5 +142,29 @@ namespace GameLauncher.Properties {
                 this["Location"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("primary")]
+        public string gametitles {
+            get {
+                return ((string)(this["gametitles"]));
+            }
+            set {
+                this["gametitles"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("primary")]
+        public string fabcolour {
+            get {
+                return ((string)(this["fabcolour"]));
+            }
+            set {
+                this["fabcolour"] = value;
+            }
+        }
     }
 }
