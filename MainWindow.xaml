@@ -18,6 +18,7 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
+        Closing="Window_Closed"
         WindowStartupLocation="CenterScreen">
     <!--  Required to make different views work  -->
     <Window.Resources>
