@@ -3,6 +3,7 @@ using GameLauncher.Properties;
 using GameLauncher.ViewModels;
 using GameLauncher.Views;
 using MaterialDesignThemes.Wpf;
+using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -44,6 +45,16 @@ namespace GameLauncher
         public string view;
         public string newText;
         public BackgroundWorker lagbw;
+        public bool LauncherSteam;
+        public bool LauncherEpic;
+        public bool LauncherUPlay;
+        public bool LauncherOrigin;
+        public bool LauncherBattleNet;
+        public string SteamExePath;
+        public string EpicExePath;
+        public string UPlayExePath;
+        public string OriginExePath;
+        public string BattleNetExePath;
 
         public MainWindow()
         {
@@ -64,6 +75,7 @@ namespace GameLauncher
             MakeDirectories();
             MakeDefaultGenres();
             lag.LoadGenres();
+            CheckLaunchersExist();
             InitializeComponent();
             LoadAllViews();
             DataContext = null;
@@ -71,6 +83,65 @@ namespace GameLauncher
             LoadSettings();
             Trace.WriteLine(DateTime.Now + ": New Session started");
         }
+
+        public void CheckLaunchersExist()
+        {
+            //Steam checker
+            try
+            {
+                string steam32 = "SOFTWARE\\VALVE";
+                string steam64 = "SOFTWARE\\Wow6432Node\\Valve";
+                string steam32path;
+                string steam64path;
+                RegistryKey key32 = Registry.LocalMachine.OpenSubKey(steam32);
+                RegistryKey key64 = Registry.LocalMachine.OpenSubKey(steam64);
+                if (key64.ToString() != null || key64.ToString() != "")
+                {
+                    //Steam is installed - 64 bit
+                    foreach (string k64subKey in key64.GetSubKeyNames())
+                    {
+                        using (RegistryKey subKey = key64.OpenSubKey(k64subKey))
+                        {
+                            steam64path = subKey.GetValue("InstallPath").ToString();
+                            SteamExePath = steam64path + "\\Steam.exe";
+                            LauncherSteam = true;
+                        }
+                    }
+                }
+                if (key32.ToString() != null || key32.ToString() != "")
+                {
+                    //Steam is installed - 32 bit
+                    foreach (string k32subKey in key32.GetSubKeyNames())
+                    {
+                        using (RegistryKey subKey = key32.OpenSubKey(k32subKey))
+                        {
+                            steam32path = subKey.GetValue("InstallPath").ToString();
+                            SteamExePath = steam32path + "\\Steam.exe";
+                            LauncherSteam = true;
+                        }
+                    }
+                }
+            }
+            catch (Exception e) { Trace.WriteLine("Steam Check Failed: " + e); }
+            //Epic Games Checker
+            string epicRegistry = "SOFTWARE\\WOW6432Node\\EpicGames\\Unreal Engine";
+            string epicGamesDir;
+            RegistryKey key = Registry.LocalMachine.OpenSubKey(epicRegistry);
+            foreach (string ksubkey in key.GetSubKeyNames())
+            {
+                using (RegistryKey subkey = key.OpenSubKey(ksubkey))
+                {
+                    epicGamesDir = subkey.GetValue("InstalledDirectory").ToString();
+                    epicGamesDir = epicGamesDir.Substring(0, epicGamesDir.Length - 4);
+                    LauncherEpic = true;
+                }
+            //Origin Checker
+
+            //BattleNet Checker
+
+            //UPlay Checker
+        }
+
         public void LagBWDoWork(object sender, DoWorkEventArgs e)
         {
             lag.LoadGenres();
