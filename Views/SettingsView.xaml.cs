@@ -43,6 +43,7 @@ namespace GameLauncher.Views
             if (Settings.Default.theme == "Dark") { themeToggle.IsChecked = true; }
             if (Settings.Default.gametitles == "primary") { GameTitlesToggle.IsChecked = true; }
             if (Settings.Default.fabcolour == "primary") { FABToggle.IsChecked = true; }
+            if (Settings.Default.genrecolour == "primary") { GenreColourToggle.IsChecked = true; }
             SelectedThemeColour();
         }
         private void DarkModeToggle_Checked(object sender, RoutedEventArgs e)
@@ -166,7 +167,18 @@ namespace GameLauncher.Views
             Settings.Default.gametitles = "accent";
             Settings.Default.Save();
         }
-
+        private void GenreColour_Checked(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.genrecolour = "primary";
+            Settings.Default.Save();
+            MainWindow.UpdateGenreColours();
+        }
+        private void GenreColour_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.genrecolour = "accent";
+            Settings.Default.Save();
+            MainWindow.UpdateGenreColours();
+        }
         private void AddNewGenre_OnClick(object sender, RoutedEventArgs e)
         {
             try

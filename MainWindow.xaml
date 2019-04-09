@@ -239,13 +239,15 @@
                                       Grid.ColumnSpan="2"
                                       VerticalScrollBarVisibility="Auto">
                             <StackPanel Orientation="Vertical">
-                                <Button Click="ApplyGenreFilter_OnClick"
+                                <Button x:Name="AllGenreBtn"
+                                        Click="ApplyGenreFilter_OnClick"
                                         Content="All Genres"
                                         Style="{StaticResource MaterialDesignFlatButton}"
                                         Tag="" />
                                 <ItemsControl x:Name="GenreSidebar"
                                               ItemsSource="{Binding Source={StaticResource GenreListCVS}, IsAsync=True}"
-                                              ScrollViewer.CanContentScroll="True">
+                                              ScrollViewer.CanContentScroll="True"
+                                              Loaded="UpdateGenreColour">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel>

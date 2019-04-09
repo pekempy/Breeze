@@ -79,6 +79,7 @@
               Margin="30,60,30,0"
               Visibility="{Binding Path=IsChecked, ElementName=ThemeBtn, Converter={StaticResource b2v}}">
             <!--  CONTENT OF THE THEMES TAB GOES IN HERE  -->
+            <ScrollViewer>
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock>Enable Dark Mode</TextBlock>
@@ -435,11 +436,21 @@
                                           Checked="TitleColour_Checked"
                                           Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
                                           Unchecked="TitleColour_Unchecked" />
+                                </StackPanel>
+                                <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
+                                    <TextBlock>Genre Sidebar uses Primary</TextBlock>
+                                    <ToggleButton x:Name="GenreColourToggle"
+                                          Margin="60,0,0,0"
+                                          HorizontalAlignment="Right"
+                                          Checked="GenreColour_Checked"
+                                          Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                                          Unchecked="GenreColour_Unchecked" />
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
                     </Grid>
                 </StackPanel>
-            </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
         <Grid Name="GenreBlock"
               Grid.RowSpan="6"

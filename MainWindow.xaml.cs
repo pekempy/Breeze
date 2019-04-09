@@ -455,6 +455,35 @@ namespace GameLauncher
                 else { Trace.WriteLine(DateTime.Now + ": -System unsure which dialog currently open"); }
             }
         }
+        public void UpdateGenreColours()
+        {
+            if (GenreSidebar.Items.Count != 0)
+            {
+                for (int i = 0; i < GenreSidebar.Items.Count; i++)
+                {
+                    ContentPresenter c = (ContentPresenter)GenreSidebar.ItemContainerGenerator.ContainerFromItem(GenreSidebar.Items[i]);
+                    try
+                    {
+                        Button tb = c.ContentTemplate.FindName("GenreButton", c) as Button;
+                        if (Settings.Default.genrecolour == "primary")
+                        {
+                            tb.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
+                            AllGenreBtn.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
+                        }
+                        if (Settings.Default.genrecolour == "accent")
+                        {
+                            tb.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
+                            AllGenreBtn.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
+                        }
+                    }
+                    catch (Exception br) { Trace.WriteLine("Break: " + br); }
+                }
+            }
+        }
+        public void UpdateGenreColour(object sender, RoutedEventArgs e)
+        {
+            UpdateGenreColours();
+        }
         public void DownloadImage(string url)
         {
             if (!File.Exists(@"Resources/img/" + DLGameTitle + "-" + DLImgType + ".png"))

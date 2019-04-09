@@ -61,7 +61,7 @@ namespace GameLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("banner")]
         public string viewtype {
             get {
                 return ((string)(this["viewtype"]));
@@ -164,6 +164,18 @@ namespace GameLauncher.Properties {
             }
             set {
                 this["fabcolour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("primary")]
+        public string genrecolour {
+            get {
+                return ((string)(this["genrecolour"]));
+            }
+            set {
+                this["genrecolour"] = value;
             }
         }
     }

@@ -42,18 +42,21 @@ namespace GameLauncher.Views
         }
         public void UpdateColours(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < gameListView.Items.Count; i++)
+            if (gameListView.Items.Count != 0)
             {
-                ContentPresenter c = (ContentPresenter)gameListView.ItemContainerGenerator.ContainerFromItem(gameListView.Items[i]);
-                try
+                for (int i = 0; i < gameListView.Items.Count; i++)
                 {
-                    Button tb = c.ContentTemplate.FindName("PosterGameTitle", c) as Button;
-                    if (Settings.Default.gametitles == "primary")
-                        tb.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
-                    if (Settings.Default.gametitles == "accent")
-                        tb.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
+                    ContentPresenter c = (ContentPresenter)gameListView.ItemContainerGenerator.ContainerFromItem(gameListView.Items[i]);
+                    try
+                    {
+                        Button tb = c.ContentTemplate.FindName("PosterGameTitle", c) as Button;
+                        if (Settings.Default.gametitles == "primary")
+                            tb.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
+                        if (Settings.Default.gametitles == "accent")
+                            tb.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
+                    }
+                    catch (Exception br) { Trace.WriteLine("Break: " + br); break; }
                 }
-                catch (Exception br) { Trace.WriteLine("Break: " + br); }
             }
         }
         private void EditGame_OnClick(object sender, RoutedEventArgs e)

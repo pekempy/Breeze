@@ -12,7 +12,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="viewtype" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">banner</Value>
     </Setting>
     <Setting Name="Top" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -36,6 +36,9 @@
       <Value Profile="(Default)">primary</Value>
     </Setting>
     <Setting Name="fabcolour" Type="System.String" Scope="User">
+      <Value Profile="(Default)">primary</Value>
+    </Setting>
+    <Setting Name="genrecolour" Type="System.String" Scope="User">
       <Value Profile="(Default)">primary</Value>
     </Setting>
   </Settings>
