@@ -89,6 +89,7 @@
                                   Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
                                   Unchecked="DarkModeToggle_Unchecked" />
                 </StackPanel>
+
                 <TextBlock />
                 <TextBlock Width="160"
                            Height="16"

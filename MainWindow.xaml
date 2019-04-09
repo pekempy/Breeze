@@ -22,6 +22,7 @@
         WindowStartupLocation="CenterScreen">
     <!--  Required to make different views work  -->
     <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="b2v" />
         <DataTemplate x:Name="bannerViewTemplate" DataType="{x:Type viewmodels:BannerViewModel}">
             <views:BannerView DataContext="{Binding}" />
         </DataTemplate>
@@ -41,6 +42,7 @@
                 <scm:SortDescription PropertyName="Name" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
+        
     </Window.Resources>
     <Grid>
         <!--  DrawerHost is the main "host" to have the hamburger  -->
@@ -136,8 +138,8 @@
                     <!--  Button to open hamburger  -->
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="10*"/>
-                            <RowDefinition Height="90*"/>
+                            <RowDefinition Height="15*"/>
+                            <RowDefinition Height="85*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -154,23 +156,46 @@
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="0"
                                       Grid.Column="0" Margin="15 0 0 0">
                             <!-- Icons for Launchers -->
+                            <Button x:Name="SteamLaunchBtn" Style="{StaticResource MaterialDesignFlatButton}"
+                                                     Width="30" Height="30" Padding="0 0 0 0"
+                                    ToolTip="Steam">
                             <materialDesign:PackIcon VerticalAlignment="Center" 
                                                      Kind="Steam" 
                                                      Margin="5 5 5 5" Height="20" Width="20"/>
-                            <materialDesign:PackIcon VerticalAlignment="Center" 
+                            </Button>
+                            <Button x:Name="OriginLaunchBtn" Style="{StaticResource MaterialDesignFlatButton}"
+                                                     Width="30" Height="30" Padding="0 0 0 0"
+                                    ToolTip="Origin">
+                                <materialDesign:PackIcon VerticalAlignment="Center" 
                                                      Kind="Origin"
                                                      Margin="5 5 5 5" 
                                                      FontSize="20" Height="20" Width="20" />
+                            </Button>
+                            <Button x:Name="UplayLaunchBtn" Style="{StaticResource MaterialDesignFlatButton}"
+                                                     Width="35" Height="35" Padding="0 0 0 0"
+                                    ToolTip="Uplay">
                             <materialDesign:PackIcon VerticalAlignment="Center" 
                                                      Kind="Uplay" 
                                                      Margin="5 5 5 5" 
                                                      FontSize="20" Height="20" Width="20" />
-                            <materialDesign:PackIcon VerticalAlignment="Center" 
+                            </Button>
+                            <Button x:Name="BattleNetLaunchBtn" Style="{StaticResource MaterialDesignFlatButton}"
+                                                     Width="35" Height="35" Padding="0 0 0 0"
+                                    ToolTip="Battle.Net">
+                                <materialDesign:PackIcon VerticalAlignment="Center" 
                                                      Kind="Battlenet" 
                                                      Margin="5 5 5 5" 
                                                      FontSize="20" Height="20" Width="20" />
-                            <!-- Need to add epic games icon -->
+                            </Button>
+                            <Button x:Name="EpicLaunchBtn" Style="{StaticResource MaterialDesignFlatButton}"
+                                                     Width="35" Height="35" Padding="0 0 0 0"
+                                    ToolTip="Epic Games">
+                                <materialDesign:PackIcon VerticalAlignment="Center" 
+                                                     Kind="Shield" 
+                                                     Margin="5 5 5 5" 
+                                                     FontSize="20" Height="20" Width="20" />
 
+                            </Button>
                         </StackPanel>
                         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.ColumnSpan="2">
                             <StackPanel Orientation="Vertical">

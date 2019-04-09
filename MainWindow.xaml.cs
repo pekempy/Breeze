@@ -66,6 +66,8 @@ namespace GameLauncher
             lagbw.DoWork += LagBWDoWork;
             lagbw.RunWorkerCompleted += LagBWRunWorkerCompleted;
             Trace.Listeners.Clear();
+            CheckLaunchersExist();
+            ManageLauncherIconVisibility();
             FixFilePaths();
             InitTraceListen();
             this.Height = (SystemParameters.PrimaryScreenHeight * 0.75);
@@ -75,8 +77,6 @@ namespace GameLauncher
             MakeDirectories();
             MakeDefaultGenres();
             lag.LoadGenres();
-            CheckLaunchersExist();
-            ManageLauncherIconVisibility();
             InitializeComponent();
             LoadAllViews();
             DataContext = null;
@@ -186,25 +186,25 @@ namespace GameLauncher
 
         public void ManageLauncherIconVisibility()
         {
-            if (LauncherSteam == true)
+            if (LauncherSteam == false)
             {
-                Console.WriteLine("Steam: " + SteamExePath);
+                SteamLaunchBtn.Visibility = Visibility.Collapsed;
             }
-            if (LauncherEpic == true)
+            if (LauncherEpic == false)
             {
-                Console.WriteLine("Epic: " + EpicExePath);
+                EpicLaunchBtn.Visibility = Visibility.Collapsed;
             }
-            if (LauncherOrigin == true)
+            if (LauncherOrigin == false)
             {
-                Console.WriteLine("Origin: " + OriginExePath);
+                OriginLaunchBtn.Visibility = Visibility.Collapsed;
             }
-            if (LauncherBattleNet == true)
+            if (LauncherBattleNet == false)
             {
-                Console.WriteLine("BattleNet: " + BattleNetExePath);
+                BattleNetLaunchBtn.Visibility = Visibility.Collapsed;
             }
-            if (LauncherUPlay == true)
+            if (LauncherUPlay == false)
             {
-                Console.WriteLine("UPlay: " + UPlayExePath);
+                UplayLaunchBtn.Visibility = Visibility.Collapsed;
             }
         }
 
