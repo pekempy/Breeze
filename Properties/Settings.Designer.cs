@@ -178,5 +178,17 @@ namespace GameLauncher.Properties {
                 this["genrecolour"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("primary")]
+        public string launchercolour {
+            get {
+                return ((string)(this["launchercolour"]));
+            }
+            set {
+                this["launchercolour"] = value;
+            }
+        }
     }
 }

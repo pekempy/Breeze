@@ -446,6 +446,15 @@
                                           Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
                                           Unchecked="GenreColour_Unchecked" />
                                 </StackPanel>
+                                <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
+                                    <TextBlock>Launcher Buttons uses Primary</TextBlock>
+                                    <ToggleButton x:Name="LauncherColourToggle"
+                                          Margin="60,0,0,0"
+                                          HorizontalAlignment="Right"
+                                          Checked="LauncherColour_Checked"
+                                          Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                                          Unchecked="LauncherColour_Unchecked" />
+                                </StackPanel>
                             </StackPanel>
                     </Grid>
                 </StackPanel>

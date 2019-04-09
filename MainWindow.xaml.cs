@@ -480,6 +480,25 @@ namespace GameLauncher
                 }
             }
         }
+        public void UpdateLauncherButtons()
+        {
+            if (Settings.Default.launchercolour == "primary")
+            {
+                SteamLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
+                OriginLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
+                UplayLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
+                EpicLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
+                BattleNetLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
+            }
+            if (Settings.Default.launchercolour == "accent")
+            {
+                SteamLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
+                OriginLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
+                UplayLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
+                EpicLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
+                BattleNetLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
+            }
+        }
         public void UpdateGenreColour(object sender, RoutedEventArgs e)
         {
             UpdateGenreColours();
@@ -798,6 +817,7 @@ namespace GameLauncher
             {
                 AddGameButton.Style = Application.Current.Resources["MaterialDesignFloatingActionAccentButton"] as Style;
             }
+            UpdateLauncherButtons();
         }
     }
 }

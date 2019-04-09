@@ -41,5 +41,8 @@
     <Setting Name="genrecolour" Type="System.String" Scope="User">
       <Value Profile="(Default)">primary</Value>
     </Setting>
+    <Setting Name="launchercolour" Type="System.String" Scope="User">
+      <Value Profile="(Default)">primary</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
