@@ -1,4 +1,5 @@
 ﻿using GameLauncher.Models;
+using GameLauncher.Properties;
 using GameLauncher.ViewModels;
 using System;
 using System.Diagnostics;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace GameLauncher.Views
 {
@@ -38,7 +40,22 @@ namespace GameLauncher.Views
                 }
             }
         }
-
+        public void UpdateColours(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < gameListView.Items.Count; i++)
+            {
+                ContentPresenter c = (ContentPresenter)gameListView.ItemContainerGenerator.ContainerFromItem(gameListView.Items[i]);
+                try
+                {
+                    Button tb = c.ContentTemplate.FindName("PosterGameTitle", c) as Button;
+                    if (Settings.Default.gametitles == "primary")
+                        tb.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
+                    if (Settings.Default.gametitles == "accent")
+                        tb.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
+                }
+                catch (Exception br) { Trace.WriteLine("Break: " + br); }
+            }
+        }
         private void EditGame_OnClick(object sender, RoutedEventArgs e)
         {
             ModifyFile.EditGameInfile(((Button)sender).Tag);

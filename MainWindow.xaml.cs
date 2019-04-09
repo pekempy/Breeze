@@ -213,23 +213,39 @@ namespace GameLauncher
             string tag = ((Button)sender).Tag.ToString();
             if (tag == "Steam")
             {
-                Process.Start(SteamExePath);
+                try
+                {
+                    Process.Start(SteamExePath);
+                }
+                catch (Exception exc) { Trace.WriteLine("Failed to start Steam: " + exc); }
             }
             if (tag == "Origin")
             {
+                try { 
                 Process.Start(OriginExePath);
+                }
+                catch (Exception exc) { Trace.WriteLine("Failed to start Origin: " + exc); }
             }
             if (tag == "Uplay")
             {
+                try { 
                 Process.Start(UplayExePath);
+                }
+                catch (Exception exc) { Trace.WriteLine("Failed to start Uplay: " + exc); }
             }
             if (tag == "Epic")
             {
+                try { 
                 Process.Start(EpicExePath);
+                }
+                catch (Exception exc) { Trace.WriteLine("Failed to start Epic Games: " + exc); }
             }
             if (tag == "Battle")
             {
+                try { 
                 Process.Start(BattleNetExePath);
+                }
+                catch (Exception exc) { Trace.WriteLine("Failed to start Battle.Net: " + exc); }
             }
         }
         public void LagBWDoWork(object sender, DoWorkEventArgs e)

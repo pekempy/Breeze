@@ -417,14 +417,25 @@
                 </StackPanel>
                 <StackPanel>
                     <Grid x:Name="ChooseColoursOfParts">
+                        <StackPanel>
                         <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
-                            <TextBlock>Primary/Accent FAB</TextBlock>
+                            <TextBlock>FAB uses Primary</TextBlock>
                             <ToggleButton x:Name="FABToggle"
                                           Margin="60,0,0,0"
                                           HorizontalAlignment="Right"
                                           Checked="FabColour_Checked"
                                           Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
                                           Unchecked="FabColour_Unchecked" />
+                        </StackPanel>
+                        <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
+                            <TextBlock>Poster Titles use Primary</TextBlock>
+                            <ToggleButton x:Name="GameTitlesToggle"
+                                          Margin="60,0,0,0"
+                                          HorizontalAlignment="Right"
+                                          Checked="TitleColour_Checked"
+                                          Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                                          Unchecked="TitleColour_Unchecked" />
+                            </StackPanel>
                         </StackPanel>
                     </Grid>
                 </StackPanel>

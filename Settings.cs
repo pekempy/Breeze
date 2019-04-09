@@ -9,6 +9,8 @@
     //  The SettingsSaving event is raised before the setting values are saved.
     internal sealed partial class Settings
     {
+        internal string gametitles;
+        internal string fabcolour;
 
         public Settings()
         {

@@ -41,6 +41,8 @@ namespace GameLauncher.Views
             InitializeComponent();
             var converter = new BrushConverter();
             if (Settings.Default.theme == "Dark") { themeToggle.IsChecked = true; }
+            if (Settings.Default.gametitles == "primary") { GameTitlesToggle.IsChecked = true; }
+            if (Settings.Default.fabcolour == "primary") { FABToggle.IsChecked = true; }
             SelectedThemeColour();
         }
         private void DarkModeToggle_Checked(object sender, RoutedEventArgs e)
@@ -144,11 +146,25 @@ namespace GameLauncher.Views
 
         private void FabColour_Checked(object sender, RoutedEventArgs e)
         {
+            Settings.Default.fabcolour = "primary";
+            Settings.Default.Save();
             MainWindow.AddGameButton.Style = Application.Current.Resources["MaterialDesignFloatingActionButton"] as Style;
         }
         private void FabColour_Unchecked(object sender, RoutedEventArgs e)
         {
+            Settings.Default.fabcolour = "accent";
+            Settings.Default.Save();
             MainWindow.AddGameButton.Style = Application.Current.Resources["MaterialDesignFloatingActionAccentButton"] as Style;
+        }
+        private void TitleColour_Checked(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.gametitles = "primary";
+            Settings.Default.Save();
+        }
+        private void TitleColour_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.gametitles = "accent";
+            Settings.Default.Save();
         }
 
         private void AddNewGenre_OnClick(object sender, RoutedEventArgs e)
