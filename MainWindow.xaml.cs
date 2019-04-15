@@ -14,6 +14,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Text.RegularExpressions;
 
 namespace GameLauncher
 {
@@ -24,8 +25,14 @@ namespace GameLauncher
         public static AddGames DialogAddGames = new AddGames();
         public static EditGames DialogEditGames = new EditGames();
         public static ExeSelection DialogExeSelection = new ExeSelection();
-        public static ObservableCollection<GameList> GameListMW { get; set; }
-        public static ObservableCollection<GenreList> GenreListMW { get; set; }
+        public static ObservableCollection<GameList> GameListMW
+        {
+            get; set;
+        }
+        public static ObservableCollection<GenreList> GenreListMW
+        {
+            get; set;
+        }
         public LoadAllGames lag = new LoadAllGames();
         private BannerViewModel bannerViewModel = new BannerViewModel();
         private ListViewModel listViewModel = new ListViewModel();
@@ -148,11 +155,11 @@ namespace GameLauncher
             {
                 string regkey = "SOFTWARE\\WOW6432Node\\Origin";
                 RegistryKey originkey = Registry.LocalMachine.OpenSubKey(regkey);
-                    using (RegistryKey subkey = originkey.OpenSubKey(regkey))
-                    {
-                        OriginExePath = originkey.GetValue("ClientPath").ToString();
-                        LauncherOrigin = true;
-                    }
+                using (RegistryKey subkey = originkey.OpenSubKey(regkey))
+                {
+                    OriginExePath = originkey.GetValue("ClientPath").ToString();
+                    LauncherOrigin = true;
+                }
             }
             catch (Exception e) { Trace.WriteLine("Origin Check Failed: " + e); }
             //BattleNet Checker
@@ -222,29 +229,33 @@ namespace GameLauncher
             }
             if (tag == "Origin")
             {
-                try { 
-                Process.Start(OriginExePath);
+                try
+                {
+                    Process.Start(OriginExePath);
                 }
                 catch (Exception exc) { Trace.WriteLine("Failed to start Origin: " + exc); }
             }
             if (tag == "Uplay")
             {
-                try { 
-                Process.Start(UplayExePath);
+                try
+                {
+                    Process.Start(UplayExePath);
                 }
                 catch (Exception exc) { Trace.WriteLine("Failed to start Uplay: " + exc); }
             }
             if (tag == "Epic")
             {
-                try { 
-                Process.Start(EpicExePath);
+                try
+                {
+                    Process.Start(EpicExePath);
                 }
                 catch (Exception exc) { Trace.WriteLine("Failed to start Epic Games: " + exc); }
             }
             if (tag == "Battle")
             {
-                try { 
-                Process.Start(BattleNetExePath);
+                try
+                {
+                    Process.Start(BattleNetExePath);
                 }
                 catch (Exception exc) { Trace.WriteLine("Failed to start Battle.Net: " + exc); }
             }
@@ -265,16 +276,34 @@ namespace GameLauncher
             posterViewModel.LoadGames();
             listViewModel.LoadGames();
             bannerViewModel.LoadGames();
-            if (Settings.Default.viewtype.ToString() == "Poster") { PosterViewActive(); }
-            if (Settings.Default.viewtype.ToString() == "Banner") { BannerViewActive(); }
-            if (Settings.Default.viewtype.ToString() == "List") { ListViewActive(); }
+            if (Settings.Default.viewtype.ToString() == "Poster")
+            {
+                PosterViewActive();
+            }
+            if (Settings.Default.viewtype.ToString() == "Banner")
+            {
+                BannerViewActive();
+            }
+            if (Settings.Default.viewtype.ToString() == "List")
+            {
+                ListViewActive();
+            }
             DialogFrame.Visibility = Visibility.Hidden;
         }
         public void MakeDirectories()
         {
-            if (!Directory.Exists("./Resources/")) { Directory.CreateDirectory("./Resources/"); }
-            if (!Directory.Exists("./Resources/img/")) { Directory.CreateDirectory("./Resources/img/"); }
-            if (!Directory.Exists("./Resources/shortcuts/")) { Directory.CreateDirectory("./Resources/shortcuts/"); }
+            if (!Directory.Exists("./Resources/"))
+            {
+                Directory.CreateDirectory("./Resources/");
+            }
+            if (!Directory.Exists("./Resources/img/"))
+            {
+                Directory.CreateDirectory("./Resources/img/");
+            }
+            if (!Directory.Exists("./Resources/shortcuts/"))
+            {
+                Directory.CreateDirectory("./Resources/shortcuts/");
+            }
         }
         public void LoadAllViews()
         {
@@ -282,8 +311,16 @@ namespace GameLauncher
             DialogFrame.Content = loadingdialog;
             try
             {
-                try { GenreListMW.Clear(); } catch { }
-                try { GameListMW.Clear(); } catch { }
+                try
+                {
+                    GenreListMW.Clear();
+                }
+                catch { }
+                try
+                {
+                    GameListMW.Clear();
+                }
+                catch { }
                 lagbw.RunWorkerAsync();
             }
             catch { }
@@ -357,7 +394,10 @@ namespace GameLauncher
                 var log = File.Create(logfile);
                 log.Close();
             }
-            else { var log = File.Create(logfile); }
+            else
+            {
+                var log = File.Create(logfile);
+            }
             TextWriterTraceListener twtl = new TextWriterTraceListener(logfile)
             {
                 TraceOutputOptions = TraceOptions.ThreadId | TraceOptions.DateTime
@@ -390,8 +430,14 @@ namespace GameLauncher
         public bool CheckBinding(string title)
         {
             bool result = exesViewModel.CheckBinding(title);
-            if (result == true) { return true; }
-            else { return false; }
+            if (result == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public void OpenExeSearchDialog()
         {
@@ -453,7 +499,10 @@ namespace GameLauncher
                     isDownloadOpen = false;
                     GC.Collect();
                 }
-                else { Trace.WriteLine(DateTime.Now + ": -System unsure which dialog currently open"); }
+                else
+                {
+                    Trace.WriteLine(DateTime.Now + ": -System unsure which dialog currently open");
+                }
             }
         }
         public void UpdateGenreColours(Brush colour)
@@ -576,9 +625,18 @@ namespace GameLauncher
             string genreToFilter = ((Button)sender).Tag.ToString();
             if (DataContext == settingsViewModel)
             {
-                if (Settings.Default.viewtype == "Poster") { DataContext = posterViewModel; }
-                if (Settings.Default.viewtype == "Banner") { DataContext = bannerViewModel; }
-                if (Settings.Default.viewtype == "List") { DataContext = listViewModel; }
+                if (Settings.Default.viewtype == "Poster")
+                {
+                    DataContext = posterViewModel;
+                }
+                if (Settings.Default.viewtype == "Banner")
+                {
+                    DataContext = bannerViewModel;
+                }
+                if (Settings.Default.viewtype == "List")
+                {
+                    DataContext = listViewModel;
+                }
             }
             pv.GenreToFilter(genreToFilter);
             pv.RefreshList2(cvs);
@@ -690,15 +748,35 @@ namespace GameLauncher
             DialogFrame.Content = loadingdialog;
             try
             {
-                try { GenreListMW.Clear(); } catch { }
-                try { GameListMW.Clear(); } catch { }
+                try
+                {
+                    GenreListMW.Clear();
+                }
+                catch { }
+                try
+                {
+                    GameListMW.Clear();
+                }
+                catch { }
                 lagbw.RunWorkerAsync();
             }
             catch { }
-            if (view == "list") { ListViewActive(); }
-            else if (view == "poster") { PosterViewActive(); }
-            else if (view == "banner") { BannerViewActive(); }
-            else if (view == "settings") { SettingsViewActive(); }
+            if (view == "list")
+            {
+                ListViewActive();
+            }
+            else if (view == "poster")
+            {
+                PosterViewActive();
+            }
+            else if (view == "banner")
+            {
+                BannerViewActive();
+            }
+            else if (view == "settings")
+            {
+                SettingsViewActive();
+            }
         }
         private void PosterButton_OnClick(object sender, RoutedEventArgs e)
         {
@@ -769,11 +847,40 @@ namespace GameLauncher
                 Settings.Default.Location = RestoreBounds.Location.ToString();
                 Settings.Default.Maximized = false;
             }
-            
+
             Settings.Default.Save();
         }
         public void LoadSettings()
         {
+            var regexColourCode8 = new Regex("^#[a-fA-F0-9]{8}$");
+            var regexColourCode6 = new Regex("^#[a-fA-F0-9]{6}$");
+            string launcher = Settings.Default.launchercolour;
+            string genre = Settings.Default.genrecolour;
+            string titles = Settings.Default.gametitles;
+            if (regexColourCode6.IsMatch(launcher) || regexColourCode8.IsMatch(launcher))
+            {
+                break;
+            }
+            else
+            {
+                Settings.Default.launchercolour = "#3369e8";
+            }
+            if (regexColourCode6.IsMatch(genre) || regexColourCode8.IsMatch(genre))
+            {
+                break;
+            }
+            else
+            {
+                Settings.Default.genrecolour = "#3369e8";
+            }
+            if (regexColourCode6.IsMatch(titles) || regexColourCode8.IsMatch(titles))
+            {
+                break;
+            }
+            else
+            {
+                Settings.Default.gametitles = "#3369e8";
+            }
             Top = Settings.Default.Top;
             Left = Settings.Default.Left;
             Height = Settings.Default.Height;
@@ -798,7 +905,7 @@ namespace GameLauncher
             {
                 new PaletteHelper().ReplaceAccentColor(Settings.Default.accent.ToString());
             }
-            if(Settings.Default.fabcolour == "primary")
+            if (Settings.Default.fabcolour == "primary")
             {
                 AddGameButton.Style = Application.Current.Resources["MaterialDesignFloatingActionButton"] as Style;
             }

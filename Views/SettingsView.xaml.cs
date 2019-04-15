@@ -1,4 +1,5 @@
-﻿using GameLauncher.Models;
+﻿using Dsafa.WpfColorPicker;
+using GameLauncher.Models;
 using GameLauncher.Properties;
 using GameLauncher.ViewModels;
 using MaterialDesignThemes.Wpf;
@@ -43,10 +44,26 @@ namespace GameLauncher.Views
         {
             InitializeComponent();
             var converter = new BrushConverter();
-            if (Settings.Default.theme == "Dark") { themeToggle.IsChecked = true; }
-            if (Settings.Default.gametitles == "primary") { GameTitlesToggle.IsChecked = true; }
-            if (Settings.Default.fabcolour == "primary") { FABToggle.IsChecked = true; }
-            if (Settings.Default.launchercolour == "primary") { LauncherColourToggle.IsChecked = true; }
+            if (Settings.Default.theme == "Dark")
+            {
+                themeToggle.IsChecked = true;
+            }
+            if (Settings.Default.gametitles != "")
+            {
+                TitlesIndicator.Fill = (Brush)converter.ConvertFromString(Settings.Default.gametitles);
+            }
+            if (Settings.Default.genrecolour != "")
+            {
+                GenresIndicator.Fill = (Brush)converter.ConvertFromString(Settings.Default.genrecolour);
+            }
+            if (Settings.Default.launchercolour != "")
+            {
+                LauncherIndicator.Fill = (Brush)converter.ConvertFromString(Settings.Default.launchercolour);
+            }
+            if (Settings.Default.fabcolour == "primary")
+            {
+                FABToggle.IsChecked = true;
+            }
             SelectedThemeColour();
         }
         private void DarkModeToggle_Checked(object sender, RoutedEventArgs e)
@@ -86,34 +103,115 @@ namespace GameLauncher.Views
         }
         private void TickColour(string primary, string accent)
         {
-            if (primary == "Pink") { PPinkIcon.Opacity = 100; }
-            if (primary == "Red") { PRedIcon.Opacity = 100; }
-            if (primary == "DeepOrange") { PDeepOrangeIcon.Opacity = 100; }
-            if (primary == "Orange") { POrangeIcon.Opacity = 100; }
-            if (primary == "Yellow") { PYellowIcon.Opacity = 100; }
-            if (primary == "Lime") { PLimeIcon.Opacity = 100; }
-            if (primary == "Green") { PGreenIcon.Opacity = 100; }
-            if (primary == "Teal") { PTealIcon.Opacity = 100; }
-            if (primary == "Cyan") { PCyanIcon.Opacity = 100; }
-            if (primary == "Blue") { PBlueIcon.Opacity = 100; }
-            if (primary == "Indigo") { PIndigoIcon.Opacity = 100; }
-            if (primary == "DeepPurple") { PDeepPurpleIcon.Opacity = 100; }
-            if (primary == "Purple") { PPurpleIcon.Opacity = 100; }
-            if (primary == "BlueGrey") { PBlueGreyIcon.Opacity = 100; }
+            if (primary == "Pink")
+            {
+                PPinkIcon.Opacity = 100;
+            }
+            if (primary == "Red")
+            {
+                PRedIcon.Opacity = 100;
+            }
+            if (primary == "DeepOrange")
+            {
+                PDeepOrangeIcon.Opacity = 100;
+            }
+            if (primary == "Orange")
+            {
+                POrangeIcon.Opacity = 100;
+            }
+            if (primary == "Yellow")
+            {
+                PYellowIcon.Opacity = 100;
+            }
+            if (primary == "Lime")
+            {
+                PLimeIcon.Opacity = 100;
+            }
+            if (primary == "Green")
+            {
+                PGreenIcon.Opacity = 100;
+            }
+            if (primary == "Teal")
+            {
+                PTealIcon.Opacity = 100;
+            }
+            if (primary == "Cyan")
+            {
+                PCyanIcon.Opacity = 100;
+            }
+            if (primary == "Blue")
+            {
+                PBlueIcon.Opacity = 100;
+            }
+            if (primary == "Indigo")
+            {
+                PIndigoIcon.Opacity = 100;
+            }
+            if (primary == "DeepPurple")
+            {
+                PDeepPurpleIcon.Opacity = 100;
+            }
+            if (primary == "Purple")
+            {
+                PPurpleIcon.Opacity = 100;
+            }
+            if (primary == "BlueGrey")
+            {
+                PBlueGreyIcon.Opacity = 100;
+            }
 
-            if (accent == "Pink") { APinkIcon.Opacity = 100; }
-            if (accent == "Red") { ARedIcon.Opacity = 100; }
-            if (accent == "DeepOrange") { ADeepOrangeIcon.Opacity = 100; }
-            if (accent == "Orange") { AOrangeIcon.Opacity = 100; }
-            if (accent == "Yellow") { AYellowIcon.Opacity = 100; }
-            if (accent == "Lime") { ALimeIcon.Opacity = 100; }
-            if (accent == "Green") { AGreenIcon.Opacity = 100; }
-            if (accent == "Teal") { ATealIcon.Opacity = 100; }
-            if (accent == "Cyan") { ACyanIcon.Opacity = 100; }
-            if (accent == "Blue") { ABlueIcon.Opacity = 100; }
-            if (accent == "Indigo") { AIndigoIcon.Opacity = 100; }
-            if (accent == "DeepPurple") { ADeepPurpleIcon.Opacity = 100; }
-            if (accent == "Purple") { APurpleIcon.Opacity = 100; }
+            if (accent == "Pink")
+            {
+                APinkIcon.Opacity = 100;
+            }
+            if (accent == "Red")
+            {
+                ARedIcon.Opacity = 100;
+            }
+            if (accent == "DeepOrange")
+            {
+                ADeepOrangeIcon.Opacity = 100;
+            }
+            if (accent == "Orange")
+            {
+                AOrangeIcon.Opacity = 100;
+            }
+            if (accent == "Yellow")
+            {
+                AYellowIcon.Opacity = 100;
+            }
+            if (accent == "Lime")
+            {
+                ALimeIcon.Opacity = 100;
+            }
+            if (accent == "Green")
+            {
+                AGreenIcon.Opacity = 100;
+            }
+            if (accent == "Teal")
+            {
+                ATealIcon.Opacity = 100;
+            }
+            if (accent == "Cyan")
+            {
+                ACyanIcon.Opacity = 100;
+            }
+            if (accent == "Blue")
+            {
+                ABlueIcon.Opacity = 100;
+            }
+            if (accent == "Indigo")
+            {
+                AIndigoIcon.Opacity = 100;
+            }
+            if (accent == "DeepPurple")
+            {
+                ADeepPurpleIcon.Opacity = 100;
+            }
+            if (accent == "Purple")
+            {
+                APurpleIcon.Opacity = 100;
+            }
         }
         private void DeselectColours()
         {
@@ -160,39 +258,42 @@ namespace GameLauncher.Views
             Settings.Default.Save();
             MainWindow.AddGameButton.Style = Application.Current.Resources["MaterialDesignFloatingActionAccentButton"] as Style;
         }
-        private void TitleColour_Checked(object sender, RoutedEventArgs e)
+        private void ChangeColours(object sender, RoutedEventArgs e)
         {
-            Settings.Default.gametitles = "primary";
-            Settings.Default.Save();
-        }
-        private void TitleColour_Unchecked(object sender, RoutedEventArgs e)
-        {
-            Settings.Default.gametitles = "accent";
-            Settings.Default.Save();
+            string type = ((Button)sender).Tag.ToString();
+
+            var initialColor = Colors.Blue;
+            var dialog = new ColorPickerDialog(initialColor);
+            var result = dialog.ShowDialog();
+            if (result.HasValue && result.Value)
+            {
+                var dialogResult = dialog.Color;
+                string chosenColour = dialogResult.ToString();
+                if (type == "Titles")
+                {
+                    var converter = new BrushConverter();
+                    TitlesIndicator.Fill = (Brush)converter.ConvertFromString(chosenColour);
+                    Settings.Default.genrecolour = chosenColour;
+                }
+                if (type == "Genres")
+                {
+                    var converter = new BrushConverter();
+                    GenresIndicator.Fill = (Brush)converter.ConvertFromString(chosenColour);
+                    Settings.Default.genrecolour = chosenColour;
+                }
+                if (type == "Launchers")
+                {
+                    var converter = new BrushConverter();
+                    LauncherIndicator.Fill = (Brush)converter.ConvertFromString(chosenColour);
+                    Settings.Default.launchercolour = chosenColour;
+                }
+                Settings.Default.Save();
+            }
         }
         private void GenreColour_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             int hexNumber;
             e.Handled = !int.TryParse(e.Text, NumberStyles.HexNumber, CultureInfo.CurrentCulture, out hexNumber);
-        }
-        private void GenreColour_Enter(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return)
-            {
-                var regexColourCode = new Regex("^#[a-fA-F0-9]{6}$");
-                if (regexColourCode.IsMatch("#" + GenreColour_Text.Text.Trim()))
-                {
-                    var converter = new BrushConverter();
-                    var brush = (Brush)converter.ConvertFromString("#" + GenreColour_Text.Text);
-                    GenreColour_Display.Fill = brush;
-                    Settings.Default.genrecolour = GenreColour_Text.Text;
-                    Settings.Default.Save();
-                    MainWindow.UpdateGenreColours(brush);
-                }
-            }
-        }
-        private void GenreColour(object sender, TextChangedEventArgs e)
-        {
         }
         private void LauncherColour_Checked(object sender, RoutedEventArgs e)
         {
@@ -244,7 +345,9 @@ namespace GameLauncher.Views
                     }
                 }
             }
-            if (!File.Exists("./Resources/GamesList.txt")) { }
+            if (!File.Exists("./Resources/GamesList.txt"))
+            {
+            }
             else
             {
                 var gametext = File.ReadAllLines("./Resources/GamesList.txt", Encoding.UTF8);
