@@ -267,45 +267,36 @@ namespace GameLauncher.Views
             var result = dialog.ShowDialog();
             if (result.HasValue && result.Value)
             {
+                var converter = new BrushConverter();
                 var dialogResult = dialog.Color;
                 string chosenColour = dialogResult.ToString();
+                Brush colour = (Brush)converter.ConvertFromString(chosenColour);
                 if (type == "Titles")
                 {
-                    var converter = new BrushConverter();
-                    TitlesIndicator.Fill = (Brush)converter.ConvertFromString(chosenColour);
-                    Settings.Default.genrecolour = chosenColour;
+                    TitlesIndicator.Fill = colour;
+                    Settings.Default.gametitles = chosenColour;
                 }
                 if (type == "Genres")
                 {
-                    var converter = new BrushConverter();
-                    GenresIndicator.Fill = (Brush)converter.ConvertFromString(chosenColour);
+                    GenresIndicator.Fill = colour;
                     Settings.Default.genrecolour = chosenColour;
                 }
                 if (type == "Launchers")
                 {
-                    var converter = new BrushConverter();
-                    LauncherIndicator.Fill = (Brush)converter.ConvertFromString(chosenColour);
+                    LauncherIndicator.Fill = colour;
                     Settings.Default.launchercolour = chosenColour;
                 }
                 Settings.Default.Save();
+                UpdateAllColours(colour, type);
             }
         }
-        private void GenreColour_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void UpdateAllColours(Brush colour, string type)
         {
-            int hexNumber;
-            e.Handled = !int.TryParse(e.Text, NumberStyles.HexNumber, CultureInfo.CurrentCulture, out hexNumber);
-        }
-        private void LauncherColour_Checked(object sender, RoutedEventArgs e)
-        {
-            Settings.Default.launchercolour = "primary";
-            Settings.Default.Save();
-            MainWindow.UpdateLauncherButtons();
-        }
-        private void LauncherColour_Unchecked(object sender, RoutedEventArgs e)
-        {
-            Settings.Default.launchercolour = "accent";
-            Settings.Default.Save();
-            MainWindow.UpdateLauncherButtons();
+            if (type == "Launchers")
+                MainWindow.UpdateLauncherButtons();
+            if (type == "Genres")
+                MainWindow.UpdateGenreColours(colour);
+            //Poster titles auto-colour when loaded
         }
         private void AddNewGenre_OnClick(object sender, RoutedEventArgs e)
         {

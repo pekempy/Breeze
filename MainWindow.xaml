@@ -23,16 +23,20 @@
     <!--  Required to make different views work  -->
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="b2v" />
-        <DataTemplate x:Name="bannerViewTemplate" DataType="{x:Type viewmodels:BannerViewModel}">
+        <DataTemplate x:Name="bannerViewTemplate"
+                      DataType="{x:Type viewmodels:BannerViewModel}">
             <views:BannerView DataContext="{Binding}" />
         </DataTemplate>
-        <DataTemplate x:Name="listViewTemplate" DataType="{x:Type viewmodels:ListViewModel}">
+        <DataTemplate x:Name="listViewTemplate"
+                      DataType="{x:Type viewmodels:ListViewModel}">
             <views:ListView DataContext="{Binding}" />
         </DataTemplate>
-        <DataTemplate x:Name="posterViewTemplate" DataType="{x:Type viewmodels:PosterViewModel}">
+        <DataTemplate x:Name="posterViewTemplate"
+                      DataType="{x:Type viewmodels:PosterViewModel}">
             <views:PosterView DataContext="{Binding}" />
         </DataTemplate>
-        <DataTemplate x:Name="settingsViewTemplate" DataType="{x:Type viewmodels:SettingsViewModel}">
+        <DataTemplate x:Name="settingsViewTemplate"
+                      DataType="{x:Type viewmodels:SettingsViewModel}">
             <views:SettingsView DataContext="{Binding}" />
         </DataTemplate>
         <CollectionViewSource x:Key="GenreListCVS"
@@ -106,7 +110,8 @@
                                     </StackPanel>
                                 </Button>
                                 <!--  Refresh Button  -->
-                                <Button x:Name="rgbtn" Click="RefreshGames_OnClick">
+                                <Button x:Name="rgbtn"
+                                        Click="RefreshGames_OnClick">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Margin="0,0,10,0"
                                                                  VerticalAlignment="Center"
@@ -254,7 +259,8 @@
                                                         Click="ApplyGenreFilter_OnClick"
                                                         Content="{Binding Name}"
                                                         Style="{StaticResource MaterialDesignFlatButton}"
-                                                        Tag="{Binding Name}" />
+                                                        Tag="{Binding Name}"
+                                                        Loaded="GenresLoaded" />
                                             </StackPanel>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>

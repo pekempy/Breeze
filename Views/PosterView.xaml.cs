@@ -42,6 +42,7 @@ namespace GameLauncher.Views
         }
         public void UpdateColours(object sender, RoutedEventArgs e)
         {
+            var converter = new BrushConverter();
             if (gameListView.Items.Count != 0)
             {
                 for (int i = 0; i < gameListView.Items.Count; i++)
@@ -50,10 +51,7 @@ namespace GameLauncher.Views
                     try
                     {
                         Button tb = c.ContentTemplate.FindName("PosterGameTitle", c) as Button;
-                        if (Settings.Default.gametitles == "primary")
-                            tb.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
-                        if (Settings.Default.gametitles == "accent")
-                            tb.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
+                        tb.Foreground = (Brush)converter.ConvertFromString(Settings.Default.gametitles);
                     }
                     catch (Exception br) { Trace.WriteLine("Break: " + br); break; }
                 }
@@ -118,8 +116,14 @@ namespace GameLauncher.Views
         {
             GameListCVS = ((CollectionViewSource)(FindResource("GameListCVS")));
             MainWindow.cvs = GameListCVS;
-            if (FilterGenreName != null) { GameListCVS.Filter += new FilterEventHandler(GenreFilter); }
-            if (GameSearchBar.Text != null) { GameListCVS.Filter += new FilterEventHandler(GameSearch); }
+            if (FilterGenreName != null)
+            {
+                GameListCVS.Filter += new FilterEventHandler(GenreFilter);
+            }
+            if (GameSearchBar.Text != null)
+            {
+                GameListCVS.Filter += new FilterEventHandler(GameSearch);
+            }
             if (GameListCVS.View != null)
                 GameListCVS.View.Refresh();
         }
@@ -129,8 +133,14 @@ namespace GameLauncher.Views
             if (cvscvs != null)
             {
                 GameListCVS = cvscvs;
-                if (FilterGenreName != null || FilterGenreName != "") { GameListCVS.Filter += new FilterEventHandler(GenreFilter); }
-                if (GameSearchBar.Text != null) { GameListCVS.Filter += new FilterEventHandler(GameSearch); }
+                if (FilterGenreName != null || FilterGenreName != "")
+                {
+                    GameListCVS.Filter += new FilterEventHandler(GenreFilter);
+                }
+                if (GameSearchBar.Text != null)
+                {
+                    GameListCVS.Filter += new FilterEventHandler(GameSearch);
+                }
                 if (GameListCVS.View != null)
                     GameListCVS.View.Refresh();
             }

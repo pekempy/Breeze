@@ -9,8 +9,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              d:DataContext="{d:DesignInstance Type=ViewModels:SettingsViewModel}"
-             d:DesignHeight="300"
-             d:DesignWidth="300"
              materialDesign:ThemeAssist.Theme="Inherit"
              FontFamily="{StaticResource MaterialDesignFont}"
              TextElement.FontSize="13"
@@ -74,33 +72,44 @@
             </StackPanel>
         </materialDesign:ColorZone>
         <Grid Name="ThemeBlock"
-              Grid.RowSpan="10"
-              Grid.ColumnSpan="4"
+              Grid.RowSpan="100"
+              Grid.ColumnSpan="40"
               Margin="30,60,30,0"
               Visibility="{Binding Path=IsChecked, ElementName=ThemeBtn, Converter={StaticResource b2v}}">
             <!--  CONTENT OF THE THEMES TAB GOES IN HERE  -->
             <ScrollViewer>
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock>Enable Dark Mode</TextBlock>
-                        <ToggleButton x:Name="themeToggle"
-                                      Margin="60,0,0,0"
-                                      HorizontalAlignment="Right"
-                                      Checked="DarkModeToggle_Checked"
-                                      Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
-                                      Unchecked="DarkModeToggle_Unchecked" />
-                    </StackPanel>
-
-                    <TextBlock />
+                <Grid ScrollViewer.CanContentScroll="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
                     <TextBlock Width="160"
                                Height="16"
                                HorizontalAlignment="Left"
-                               VerticalAlignment="Top">
+                               VerticalAlignment="Top"
+                               Grid.Row="1"
+                               Grid.ColumnSpan="3"
+                               Padding="10 0 0 10"
+                               FontWeight="Bold">
                     <Run Text="Primary Colour" />
                     </TextBlock>
                     <StackPanel MaxHeight="180"
-                                Margin="0,5,0,0"
-                                VerticalAlignment="Top">
+                                Margin="0,15,0,0"
+                                VerticalAlignment="Top"
+                                Grid.Row="1"
+                                Grid.ColumnSpan="3">
                         <WrapPanel Width="auto"
                                    MaxHeight="180">
                             <!--  Row One Buttons (PRIMARY)  -->
@@ -278,12 +287,18 @@
                     <TextBlock Width="160"
                                Height="16"
                                HorizontalAlignment="Left"
-                               VerticalAlignment="Top">
+                               VerticalAlignment="Top"
+                               Grid.Row="2"
+                               Grid.ColumnSpan="3"
+                               FontWeight="Bold"
+                               Padding="10 0 0 10">
                     <Run Text="Accent Colour" />
                     </TextBlock>
                     <StackPanel MaxHeight="180"
-                                Margin="0,5,0,0"
-                                VerticalAlignment="Top">
+                                Margin="0,15,0,0"
+                                VerticalAlignment="Top"
+                                Grid.Row="2"
+                                Grid.ColumnSpan="3">
                         <WrapPanel Width="auto"
                                    MaxHeight="180">
                             <!--  Row Two Buttons (ACCENT)  -->
@@ -445,68 +460,137 @@
                             </Button>
                         </WrapPanel>
                     </StackPanel>
-                    <StackPanel>
-                        <Grid x:Name="ChooseColoursOfParts">
-                            <StackPanel>
-                                <StackPanel Margin="0,20,0,0"
-                                            Orientation="Horizontal">
-                                    <TextBlock>FAB uses Primary</TextBlock>
-                                    <ToggleButton x:Name="FABToggle"
-                                                  Margin="60,0,0,0"
-                                                  HorizontalAlignment="Right"
-                                                  Checked="FabColour_Checked"
-                                                  Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
-                                                  Unchecked="FabColour_Unchecked" />
-                                </StackPanel>
-                                <StackPanel Margin="0,20,0,0"
-                                            Orientation="Horizontal">
-                                    <TextBlock>Poster Titles</TextBlock>
-                                    <Button x:Name="TitleButton"
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            Click="ChangeColours"
-                                            Tag="Titles">
+                    <StackPanel Grid.Row="3"
+                                Grid.ColumnSpan="3">
+                        <TextBlock Width="160"
+                                   Height="16"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Grid.Row="1"
+                                   Grid.ColumnSpan="3"
+                                   Padding="10 0 0 10"
+                                   FontWeight="Bold">
+                    <Run Text="Colour Customisation" />
+                        </TextBlock>
+                        <Grid x:Name="ChooseColoursOfParts"
+                              Margin="10 10 0 10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <!-- DARK MODE BUTTONS ROW0-->
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="0"
+                                       VerticalAlignment="Center"
+                                       Padding="0 10 0 10">Enable Dark Mode</TextBlock>
+                            <ToggleButton x:Name="themeToggle"
+                                          HorizontalAlignment="Center"
+                                          Grid.Row="0"
+                                          Grid.Column="1"
+                                          Checked="DarkModeToggle_Checked"
+                                          Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                                          Unchecked="DarkModeToggle_Unchecked" />
 
-                                    </Button>
-                                    <Canvas>
-                                        <Ellipse x:Name="TitlesIndicator"
-                                                 Width="40"
-                                                 Height="50" />
-                                    </Canvas>
-                                </StackPanel>
-                                <StackPanel Margin="0,20,0,0"
-                                            Orientation="Horizontal">
-                                    <TextBlock>Genres</TextBlock>
-                                    <Button x:Name="GenresButton"
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            Click="ChangeColours"
-                                            Tag="Genres">
+                            <!-- FAB BUTTONS ROW1-->
+                            <TextBlock Grid.Column="0"
+                                       Grid.Row="1"
+                                       VerticalAlignment="Center"
+                                       Padding="0 10 0 10">FAB uses Primary</TextBlock>
+                            <ToggleButton x:Name="FABToggle"
+                                          Checked="FabColour_Checked"
+                                          Grid.Row="1"
+                                          Grid.Column="1"
+                                          Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+                                          Unchecked="FabColour_Unchecked"
+                                          HorizontalAlignment="Center"
+                                          Width="34" />
 
-                                    </Button>
-                                    <Canvas>
-                                        <Ellipse x:Name="GenresIndicator"
-                                                 Width="40"
-                                                 Height="50" />
-                                    </Canvas>
-                                </StackPanel>
-                                <StackPanel Margin="0,20,0,0"
-                                            Orientation="Horizontal">
-                                    <TextBlock>Launcher Buttons uses Primary</TextBlock>
-                                    <Button x:Name="LauncherButton"
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            Click="ChangeColours"
-                                            Tag="Launcher">
+                            <!-- POSTER TITLE BUTTONS ROW2 -->
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="0"
+                                       VerticalAlignment="Center"
+                                       Padding="0 10 0 10">Poster Titles</TextBlock>
+                            <Button x:Name="TitleButton"
+                                    Style="{StaticResource MaterialDesignFlatAccentButton}"
+                                    Click="ChangeColours"
+                                    Tag="Titles"
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Paintbrush" />
+                            </Button>
+                            <Canvas Grid.Column="1"
+                                    Grid.Row="2"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Margin="20 5 0 0">
+                                <Ellipse x:Name="TitlesIndicator"
+                                         Width="30"
+                                         Height="30" />
+                            </Canvas>
 
-                                    </Button>
-                                    <Canvas>
-                                        <Ellipse x:Name="LauncherIndicator"
-                                                 Width="40"
-                                                 Height="50" />
-                                    </Canvas>
-                                </StackPanel>
-                            </StackPanel>
+                            <!-- GENRE BUTTONS ROW3-->
+                            <TextBlock Grid.Row="3"
+                                       Grid.Column="0"
+                                       VerticalAlignment="Center"
+                                       Padding="0 10 0 10">Genres</TextBlock>
+                            <Button x:Name="GenresButton"
+                                    Style="{StaticResource MaterialDesignFlatAccentButton}"
+                                    Click="ChangeColours"
+                                    Tag="Genres"
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Paintbrush" />
+                            </Button>
+                            <Canvas Grid.Row="3"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Margin="20 5 0 0">
+                                <Ellipse x:Name="GenresIndicator"
+                                         Width="30"
+                                         Height="30" />
+                            </Canvas>
+                            <!-- LAUNCHER BUTTONS ROW4-->
+                            <TextBlock Grid.Row="4"
+                                       Grid.Column="0"
+                                       VerticalAlignment="Center">Launcher Buttons</TextBlock>
+                            <Button x:Name="LauncherButton"
+                                    Style="{StaticResource MaterialDesignFlatAccentButton}"
+                                    Click="ChangeColours"
+                                    Tag="Launchers"
+                                    Grid.Row="4"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Paintbrush" />
+                            </Button>
+                            <Canvas Grid.Row="4"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Margin="20 5 0 0">
+                                <Ellipse x:Name="LauncherIndicator"
+                                         Width="30"
+                                         Height="30" />
+                            </Canvas>
                         </Grid>
                     </StackPanel>
-                </StackPanel>
+                </Grid>
+
             </ScrollViewer>
         </Grid>
         <Grid Name="GenreBlock"

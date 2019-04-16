@@ -505,6 +505,12 @@ namespace GameLauncher
                 }
             }
         }
+        public void GenresLoaded(object sender, RoutedEventArgs e)
+        {
+            var converter = new BrushConverter();
+            Brush colour = (Brush)converter.ConvertFromString(Settings.Default.genrecolour);
+            UpdateGenreColours(colour);
+        }
         public void UpdateGenreColours(Brush colour)
         {
             if (GenreSidebar.Items.Count != 0)
@@ -524,22 +530,12 @@ namespace GameLauncher
         }
         public void UpdateLauncherButtons()
         {
-            if (Settings.Default.launchercolour == "primary")
-            {
-                SteamLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
-                OriginLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
-                UplayLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
-                EpicLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
-                BattleNetLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatButton"] as Style;
-            }
-            if (Settings.Default.launchercolour == "accent")
-            {
-                SteamLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
-                OriginLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
-                UplayLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
-                EpicLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
-                BattleNetLaunchBtn.Style = Application.Current.Resources["MaterialDesignFlatAccentButton"] as Style;
-            }
+            var converter = new BrushConverter();
+            SteamLaunchBtn.Foreground = (Brush)converter.ConvertFromString(Settings.Default.launchercolour);
+            OriginLaunchBtn.Foreground = (Brush)converter.ConvertFromString(Settings.Default.launchercolour);
+            UplayLaunchBtn.Foreground = (Brush)converter.ConvertFromString(Settings.Default.launchercolour);
+            EpicLaunchBtn.Foreground = (Brush)converter.ConvertFromString(Settings.Default.launchercolour);
+            BattleNetLaunchBtn.Foreground = (Brush)converter.ConvertFromString(Settings.Default.launchercolour);
         }
         public void DownloadImage(string url)
         {
@@ -857,9 +853,10 @@ namespace GameLauncher
             string launcher = Settings.Default.launchercolour;
             string genre = Settings.Default.genrecolour;
             string titles = Settings.Default.gametitles;
+
             if (regexColourCode6.IsMatch(launcher) || regexColourCode8.IsMatch(launcher))
             {
-                break;
+                Trace.WriteLine("Settings: Launcher Colour OK");
             }
             else
             {
@@ -867,15 +864,19 @@ namespace GameLauncher
             }
             if (regexColourCode6.IsMatch(genre) || regexColourCode8.IsMatch(genre))
             {
-                break;
+                var converter = new BrushConverter();
+                Trace.WriteLine("Settings: Genre Colour OK");
+                AllGenreBtn.Foreground = (Brush)converter.ConvertFromString(genre);
             }
             else
             {
                 Settings.Default.genrecolour = "#3369e8";
+                var converter = new BrushConverter();
+                AllGenreBtn.Foreground = (Brush)converter.ConvertFromString(genre);
             }
             if (regexColourCode6.IsMatch(titles) || regexColourCode8.IsMatch(titles))
             {
-                break;
+                Trace.WriteLine("Settings: Titles Colour OK");
             }
             else
             {
