@@ -66,6 +66,8 @@ namespace GameLauncher
 
         public MainWindow()
         {
+            MakeDirectories();
+            MakeDefaultGenres();
             lagbw = new BackgroundWorker
             {
                 WorkerReportsProgress = true
@@ -81,8 +83,6 @@ namespace GameLauncher
             this.Width = (SystemParameters.PrimaryScreenWidth * 0.75);
             LoadAllGames lag = new LoadAllGames();
             LoadSearch ls = new LoadSearch();
-            MakeDirectories();
-            MakeDefaultGenres();
             lag.LoadGenres();
             InitializeComponent();
             ManageLauncherIconVisibility();
@@ -677,64 +677,68 @@ namespace GameLauncher
 
         public void FixFilePaths()
         {
-            string file = "./Resources/GamesList.txt";
-            string fileout = "./Resources/GamesList2.txt";
-            var contents = File.ReadAllLines(file);
-            Array.Sort(contents);
-            File.WriteAllLines(fileout, contents);
-            File.Delete("./Resources/GamesList.txt");
-            File.Move("./Resources/GamesList2.txt", "./Resources/GamesList.txt");
-            bool textModified = false;
-            string installPath = AppDomain.CurrentDomain.BaseDirectory;
             if (File.Exists("./Resources/GamesList.txt"))
             {
-                string text = File.ReadAllText("./Resources/GamesList.txt");
 
-                if (text.Contains(installPath + "Resources/img/"))
+                string file = "./Resources/GamesList.txt";
+                string fileout = "./Resources/GamesList2.txt";
+                var contents = File.ReadAllLines(file);
+                Array.Sort(contents);
+                File.WriteAllLines(fileout, contents);
+                File.Delete("./Resources/GamesList.txt");
+                File.Move("./Resources/GamesList2.txt", "./Resources/GamesList.txt");
+                bool textModified = false;
+                string installPath = AppDomain.CurrentDomain.BaseDirectory;
+                if (File.Exists("./Resources/GamesList.txt"))
                 {
-                    newText = text.Replace(installPath + "Resources/img/", "");
-                    textModified = true;
-                }
-                if (text.Contains(installPath + "Resources\\img\\"))
-                {
-                    if (textModified)
+                    string text = File.ReadAllText("./Resources/GamesList.txt");
+
+                    if (text.Contains(installPath + "Resources/img/"))
                     {
-                        newText = newText.Replace(installPath + "Resources\\img\\", "");
-                    }
-                    else
-                    {
-                        newText = text.Replace(installPath + "Resources\\img\\", "");
+                        newText = text.Replace(installPath + "Resources/img/", "");
                         textModified = true;
                     }
-                }
-                if (text.Contains(installPath + "Resources/shortcuts/"))
-                {
-                    if (textModified)
+                    if (text.Contains(installPath + "Resources\\img\\"))
                     {
-                        newText = newText.Replace(installPath + "Resources/shortcuts/", "");
+                        if (textModified)
+                        {
+                            newText = newText.Replace(installPath + "Resources\\img\\", "");
+                        }
+                        else
+                        {
+                            newText = text.Replace(installPath + "Resources\\img\\", "");
+                            textModified = true;
+                        }
                     }
-                    else
+                    if (text.Contains(installPath + "Resources/shortcuts/"))
                     {
-                        newText = text.Replace(installPath + "Resources/shortcuts/", "");
-                        textModified = true;
+                        if (textModified)
+                        {
+                            newText = newText.Replace(installPath + "Resources/shortcuts/", "");
+                        }
+                        else
+                        {
+                            newText = text.Replace(installPath + "Resources/shortcuts/", "");
+                            textModified = true;
+                        }
                     }
-                }
-                else if (text.Contains(installPath + "Resources\\shortcuts\\"))
-                {
-                    if (textModified)
+                    else if (text.Contains(installPath + "Resources\\shortcuts\\"))
                     {
-                        newText = newText.Replace(installPath + "Resources\\shortcuts\\", "");
+                        if (textModified)
+                        {
+                            newText = newText.Replace(installPath + "Resources\\shortcuts\\", "");
+                        }
+                        else
+                        {
+                            newText = text.Replace(installPath + "Resources\\shortcuts\\", "");
+                        }
                     }
-                    else
+                    if (newText != null)
                     {
-                        newText = text.Replace(installPath + "Resources\\shortcuts\\", "");
+                        File.WriteAllText("./Resources/GamesList2.txt", newText);
+                        File.Delete("./Resources/GamesList.txt");
+                        File.Move("./Resources/GamesList2.txt", "./Resources/GamesList.txt");
                     }
-                }
-                if (newText != null)
-                {
-                    File.WriteAllText("./Resources/GamesList2.txt", newText);
-                    File.Delete("./Resources/GamesList.txt");
-                    File.Move("./Resources/GamesList2.txt", "./Resources/GamesList.txt");
                 }
             }
         }
@@ -848,40 +852,52 @@ namespace GameLauncher
         }
         public void LoadSettings()
         {
-            var regexColourCode8 = new Regex("^#[a-fA-F0-9]{8}$");
-            var regexColourCode6 = new Regex("^#[a-fA-F0-9]{6}$");
+            Regex regexColourCode8 = new Regex("^#[a-fA-F0-9]{8}$");
+            Regex regexColourCode6 = new Regex("^#[a-fA-F0-9]{6}$");
             string launcher = Settings.Default.launchercolour;
             string genre = Settings.Default.genrecolour;
             string titles = Settings.Default.gametitles;
+            try
+            {
+                if (regexColourCode6.IsMatch(launcher) || regexColourCode8.IsMatch(launcher))
+                {
+                    Trace.WriteLine("Settings: Launcher Colour OK");
+                }
+                else
+                {
+                    Settings.Default.launchercolour = "#3369e8";
+                }
+            }
+            catch (Exception e) { Trace.WriteLine("Error: " + e); }
+            try
+            {
+                if (regexColourCode6.IsMatch(genre) || regexColourCode8.IsMatch(genre))
+                {
+                    var converter = new BrushConverter();
+                    Trace.WriteLine("Settings: Genre Colour OK");
+                    AllGenreBtn.Foreground = (Brush)converter.ConvertFromString(genre);
+                }
+                else
+                {
+                    Settings.Default.genrecolour = "#3369e8";
+                    var converter = new BrushConverter();
+                    AllGenreBtn.Foreground = (Brush)converter.ConvertFromString(genre);
+                }
+            }
+            catch (Exception e) { Trace.WriteLine("Error: " + e); }
+            try
+            {
 
-            if (regexColourCode6.IsMatch(launcher) || regexColourCode8.IsMatch(launcher))
-            {
-                Trace.WriteLine("Settings: Launcher Colour OK");
+                if (regexColourCode6.IsMatch(titles) || regexColourCode8.IsMatch(titles))
+                {
+                    Trace.WriteLine("Settings: Titles Colour OK");
+                }
+                else
+                {
+                    Settings.Default.gametitles = "#3369e8";
+                }
             }
-            else
-            {
-                Settings.Default.launchercolour = "#3369e8";
-            }
-            if (regexColourCode6.IsMatch(genre) || regexColourCode8.IsMatch(genre))
-            {
-                var converter = new BrushConverter();
-                Trace.WriteLine("Settings: Genre Colour OK");
-                AllGenreBtn.Foreground = (Brush)converter.ConvertFromString(genre);
-            }
-            else
-            {
-                Settings.Default.genrecolour = "#3369e8";
-                var converter = new BrushConverter();
-                AllGenreBtn.Foreground = (Brush)converter.ConvertFromString(genre);
-            }
-            if (regexColourCode6.IsMatch(titles) || regexColourCode8.IsMatch(titles))
-            {
-                Trace.WriteLine("Settings: Titles Colour OK");
-            }
-            else
-            {
-                Settings.Default.gametitles = "#3369e8";
-            }
+            catch (Exception e) { Trace.WriteLine("Error: " + e); }
             Top = Settings.Default.Top;
             Left = Settings.Default.Left;
             Height = Settings.Default.Height;

@@ -61,7 +61,7 @@ namespace GameLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("banner")]
+        [global::System.Configuration.DefaultSettingValueAttribute("poster")]
         public string viewtype {
             get {
                 return ((string)(this["viewtype"]));
@@ -145,7 +145,7 @@ namespace GameLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("primary")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string gametitles {
             get {
                 return ((string)(this["gametitles"]));
@@ -157,7 +157,7 @@ namespace GameLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("primary")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string fabcolour {
             get {
                 return ((string)(this["fabcolour"]));
@@ -169,7 +169,7 @@ namespace GameLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("primary")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string genrecolour {
             get {
                 return ((string)(this["genrecolour"]));
@@ -181,7 +181,7 @@ namespace GameLauncher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("primary")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string launchercolour {
             get {
                 return ((string)(this["launchercolour"]));
