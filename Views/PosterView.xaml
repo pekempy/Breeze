@@ -88,7 +88,7 @@
                           Margin="10,10,0,10"
                           ItemsSource="{Binding Source={StaticResource GameListCVS}, IsAsync=True}"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          VirtualizingStackPanel.IsVirtualizing ="True">
+                          VirtualizingStackPanel.IsVirtualizing="True">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <vwp:VirtualizingWrapPanel />
@@ -98,9 +98,12 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <!--  The card  -->
-                            <materialDesign:Card MinWidth="180"
+                            <materialDesign:Card x:Name="gameCard"
+                                                 MinWidth="180"
                                                  MaxWidth="180"
-                                                 Margin="10,10,10,10">
+                                                 Margin="10,10,10,10"
+                                                 MouseEnter="Marquee_Start"
+                                                 MouseLeave="Marquee_Stop">
                                 <Grid>
                                     <!--  This grid positions content on the card  -->
                                     <Grid.RowDefinitions>
@@ -125,14 +128,24 @@
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Bottom">
                                         <WrapPanel>
-                                            <Button x:Name="PosterGameTitle"
-                                                    Width="180"
+                                            <Button Width="180"
                                                     HorizontalAlignment="Left"
                                                     VerticalAlignment="Bottom"
                                                     HorizontalContentAlignment="Left"
-                                                    Content="{Binding Title}"
-                                                    Style="{StaticResource MaterialDesignFlatButton}" 
-                                                    Loaded="UpdateColours"/>
+                                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                                <Canvas Background="Transparent">
+                                                    <Canvas Canvas.Top="-7"
+                                                            Canvas.Left="-5"
+                                                            ClipToBounds="True"
+                                                            Name="canvasTitle"
+                                                            Width="150"
+                                                            Height="50">
+                                                        <TextBlock x:Name="PosterGameTitle"
+                                                                   Text="{Binding Title}"
+                                                                   Loaded="UpdateColours" />
+                                                    </Canvas>
+                                                </Canvas>
+                                            </Button>
                                         </WrapPanel>
                                     </StackPanel>
                                     <!--  Overflow  -->
@@ -147,24 +160,33 @@
                                         <!--  Items inside overflow  -->
                                         <StackPanel>
                                             <!--  Link Button  -->
-                                            <Button Click="GameLink_OnClick" Tag="{Binding Link}">
+                                            <Button Click="GameLink_OnClick"
+                                                    Tag="{Binding Link}">
                                                 <StackPanel Orientation="Horizontal">
-                                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Earth" />
-                                                    <TextBlock Margin="5,0,0,0" Text="Website" />
+                                                    <materialDesign:PackIcon VerticalAlignment="Center"
+                                                                             Kind="Earth" />
+                                                    <TextBlock Margin="5,0,0,0"
+                                                               Text="Website" />
                                                 </StackPanel>
                                             </Button>
                                             <!--  Edit Button  -->
-                                            <Button Click="EditGame_OnClick" Tag="{Binding Guid}">
+                                            <Button Click="EditGame_OnClick"
+                                                    Tag="{Binding Guid}">
                                                 <StackPanel Orientation="Horizontal">
-                                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Pencil" />
-                                                    <TextBlock Margin="5,0,0,0" Text="Edit" />
+                                                    <materialDesign:PackIcon VerticalAlignment="Center"
+                                                                             Kind="Pencil" />
+                                                    <TextBlock Margin="5,0,0,0"
+                                                               Text="Edit" />
                                                 </StackPanel>
                                             </Button>
                                             <!--  Delete Button  -->
-                                            <Button Click="DeleteGame_OnClick" Tag="{Binding Guid}">
+                                            <Button Click="DeleteGame_OnClick"
+                                                    Tag="{Binding Guid}">
                                                 <StackPanel Orientation="Horizontal">
-                                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Delete" />
-                                                    <TextBlock Margin="5,0,0,0" Text="Delete" />
+                                                    <materialDesign:PackIcon VerticalAlignment="Center"
+                                                                             Kind="Delete" />
+                                                    <TextBlock Margin="5,0,0,0"
+                                                               Text="Delete" />
                                                 </StackPanel>
                                             </Button>
                                         </StackPanel>

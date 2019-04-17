@@ -8,11 +8,16 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace GameLauncher.Views
 {
     public partial class PosterView : UserControl
     {
+        DateTime dt;
+        DispatcherTimer t;
+        public DoubleAnimation doubleAnimation = new DoubleAnimation();
         public static string FilterGenreName;
         public string installPath = AppDomain.CurrentDomain.BaseDirectory;
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
@@ -21,6 +26,8 @@ namespace GameLauncher.Views
         public PosterView()
         {
             InitializeComponent();
+            t = new DispatcherTimer();
+            t.Tick += new EventHandler(t_Tick);
         }
         private void DeleteGame_OnClick(object sender, RoutedEventArgs e)
         {
@@ -54,6 +61,62 @@ namespace GameLauncher.Views
                         tb.Foreground = (Brush)converter.ConvertFromString(Settings.Default.gametitles);
                     }
                     catch (Exception br) { Trace.WriteLine("Break: " + br); break; }
+                }
+            }
+        }
+        public void Marquee_Start(object sender, RoutedEventArgs e)
+        {
+            dt = DateTime.Now;
+            t.Interval = new TimeSpan(0, 0, 1);
+            t.IsEnabled = true;
+
+        }
+        public void t_Tick(object sender, EventArgs e)
+        {
+            if ((DateTime.Now - dt).Seconds >= 2)
+            {
+
+                if (gameListView.Items.Count != 0)
+                {
+                    for (int i = 0; i < gameListView.Items.Count; i++)
+                    {
+                        ContentPresenter c = (ContentPresenter)gameListView.ItemContainerGenerator.ContainerFromItem(gameListView.Items[i]);
+                        TextBlock title = c.ContentTemplate.FindName("PosterGameTitle", c) as TextBlock;
+                        Canvas canvas = c.ContentTemplate.FindName("canvasTitle", c) as Canvas;
+                        MaterialDesignThemes.Wpf.Card card = c.ContentTemplate.FindName("gameCard", c) as MaterialDesignThemes.Wpf.Card;
+                        if (card.IsMouseOver == true)
+                        {
+                            if (title.Text.ToString().Length > 22)
+                            {
+                                doubleAnimation.From = 0;
+                                doubleAnimation.To = canvas.ActualWidth;
+                                doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
+                                doubleAnimation.Duration = new Duration(TimeSpan.Parse("0:0:5"));
+                                title.BeginAnimation(Canvas.RightProperty, doubleAnimation);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        public void Marquee_Stop(object sender, RoutedEventArgs e)
+        {
+            t.IsEnabled = false;
+            if (gameListView.Items.Count != 0)
+            {
+                for (int i = 0; i < gameListView.Items.Count; i++)
+                {
+                    ContentPresenter c = (ContentPresenter)gameListView.ItemContainerGenerator.ContainerFromItem(gameListView.Items[i]);
+                    TextBlock title = c.ContentTemplate.FindName("PosterGameTitle", c) as TextBlock;
+                    Canvas canvas = c.ContentTemplate.FindName("canvasTitle", c) as Canvas;
+                    MaterialDesignThemes.Wpf.Card card = c.ContentTemplate.FindName("gameCard", c) as MaterialDesignThemes.Wpf.Card;
+                    if (card.IsMouseOver != true)
+                    {
+                        if (title.Text.ToString().Length > 20)
+                        {
+                            title.BeginAnimation(Canvas.RightProperty, null);
+                        }
+                    }
                 }
             }
         }

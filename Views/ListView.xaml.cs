@@ -8,11 +8,14 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace GameLauncher.Views
 {
     public partial class ListView : UserControl
     {
+        DateTime dt;
+        DispatcherTimer t;
         public DoubleAnimation doubleAnimation = new DoubleAnimation();
         public static string FilterGenreName;
         public string installPath = AppDomain.CurrentDomain.BaseDirectory;
@@ -22,6 +25,8 @@ namespace GameLauncher.Views
         public ListView()
         {
             InitializeComponent();
+            t = new DispatcherTimer();
+            t.Tick += new EventHandler(t_Tick);
         }
 
         private void GameLink_OnClick(object sender, RoutedEventArgs e)
@@ -71,23 +76,33 @@ namespace GameLauncher.Views
 
         public void Marquee_Start(object sender, RoutedEventArgs e)
         {
-            if (gameListView.Items.Count != 0)
+            dt = DateTime.Now;
+            t.Interval = new TimeSpan(0, 0, 1);
+            t.IsEnabled = true;
+        }
+
+        void t_Tick(object sender, EventArgs e)
+        {
+            if ((DateTime.Now - dt).Seconds >= 2)
             {
-                for (int i = 0; i < gameListView.Items.Count; i++)
+                if (gameListView.Items.Count != 0)
                 {
-                    ContentPresenter c = (ContentPresenter)gameListView.ItemContainerGenerator.ContainerFromItem(gameListView.Items[i]);
-                    Label title = c.ContentTemplate.FindName("GameTitle", c) as Label;
-                    Canvas canvas = c.ContentTemplate.FindName("canvasTitle", c) as Canvas;
-                    MaterialDesignThemes.Wpf.Card card = c.ContentTemplate.FindName("gameCard", c) as MaterialDesignThemes.Wpf.Card;
-                    if (card.IsMouseOver == true)
+                    for (int i = 0; i < gameListView.Items.Count; i++)
                     {
-                        if (title.Content.ToString().Length > 20)
+                        ContentPresenter c = (ContentPresenter)gameListView.ItemContainerGenerator.ContainerFromItem(gameListView.Items[i]);
+                        Label title = c.ContentTemplate.FindName("GameTitle", c) as Label;
+                        Canvas canvas = c.ContentTemplate.FindName("canvasTitle", c) as Canvas;
+                        MaterialDesignThemes.Wpf.Card card = c.ContentTemplate.FindName("gameCard", c) as MaterialDesignThemes.Wpf.Card;
+                        if (card.IsMouseOver == true)
                         {
-                            doubleAnimation.From = 0;
-                            doubleAnimation.To = canvas.ActualWidth;
-                            doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
-                            doubleAnimation.Duration = new Duration(TimeSpan.Parse("0:0:5"));
-                            title.BeginAnimation(Canvas.RightProperty, doubleAnimation);
+                            if (title.Content.ToString().Length > 20)
+                            {
+                                doubleAnimation.From = 0;
+                                doubleAnimation.To = canvas.ActualWidth;
+                                doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
+                                doubleAnimation.Duration = new Duration(TimeSpan.Parse("0:0:5"));
+                                title.BeginAnimation(Canvas.RightProperty, doubleAnimation);
+                            }
                         }
                     }
                 }
