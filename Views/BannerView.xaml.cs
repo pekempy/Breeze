@@ -1,4 +1,5 @@
 ﻿using GameLauncher.Models;
+using GameLauncher.Properties;
 using GameLauncher.ViewModels;
 using System;
 using System.Diagnostics;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace GameLauncher.Views
 {
@@ -21,7 +23,23 @@ namespace GameLauncher.Views
             InitializeComponent();
         }
 
-
+        public void BannerBackground_Loaded(object sender, RoutedEventArgs e)
+        {
+            var converter = new BrushConverter();
+            if (gameListView.Items.Count != 0)
+            {
+                for (int i = 0; i < gameListView.Items.Count; i++)
+                {
+                    ContentPresenter c = (ContentPresenter)gameListView.ItemContainerGenerator.ContainerFromItem(gameListView.Items[i]);
+                    try
+                    {
+                        TextBlock tb = c.ContentTemplate.FindName("BannerBackground", c) as TextBlock;
+                        tb.Background = (Brush)converter.ConvertFromString(Settings.Default.bannertitles);
+                    }
+                    catch (Exception br) { Trace.WriteLine("Break: " + br); break; }
+                }
+            }
+        }
         private void GameLink_OnClick(object sender, RoutedEventArgs e)
         {
             object link = ((Button)sender).Tag;
@@ -107,8 +125,14 @@ namespace GameLauncher.Views
         {
             GameListCVS = ((CollectionViewSource)(FindResource("GameListCVS")));
             MainWindow.cvs = GameListCVS;
-            if (FilterGenreName != null) { GameListCVS.Filter += new FilterEventHandler(GenreFilter); }
-            if (GameSearchBar.Text != null) { GameListCVS.Filter += new FilterEventHandler(GameSearch); }
+            if (FilterGenreName != null)
+            {
+                GameListCVS.Filter += new FilterEventHandler(GenreFilter);
+            }
+            if (GameSearchBar.Text != null)
+            {
+                GameListCVS.Filter += new FilterEventHandler(GameSearch);
+            }
             if (GameListCVS.View != null)
                 GameListCVS.View.Refresh();
         }
@@ -119,8 +143,14 @@ namespace GameLauncher.Views
             if (cvscvs != null)
             {
                 GameListCVS = cvscvs;
-                if (FilterGenreName != null) { GameListCVS.Filter += new FilterEventHandler(GenreFilter); }
-                if (GameSearchBar.Text != null) { GameListCVS.Filter += new FilterEventHandler(GameSearch); }
+                if (FilterGenreName != null)
+                {
+                    GameListCVS.Filter += new FilterEventHandler(GenreFilter);
+                }
+                if (GameSearchBar.Text != null)
+                {
+                    GameListCVS.Filter += new FilterEventHandler(GameSearch);
+                }
                 if (GameListCVS.View != null)
                     GameListCVS.View.Refresh();
             }

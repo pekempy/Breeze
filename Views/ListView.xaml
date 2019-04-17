@@ -95,7 +95,7 @@
                           ItemsSource="{Binding Source={StaticResource GameListCVS}, IsAsync=True}"
                           VirtualizingStackPanel.IsVirtualizing="True"
                           VirtualizingStackPanel.VirtualizationMode="Recycling"
-                                  ScrollViewer.CanContentScroll="True">
+                          ScrollViewer.CanContentScroll="True">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <vwp:VirtualizingWrapPanel />
@@ -104,7 +104,11 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <!--  The card  -->
-                        <materialDesign:Card Height="80" Margin="10,5,10,0">
+                        <materialDesign:Card x:Name="gameCard"
+                                             Height="80"
+                                             Margin="10,5,10,0"
+                                             MouseEnter="Marquee_Start"
+                                             MouseLeave="Marquee_Stop">
                             <Grid Width="330">
                                 <!--  Game Image  -->
                                 <Image x:Name="GameIcon"
@@ -114,12 +118,20 @@
                                        Source="{Binding Icon, Mode=OneWay}"
                                        Stretch="Fill" />
                                 <!--  Game Title  -->
-                                <Label x:Name="GameTitle"
-                                       Margin="85,1,0,45"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       Content="{Binding Title, Mode=OneWay}"
-                                       FontSize="20" />
+                                <Canvas Background="Transparent">
+                                    <Canvas Canvas.Right="40"
+                                            Canvas.Top="1"
+                                            ClipToBounds="True"
+                                            Name="canvasTitle"
+                                            Width="210"
+                                            Height="50">
+                                        <Label x:Name="GameTitle"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Content="{Binding Title, Mode=OneWay}"
+                                               FontSize="20" />
+                                    </Canvas>
+                                </Canvas>
                                 <!--  Game Genres  -->
                                 <Label x:Name="GameGenre"
                                        Margin="86,32,0,0"
@@ -152,24 +164,33 @@
                                     <!--  Items inside overflow  -->
                                     <StackPanel>
                                         <!--  Link Button  -->
-                                        <Button Click="GameLink_OnClick" Tag="{Binding Link}">
+                                        <Button Click="GameLink_OnClick"
+                                                Tag="{Binding Link}">
                                             <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon VerticalAlignment="Center" Kind="Earth" />
-                                                <TextBlock Margin="5,0,0,0" Text="Website" />
+                                                <materialDesign:PackIcon VerticalAlignment="Center"
+                                                                         Kind="Earth" />
+                                                <TextBlock Margin="5,0,0,0"
+                                                           Text="Website" />
                                             </StackPanel>
                                         </Button>
                                         <!--  Edit Button  -->
-                                        <Button Click="EditGame_OnClick" Tag="{Binding Guid}">
+                                        <Button Click="EditGame_OnClick"
+                                                Tag="{Binding Guid}">
                                             <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon VerticalAlignment="Center" Kind="Pencil" />
-                                                <TextBlock Margin="5,0,0,0" Text="Edit" />
+                                                <materialDesign:PackIcon VerticalAlignment="Center"
+                                                                         Kind="Pencil" />
+                                                <TextBlock Margin="5,0,0,0"
+                                                           Text="Edit" />
                                             </StackPanel>
                                         </Button>
                                         <!--  Delete Button  -->
-                                        <Button Click="DeleteGame_OnClick" Tag="{Binding Guid}">
+                                        <Button Click="DeleteGame_OnClick"
+                                                Tag="{Binding Guid}">
                                             <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon VerticalAlignment="Center" Kind="Delete" />
-                                                <TextBlock Margin="5,0,0,0" Text="Delete" />
+                                                <materialDesign:PackIcon VerticalAlignment="Center"
+                                                                         Kind="Delete" />
+                                                <TextBlock Margin="5,0,0,0"
+                                                           Text="Delete" />
                                             </StackPanel>
                                         </Button>
                                     </StackPanel>

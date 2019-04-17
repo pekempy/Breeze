@@ -482,6 +482,7 @@
                                 <RowDefinition />
                                 <RowDefinition />
                                 <RowDefinition />
+                                <RowDefinition />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
@@ -584,6 +585,29 @@
                                     VerticalAlignment="Top"
                                     Margin="20 5 0 0">
                                 <Ellipse x:Name="LauncherIndicator"
+                                         Width="30"
+                                         Height="30" />
+                            </Canvas>
+                            <!-- LAUNCHER BUTTONS ROW5-->
+                            <TextBlock Grid.Row="5"
+                                       Grid.Column="0"
+                                       VerticalAlignment="Center">Banner Titles</TextBlock>
+                            <Button x:Name="BannerButton"
+                                    Style="{StaticResource MaterialDesignFlatAccentButton}"
+                                    Click="ChangeColours"
+                                    Tag="Banners"
+                                    Grid.Row="5"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Paintbrush" />
+                            </Button>
+                            <Canvas Grid.Row="5"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Margin="20 5 0 0">
+                                <Ellipse x:Name="BannerIndicator"
                                          Width="30"
                                          Height="30" />
                             </Canvas>

@@ -94,7 +94,7 @@
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           VirtualizingStackPanel.IsVirtualizing="True"
                           VirtualizingStackPanel.VirtualizationMode="Recycling"
-                                  ScrollViewer.CanContentScroll="True">
+                          ScrollViewer.CanContentScroll="True">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <vwp:VirtualizingWrapPanel />
@@ -112,10 +112,11 @@
                                            Height="100"
                                            Source="{Binding Banner}"
                                            Stretch="Fill" />
-                                    <TextBlock Margin="0,80,0,0"
+                                    <TextBlock x:Name="BannerBackground"
+                                               Margin="0,80,0,0"
                                                Background="Black"
                                                FontSize="12"
-                                               Opacity="0.6" />
+                                               Loaded="BannerBackground_Loaded" />
                                     <TextBlock Width="Auto"
                                                Height="Auto"
                                                Margin="10,80,32,0"
@@ -141,24 +142,33 @@
                                         <!--  Items inside overflow  -->
                                         <StackPanel>
                                             <!--  Link Button  -->
-                                            <Button Click="GameLink_OnClick" Tag="{Binding Link}">
+                                            <Button Click="GameLink_OnClick"
+                                                    Tag="{Binding Link}">
                                                 <StackPanel Orientation="Horizontal">
-                                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Earth" />
-                                                    <TextBlock Margin="5,0,0,0" Text="Website" />
+                                                    <materialDesign:PackIcon VerticalAlignment="Center"
+                                                                             Kind="Earth" />
+                                                    <TextBlock Margin="5,0,0,0"
+                                                               Text="Website" />
                                                 </StackPanel>
                                             </Button>
                                             <!--  Edit Button  -->
-                                            <Button Click="EditGame_OnClick" Tag="{Binding Guid}">
+                                            <Button Click="EditGame_OnClick"
+                                                    Tag="{Binding Guid}">
                                                 <StackPanel Orientation="Horizontal">
-                                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Pencil" />
-                                                    <TextBlock Margin="5,0,0,0" Text="Edit" />
+                                                    <materialDesign:PackIcon VerticalAlignment="Center"
+                                                                             Kind="Pencil" />
+                                                    <TextBlock Margin="5,0,0,0"
+                                                               Text="Edit" />
                                                 </StackPanel>
                                             </Button>
                                             <!--  Delete Button  -->
-                                            <Button Click="DeleteGame_OnClick" Tag="{Binding Guid}">
+                                            <Button Click="DeleteGame_OnClick"
+                                                    Tag="{Binding Guid}">
                                                 <StackPanel Orientation="Horizontal">
-                                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Delete" />
-                                                    <TextBlock Margin="5,0,0,0" Text="Delete" />
+                                                    <materialDesign:PackIcon VerticalAlignment="Center"
+                                                                             Kind="Delete" />
+                                                    <TextBlock Margin="5,0,0,0"
+                                                               Text="Delete" />
                                                 </StackPanel>
                                             </Button>
                                         </StackPanel>

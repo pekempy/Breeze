@@ -12,7 +12,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="viewtype" Type="System.String" Scope="User">
-      <Value Profile="(Default)">banner</Value>
+      <Value Profile="(Default)">poster</Value>
     </Setting>
     <Setting Name="Top" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -33,16 +33,19 @@
       <Value Profile="(Default)">0, 0</Value>
     </Setting>
     <Setting Name="gametitles" Type="System.String" Scope="User">
-      <Value Profile="(Default)">primary</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="fabcolour" Type="System.String" Scope="User">
-      <Value Profile="(Default)">primary</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="genrecolour" Type="System.String" Scope="User">
-      <Value Profile="(Default)">primary</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="launchercolour" Type="System.String" Scope="User">
-      <Value Profile="(Default)">primary</Value>
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="bannertitles" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
