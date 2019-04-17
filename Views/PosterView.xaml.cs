@@ -57,7 +57,7 @@ namespace GameLauncher.Views
                     ContentPresenter c = (ContentPresenter)gameListView.ItemContainerGenerator.ContainerFromItem(gameListView.Items[i]);
                     try
                     {
-                        Button tb = c.ContentTemplate.FindName("PosterGameTitle", c) as Button;
+                        Button tb = c.ContentTemplate.FindName("GameTitleBtn", c) as Button;
                         tb.Foreground = (Brush)converter.ConvertFromString(Settings.Default.gametitles);
                     }
                     catch (Exception br) { Trace.WriteLine("Break: " + br); break; }

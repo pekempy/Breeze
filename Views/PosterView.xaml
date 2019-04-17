@@ -129,6 +129,7 @@
                                                 VerticalAlignment="Bottom">
                                         <WrapPanel>
                                             <Button Width="180"
+                                                    x:Name="GameTitleBtn"
                                                     HorizontalAlignment="Left"
                                                     VerticalAlignment="Bottom"
                                                     HorizontalContentAlignment="Left"
