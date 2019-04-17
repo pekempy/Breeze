@@ -1,4 +1,5 @@
 ﻿using GameLauncher.Models;
+using GameLauncher.Properties;
 using GameLauncher.ViewModels;
 using System;
 using System.Diagnostics;
@@ -7,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
@@ -39,7 +41,23 @@ namespace GameLauncher.Views
                 Process.Start(new ProcessStartInfo(linkstring));
             }
         }
-
+        public void UpdateColours(object sender, RoutedEventArgs e)
+        {
+            var converter = new BrushConverter();
+            if (gameListView.Items.Count != 0)
+            {
+                for (int i = 0; i < gameListView.Items.Count; i++)
+                {
+                    ContentPresenter c = (ContentPresenter)gameListView.ItemContainerGenerator.ContainerFromItem(gameListView.Items[i]);
+                    try
+                    {
+                        Label tb = c.ContentTemplate.FindName("GameTitle", c) as Label;
+                        tb.Foreground = (Brush)converter.ConvertFromString(Settings.Default.listtitles);
+                    }
+                    catch (Exception br) { Trace.WriteLine("Break: " + br); break; }
+                }
+            }
+        }
         private void LaunchButton_OnClick(object sender, RoutedEventArgs e)
         {
             object link = ((Button)sender).Tag;

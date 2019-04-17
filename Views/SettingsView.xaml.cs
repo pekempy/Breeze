@@ -56,6 +56,10 @@ namespace GameLauncher.Views
             {
                 BannerIndicator.Fill = (Brush)converter.ConvertFromString(Settings.Default.bannertitles);
             }
+            if (Settings.Default.listtitles != "")
+            {
+                ListIndicator.Fill = (Brush)converter.ConvertFromString(Settings.Default.listtitles);
+            }
             if (Settings.Default.genrecolour != "")
             {
                 GenresIndicator.Fill = (Brush)converter.ConvertFromString(Settings.Default.genrecolour);
@@ -294,6 +298,11 @@ namespace GameLauncher.Views
                 {
                     LauncherIndicator.Fill = colour;
                     Settings.Default.launchercolour = chosenColour;
+                }
+                if (type == "List")
+                {
+                    ListIndicator.Fill = colour;
+                    Settings.Default.listtitles = chosenColour;
                 }
                 Settings.Default.Save();
                 UpdateAllColours(colour, type);

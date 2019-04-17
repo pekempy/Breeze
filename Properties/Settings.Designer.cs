@@ -202,5 +202,17 @@ namespace GameLauncher.Properties {
                 this["bannertitles"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string listtitles {
+            get {
+                return ((string)(this["listtitles"]));
+            }
+            set {
+                this["listtitles"] = value;
+            }
+        }
     }
 }

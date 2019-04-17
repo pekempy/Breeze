@@ -858,6 +858,7 @@ namespace GameLauncher
             string genre = Settings.Default.genrecolour;
             string titles = Settings.Default.gametitles;
             string banner = Settings.Default.bannertitles;
+            string list = Settings.Default.listtitles;
             try
             {
                 if (regexColourCode6.IsMatch(launcher) || regexColourCode8.IsMatch(launcher))
@@ -904,6 +905,17 @@ namespace GameLauncher
                 else
                 {
                     Settings.Default.bannertitles = "#3369e8";
+                }
+            }
+            catch (Exception e) { Trace.WriteLine("Error: " + e); }
+            try
+            {
+                if (regexColourCode6.IsMatch(list) || regexColourCode8.IsMatch(list))
+                {
+                }
+                else
+                {
+                    Settings.Default.listtitles = "#3369e8";
                 }
             }
             catch (Exception e) { Trace.WriteLine("Error: " + e); }

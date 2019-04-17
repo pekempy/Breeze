@@ -129,7 +129,8 @@
                                                HorizontalAlignment="Left"
                                                VerticalAlignment="Center"
                                                Content="{Binding Title, Mode=OneWay}"
-                                               FontSize="20" />
+                                               FontSize="20"
+                                               Loaded="UpdateColours" />
                                     </Canvas>
                                 </Canvas>
                                 <!--  Game Genres  -->

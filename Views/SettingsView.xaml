@@ -483,6 +483,7 @@
                                 <RowDefinition />
                                 <RowDefinition />
                                 <RowDefinition />
+                                <RowDefinition />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
@@ -520,11 +521,11 @@
                             <TextBlock Grid.Row="2"
                                        Grid.Column="0"
                                        VerticalAlignment="Center"
-                                       Padding="0 10 0 10">Poster Titles</TextBlock>
-                            <Button x:Name="TitleButton"
+                                       Padding="0 10 0 10">Launcher Buttons</TextBlock>
+                            <Button x:Name="LauncherButton"
                                     Style="{StaticResource MaterialDesignFlatAccentButton}"
                                     Click="ChangeColours"
-                                    Tag="Titles"
+                                    Tag="Launchers"
                                     Grid.Row="2"
                                     Grid.Column="1"
                                     HorizontalAlignment="Center"
@@ -536,7 +537,7 @@
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
                                     Margin="20 5 0 0">
-                                <Ellipse x:Name="TitlesIndicator"
+                                <Ellipse x:Name="LauncherIndicator"
                                          Width="30"
                                          Height="30" />
                             </Canvas>
@@ -568,11 +569,11 @@
                             <!-- LAUNCHER BUTTONS ROW4-->
                             <TextBlock Grid.Row="4"
                                        Grid.Column="0"
-                                       VerticalAlignment="Center">Launcher Buttons</TextBlock>
-                            <Button x:Name="LauncherButton"
+                                       VerticalAlignment="Center">Poster Titles</TextBlock>
+                            <Button x:Name="TitleButton"
                                     Style="{StaticResource MaterialDesignFlatAccentButton}"
                                     Click="ChangeColours"
-                                    Tag="Launchers"
+                                    Tag="Titles"
                                     Grid.Row="4"
                                     Grid.Column="1"
                                     HorizontalAlignment="Center"
@@ -584,11 +585,11 @@
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
                                     Margin="20 5 0 0">
-                                <Ellipse x:Name="LauncherIndicator"
+                                <Ellipse x:Name="TitlesIndicator"
                                          Width="30"
                                          Height="30" />
                             </Canvas>
-                            <!-- LAUNCHER BUTTONS ROW5-->
+                            <!-- Titles BUTTONS ROW5-->
                             <TextBlock Grid.Row="5"
                                        Grid.Column="0"
                                        VerticalAlignment="Center">Banner Titles</TextBlock>
@@ -608,6 +609,29 @@
                                     VerticalAlignment="Top"
                                     Margin="20 5 0 0">
                                 <Ellipse x:Name="BannerIndicator"
+                                         Width="30"
+                                         Height="30" />
+                            </Canvas>
+                            <!-- ListTitles BUTTONS ROW6-->
+                            <TextBlock Grid.Row="6"
+                                       Grid.Column="0"
+                                       VerticalAlignment="Center">List Titles</TextBlock>
+                            <Button x:Name="ListButton"
+                                    Style="{StaticResource MaterialDesignFlatAccentButton}"
+                                    Click="ChangeColours"
+                                    Tag="List"
+                                    Grid.Row="6"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Paintbrush" />
+                            </Button>
+                            <Canvas Grid.Row="6"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Margin="20 5 0 0">
+                                <Ellipse x:Name="ListIndicator"
                                          Width="30"
                                          Height="30" />
                             </Canvas>
