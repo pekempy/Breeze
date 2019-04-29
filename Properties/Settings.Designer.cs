@@ -214,5 +214,17 @@ namespace GameLauncher.Properties {
                 this["listtitles"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool autotheme {
+            get {
+                return ((bool)(this["autotheme"]));
+            }
+            set {
+                this["autotheme"] = value;
+            }
+        }
     }
 }
