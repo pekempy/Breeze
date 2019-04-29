@@ -86,6 +86,16 @@ namespace GameLauncher.Views
             Settings.Default.theme = "Light";
             SaveSettings();
         }
+        private void AutoDarkModeToggle_Checked(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.autotheme = true;
+            SaveSettings();
+        }
+        private void AutoDarkModeToggle_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.autotheme = false;
+            SaveSettings();
+        }
         private void ChangePrimary_OnClick(object sender, RoutedEventArgs e)
         {
             string newPrimaryColour = ((Button)sender).Tag.ToString();

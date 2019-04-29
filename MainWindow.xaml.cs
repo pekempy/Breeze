@@ -15,6 +15,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Text.RegularExpressions;
+using System.Device.Location;
+using Innovative.SolarCalculator;
 
 namespace GameLauncher
 {
@@ -63,6 +65,8 @@ namespace GameLauncher
         public string UplayExePath;
         public string OriginExePath;
         public string BattleNetExePath;
+        public DateTime sunriseTime;
+        public DateTime sunsetTime;
 
         public MainWindow()
         {
@@ -927,13 +931,23 @@ namespace GameLauncher
             {
                 WindowState = WindowState.Maximized;
             }
-            if (Settings.Default.theme.ToString() == "Dark")
+            if (Settings.Default.autotheme != true)
             {
-                ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark);
+                if (Settings.Default.theme.ToString() == "Dark")
+                {
+                    ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark);
+                }
+                else if (Settings.Default.theme.ToString() == "Light")
+                {
+                    ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Light);
+                }
             }
-            else if (Settings.Default.theme.ToString() == "Light")
+            if (Settings.Default.autotheme == true)
             {
-                ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Light);
+                var watcher = new GeoCoordinateWatcher();
+                watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(geoPositionChanged);
+                watcher.Start();
+                var coord = watcher.Position.Location;
             }
             if (Settings.Default.primary.ToString() != "")
             {
@@ -952,6 +966,26 @@ namespace GameLauncher
                 AddGameButton.Style = Application.Current.Resources["MaterialDesignFloatingActionAccentButton"] as Style;
             }
             UpdateLauncherButtons();
+        }
+        private void geoPositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+        {
+            //this method shows lat/long
+            var lat = e.Position.Location.Latitude;
+            var lon = e.Position.Location.Longitude;
+            TimeZoneInfo cst = TimeZoneInfo.FindSystemTimeZoneById(TimeZone.CurrentTimeZone.StandardName);
+            SolarTimes solarTimes = new SolarTimes(DateTime.Now.Date, lat, lon);
+            sunriseTime = TimeZoneInfo.ConvertTimeFromUtc(solarTimes.Sunrise.ToUniversalTime(), TimeZoneInfo.Local);
+            sunsetTime = TimeZoneInfo.ConvertTimeFromUtc(solarTimes.Sunset.ToUniversalTime(), TimeZoneInfo.Local);
+            if (DateTime.Now > sunsetTime)
+            {
+                MessageBox.Show(DateTime.Now + " - Night Theme");
+                ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark);
+            }
+            else if (DateTime.Now > sunriseTime && DateTime.Now < sunsetTime)
+            {
+                MessageBox.Show(DateTime.Now + " - Day Theme");
+                ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Light);
+            }
         }
     }
 }
