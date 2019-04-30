@@ -931,6 +931,13 @@ namespace GameLauncher
             {
                 WindowState = WindowState.Maximized;
             }
+            if (Settings.Default.autotheme == true)
+            {
+                var watcher = new GeoCoordinateWatcher();
+                watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(GeoPositionChanged);
+                watcher.Start();
+                var coord = watcher.Position.Location;
+            }
             if (Settings.Default.autotheme != true)
             {
                 if (Settings.Default.theme.ToString() == "Dark")
@@ -941,13 +948,6 @@ namespace GameLauncher
                 {
                     ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Light);
                 }
-            }
-            if (Settings.Default.autotheme == true)
-            {
-                var watcher = new GeoCoordinateWatcher();
-                watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(geoPositionChanged);
-                watcher.Start();
-                var coord = watcher.Position.Location;
             }
             if (Settings.Default.primary.ToString() != "")
             {
@@ -967,7 +967,7 @@ namespace GameLauncher
             }
             UpdateLauncherButtons();
         }
-        private void geoPositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+        private void GeoPositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
         {
             //this method shows lat/long
             var lat = e.Position.Location.Latitude;
@@ -976,15 +976,18 @@ namespace GameLauncher
             SolarTimes solarTimes = new SolarTimes(DateTime.Now.Date, lat, lon);
             sunriseTime = TimeZoneInfo.ConvertTimeFromUtc(solarTimes.Sunrise.ToUniversalTime(), TimeZoneInfo.Local);
             sunsetTime = TimeZoneInfo.ConvertTimeFromUtc(solarTimes.Sunset.ToUniversalTime(), TimeZoneInfo.Local);
-            if (DateTime.Now > sunsetTime)
+            var time = DateTime.Now;
+            if (time > sunsetTime)
             {
-                MessageBox.Show(DateTime.Now + " - Night Theme");
                 ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark);
+                Settings.Default.theme = "Dark";
+                Settings.Default.Save();
             }
-            else if (DateTime.Now > sunriseTime && DateTime.Now < sunsetTime)
+            else if (time > sunriseTime && time < sunsetTime)
             {
-                MessageBox.Show(DateTime.Now + " - Day Theme");
                 ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Light);
+                Settings.Default.theme = "Light";
+                Settings.Default.Save();
             }
         }
     }
