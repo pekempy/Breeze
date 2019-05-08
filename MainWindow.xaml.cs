@@ -884,6 +884,7 @@ namespace GameLauncher
                 else
                 {
                     Settings.Default.genrecolour = "#3369e8";
+                    genre = "#3369e8";
                     var converter = new BrushConverter();
                     AllGenreBtn.Foreground = (Brush)converter.ConvertFromString(genre);
                 }
@@ -931,13 +932,6 @@ namespace GameLauncher
             {
                 WindowState = WindowState.Maximized;
             }
-            if (Settings.Default.autotheme == true)
-            {
-                var watcher = new GeoCoordinateWatcher();
-                watcher.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(GeoPositionChanged);
-                watcher.Start();
-                var coord = watcher.Position.Location;
-            }
             if (Settings.Default.autotheme != true)
             {
                 if (Settings.Default.theme.ToString() == "Dark")
@@ -966,29 +960,6 @@ namespace GameLauncher
                 AddGameButton.Style = Application.Current.Resources["MaterialDesignFloatingActionAccentButton"] as Style;
             }
             UpdateLauncherButtons();
-        }
-        private void GeoPositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
-        {
-            //this method shows lat/long
-            var lat = e.Position.Location.Latitude;
-            var lon = e.Position.Location.Longitude;
-            TimeZoneInfo cst = TimeZoneInfo.FindSystemTimeZoneById(TimeZone.CurrentTimeZone.StandardName);
-            SolarTimes solarTimes = new SolarTimes(DateTime.Now.Date, lat, lon);
-            sunriseTime = TimeZoneInfo.ConvertTimeFromUtc(solarTimes.Sunrise.ToUniversalTime(), TimeZoneInfo.Local);
-            sunsetTime = TimeZoneInfo.ConvertTimeFromUtc(solarTimes.Sunset.ToUniversalTime(), TimeZoneInfo.Local);
-            var time = DateTime.Now;
-            if (time > sunsetTime)
-            {
-                ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark);
-                Settings.Default.theme = "Dark";
-                Settings.Default.Save();
-            }
-            else if (time > sunriseTime && time < sunsetTime)
-            {
-                ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Light);
-                Settings.Default.theme = "Light";
-                Settings.Default.Save();
-            }
         }
     }
 }

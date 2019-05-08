@@ -12,8 +12,14 @@ namespace GameLauncher.ViewModels
 {
     public class LoadAllGames
     {
-        public ObservableCollection<GameList> Games { get; set; }
-        public ObservableCollection<GenreList> Genres { get; set; }
+        public ObservableCollection<GameList> Games
+        {
+            get; set;
+        }
+        public ObservableCollection<GenreList> Genres
+        {
+            get; set;
+        }
         private ObservableCollection<GameList> games = new ObservableCollection<GameList>();
         private ObservableCollection<GenreList> genres = new ObservableCollection<GenreList>();
         private MainWindow MainWindow = ((MainWindow)Application.Current.MainWindow);
@@ -31,8 +37,16 @@ namespace GameLauncher.ViewModels
 
         public void LoadGames()
         {
-            try { games.Clear(); } catch { }
-            try { Games.Clear(); } catch { }
+            try
+            {
+                games.Clear();
+            }
+            catch { }
+            try
+            {
+                Games.Clear();
+            }
+            catch { }
             ReadFile();
             Games = games;
             Application.Current.Dispatcher.Invoke(new Action(() =>
@@ -41,8 +55,16 @@ namespace GameLauncher.ViewModels
 
         public void LoadGenres()
         {
-            try { Genres.Clear(); } catch { }
-            try { genres.Clear(); } catch { }
+            try
+            {
+                Genres.Clear();
+            }
+            catch { }
+            try
+            {
+                genres.Clear();
+            }
+            catch { }
             if (File.Exists("./Resources/GenreList.txt"))
             {
                 string genreFile = "./Resources/GenreList.txt";

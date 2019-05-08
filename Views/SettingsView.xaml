@@ -502,18 +502,6 @@
                                           Checked="DarkModeToggle_Checked"
                                           Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
                                           Unchecked="DarkModeToggle_Unchecked" />
-                            <!-- DARK MODE BUTTONS ROW1-->
-                            <TextBlock Grid.Row="1"
-                                       Grid.Column="0"
-                                       VerticalAlignment="Center"
-                                       Padding="0 10 0 10">Auto Dark Mode (overrides above)</TextBlock>
-                            <ToggleButton x:Name="autothemeToggle"
-                                          HorizontalAlignment="Center"
-                                          Grid.Row="1"
-                                          Grid.Column="1"
-                                          Checked="AutoDarkModeToggle_Checked"
-                                          Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
-                                          Unchecked="AutoDarkModeToggle_Unchecked" />
                             <!-- FAB BUTTONS ROW1-->
                             <TextBlock Grid.Column="0"
                                        Grid.Row="2"
