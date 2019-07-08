@@ -18,4 +18,8 @@ This isn't designed to be a competitor to steam, or any other game launcher. I j
 
 [Changelog](https://github.com/pekempy/Breeze/blob/master/Changelog.md)
 
+#### Reusage notes:
+- Feel free to re-use any of the code or snippets; however if you do please have a comment link in the file it is used which links back to this repository
+
+
 © 2018 [Peter Kemp](https://github.com/Pekempy) & [John Campbell](https://github.com/JohnSandshrew) 
