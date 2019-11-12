@@ -98,7 +98,31 @@ namespace GameLauncher
                     }
                     else
                     {
-                        MessageBox.Show("That game already exists!");
+                        try
+                        {
+                            TextWriter tsw = new StreamWriter(@"./Resources/GamesList.txt", true);
+                            tsw.WriteLine(EditTitle.Text + "|" +
+                                          EditGenre.Text + "|" +
+                                          EditPath.Text + "|" +
+                                          EditLink.Text + "|" +
+                                          EditIcon.Text + "|" +
+                                          EditPoster.Text + "|" +
+                                          EditBanner.Text + "|" +
+                                          Guid.NewGuid());
+                            tsw.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            Trace.WriteLine(DateTime.Now + ": EditGame: " + ex.Message);
+                        }
+                        clearFields();
+                        ClearGenreBoxes();
+                        alltitles = null;
+                        OldTitle = null;
+                        ModifyFile.RemoveGameFromFile(guid);
+                        ((MainWindow)Application.Current.MainWindow)?.RefreshGames();
+                        ((MainWindow)Application.Current.MainWindow).isDialogOpen = false;
+                        EditGameDialog.IsOpen = false;
                     }
                 }
                 catch (Exception ex) { Trace.WriteLine(DateTime.Now + ": EditGame2: " + ex); }

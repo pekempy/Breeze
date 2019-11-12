@@ -932,8 +932,6 @@ namespace GameLauncher
             {
                 WindowState = WindowState.Maximized;
             }
-            if (Settings.Default.autotheme != true)
-            {
                 if (Settings.Default.theme.ToString() == "Dark")
                 {
                     ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Dark);
@@ -942,7 +940,6 @@ namespace GameLauncher
                 {
                     ThemeAssist.SetTheme(Application.Current.MainWindow, BaseTheme.Light);
                 }
-            }
             if (Settings.Default.primary.ToString() != "")
             {
                 new PaletteHelper().ReplacePrimaryColor(Settings.Default.primary.ToString());

@@ -6,12 +6,20 @@ namespace GameLauncher.Models
 
     public class SearchResults : INotifyPropertyChanged
     {
-        private string thumbnail;
-        private string image;
+        private string title;
+        private string directlink;
+        private string directlinkqwant;
+        private string thumbnaillink;
+        private string height;
+        private string width;
 
-        public string Thumbnail { get { return thumbnail; } set { thumbnail = value; OnPropertyChanged("Thumbnail"); } }
+        public string Title { get { return title; } set { title = value; OnPropertyChanged("Title"); } }
+        public string DirectLink { get { return directlink; } set { directlink = value; OnPropertyChanged("DirectLink"); } }
+        public string DirectLinkQwant { get { return directlinkqwant; } set { directlinkqwant = value; OnPropertyChanged("DirectLinkQwant"); } }
+        public string ThumbnailLink { get { return thumbnaillink; } set { thumbnaillink = value; OnPropertyChanged("ThumbnailLink"); } }
+        public string Height { get { return height; } set { height = value; OnPropertyChanged("Height"); } }
+        public string Width { get { return width; } set { width = value; OnPropertyChanged("Width"); } }
 
-        public string Image { get { return image; } set { image = value; OnPropertyChanged("Image"); } }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

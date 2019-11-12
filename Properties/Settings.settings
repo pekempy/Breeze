@@ -50,8 +50,5 @@
     <Setting Name="listtitles" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="autotheme" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
   </Settings>
 </SettingsFile>
