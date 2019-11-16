@@ -56,7 +56,7 @@ namespace GameLauncher
                         string gametitle = columns[0];
                         gametitle = columns[0];
                         gametitle = gametitle.Trim().ToLower();
-                        alltitles += " | " + gametitle + " | ";
+                        alltitles = alltitles + " | " + gametitle + " | ";
                         numofgames++;
                     }
                     if (alltitles.Contains(" | " + NewGameTitle.Text.Trim().ToLower() + " | "))

@@ -13,9 +13,7 @@ namespace GameLauncher.ViewModels
         public ObservableCollection<SearchResults> SearchList { get; set; }
         private ObservableCollection<SearchResults> searchlist = new ObservableCollection<SearchResults>();
         public int numofitems = 0;
-        public string url;
         public string urlapi;
-        public List<ImageResult> result = new List<ImageResult>();
         public void Search(string gametitle, string imagetype, string searchstring, int offset)
         {
             SearchLinks(gametitle, imagetype, searchstring, 0);
@@ -27,7 +25,6 @@ namespace GameLauncher.ViewModels
             if (searchstring != "")
             {
                 searchstring = searchstring.Replace(" ", "%20");
-                url = "https://www.qwant.com/?q=" + searchstring + "&t=images";
                 urlapi = "https://api.qwant.com/api/search/images?count=50&offset=0&q=" + searchstring + "&t=images&uiv=1";
                 APISearch();
             }
@@ -62,12 +59,4 @@ namespace GameLauncher.ViewModels
         }
 
     }
-    public class ImageResult{
-        public string Title { get; set; }
-        public string DirectLink { get; set; }
-        public string DirectLinkQwant { get; set; }
-        public string ThumbnailLink { get; set; }
-        public string Height { get; set; }
-        public string Width { get; set; }
-        }
 }

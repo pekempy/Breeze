@@ -683,7 +683,6 @@ namespace GameLauncher
         {
             if (File.Exists("./Resources/GamesList.txt"))
             {
-
                 string file = "./Resources/GamesList.txt";
                 string fileout = "./Resources/GamesList2.txt";
                 var contents = File.ReadAllLines(file);

@@ -41,22 +41,25 @@ namespace GameLauncher.Models
             catch (Exception e) { Trace.WriteLine("SearchEpic Failed: " + e); }
             try { SearchBattle(); }
             catch (Exception e) { Trace.WriteLine("SearchBattleNet Failed: " + e); }
-
-            var text = File.ReadAllLines("./Resources/GamesList.txt", Encoding.UTF8);
-            foreach (var exeItem in exes.ToList())
+            try
             {
-                for (int i = 0; i < text.Length; i++)
+                var text = File.ReadAllLines("./Resources/GamesList.txt", Encoding.UTF8);
+                foreach (var exeItem in exes.ToList())
                 {
-                    string[] columns = text[i].Split('|');
-                    if (columns[0] == exeItem.Title)
+                    for (int i = 0; i < text.Length; i++)
                     {
-                        Trace.WriteLine(DateTime.Now + ": Matched exe found, skipping - " + exeItem.Title);
-                        exes.Remove(exeItem);
+                        string[] columns = text[i].Split('|');
+                        if (columns[0] == exeItem.Title)
+                        {
+                            Trace.WriteLine(DateTime.Now + ": Matched exe found, skipping - " + exeItem.Title);
+                            exes.Remove(exeItem);
+                        }
                     }
                 }
+                exes2 = exes;
+                Exes = exes2;
             }
-            exes2 = exes;
-            Exes = exes2;
+            catch { Console.WriteLine("Fuck.."); }
         }
 
         public void UpdateObsCol(string title, string exe)
